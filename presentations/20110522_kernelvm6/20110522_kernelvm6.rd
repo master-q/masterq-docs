@@ -1,5 +1,6 @@
-# To run with it without system install.
-#  % ruby -I./lib bin/rabbit -f sample/rabbit.rd
+# install: apt-get install rabbit
+# view: rabbit 20110522_kernelvm6.rd
+# print: rabbit --print -o 20110522_kernelvm6.pdf 20110522_kernelvm6.rd
 
 = NetBSD manを翻訳してみた
 
@@ -7,8 +8,6 @@
    NetBSD manを翻訳しよう。契約なんていらないよ!
 : author
    Kiwamu Okabe
-: institution
-   プロニート
 : theme
    rabbit-and-tortoise
 : allotted-time
@@ -26,7 +25,7 @@
 
 (('tag:center'))(('tag:x-large:もちろんです!'))
 
-= でもこんなことに困ってませんか？
+= でも困ってませんか？
 
   * 普段の開発環境に採用できない
   * キレイなソースってどのへん？
@@ -34,14 +33,14 @@
   * 日本語の情報がまとまってない
   * なんとなくマイナー
 
-= この状況を変えるにはどうすれば...
+= どうすれば...
 
   * 仕様書があればそれを読むべき
   * NetBSDの仕様書って何？
   * そりゃあmanでしょう
   * でもmanが英語しかないので情弱にツラい
 
-= そんな悩みも今日で終わりです!
+= 悩みよさようなら!
 
   * 日本語翻訳プロジェクトを作ってみた
 
@@ -65,7 +64,7 @@
 
 = 今後の展望
 
-  * man9を完全に翻訳完了
-  * man4に手をつける
-  * man4,9について最新版に追従できるように差分管理
+  * man9を翻訳完了(man4も？)
+  * 最新版に追従できるように差分管理
+  * webから翻訳できるように
   * NetBSD標準にねじ込む!!!
