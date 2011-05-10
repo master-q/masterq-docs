@@ -10,8 +10,6 @@
    Kiwamu Okabe
 : theme
    rabbit-and-tortoise
-: allotted-time
-   8m
 
 = ぼくのスペック
 
@@ -23,7 +21,12 @@
 
 = NetBSD愛してますか？
 
-(('tag:center'))(('tag:x-large:もちろんです!'))
+  # image
+  # src = NetBSD_logo.png
+  # relative_height = 70
+  # reflect_ratio = 0.6
+
+(('tag:center'))もちろんです!
 
 = でも困ってませんか？
 
