@@ -17,57 +17,83 @@
   * ふだんはDebian
   * 前の仕事でNetBSD使ってた
   * 今はプロニート
-  * Haskell教えてくれる優しいお姉さん募集中
+  * お姉さんHaskell教えてー
 
-= NetBSD愛してますか？
+= Love NetBSD?
 
   # image
   # src = NetBSD_logo.png
-  # relative_height = 70
-  # reflect_ratio = 0.6
+  # relative_height = 85
+  # reflect_ratio = 0.8
 
-(('tag:center'))もちろんです!
+(('tag:center'))Of course! But...
 
-= でも困ってませんか？
+= 困ってませんか？
 
   * 普段の開発環境に採用できない
+  * なんとなくマイナー
   * キレイなソースってどのへん？
   * そもそもkernelよく知らない
   * 日本語の情報がまとまってない
-  * なんとなくマイナー
 
 = どうすれば...
 
   * 仕様書があればそれを読むべき
   * NetBSDの仕様書って何？
   * そりゃあmanでしょう
-  * でもmanが英語しかないので情弱にツラい
+  * でもmanが英語しかないので情弱(つまり僕)にツラい
 
 = 悩みよさようなら!
 
-  * 日本語翻訳プロジェクトを作ってみた
+日本語翻訳プロジェクトを作った
 
-      xxx スクリーンショット xxx
+  # image
+  # src = gitorious.png
+  # relative_height = 200
 
-= ただ翻訳するだけだと...
+= 翻訳manを読むには
+
+UNIXっぽい環境で
+
+  $ git clone git@gitorious.org:netbsd-man-translate\
+  /netbsd-man-translate.git
+  $ cd netbsd-man-translate
+  $ ./tools/man_utf8 ja/src/share/man/man9/uvm.9.ja
+
+皆groff 1.21使ってるよね!
+"-K"オプション使うよ!
+
+= 翻訳するだけだと
 
   # blockquote
   # title = http://d.hatena.ne.jp/naruoga/20110305/1302188484
-  どうせ翻訳なんか付いて来られないんだからおまいら英語見ろと本家の各国語版リポジトリパージ
+  "どうせ翻訳なんか付いて来られないんだからおまいら英語見ろ"と本家の各国語版リポジトリパージ
 
-= ワークフローを決めてみた
+= ワークフロー決め
 
+  # image
+  # src = workflow.png
+  # relative_height = 130
 
-= でもgroffとか知らないヨ？
+= 翻訳手順(現状)
+
+https://gitorious.org/netbsd-man-translate/netbsd-man-translate
+の"Clone repository"ボタンを押してclone作成。
+
+  $ どうしよう？ xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+= *NIX環境がない...
 
 ((<netbsdman.masterq.net|URL:http://netbsdman.masterq.net/>))
-をどうぞ。
+どぞ
 
-      xxx スクリーンショット xxx
+  # image
+  # src = netbsdman.png
+  # relative_height = 200
 
 = 今後の展望
 
   * man9を翻訳完了(man4も？)
-  * 最新版に追従できるように差分管理
+  * 最新版追従できるように差分管理
   * webから翻訳できるように
-  * NetBSD標準にねじ込む!!!
+  * NetBSD標準にねじ込む!!!といいな

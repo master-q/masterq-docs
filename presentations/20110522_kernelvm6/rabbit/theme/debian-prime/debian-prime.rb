@@ -231,6 +231,7 @@ match("**", ReferText) do |texts|
   texts.prop_set("foreground", "blue")
 end
 
+=begin
 # 高橋メソッド
 @lightning_talk_proc_name = "lightning-debian"
 @lightning_talk_as_large_as_possible = true
@@ -250,3 +251,4 @@ match(Slide) do |slides|
     end
   end
 end
+=end
