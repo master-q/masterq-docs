@@ -1,6 +1,6 @@
 # NOTE: This is sumple theme
 
-include_theme("rabbit")
+include_theme("debian-prime")
 
 @image_timer_limit = 8 * 60 # customize
 include_theme("image-timer")
