@@ -9,7 +9,7 @@
 : author
    Kiwamu Okabe
 : theme
-   rabbit-and-tortoise
+   debian-and-tortoise
 
 = ぼくのスペック
 
