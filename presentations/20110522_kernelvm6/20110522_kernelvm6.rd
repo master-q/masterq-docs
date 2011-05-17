@@ -2,10 +2,10 @@
 # view: rabbit 20110522_kernelvm6.rd
 # print: rabbit --print -o 20110522_kernelvm6.pdf 20110522_kernelvm6.rd
 
-= NetBSD manを翻訳してみた
+= NetBSD manを翻訳しよう!
 
 : subtitle
-   NetBSD manを翻訳しよう。契約なんていらないよ!
+   契約なんていらないよ!
 : author
    Kiwamu Okabe
 : theme
@@ -16,7 +16,7 @@
   * twitter: ((<@master_q|URL:http://twitter/master_q>))
   * ふだんはDebian
   * 前の仕事でNetBSD使ってた
-  * 今はプロニート
+  * 今プロニート
   * お姉さんHaskell教えてー
 
 = Love NetBSD?
@@ -30,10 +30,8 @@
 
 = 困ってませんか？
 
-  * 普段の開発環境に採用できない
-  * なんとなくマイナー
   * キレイなソースってどのへん？
-  * そもそもkernelよく知らない
+  * そもそもNetBSD kernelよく知らない
   * 日本語の情報がまとまってない
 
 = どうすれば...
@@ -45,11 +43,11 @@
 
 = 悩みよさようなら!
 
-日本語翻訳プロジェクトを作った
+翻訳プロジェクトを作ったよ!
 
   # image
   # src = gitorious.png
-  # relative_height = 200
+  # relative_height = 250
 
 = 翻訳manを読むには
 
@@ -63,25 +61,6 @@ UNIXっぽい環境で
 皆groff 1.21使ってるよね!
 "-K"オプション使うよ!
 
-= 翻訳するだけだと
-
-  # blockquote
-  # title = http://d.hatena.ne.jp/naruoga/20110305/1302188484
-  "どうせ翻訳なんか付いて来られないんだからおまいら英語見ろ"と本家の各国語版リポジトリパージ
-
-= ワークフロー決め
-
-  # image
-  # src = workflow.png
-  # relative_height = 130
-
-= 翻訳手順(現状)
-
-https://gitorious.org/netbsd-man-translate/netbsd-man-translate
-の"Clone repository"ボタンを押してclone作成。
-
-  $ どうしよう？ xxxxxxxxxxxxxxxxxxxxxxxxxxxx
-
 = *NIX環境がない...
 
 ((<netbsdman.masterq.net|URL:http://netbsdman.masterq.net/>))
@@ -91,9 +70,100 @@ https://gitorious.org/netbsd-man-translate/netbsd-man-translate
   # src = netbsdman.png
   # relative_height = 200
 
+= HTML化手順
+
+  $ pwd
+  /home/hoge/doc/netbsd-man-translate
+  $ ./tools/output_htmls
+  。。。warning出まくり。。。
+  $ chromium html/index.html
+
+((<haml|URL:http://haml.ursm.jp/>))とか使うから入れといてネ!
+
+= 翻訳するだけだと
+
+  # blockquote
+  # title = http://d.hatena.ne.jp/naruoga/20110305/1302188484
+  "「man とかどうせ翻訳なんか付いて来られないんだからおまいら英語見ろ」といって本家の各国語版リポジトリパージされちゃった"
+
+= ワークフロー決め
+
+  # image
+  # src = workflow.png
+  # relative_height = 140
+
+= ディレクトリ構造
+
+  html/
+      manのhtml出力先
+  ja/src/share/man/man9/*.9
+      翻訳元roffファイル
+  ja/src/share/man/man9/*.9.ja
+      日本語化roffファイル
+  org_netbsd/
+      NetBSDオリジナルソースcheckout先
+  tools/
+      翻訳ツール群
+
+= 翻訳手順(暫定) #1
+
+gitoriousで"Clone repository"してからgit clone;git flow init((-git-flowが必要-))
+
+  $ git clone git@gitorious.org:~masterq/netbsd-man-translate\
+  /masterqs-netbsd-man-translate.git
+  $ cd masterqs-netbsd-man-translate
+  $ git flow init
+  。。。リターン押しまくる
+
+= 翻訳手順(暫定) #2
+
+トピックブランチを作って翻訳
+
+  $ git checkout develop
+  $ xxx 親リポジトリをpull
+  $ git flow feature start cpu_initclocks.9
+  $ cp ja/src/share/man/man9/cpu_initclocks.9 \
+  ja/src/share/man/man9/cpu_initclocks.9.ja
+  $ vi ja/src/share/man/man9/cpu_initclocks.9.ja # 翻訳
+  $ ./tools/man_utf8 ja/src/share/man/man9/cpu_initclocks.9.ja
+  $ git add ja/src/share/man/man9/cpu_initclocks.9.ja
+  $ git commit -m "complete translate cpu_initclocks.9.ja"
+  $ git flow feature publish cpu_initclocks.9
+
+= 翻訳手順(暫定) #3
+
+"Request merge"ボタン押下
+
+  # image
+  # src = gitorious_mergereq.png
+  # relative_height = 150
+
+= 査読手順(暫定)
+
+  $ cd netbsd-man-translate
+  $ git checkout -b merge-requests/1
+  $ git pull git://gitorious.org/netbsd-man-translate\
+  /netbsd-man-translate.git refs/merge-requests/1
+  $ ./tools/man_utf8 ja/src/share/man/man9/cpu_initclocks.9.ja
+  $ git log --pretty=oneline --abbrev-commit \
+  master..merge-requests/1
+  $ git checkout master
+  $ git merge merge-requests/1
+  $ git push origin master
+
+査読者募集中!
+
 = 今後の展望
 
   * man9を翻訳完了(man4も？)
   * 最新版追従できるように差分管理
   * webから翻訳できるように
   * NetBSD標準にねじ込む!!!といいな
+
+= まとめ
+
+  * NetBSD manを翻訳する
+  * ソースをgrepするはめに
+  * キレイなソースを読める!
+  * manの間違いに気付く!
+  * 女子力アップ!
