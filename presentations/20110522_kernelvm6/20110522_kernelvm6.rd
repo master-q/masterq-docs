@@ -112,6 +112,7 @@ gitoriousで"Clone repository"してからgit clone;git flow init((-git-flowが�
   $ git clone git@gitorious.org:~masterq/netbsd-man-translate\
   /masterqs-netbsd-man-translate.git
   $ cd masterqs-netbsd-man-translate
+  $ git remote add upstream git@gitorious.org:netbsd-man-translate/netbsd-man-translate.git
   $ git flow init
   。。。リターン押しまくる
 
@@ -120,7 +121,8 @@ gitoriousで"Clone repository"してからgit clone;git flow init((-git-flowが�
 トピックブランチを作って翻訳
 
   $ git checkout develop
-  $ xxx 親リポジトリをpull
+  $ git pull upstream master
+  $ xxx ローカルのmasterブランチはどうする？
   $ git flow feature start cpu_initclocks.9
   $ cp ja/src/share/man/man9/cpu_initclocks.9 \
   ja/src/share/man/man9/cpu_initclocks.9.ja
