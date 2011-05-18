@@ -19,6 +19,13 @@
   * 今プロニート
   * お姉さんHaskell教えてー
 
+== プロパティ
+
+: background-image
+   enjoy.jpg
+: background-image-relative-width
+   100
+
 = Love NetBSD?
 
   # image
@@ -30,16 +37,30 @@
 
 = 困ってませんか？
 
-  * キレイなソースってどのへん？
-  * そもそもNetBSD kernelよく知らない
-  * 日本語の情報がまとまってない
+  * ((*キレイなソース*))ってどのへん？
+  * そもそもNetBSD kernel((*よく知らない*))
+  * ((*日本語の情報*))がまとまってない
+
+== プロパティ
+
+: background-image
+   trouble.jpg
+: background-image-relative-width
+   120
 
 = どうすれば...
 
   * 仕様書があればそれを読むべき
   * NetBSDの仕様書って何？
-  * そりゃあmanでしょう
-  * でもmanが英語しかないので情弱(つまり僕)にツラい
+  * そりゃあ((*man*))でしょう
+  * でも((*英語のmanしかない*))ので情弱(('note:(つまり僕)'))にツラい
+
+== プロパティ
+
+: background-image
+   specpaper.jpg
+: background-image-relative-width
+   150
 
 = 悩みよさようなら!
 
@@ -61,7 +82,14 @@ UNIXっぽい環境で
 皆groff 1.21使ってるよね!
 "-K"オプション使うよ!
 
-= *NIX環境がない...
+== プロパティ
+
+: background-image
+   files.jpg
+: background-image-relative-width
+   150
+
+= *NIX環境がない人
 
 ((<netbsdman.masterq.net|URL:http://netbsdman.masterq.net/>))
 どぞ
@@ -80,11 +108,25 @@ UNIXっぽい環境で
 
 ((<haml|URL:http://haml.ursm.jp/>))とか使うから入れといてネ!
 
+== プロパティ
+
+: background-image
+   haml.jpg
+: background-image-relative-width
+   150
+
 = 翻訳するだけだと
 
   # blockquote
   # title = http://d.hatena.ne.jp/naruoga/20110305/1302188484
   "「man とかどうせ翻訳なんか付いて来られないんだからおまいら英語見ろ」といって本家の各国語版リポジトリパージされちゃった"
+
+== プロパティ
+
+: background-image
+   rain3.jpg
+: background-image-relative-width
+   150
 
 = ワークフロー決め
 
@@ -157,15 +199,30 @@ gitoriousで"Clone repository"してからgit clone;git flow init((-git-flowが�
 
 = 今後の展望
 
-  * man9を翻訳完了(man4も？)
+  * man9を翻訳完了(('note:(man4も？)'))
   * 最新版追従できるように差分管理
-  * webから翻訳できるように
-  * NetBSD標準にねじ込む!!!といいな
+  * 用語辞書による翻訳支援
+  * Webから翻訳できるように
+  * NetBSD標準にねじ込む!!!(('note:(といいな)'))
+
+== プロパティ
+
+: background-image
+   future2.jpg
+: background-image-relative-width
+   100
 
 = まとめ
 
-  * NetBSD manを翻訳する
-  * ソースをgrepするはめに
-  * キレイなソースを読める!
-  * manの間違いに気付く!
-  * 女子力アップ!
+  * NetBSD manを翻訳する(('note:と'))
+  * (('note:なぜか'))ソースをgrepするはめに
+  * (('note:なしくずし的に'))キレイなソースを読める!
+  * (('note:そのうち'))manの間違いに気付く!
+  * ((*女子力アップ!*))
+
+== プロパティ
+
+: background-image
+   riceomelet.jpg
+: background-image-relative-width
+   130
