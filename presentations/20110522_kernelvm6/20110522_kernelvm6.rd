@@ -1,5 +1,10 @@
 # install: apt-get install rabbit
-# view: rabbit 20110522_kernelvm6.rd
+# view: rabbit --use-druby --public-level=all 20110522_kernelvm6.rd
+# wiimote: rabbit-wiictl.rb 20110522_kernelvm6.rd
+# control: rabbit-command --next
+# or: $ irb1.9.1 -r drb/drb
+#     irb> rabbit = DRbObject.new_with_uri("druby://localhost:10101")
+#     irb> rabbit.send(:toggle_index_mode)
 # print: rabbit --print -o 20110522_kernelvm6.pdf 20110522_kernelvm6.rd
 
 = NetBSD manを翻訳しよう!
@@ -37,7 +42,7 @@
 
 = 困ってませんか？
 
-  * ((*キレイなソース*))ってどのへん？
+  * キレイなソースって((*どのへん？*))
   * そもそもNetBSD kernel((*よく知らない*))
   * ((*日本語の情報*))がまとまってない
 
@@ -66,9 +71,14 @@
 
 翻訳プロジェクトを作ったよ!
 
-  # image
-  # src = gitorious.png
-  # relative_height = 250
+== プロパティ
+
+: background-image
+   gitorious.png
+: background-image-relative-width
+   90
+: background-image-relative-margin-top
+   40
 
 = 翻訳manを読むには
 
@@ -94,9 +104,14 @@ UNIXっぽい環境で
 ((<netbsdman.masterq.net|URL:http://netbsdman.masterq.net/>))
 どぞ
 
-  # image
-  # src = netbsdman.png
-  # relative_height = 200
+== プロパティ
+
+: background-image
+   netbsdman.png
+: background-image-relative-width
+   90
+: background-image-relative-margin-top
+   20
 
 = HTML化手順
 
@@ -130,15 +145,25 @@ UNIXっぽい環境で
 
 = ワークフロー決め
 
-  # image
-  # src = workflow.png
-  # relative_height = 140
+== プロパティ
+
+: background-image
+   workflow.png
+: background-image-relative-width
+   80
+: background-image-relative-margin-top
+   6
 
 = ディレクトリ構造
 
-  # image
-  # src = dirtree.png
-  # relative_height = 130
+== プロパティ
+
+: background-image
+   dirtree.png
+: background-image-relative-width
+   80
+: background-image-relative-margin-top
+   6
 
 = 翻訳手順(暫定) #1
 
@@ -171,9 +196,14 @@ gitoriousで"Clone repository"してからgit clone;git flow init((-git-flowが�
 
 "Request merge"ボタン押下
 
-  # image
-  # src = gitorious_mergereq.png
-  # relative_height = 150
+== プロパティ
+
+: background-image
+   gitorious_mergereq.png
+: background-image-relative-width
+   50
+: background-image-relative-margin-top
+   13
 
 = 査読手順(暫定)
 
