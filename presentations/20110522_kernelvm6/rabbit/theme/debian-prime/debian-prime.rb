@@ -170,7 +170,7 @@ loader_foot = ImageLoader.new(find_file(@slide_footer))
 loader_banner = ImageLoader.new(find_file(@slide_banner))
 match(Slide) do |slides|
   slides.each do |slide|
-    slide.add_post_draw_proc("footer") do |canvas, x, y, w, h, simulation|
+    slide.add_pre_draw_proc("footer") do |canvas, x, y, w, h, simulation|
       unless simulation
         footer_height = canvas.height/26.0 + screen_y(1) * 0.2
         loader_foot.resize(canvas.width, footer_height)
