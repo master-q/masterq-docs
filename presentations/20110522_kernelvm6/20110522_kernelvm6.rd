@@ -136,16 +136,9 @@ UNIXっぽい環境で
 
 = ディレクトリ構造
 
-  html/
-      manのhtml出力先
-  ja/src/share/man/man9/*.9
-      翻訳元roffファイル
-  ja/src/share/man/man9/*.9.ja
-      日本語化roffファイル
-  org_netbsd/
-      NetBSDオリジナルソースcheckout先
-  tools/
-      翻訳ツール群
+  # image
+  # src = dirtree.png
+  # relative_height = 130
 
 = 翻訳手順(暫定) #1
 
