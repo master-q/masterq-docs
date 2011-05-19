@@ -12,6 +12,7 @@ usage if ARGV.size != 1
 
 # exec rabbit
 pid = spawn"rabbit --use-druby --public-level=all #{ARGV[0]}"
+Process.setpgid(pid, Process.getpgid(0))
 
 # setup wiimote
 puts 'Put Wiimote in discoverable mode now (press 1+2)...'
