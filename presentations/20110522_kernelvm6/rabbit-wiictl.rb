@@ -17,6 +17,7 @@ pid = spawn"rabbit --use-druby --public-level=all #{ARGV[0]}"
 puts 'Put Wiimote in discoverable mode now (press 1+2)...'
 wiimote = WiiMote.new
 wiimote.rpt_mode = WiiMote::RPT_BTN
+wiimote.led = WiiMote::LED1_ON | WiiMote::LED4_ON
 puts 'OK!'
 
 # setup druby
@@ -28,11 +29,27 @@ while true
   buttons_prev = wiimote.buttons
   wiimote.get_state
   buttons_state = wiimote.buttons - (wiimote.buttons & buttons_prev)
-  rabbit.send(:move_to_previous_if_can) if buttons_state == WiiMote::BTN_LEFT
-  rabbit.send(:move_to_next_if_can) if buttons_state == WiiMote::BTN_RIGHT
-  rabbit.send(:move_to_first) if buttons_state == WiiMote::BTN_UP
-  rabbit.send(:move_to_last) if buttons_state == WiiMote::BTN_DOWN
-  rabbit.send(:toggle_fullscreen) if buttons_state == WiiMote::BTN_HOME
-  rabbit.send(:toggle_index_mode) if buttons_state == WiiMote::BTN_PLUS
+
+  case buttons_state
+  when WiiMote::BTN_A
+    rabbit.send(:move_to_next_if_can)
+  when WiiMote::BTN_B
+    rabbit.send(:move_to_previous_if_can)
+  when WiiMote::BTN_RIGHT
+    rabbit.send(:move_to_next_slide_if_can)
+  when WiiMote::BTN_LEFT
+    rabbit.send(:move_to_previous_slide_if_can)
+  when WiiMote::BTN_UP
+    rabbit.send(:move_to_first)
+  when WiiMote::BTN_DOWN
+    rabbit.send(:move_to_last)
+  when WiiMote::BTN_HOME
+    rabbit.send(:toggle_fullscreen)
+  when WiiMote::BTN_PLUS
+    rabbit.send(:toggle_index_mode)
+  when WiiMote::BTN_MINUS
+    rabbit.send(:toggle_whiteout)
+  end
+
   sleep 0.1
 end
