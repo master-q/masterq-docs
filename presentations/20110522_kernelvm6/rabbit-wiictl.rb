@@ -24,12 +24,23 @@ puts 'OK!'
 # setup druby
 rabbit = DRbObject.new_with_uri("druby://localhost:10101")
 
+leds = [WiiMote::LED1_ON, WiiMote::LED2_ON, WiiMote::LED3_ON, WiiMote::LED4_ON, WiiMote::LED3_ON, WiiMote::LED2_ON]
+ledcnt = 0
+gcount = 0
+
 # main loop
 buttons_prev = 0
 while true
   buttons_prev = wiimote.buttons
   wiimote.get_state
   buttons_state = wiimote.buttons - (wiimote.buttons & buttons_prev)
+
+  # led night rider
+  gcount = (gcount + 1) % 20
+  if gcount == 0
+    ledcnt = (ledcnt + 1) % leds.size
+    wiimote.led = leds[ledcnt]
+  end
 
   case buttons_state
   when WiiMote::BTN_A
