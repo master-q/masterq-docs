@@ -128,7 +128,9 @@ UNIXっぽい環境で
 : background-image
    haml.jpg
 : background-image-relative-width
-   150
+   140
+: background-image-relative-margin-top
+   -15
 
 = 翻訳するだけだと
 
@@ -143,15 +145,24 @@ UNIXっぽい環境で
 : background-image-relative-width
    150
 
-= どうすれば。。。
+= 再びどうすれば...
 
-  * 差分管理
+  * オリジナル更新差分管理
   * 翻訳マンパワー確保
   * ブランチ追従
 
 すれば受け入れてもらえる？
 
-= 差分管理
+== プロパティ
+
+: background-image
+   kuma.jpg
+: background-image-relative-width
+   80
+: background-image-relative-margin-top
+   10
+
+= 更新差分管理
 
 manpageをgettext化しよう!
 
@@ -167,7 +178,7 @@ manpageをgettext化しよう!
 = 翻訳マンパワー確保
 
 ((<www.transifex.net|URL:http://www.transifex.net>))
-で翻訳!(('note:(翻訳結果吸い上げまだだけど)'))
+で翻訳!(('note:(運用まだ開始してないけど)'))
 
 == プロパティ
 
@@ -182,6 +193,13 @@ manpageをgettext化しよう!
 
   * まだ考えてない。。。
   * けれど、((*msgmerge*))を使えばtransifexでの翻訳結果を活用できるのではないか
+
+== プロパティ
+
+: background-image
+   branch.jpg
+: background-image-relative-width
+   100
 
 = 今後の展望
 

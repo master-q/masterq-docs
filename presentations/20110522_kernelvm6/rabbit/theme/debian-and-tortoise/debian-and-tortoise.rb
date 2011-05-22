@@ -9,5 +9,5 @@ include_theme("image-timer")
 include_theme("slide-number")
 include_theme("image-slide-number")
 
-# @twitter_stream_content ||='track=#kernelvm,master_q'
-# include_theme("twitter-footer")
+@twitter_stream_content ||='track=#kernelvm,master_q'
+include_theme("twitter-footer")
