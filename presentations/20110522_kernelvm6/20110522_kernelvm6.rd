@@ -143,89 +143,52 @@ UNIXっぽい環境で
 : background-image-relative-width
    150
 
-= ワークフロー決め
+= どうすれば。。。
+
+  * 差分管理
+  * 翻訳マンパワー確保
+  * ブランチ追従
+
+すれば受け入れてもらえる？
+
+= 差分管理
+
+manpageをgettext化しよう!
 
 == プロパティ
 
 : background-image
-   workflow.png
+   roffflow.png
 : background-image-relative-width
-   80
+   65
 : background-image-relative-margin-top
-   6
+   10
 
-= ディレクトリ構造
+= 翻訳マンパワー確保
+
+((<www.transifex.net|URL:http://www.transifex.net>))
+で翻訳!(('note:(翻訳結果吸い上げまだだけど)'))
 
 == プロパティ
 
 : background-image
-   dirtree.png
+   transifrex_screenshot.png
 : background-image-relative-width
-   80
+   70
 : background-image-relative-margin-top
-   6
+   5
 
-= 翻訳手順(暫定) #1
+= ブランチ追従
 
-gitoriousで"Clone repository"してからgit clone;git flow init((-git-flowが必要-))
-
-  $ git clone git@gitorious.org:~masterq/netbsd-man-translate\
-  /masterqs-netbsd-man-translate.git
-  $ cd masterqs-netbsd-man-translate
-  $ git remote add upstream git@gitorious.org:netbsd-man-translate/netbsd-man-translate.git
-  $ git flow init
-  。。。リターン押しまくる
-
-= 翻訳手順(暫定) #2
-
-トピックブランチを作って翻訳
-
-  $ git checkout develop
-  $ git pull upstream master
-  $ xxx ローカルのmasterブランチはどうする？
-  $ git flow feature start cpu_initclocks.9
-  $ cp ja/src/share/man/man9/cpu_initclocks.9 \
-  ja/src/share/man/man9/cpu_initclocks.9.ja
-  $ vi ja/src/share/man/man9/cpu_initclocks.9.ja # 翻訳
-  $ ./tools/man_utf8 ja/src/share/man/man9/cpu_initclocks.9.ja
-  $ git add ja/src/share/man/man9/cpu_initclocks.9.ja
-  $ git commit -m "complete translate cpu_initclocks.9.ja"
-  $ git flow feature publish cpu_initclocks.9
-
-= 翻訳手順(暫定) #3
-
-"Request merge"ボタン押下
-
-== プロパティ
-
-: background-image
-   gitorious_mergereq.png
-: background-image-relative-width
-   50
-: background-image-relative-margin-top
-   13
-
-= 査読手順(暫定)
-
-  $ cd netbsd-man-translate
-  $ git checkout -b merge-requests/1
-  $ git pull git://gitorious.org/netbsd-man-translate\
-  /netbsd-man-translate.git refs/merge-requests/1
-  $ ./tools/man_utf8 ja/src/share/man/man9/cpu_initclocks.9.ja
-  $ git log --pretty=oneline --abbrev-commit \
-  master..merge-requests/1
-  $ git checkout master
-  $ git merge merge-requests/1
-  $ git push origin master
-
-査読者募集中!
+  * まだ考えてない。。。
+  * けれど、((*msgmerge*))を使えばtransifexでの翻訳結果を活用できるのではないか
 
 = 今後の展望
 
+  * transifexでの翻訳運用開始
+  * transifexでの翻訳の査読方法
   * man9を翻訳完了(('note:(man4も？)'))
-  * 最新版追従できるように差分管理
   * 用語辞書による翻訳支援
-  * Webから翻訳できるように
   * NetBSD標準にねじ込む!!!(('note:(といいな)'))
 
 == プロパティ
