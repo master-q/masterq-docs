@@ -175,6 +175,45 @@ manpageをgettext化しよう!
 : background-image-relative-margin-top
    10
 
+= roffxgettext動作#1
+
+".Sh"とか".Pp"とか出てきたら...
+
+== プロパティ
+
+: background-image
+   uvm_9.png
+: background-image-relative-width
+   70
+: background-image-relative-margin-top
+   17
+
+= roffxgettext動作#2
+
+msgidに切り取るだけ
+
+== プロパティ
+
+: background-image
+   9-uvm_pot.png
+: background-image-relative-width
+   70
+: background-image-relative-margin-top
+   17
+
+= roffmsgfmtは？
+
+まだ作ってません orz
+
+== プロパティ
+
+: background-image
+   orz.jpg
+: background-image-relative-width
+   100
+: background-image-relative-margin-top
+   -10
+
 = 翻訳マンパワー確保
 
 ((<www.transifex.net|URL:http://www.transifex.net>))
