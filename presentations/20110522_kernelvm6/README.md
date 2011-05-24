@@ -47,3 +47,7 @@ wiiリモコンを使ってrabbitプロセスを操作します。
 rabbitプロセスを--use-drubyで起動したあと、wiiリモコンの状態を検知して
 本プロセスからdrubyでrabbitプロセスにコマンドを投げます。
 あとwiiリモコンLEDがナイトライダーっぽくチカチカします。
+
+ライセンス
+----------
+The author disclaims all copyright. The ruby code is in the public domain.
