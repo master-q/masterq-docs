@@ -216,7 +216,7 @@ msgidに切り取るだけ
 
 = 翻訳マンパワー確保
 
-((<www.transifex.net|URL:http://www.transifex.net>))
+((<www.transifex.net|URL:https://www.transifex.net/projects/p/netbsd-man-translate>))
 で翻訳!(('note:(運用まだ開始してないけど)'))
 
 == プロパティ

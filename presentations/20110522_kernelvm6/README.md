@@ -35,6 +35,7 @@ twitterのTLをリアルタイム表示するテーマです。
 rabbit/theme/debian-prime/debian-prime.rb
 -----------------------------------------
 Debianテーマの改造版です。
+
 * 高橋メソッド無効化
 * タイトルフォントを小さく
 * スライドフッタの描画タイミングをpreに (上記twitter-footer.rbのために必要)
