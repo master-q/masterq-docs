@@ -7,7 +7,7 @@
 #     irb> rabbit.send(:toggle_index_mode)
 # print: rabbit --print -o hogehoge.pdf hogehoge.rd
 
-= Wikiを設置するならgitit!
+= Wiki設置するならgitit!
 
 : subtitle
    とっても簡単だよ!こわくないよ!
@@ -38,9 +38,18 @@
   * google code?
   * redmine?
 
+== プロパティ
+
+: background-image
+   Wikipedia-logo.png
+: background-image-relative-width
+   60
+: background-image-relative-margin-top
+   10
+
 = gititはいかが？
 
-  http://gitit.net/
+  http://gitit.net
 がデモサイト。
 
   https://github.com/jgm/gitit
@@ -57,11 +66,11 @@
 
 = gititのうれしいコト
 
-  * wikiデータがgit管理
+  * wikiデータが((*git*))管理
   * git cloneして文書更新できる
   * 専用プロセスだからfcgi不要
   * 文法がmarkdown(変更可能)
-  * プラグイン拡張できる!
+  * ((*プラグイン拡張*))できる!
 
 == プロパティ
 
@@ -83,9 +92,18 @@ Debian squeezeの場合、、、
 
 これだけ!(('note:(たぶん。。。)'))
 
+== プロパティ
+
+: background-image
+   squeeze.png
+: background-image-relative-width
+   120
+: background-image-relative-margin-top
+   0
+
 = え、、、Haskell？
 
-とりあえず見なかったことにして、先に進みましょう!
+((*流行の関数型*))ですよ!奥さん!!!
 
 == プロパティ
 
@@ -105,6 +123,15 @@ Debian squeezeの場合、、、
   $ chromium http://localhost:5001/ 
 
 うわー簡単!
+
+== プロパティ
+
+: background-image
+   easy.jpg
+: background-image-relative-width
+   130
+: background-image-relative-margin-top
+   0
 
 = こんな初期ページ
 
@@ -129,6 +156,15 @@ Debian squeezeの場合、、、
 
 staticとかtemplatesとか編集すればオシャレくなる(('note:ハズ'))
 
+== プロパティ
+
+: background-image
+   dressup.jpg
+: background-image-relative-width
+   140
+: background-image-relative-margin-top
+   8
+
 = プラグイン作る#1
 
 ふつーは((*PageTransform*))で。
@@ -143,6 +179,15 @@ staticとかtemplatesとか編集すればオシャレくなる(('note:ハズ'))
    10
 
 = プラグイン作る#2
+
+  http://hackage.haskell.org/platform/linux.html
+
+から
+
+  ghc-7.0.3バイナリ / haskell-platform-2011.2.0.1
+
+をインストールしておきましょう
+(('note:(Debianパッケージがstripされちゃってるから...)'))
 
 = 実地:daemon化
 
@@ -159,6 +204,15 @@ staticとかtemplatesとか編集すればオシャレくなる(('note:ハズ'))
   }
   --snip--
 
+== プロパティ
+
+: background-image
+   freebsd-beauty.jpg
+: background-image-relative-width
+   120
+: background-image-relative-margin-top
+   5
+
 = 実地:VirtualHost
 
   $ pwd
@@ -172,9 +226,18 @@ staticとかtemplatesとか編集すればオシャレくなる(('note:ハズ'))
   --snip--
   </VirtualHost>
 
+== プロパティ
+
+: background-image
+   apache.gif
+: background-image-relative-width
+   120
+: background-image-relative-margin-top
+   20
+
 = 最後に宣伝
 
-初心者Haskell勉強会やってます。僕が参加者に教えてもらう会!
+((*初心者Haskell勉強会*))やってます。僕が参加者に教えてもらう会!
 
   前回議事録: http://bit.ly/jnonaP
   次回: http://partake.in/events/8ccdc151-b758-47af-9ff2-91216bd5d3c4
