@@ -180,14 +180,58 @@ staticとかtemplatesとか編集すればオシャレくなる(('note:ハズ'))
 
 = プラグイン作る#2
 
-  http://hackage.haskell.org/platform/linux.html
+  $ cd mywiki/
+  $ mkdir plugins
+  $ vi plugins/TwitterUrl.hs
+  module TwitterUrl (plugin) where
+  import Network.Gitit.Interface
+  
+  plugin :: Plugin
+  plugin = mkPageTransform twitterurlize
+  
+  twitterurlize :: Inline -> Inline
+  twitterurlize (Str ('@':x)) =
+    Link [Str ('@':x)] ("http://twitter.com/" ++ x, '@':x)
+  twitterurlize x = x
 
-から
+テキトーにプラグイン作って
 
-  ghc-7.0.3バイナリ / haskell-platform-2011.2.0.1
+= プラグイン作る#3
 
-をインストールしておきましょう
-(('note:(Debianパッケージがstripされちゃってるから...)'))
+  $ cp ~/.cabal/share/gitit-0.8/data/default.conf ./
+  $ vi default.conf
+  --snip--
+  plugins: plugins/TwitterUrl.hs
+  --snip--
+  $ ~/.cabal/bin/gitit -f default.conf
+
+コンパイルしないで置いただけなのに。。。
+
+= プラグイン作る#4
+
+"@master_q"とか書くと、、、
+
+== プロパティ
+
+: background-image
+   plugin_edit.png
+: background-image-relative-width
+   100
+: background-image-relative-margin-top
+   10
+
+= プラグイン作る#5
+
+やった!twitterっぽいリンクになってる!
+
+== プロパティ
+
+: background-image
+   plugin_view.png
+: background-image-relative-width
+   100
+: background-image-relative-margin-top
+   10
 
 = 実地:daemon化
 

@@ -2,7 +2,7 @@
 
 include_theme("debian-prime")
 
-@image_timer_limit = 8 * 60 # customize
+@image_timer_limit = 5 * 60 # customize
 include_theme("image-timer")
 
 @slide_number_uninstall = true
