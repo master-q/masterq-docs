@@ -170,5 +170,6 @@ Main.hs
           m_v <- load_ "../Test.o" ["../api"] "resource"
           v <- case m_v of
                   LoadFailure _   -> error "load failed"
-                  LoadSuccess _ v -> return v          let s = field v
+                  LoadSuccess _ v -> return v
+          let s = field v
           print s -- => "success"と表示
