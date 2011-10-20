@@ -7,21 +7,93 @@ Kiwamu Okabe
 ![background](enjoy.png)
 
 * twitter: @master_q
+* http://www.masterq.net/
 * 職業: コピペプログラマ
-* Haskell NINJAになるべく修行中
+* Haskell忍者になるべく修行中
 * (NINJA:=No Income No Job or Asset)
 * あとPerl忍者リスペクト
 
-# Haskell言語を知っていますか？
+# Haskellを知っていますか？
 
 いくつもの特徴を持った関数型言語です。
 
+ちょっとだけ解説します。
+
 # 静的型付け
+
+* 全てのデータ/関数には型がついている
+* 型が合わないとエラー
+* 暗黙の型変換なんてもんはない
+* "型による設計"
+* 今まで動作時エラーだったものが、、、
+* コンパイル時エラーになる。やった!
+
 # 型推論
+
+* 全部の関数に型書かなくてもOK
+* たまーに推論失敗するけど。。。
+* 公開関数には型書こう
+* where内の非公開関数は省略がいいかも
+* hlintの言うことは聞いとけ
+
+# 型クラス
+
+returnとか作れるよ
+
+~~~ { .haskell }
+class Functor f => Applicative f where
+  return :: a -> f a
+instance Applicative [] where
+  return a = [a]
+instance Applicative Maybe where
+  return a = Just a
+~~~
+
+おっしゃれー
+
 # パターンマッチ
+
+* 型 + パターンマッチ = 表現力∞
+
+もうこんなの嫌
+
+~~~ { .c }
+switch (l->l_stat) {
+case LSRUN:
+        if (l->l_swtime > outpri2) {
+                outl2 = l;
+                outpri2 = l->l_swtime;
+        }
+        break;
+~~~
+
 # 遅延評価
+
+* 本当に必要になるまで評価されない
+* 無限再帰構造を持つ純粋世界は作れる
+* 現実世界(=IOモナド)が純粋世界を手招き
+* 手招きされた分のみ純粋世界が評価される
+* 使用上の注意をよく読み用法用量を守って
+
 # コンパイルして実行
+
+* runhaskellでインタプリタ的にも使える
+* でもコンパイルしてしまえば環境を選ばない
+* Haskell環境のないサーバに直バイナリOK
+* コンパイラだから最適化によっては速いかも
+
 # 読みやすく、書きやすい文法
+
+where厨になることうけあいです
+
+~~~ { .haskell }
+data Tree a   = Node { rootLabel :: a,
+                                   subForest :: Forest a }
+type Forest a = [Tree a]
+flatten :: Tree a -> [a]
+flatten t = squish t []
+   where squish (Node x ts) xs = x:Prelude.foldr squish xs ts
+~~~
 
 # ghciでインタラクティブ ラブ
 
@@ -45,7 +117,7 @@ Prelude> print $ fmap \
 * 依存したHackageを芋蔓式にインストール
 * Hackage := Haskellのライブラリ
 
-# Debianなら簡単!
+# Debianならcabal使うのも簡単!
 
 ~~~
 $ sudo apt-get install cabal-install
@@ -151,11 +223,11 @@ $ cabal info yesod
 
 * 図
 
-# そこでDebian DEATHヨ!
+# そこでDebian DEATHよ!
 
-最強のcabalができるまでどうすれば、、、
+最強のcabalができるまでどうすれば、、、
 
-cabalがダメならdeb化しちゃえばイイじゃない
+cabalダメならdeb化しちゃえばイイじゃない
 
 # Hackageのdeb化 #1
 
@@ -221,4 +293,11 @@ debian-haskell@lists.debian.org 常駐？
 * ~/.cabal
 * ~/.ghc
 
-もカラッポにしてやろか!
+もカラッポにしてやろか！？
+
+# 宣伝: プレゼンツール作ってます
+![background](turtle.png)
+
+* http://carettah.masterq.net/
+* Haskell製
+* このプレゼンもCarettah使ってます!
