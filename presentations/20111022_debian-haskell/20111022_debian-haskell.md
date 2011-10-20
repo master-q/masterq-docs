@@ -14,12 +14,14 @@ Kiwamu Okabe
 * あとPerl忍者リスペクト
 
 # Haskellを知っていますか？
+![background](haskell.png)
 
 いくつもの特徴を持った関数型言語です。
 
 ちょっとだけ解説します。
 
 # 静的型付け
+![background](cookie_cutter.png)
 
 * 全てのデータ/関数には型がついている
 * 型が合わないとエラー
@@ -29,6 +31,7 @@ Kiwamu Okabe
 * コンパイル時エラーになる。やった!
 
 # 型推論
+![background](sherlock_holmes.png)
 
 * 全部の関数に型書かなくてもOK
 * たまーに推論失敗するけど。。。
@@ -37,6 +40,7 @@ Kiwamu Okabe
 * hlintの言うことは聞いとけ
 
 # 型クラス
+![background](polymorphism.png)
 
 returnとか作れるよ
 
@@ -52,6 +56,7 @@ instance Applicative Maybe where
 おっしゃれー
 
 # パターンマッチ
+![background](match.png)
 
 * 型 + パターンマッチ = 表現力∞
 
@@ -68,6 +73,7 @@ case LSRUN:
 ~~~
 
 # 遅延評価
+![background](lazy.png)
 
 * 本当に必要になるまで評価されない
 * 無限再帰構造を持つ純粋世界は作れる
@@ -76,6 +82,7 @@ case LSRUN:
 * 使用上の注意をよく読み用法用量を守って
 
 # コンパイルして実行
+![background](cpu.png)
 
 * runhaskellでインタプリタ的にも使える
 * でもコンパイルしてしまえば環境を選ばない
@@ -83,6 +90,7 @@ case LSRUN:
 * コンパイラだから最適化によっては速いかも
 
 # 読みやすく、書きやすい文法
+![background](books.png)
 
 where厨になることうけあいです
 
@@ -96,6 +104,7 @@ flatten t = squish t []
 ~~~
 
 # ghciでインタラクティブ ラブ
+![background](interactive.png)
 
 ~~~
 $ sudo apt-get install haskell-platform
@@ -111,13 +120,15 @@ Prelude> print $ fmap \
 ~~~
 
 # cabalを使えば選り取り緑
+![background](cabal.png)
 
+* Hackage := Haskellのライブラリ
 * Ruby gemみたいな感じ
 * 使い方: "cabal install ライブラリ名"
 * 依存したHackageを芋蔓式にインストール
-* Hackage := Haskellのライブラリ
 
 # Debianならcabal使うのも簡単!
+![background](apt-get_moo.png)
 
 ~~~
 $ sudo apt-get install cabal-install
@@ -133,6 +144,7 @@ haskell-platformをインストールすれば
 cabal-installは自動でインストールされるけど
 
 # でもcabalには色々不都合が...
+![background](rubygem.png)
 
 Ruby gemとか使ってればよくある日常
 
@@ -148,6 +160,7 @@ $ sudo gem update
 パッケージは依存ライブラリを含めて最新版に
 
 # yesod Hackageのあるある (続く)
+![background](yesod_logo.png)
 
 ~~~
 $ cabal update # ローカルの Hackage データベースを更新
@@ -162,6 +175,7 @@ led to broken packages.
 ~~~
 
 # yesod Hackageのあるある (完)
+![background](accident.png)
 
 ~~~
 # しょうがない、必要なパッケージだけ更新しよう
@@ -176,6 +190,7 @@ $ cabal install yesod
 ~~~
 
 # これじゃあ、、、 #orz
+![background](orz.png)
 
 せっかくセットアップしても
 
@@ -188,6 +203,7 @@ $ cabal install yesod
 * orz orz orz orz orz
 
 # どーしてcabalはこんななの？
+![background](problem.png)
 
 それはそれはいくつもの問題があるんじゃよ
 
@@ -197,6 +213,7 @@ $ cabal install yesod
 の2つに大別されます。
 
 # Hackage 作成の文化的問題
+![background](culture.png)
 
 ~~~
 $ cabal info yesod
@@ -218,16 +235,17 @@ $ cabal info yesod
 # Hackage群全てを最新にはできない
 
 # 妄想: @khibinoさん最強cabal
+![background](khibino.png)
 
 可能性の中から最新を選択してくれたらイイナ
 
-* 図
+* 図 xxxxx
 
 # そこでDebian DEATHよ!
+![background](marie_antoinette.png)
 
-最強のcabalができるまでどうすれば、、、
-
-cabalダメならdeb化しちゃえばイイじゃない
+* 最強のcabalができるまでどうすれば、、、
+* cabalダメならdeb化しちゃえばイイじゃない
 
 # Hackageのdeb化 #1
 
@@ -271,6 +289,7 @@ $ ls ../*hcwiid*deb
 * プロファイラ対応ライブラリ　　がでけた!
 
 # どうしてこんなに簡単なの？
+![background](helper.png)
 
 debhelperの力です。
 
