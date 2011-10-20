@@ -10,8 +10,11 @@ Kiwamu Okabe
 * 職業: コピペプログラマ
 * Haskell NINJAになるべく修行中
 * (NINJA:=No Income No Job or Asset)
+* あとPerl忍者リスペクト
 
 # Haskell言語を知っていますか？
+
+いくつもの特徴を持った関数型言語です。
 
 # 静的型付け
 # 型推論
@@ -104,7 +107,7 @@ $ cabal install yesod
 
 せっかくセットアップしても
 
-経年変化で削除するハメに。。。
+経年変化で海のもくずに。。。
 
 * orz
 * orz orz
@@ -114,7 +117,7 @@ $ cabal install yesod
 
 # どーしてcabalはこんななの？
 
-それはそれはいくつもの問題があるんじゃよ。
+それはそれはいくつもの問題があるんじゃよ
 
 * cabalのしくみの問題
 * Hackage作者達の文化の問題
@@ -122,6 +125,19 @@ $ cabal install yesod
 の2つに大別されます。
 
 # Hackage 作成の文化的問題
+
+~~~
+$ cabal info yesod
+--snip--
+    Versions available: 0.6.7, 0.7.2, 0.7.3, 0.8.0, 0.8.1, 0.8.2,
+                        0.8.2.1, 0.9.1, 0.9.1.1 (and 35 others)
+--snip--
+    Dependencies:  yesod-core >=0.9.1.1 && <0.10, yesod-auth ==0.7.*,
+                   yesod-json ==0.2.*, yesod-persistent ==0.2.*,
+                   yesod-form ==0.3.*, monad-control ==0.2.*,
+~~~
+
+上限バージョンを決めてしまうんだ。。。 #orz
 
 # cabal の実装上の問題
 
@@ -137,7 +153,7 @@ $ cabal install yesod
 
 # そこでDebian DEATHヨ!
 
-最強のcabalができるまでどうすれば、、、
+最強のcabalができるまでどうすれば、、、
 
 cabalがダメならdeb化しちゃえばイイじゃない
 
@@ -191,13 +207,14 @@ debhelperの力です。
 ボスは
 
 * Joachim Breitner
-* nomeata@debian.org
+* E-mail: nomeata@debian.org
 
 debian-haskell@lists.debian.org 常駐？
 
 # darcsな使い方とか
 
 # 合言葉は
+![background](omaeha_naniwo.png)
 
 お前の
 
@@ -205,5 +222,3 @@ debian-haskell@lists.debian.org 常駐？
 * ~/.ghc
 
 もカラッポにしてやろか!
-
-* 図「おまえは何をいっているんだ」
