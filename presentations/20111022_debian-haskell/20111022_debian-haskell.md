@@ -20,6 +20,8 @@ Kiwamu Okabe
 
 ちょっとだけ解説します。
 
+(注: ぼくはHaskell初心者です)
+
 # 静的型付け
 ![background](cookie_cutter.png)
 
@@ -495,8 +497,6 @@ haskell-ansi-wl-pprint (0.6.3-1) UNRELEASED; urgency=low
 
 ![background](darcs.png)
 
-debianディレクトリだけバージョン管理
-
 ~~~
 $ pwd
 /home/kiwamu/deb/haskell-ansi-wl-pprint/debian
@@ -508,6 +508,8 @@ $ darcs put kiwamu-guest@darcs.debian.org:/darcs\
 Finished applying...
 Put successful.
 ~~~
+
+debianディレクトリだけ。。Gentooか？
 
 # darcsフックを設定
 
@@ -533,17 +535,18 @@ pkg-haskell-commits@lists.alioth.debian.org
 
 リリース対象バージョンを決める。
 
-debian/changelogの行を
+debian/changelogの最新行をunstableに
 
 ~~~
-UNRELEASED => unstable
+$ dch
 ~~~
 
-に変更。そしてdarcs push。
+バージョンが一つ上げた。そしてdarcs push。
 
 ~~~
 $ darcs record -a
 $ darcs push
+Sending mail to pkg-haskell-commits@lists.alioth.debian.org
 ~~~
 
 さっきのフックで通報されるはず。
@@ -558,7 +561,7 @@ http://pkg-haskell.alioth.debian.org/cgi-bin/pet.cgi
 
 "Ready for upload"状態になる。
 
-xxxxxxx スクリーンショット
+![inline](pit_cgi.png)
 
 # sponsor uploadを誰かにお願い
 
@@ -573,6 +576,23 @@ debian-haskell@lists.debian.org
 無事dputされてしまえば、次回からは
 
 自分でdputできますね :)
+
+# sponsorはこんなことしてるらしい
+
+![background](question.png)
+
+~~~
+$ darcs get darcs.debian.org:/darcs/pkg-haskell/tools
+$ tools/pkg-haskell-checkout haskell-ansi-wl-pprint
+$ cd haskell-ansi-wl-pprint/
+$ debuild -i -I
+$ debrelease
+$ debuild clean
+$ cd debian/
+$ darcs tag $(dpkg-parsechangelog -lchangelog |\
+  grep-dctrl -n -s Version .)
+$ darcs push -a
+~~~
 
 # ということで合言葉は
 ![background](omaeha_naniwo.png)
@@ -590,3 +610,4 @@ debian-haskell@lists.debian.org
 * http://carettah.masterq.net/
 * Haskell製
 * このプレゼンもCarettah使ってます!
+* そのうちapt-getできるようにしたる!
