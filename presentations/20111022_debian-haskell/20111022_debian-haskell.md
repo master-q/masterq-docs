@@ -169,7 +169,7 @@ $ sudo gem update
 ~~~
 $ cabal update # ローカルの Hackage データベースを更新
 $ cabal install yesod
-# 後日 yesod を最新版に更新しようと思いたつ
+# 後日yesodを最新版に更新しようと思いたつ
 $ cabal upgrade
 --snip--
 The 'cabal upgrade' command has been removed
@@ -184,12 +184,12 @@ led to broken packages.
 ~~~
 # しょうがない、必要なパッケージだけ更新しよう
 $ cabal install yesod
-# yesod が動作しなかったり、依存関係を cabal が自動解決しない
-# とりあえず cabal でインストールした Hackage を全部消そう
+# yesodが動作しない or 依存関係をcabalが自動解決しない
+# とりあえずcabalでインストールしたHackageを全部消そう
 $ rm -rf ~/.ghc ~/.cabal
 $ cabal update
 $ cabal install yesod
-# さっきの yesod のバグが再現しない。ふつーに動いとる。
+# さっきのyesodのバグが再現しない。ふつーに動いとる。
 # なぜだーーーーーーーーーーーーーーーー!?
 ~~~
 
@@ -225,9 +225,10 @@ $ cabal info yesod
     Versions available: 0.6.7, 0.7.2, 0.7.3, 0.8.0, 0.8.1, 0.8.2,
                         0.8.2.1, 0.9.1, 0.9.1.1 (and 35 others)
 --snip--
-    Dependencies:  yesod-core >=0.9.1.1 && <0.10, yesod-auth ==0.7.*,
-                   yesod-json ==0.2.*, yesod-persistent ==0.2.*,
-                   yesod-form ==0.3.*, monad-control ==0.2.*,
+    Dependencies:  yesod-core >=0.9.1.1 && <0.10,
+                   yesod-auth ==0.7.*, yesod-json ==0.2.*,
+                   yesod-persistent ==0.2.*, yesod-form ==0.3.*,
+                   monad-control ==0.2.*, ...
 ~~~
 
 上限バージョンを決めてしまうんだ。。。 #orz
@@ -509,7 +510,7 @@ Finished applying...
 Put successful.
 ~~~
 
-debianディレクトリだけ。。Gentooか？
+debianディレクトリだけ。。Gentoo？
 
 # darcsフックを設定
 
@@ -546,7 +547,7 @@ $ dch
 ~~~
 $ darcs record -a
 $ darcs push
-Sending mail to pkg-haskell-commits@lists.alioth.debian.org
+Sending mail to pkg-haskell-commits@lists.alioth.debian.org...
 ~~~
 
 さっきのフックで通報されるはず。
