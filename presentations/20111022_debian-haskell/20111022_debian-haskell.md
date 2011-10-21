@@ -272,8 +272,8 @@ hcwiid hackageを例に取ると...
 
 * hcwiid hackageはlibcwiid-devに依存
 * cabal install hcwiidしても...
-* apt-get install libcwiid-devするワケない
-* 。。。auto-aptたん。。。 orz
+* 自動でapt-get install libcwiid-dev？
+* するワケない。。。auto-aptたん。。。 orz
 
 # Hackage群全てを最新にはできない
 
@@ -291,7 +291,7 @@ yesod, hakyll, hamletを例に取ると...
 
 可能性の中から最新を選択してくれたらイイナ
 
-そしたらcabalさん最強なのに!
+そしたらcabalさん最強!
 
 # そこでDebian DEATHよ!
 ![background](marie_antoinette.png)
@@ -499,6 +499,8 @@ UNRELEASED => unstable
 $ darcs record -a
 $ darcs push
 ~~~
+
+さっきのフックで通報されるはず。
 
 # するとトラッカーが検出!
 
