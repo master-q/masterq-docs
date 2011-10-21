@@ -232,11 +232,15 @@ $ cabal info yesod
 
 # cabal の実装上の問題 #1
 
+![background](gear.png)
+
 B-1パッケージがAパッケージに依存
 
 ![inline](cabal-1.png)
 
 # cabal の実装上の問題 #2
+
+![background](gear.png)
 
 B-1をインストールするとA-1も一緒に入る
 
@@ -244,11 +248,15 @@ B-1をインストールするとA-1も一緒に入る
 
 # cabal の実装上の問題 #3
 
+![background](gear.png)
+
 B-1に依存したHackage群をインストール
 
 ![inline](cabal-3.png)
 
 # cabal の実装上の問題 #4
+
+![background](gear.png)
 
 A-2に依存しているD-1をインストール...
 
@@ -256,17 +264,23 @@ A-2に依存しているD-1をインストール...
 
 # cabal の実装上の問題 #5
 
+![background](gear.png)
+
 A-1のかわりにA-2をインストールすることに
 
 ![inline](cabal-5.png)
 
 # cabal の実装上の問題 #6
 
+![background](gear.png)
+
 B-1に依存していたHackageが依存が壊れる
 
 ![inline](cabal-6.png)
 
 # Haskellの外をcabalは感知しない
+
+![background](world.png)
 
 hcwiid hackageを例に取ると...
 
@@ -276,6 +290,8 @@ hcwiid hackageを例に取ると...
 * するワケない。。。auto-aptたん。。。 orz
 
 # Hackage群全てを最新にはできない
+
+![background](new.png)
 
 yesod, hakyll, hamletを例に取ると...
 
@@ -302,6 +318,8 @@ yesod, hakyll, hamletを例に取ると...
 
 # Hackageのdeb化 #1
 
+![background](bbq3.png)
+
 Haskellパッケージ化環境整備
 
 ~~~
@@ -312,6 +330,8 @@ $ sudo apt-get install \
 debhelperななにかがインストールされる。
 
 # Hackageのdeb化 #2
+
+![background](bbq2.png)
 
 cabal-debianでdebianディレクトリ作成
 
@@ -327,6 +347,8 @@ changelog compat control copyright rules
 ~~~
 
 # Hackageのdeb化 #3
+
+![background](bbq1.png)
 
 ~~~
 $ debuild -rfakeroot -us -uc
@@ -357,21 +379,29 @@ $
 
 # hlibrary.mk #build
 
+![background](crane.png)
+
 ![inline](haskell-debian-utils_build.png)
 
 cabalが普段やっていることと同じ
 
 # hlibrary.mk #install
 
+![background](install.png)
+
 ![inline](haskell-debian-utils_install.png)
 
 # どーせなら本家にdebをアップロード
+
+![background](temple.png)
 
 * 複数台PCの環境同期めんどい
 * そのうちubuntuも取り込むかもしれんし
 * やっちまえ! やっちまえ!
 
 # とりあえずDMになりましょう
+
+![background](direct_mail.png)
 
 * DDにならなくてもできることはアル
 * 結構簡単になれる
@@ -381,6 +411,8 @@ http://wiki.debian.org/DebianMaintainer
 
 # aliothのアカウントを作りましょう
 
+![background](alioth.png)
+
 * アカウントの作り方は日記に書いた
 * 読んでちょ
 
@@ -389,6 +421,8 @@ http://d.masterq.net/?date=20100325
 (あんま詳しくないかも。。。)
 
 # pkg-haskellチームにjoinセヨ!
+
+![background](handshake.png)
 
 ボスは
 
@@ -400,6 +434,8 @@ debian-haskell@lists.debian.org 常駐？
 頼まなくても活動してると勝手に登録される
 
 # さて作りますか
+
+![background](mail.png)
 
 http://wiki.debian.org/Haskell
 
@@ -418,6 +454,8 @@ Owner: Kiwamu Okabe <kiwamu@debian.or.jp>
 
 # cabal-debianコマンドでdeb化
 
+![background](sukiyaki.png)
+
 この時、debian/controlをpkg-haskell風に
 
 ~~~
@@ -432,6 +470,8 @@ Vcs-Browser: http://darcs.debian.org/cgi-bin/\
 ~~~
 
 # debian/changelogにも注意
+
+![background](changelog.png)
 
 リリースしていないバージョンには
 
@@ -453,6 +493,8 @@ haskell-ansi-wl-pprint (0.6.3-1) UNRELEASED; urgency=low
 
 # darcsリポジトリを作る
 
+![background](darcs.png)
+
 debianディレクトリだけバージョン管理
 
 ~~~
@@ -469,6 +511,8 @@ Put successful.
 
 # darcsフックを設定
 
+![background](hook.png)
+
 ~~~
 $ ssh kiwamu-guest@darcs.debian.org \
   /darcs/pkg-haskell/tools/add-hooks.sh \
@@ -484,6 +528,8 @@ pkg-haskell-commits@lists.alioth.debian.org
 に流れるようになる。
 
 # リリースを前提にしたお付き合い
+
+![background](marriage_meeting.png)
 
 リリース対象バージョンを決める。
 
@@ -504,6 +550,8 @@ $ darcs push
 
 # するとトラッカーが検出!
 
+![background](entropy.png)
+
 ~~~
 http://pkg-haskell.alioth.debian.org/cgi-bin/pet.cgi
 ~~~
@@ -513,6 +561,8 @@ http://pkg-haskell.alioth.debian.org/cgi-bin/pet.cgi
 xxxxxxx スクリーンショット
 
 # sponsor uploadを誰かにお願い
+
+![background](sponsor.png)
 
 debian-haskell@lists.debian.org
 
