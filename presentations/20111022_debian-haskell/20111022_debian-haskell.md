@@ -100,7 +100,7 @@ data Tree a   = Node { rootLabel :: a,
 type Forest a = [Tree a]
 flatten :: Tree a -> [a]
 flatten t = squish t []
-   where squish (Node x ts) xs = x:Prelude.foldr squish xs ts
+   where squish (Node x ts) xs = x:foldr squish xs ts
 ~~~
 
 # ghciでインタラクティブ ラブ
@@ -119,7 +119,7 @@ Prelude> print $ fmap \
 ["hoge","hogehoge","hogehogehoge"]
 ~~~
 
-# cabalを使えば選り取り緑
+# cabalを使えばよりどり緑
 ![background](cabal.png)
 
 * Hackage := Haskellのライブラリ
@@ -159,7 +159,9 @@ $ sudo gem update
 
 パッケージは依存ライブラリを含めて最新版に
 
-# yesod Hackageのあるある (続く)
+なる
+
+# yesod hackageのあるある (続く)
 ![background](yesod_logo.png)
 
 ~~~
@@ -174,7 +176,7 @@ led to broken packages.
 --snip-- # なにこれーーーーー!？
 ~~~
 
-# yesod Hackageのあるある (完)
+# yesod hackageのあるある (完)
 ![background](accident.png)
 
 ~~~
@@ -194,7 +196,7 @@ $ cabal install yesod
 
 せっかくセットアップしても
 
-経年変化で海のもくずに。。。
+経年変化で環境がもくずと消える。。。
 
 * orz
 * orz orz
@@ -228,24 +230,75 @@ $ cabal info yesod
 
 上限バージョンを決めてしまうんだ。。。 #orz
 
-# cabal の実装上の問題
+# cabal の実装上の問題 #1
+
+B-1パッケージがAパッケージに依存
+
+![inline](cabal-1.png)
+
+# cabal の実装上の問題 #2
+
+B-1をインストールするとA-1も一緒に入る
+
+![inline](cabal-2.png)
+
+# cabal の実装上の問題 #3
+
+B-1に依存したHackage群をインストール
+
+![inline](cabal-3.png)
+
+# cabal の実装上の問題 #4
+
+A-2に依存しているD-1をインストール...
+
+![inline](cabal-4.png)
+
+# cabal の実装上の問題 #5
+
+A-1のかわりにA-2をインストールすることに
+
+![inline](cabal-5.png)
+
+# cabal の実装上の問題 #6
+
+B-1に依存していたHackageが依存が壊れる
+
+![inline](cabal-6.png)
 
 # Haskellの外をcabalは感知しない
 
+hcwiid hackageを例に取ると...
+
+* hcwiid hackageはlibcwiid-devに依存
+* cabal install hcwiidしても...
+* apt-get install libcwiid-devするワケない
+* 。。。auto-aptたん。。。 orz
+
 # Hackage群全てを最新にはできない
 
-# 妄想: @khibinoさん最強cabal
+yesod, hakyll, hamletを例に取ると...
+
+* yesod-0.9.2はhamlet-0.10.*に依存
+* hakyll-3.2.0.8はhamlet-0.{7,8}.*に依存
+* yesodとhakyllを同時に使えない？
+* orz (今は改善されました)
+
+# 妄想: @khibinoさんのアイデア
 ![background](khibino.png)
+
+![inline](cabal_khibino.png)
 
 可能性の中から最新を選択してくれたらイイナ
 
-* 図 xxxxx
+そしたらcabalさん最強なのに!
 
 # そこでDebian DEATHよ!
 ![background](marie_antoinette.png)
 
 * 最強のcabalができるまでどうすれば、、、
 * cabalダメならdeb化しちゃえばイイじゃない
+* Haskell以外のライブラリに紐づけ可だし
 
 # Hackageのdeb化 #1
 
@@ -254,7 +307,6 @@ Haskellパッケージ化環境整備
 ~~~
 $ sudo apt-get install \
    haskell-debian-utils haskell-devscripts
-$ rehash
 ~~~
 
 debhelperななにかがインストールされる。
@@ -292,6 +344,26 @@ $ ls ../*hcwiid*deb
 ![background](helper.png)
 
 debhelperの力です。
+
+~~~
+$ cat debian/rules
+#!/usr/bin/make -f
+include /usr/share/cdbs/1/rules/debhelper.mk
+include /usr/share/cdbs/1/class/hlibrary.mk
+$
+~~~
+
+ご覧の通りincludeしかないです。
+
+# haskell-debian-utils #build
+
+![inline](haskell-debian-utils_build.png)
+
+cabalが普段やっていることと同じ
+
+# haskell-debian-utils #install
+
+![inline](haskell-debian-utils_install.png)
 
 # pkg-haskellチームにjoinセヨ!
 
