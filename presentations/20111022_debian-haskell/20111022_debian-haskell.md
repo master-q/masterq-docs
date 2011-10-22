@@ -9,9 +9,10 @@ Kiwamu Okabe
 * twitter: @master_q
 * http://www.masterq.net/
 * 職業: コピペプログラマ
+* Debianのおかげで結婚できました
 * Haskell忍者になるべく修行中
 * (NINJA:=No Income No Job or Asset)
-* あとPerl忍者リスペクト
+* Perl忍者リスペクト
 
 # Haskellを知っていますか？
 ![background](haskell.png)
@@ -49,8 +50,10 @@ returnとか作れるよ
 ~~~ { .haskell }
 class Functor f => Applicative f where
   return :: a -> f a
+
 instance Applicative [] where
   return a = [a]
+
 instance Applicative Maybe where
   return a = Just a
 ~~~
@@ -66,12 +69,16 @@ instance Applicative Maybe where
 
 ~~~ { .c }
 switch (l->l_stat) {
+case LSONPROC:
+	break;
+
 case LSRUN:
-        if (l->l_swtime > outpri2) {
-                outl2 = l;
-                outpri2 = l->l_swtime;
-        }
-        break;
+	if (l->l_swtime > outpri2) {
+		outl2 = l;
+		outpri2 = l->l_swtime;
+	}
+	break;
+...
 ~~~
 
 # 遅延評価
@@ -97,12 +104,18 @@ case LSRUN:
 where厨になることうけあいです
 
 ~~~ { .haskell }
-data Tree a   = Node { rootLabel :: a,
-                                   subForest :: Forest a }
+-- http://hackage.haskell.org/packages/archive/containers/
+-- latest/doc/html/Data-Tree.html から抜粋
+data Tree a = Node {
+        rootLabel :: a,         -- ^ label value
+        subForest :: Forest a   -- ^ zero or more child trees
+    }
 type Forest a = [Tree a]
+
+-- | The elements of a tree in pre-order.
 flatten :: Tree a -> [a]
 flatten t = squish t []
-   where squish (Node x ts) xs = x:foldr squish xs ts
+  where squish (Node x ts) xs = x:Prelude.foldr squish xs ts
 ~~~
 
 # ghciでインタラクティブ ラブ
@@ -116,10 +129,17 @@ GHCi, version 7.0.4: http://www.haskell.org/ghc/ :? for help
 Loading package ghc-prim ... linking ... done.
 Loading package integer-gmp ... linking ... done.
 Loading package base ... linking ... done.
-Prelude> print $ fmap \
-               (foldr (++) "" . flip replicate "hoge") [1..3]
+Prelude> fmap (foldr (++) "" . flip replicate "hoge") [1..3]
 ["hoge","hogehoge","hogehogehoge"]
 ~~~
+
+~~~
+$ irb
+irb(main)> (1..3).collect{|a|s="";a.times{s+="hoge"};s}
+=> ["hoge", "hogehoge", "hogehogehoge"]
+~~~
+
+似てるー
 
 # cabalを使えばよりどり緑
 ![background](cabal.png)
@@ -137,6 +157,7 @@ $ sudo apt-get install cabal-install
 $ rehash
 $ cabal update
 $ cabal install carettah
+# がりがりっとコンパイルされる
 $ ~/.cabal/bin/carettah
 carettah version 0.0.4
 ~~~
@@ -175,23 +196,30 @@ $ cabal upgrade
 The 'cabal upgrade' command has been removed
 because people found it confusing and it often
 led to broken packages.
---snip-- # なにこれーーーーー!？
+--snip--
 ~~~
+
+なにこれーーーーー!？
 
 # yesod hackageのあるある (完)
 ![background](accident.png)
 
+しょうがない、必要なパッケージだけ更新しよう
+
 ~~~
-# しょうがない、必要なパッケージだけ更新しよう
 $ cabal install yesod
 # yesodが動作しない or 依存関係をcabalが自動解決しない
 # とりあえずcabalでインストールしたHackageを全部消そう
 $ rm -rf ~/.ghc ~/.cabal
 $ cabal update
 $ cabal install yesod
-# さっきのyesodのバグが再現しない。ふつーに動いとる。
-# なぜだーーーーーーーーーーーーーーーー!?
 ~~~
+
+さっきのyesodのバグが再現しない。
+
+ふつーに動いとる。
+
+なぜだーーーーーーーーーーーーーーーー!?
 
 # これじゃあ、、、 #orz
 ![background](orz.png)
@@ -233,11 +261,13 @@ $ cabal info yesod
 
 上限バージョンを決めてしまうんだ。。。 #orz
 
+未来は誰にもわからないんじゃないのか？
+
 # cabal の実装上の問題 #1
 
 ![background](gear.png)
 
-B-1パッケージがAパッケージに依存
+B-1 hackageがA hackageに依存している
 
 ![inline](cabal-1.png)
 
@@ -261,7 +291,7 @@ B-1に依存したHackage群をインストール
 
 ![background](gear.png)
 
-A-2に依存しているD-1をインストール...
+A-2に依存しているD-1をインストールしよう
 
 ![inline](cabal-4.png)
 
@@ -269,7 +299,7 @@ A-2に依存しているD-1をインストール...
 
 ![background](gear.png)
 
-A-1のかわりにA-2をインストールすることに
+A-1のかわりにA-2をインストールするハメに
 
 ![inline](cabal-5.png)
 
@@ -289,7 +319,7 @@ hcwiid hackageを例に取ると...
 
 * hcwiid hackageはlibcwiid-devに依存
 * cabal install hcwiidしても...
-* 自動でapt-get install libcwiid-dev？
+* 自動でapt-get install libcwiid-devする？
 * するワケない。。。auto-aptたん。。。 orz
 
 # Hackage群全てを最新にはできない
@@ -300,6 +330,7 @@ yesod, hakyll, hamletを例に取ると...
 
 * yesod-0.9.2はhamlet-0.10.*に依存
 * hakyll-3.2.0.8はhamlet-0.{7,8}.*に依存
+* 理由:hamletのAPI変更にhakyllが追従×
 * yesodとhakyllを同時に使えない？
 * orz (今は改善されました)
 
@@ -310,7 +341,7 @@ yesod, hakyll, hamletを例に取ると...
 
 可能性の中から最新を選択してくれたらイイナ
 
-そしたらcabalさん最強!
+したらcabalさん最強!
 
 # そこでDebian DEATHよ!
 ![background](marie_antoinette.png)
@@ -363,7 +394,9 @@ $ ls ../*hcwiid*deb
 
 * 通常使用するライブラリ
 * Haddockで生成されたドキュメント
-* プロファイラ対応ライブラリ　　がでけた!
+* プロファイラ対応ライブラリ
+
+がでけた!
 
 # どうしてこんなに簡単なの？
 ![background](helper.png)
@@ -448,10 +481,14 @@ http://wiki.debian.org/Haskell
 Package: wnpp
 Severity: wishlist
 Owner: Kiwamu Okabe <kiwamu@debian.or.jp>
+
 * Package name    : haskell-ansi-wl-pprint
  Version         : 0.6.3
  Upstream Author : Daan Leijen, Max Bolingbroke
+<batterseapower@hotmail.com>
 * URL             : http://github.com/batterseapower/ansi-wl-pprint
+ Vcs-Browser     :
+http://anonscm.debian.org/gitweb/?p=collab-maint/haskell-ansi-wl-pprint.git
 * License         : BSD3
 ~~~
 
@@ -464,13 +501,16 @@ Owner: Kiwamu Okabe <kiwamu@debian.or.jp>
 ~~~
 $ vi debian/control
 Maintainer: Debian Haskell Group \
-  <pkg-haskell-maintainers@lists.alioth.debian.org>
+<pkg-haskell-maintainers@lists.alioth.debian.org>
 Uploaders: Kiwamu Okabe <kiwamu@debian.or.jp>
 Vcs-Darcs: \
-  http://darcs.debian.org/pkg-haskell/haskell-ansi-wl-pprint
+http://darcs.debian.org/pkg-haskell/haskell-ansi-wl-pprint
 Vcs-Browser: http://darcs.debian.org/cgi-bin/\
-  darcsweb.cgi?r=pkg-haskell/haskell-ansi-wl-pprint
+darcsweb.cgi?r=pkg-haskell/haskell-ansi-wl-pprint
+DM-Upload-Allowed: yes
 ~~~
+
+DMでもdput可能にしておこう
 
 # debian/changelogにも注意
 
@@ -483,7 +523,8 @@ Vcs-Browser: http://darcs.debian.org/cgi-bin/\
 ~~~
 haskell-ansi-wl-pprint (0.6.3-2) UNRELEASED; urgency=low
 
-  * ITP (Closes: #644376)
+  * repo is moved to darcs.
+  * change Vcs-* lines on debian/control.
 
  -- Kiwamu Okabe <kiwamu@debian.or.jp>  Wed, 12 Oct 2011 22:45:11 +0900
 
@@ -491,7 +532,7 @@ haskell-ansi-wl-pprint (0.6.3-1) UNRELEASED; urgency=low
 
   * Debianization generated by cabal-debian
 
- -- Kiwamu Okabe <kiwamu@debian.or.jp>  Wed, 05 Oct 2011 11:09:01 +0900
+ -- Kiwamu Okabe <kiwamu@debian.or.jp>  Wed, 05 Oct 2011 11:14:50 +0900
 ~~~
 
 # darcsリポジトリを作る
@@ -499,6 +540,7 @@ haskell-ansi-wl-pprint (0.6.3-1) UNRELEASED; urgency=low
 ![background](darcs.png)
 
 ~~~
+$ sudo apt-get install darcs
 $ pwd
 /home/kiwamu/deb/haskell-ansi-wl-pprint/debian
 $ darcs init --darcs-2
@@ -510,7 +552,9 @@ Finished applying...
 Put successful.
 ~~~
 
-debianディレクトリだけ。。Gentoo？
+debianディレクトリだけ管理って。。。
+
+どんなGentooだよwwwww
 
 # darcsフックを設定
 
@@ -539,7 +583,7 @@ pkg-haskell-commits@lists.alioth.debian.org
 debian/changelogの最新行をunstableに
 
 ~~~
-$ dch
+$ dch # エディタが起動される
 ~~~
 
 バージョンが一つ上げた。そしてdarcs push。
@@ -552,7 +596,7 @@ Sending mail to pkg-haskell-commits@lists.alioth.debian.org...
 
 さっきのフックで通報されるはず。
 
-# するとトラッカーが検出!
+# Package Entropy Trackerが検出!
 
 ![background](entropy.png)
 
@@ -595,6 +639,10 @@ $ darcs tag $(dpkg-parsechangelog -lchangelog |\
 $ darcs push -a
 ~~~
 
+pkg-haskell-checkout失敗するような気が。。。
+
+後darcsはhttp経由だととバグる sshでどぞ
+
 # ということで合言葉は
 ![background](omaeha_naniwo.png)
 
@@ -610,5 +658,6 @@ $ darcs push -a
 
 * http://carettah.masterq.net/
 * Haskell製
+* http://rabbit-shockers.org/ のパクり
 * このプレゼンもCarettah使ってます!
 * そのうちapt-getできるようにしたる!
