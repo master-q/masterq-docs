@@ -445,6 +445,15 @@ cabalが普段やっていることと同じ
 
 http://wiki.debian.org/DebianMaintainer
 
+~~~
+後日談) JoachimからメールがあってDDやDMでなくても
+pkg-haskellチームになれるそうです！
+>> [Q2] Can the person as not DM (Debian Maintainer) join
+>> pkg-haskell team? Or they should become DM, first?
+> No need to be a DM, as there are DDs around that can do
+> the sponsoring."
+~~~
+
 # aliothのアカウントを作りましょう
 
 ![background](alioth.png)
