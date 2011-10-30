@@ -9,7 +9,7 @@ Kiwamu Okabe
 * twitter: @master_q
 * http://www.masterq.net/
 * 職業: コピペプログラマ
-* Debianのおかげで結婚できました!
+* Debianのおかげで結婚できました(5年前)
 
 # Rabbitって知ってますか？
 ![background](rabbit.png)
@@ -53,10 +53,30 @@ http://www.debian.org/releases/sid/
 ~~~
 * http://www.haskell.org/platform をインストール
 * http://www.haskell.org/haskellwiki/Gtk2Hs をインストール
+* http://abstrakraft.org/cwiid/ をインストール
 * cabal update; cabal install carettah
 ~~~
 
 # スライドひな形作成
+![background](scaffold.png)
+
+てきとーなディレクトリで-nオプション起動
+
+~~~
+$ carettah -n hoge.md & # プレゼンウィンドウ起動
+$ cat hoge.md
+# Presentation Title
+![background](debian.png)
+
+Your Name
+
+# Slide Title
+* item1
+* item2
+* item3
+
+![inline](turtle.png)
+~~~
 
 # markdownで書きましょう
 ![background](markdown.png)
@@ -77,6 +97,8 @@ http://www.debian.org/releases/sid/
 # rキーでリロード
 ![background](reload.png)
 
+![inline](desktop.png)
+
 # 壁紙をはりましょう
 ![background](dressup.png)
 
@@ -86,6 +108,14 @@ http://www.debian.org/releases/sid/
 ~~~
 
 みたいに書くとスライドに壁紙つけられます
+
+~~~
+![inline](もっとしゃれおつ画像.png)
+~~~
+
+みたいに書くとその場所に画像がはりつきます
+
+![inline](dressup.png)
 
 # Wiiリモコン使えます
 ![background](wiimote.png)
@@ -107,8 +137,12 @@ $ evince output.pdf
 
 これだけ。
 
+slideshareとかにアップロードできますね
+
 # ----- デモ -----
+![background](demo.png)
 
 * デモをご覧ください
 
 # ちょっとだけ実装の紹介
+![background](gear.png)
