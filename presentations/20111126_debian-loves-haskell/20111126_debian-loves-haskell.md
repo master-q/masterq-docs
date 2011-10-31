@@ -3,25 +3,23 @@
 
 Kiwamu Okabe
 
-# 自己紹介
+# Who am I?
 ![background](enjoy.png)
 
 * twitter: @master_q
 * http://www.masterq.net/
-* 職業: コピペプログラマ
-* Debianのおかげで結婚できました
-* Haskell忍者になるべく修行中
+* I had met my wife with Debian.
+* I am a Haskell NINJA.
 * (NINJA:=No Income No Job or Asset)
-* Perl忍者リスペクト
 
-# Haskellを知っていますか？
+# Do you know Haskell?
 ![background](haskell.png)
 
-いくつもの特徴を持った関数型言語です。
+It's a functional programming language,
 
-ちょっとだけ解説します。
+Now I try to explain it.
 
-(注: ぼくはHaskell初心者です)
+(But, I am a beginer of Haskell.)
 
 # 静的型付け
 ![background](cookie_cutter.png)
