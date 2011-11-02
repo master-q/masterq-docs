@@ -29,7 +29,8 @@ Rubyistのためのプレゼンツールなんですね
 
 を作りました!
 
-命名 : Carettah
+* 命名 : Carettah
+* http://carettah.masterq.net/
 
 Rabbitはウサギさんだったので、亀の名前
 
@@ -146,3 +147,5 @@ slideshareとかにアップロードできますね
 
 # ちょっとだけ実装の紹介
 ![background](gear.png)
+
+* ソース見たいところ聞いて聞いて!
