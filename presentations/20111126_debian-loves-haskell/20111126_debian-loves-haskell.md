@@ -7,188 +7,65 @@ Kiwamu Okabe
 ![background](enjoy.png)
 
 * twitter: @master_q
-* http://www.masterq.net/
+* web: http://www.masterq.net/
 * I had met my wife with Debian.
 * I am a Haskell NINJA.
 * (NINJA:=No Income No Job or Asset)
 
-# Do you know Haskell?
+# Do you like Haskell?
 ![background](haskell.png)
 
-It's a functional programming language,
+* Do you like Haskell? Of course!
+* Do you like Hackages? Of course!
+* Do you like Hoogle? Of course!
+* Do you like Cabal? ............. no ...
 
-Now I try to explain it.
+You know, Cabal has many problems.....
 
-(But, I am a beginer of Haskell.)
-
-# 静的型付け
-![background](cookie_cutter.png)
-
-* 全てのデータ/関数には型がついている
-* 型が合わないとエラー
-* 暗黙の型変換なんてもんはない
-* "型による設計"
-* 今まで動作時エラーだったものが、、、
-* コンパイル時エラーになる。やった!
-
-# 型推論
-![background](sherlock_holmes.png)
-
-* 全部の関数に型書かなくてもOK
-* たまーに推論失敗するけど。。。
-* 公開関数には型書こう
-* where内の非公開関数は省略がいいかも
-* hlintの言うことは聞いとけ
-
-# 型クラス
-![background](polymorphism.png)
-
-returnとか作れるよ
-
-~~~ { .haskell }
-class Functor f => Applicative f where
-  return :: a -> f a
-
-instance Applicative [] where
-  return a = [a]
-
-instance Applicative Maybe where
-  return a = Just a
-~~~
-
-おっしゃれー
-
-# パターンマッチ
-![background](match.png)
-
-* 型 + パターンマッチ = 表現力∞
-
-もうこんなの嫌
-
-~~~ { .c }
-switch (l->l_stat) {
-case LSONPROC:
-	break;
-
-case LSRUN:
-	if (l->l_swtime > outpri2) {
-		outl2 = l;
-		outpri2 = l->l_swtime;
-	}
-	break;
-...
-~~~
-
-# 遅延評価
-![background](lazy.png)
-
-* 本当に必要になるまで評価されない
-* 無限再帰構造を持つ純粋世界は作れる
-* 現実世界(=IOモナド)が純粋世界を手招き
-* 手招きされた分のみ純粋世界が評価される
-* 使用上の注意をよく読み用法用量を守って
-
-# コンパイルして実行
-![background](cpu.png)
-
-* runhaskellでインタプリタ的にも使える
-* でもコンパイルしてしまえば環境を選ばない
-* Haskell環境のないサーバに直バイナリOK
-* コンパイラだから最適化によっては速いかも
-
-# 読みやすく、書きやすい文法
-![background](books.png)
-
-where厨になることうけあいです
-
-~~~ { .haskell }
--- http://hackage.haskell.org/packages/archive/containers/
--- latest/doc/html/Data-Tree.html から抜粋
-data Tree a = Node {
-        rootLabel :: a,         -- ^ label value
-        subForest :: Forest a   -- ^ zero or more child trees
-    }
-type Forest a = [Tree a]
-
--- | The elements of a tree in pre-order.
-flatten :: Tree a -> [a]
-flatten t = squish t []
-  where squish (Node x ts) xs = x:Prelude.foldr squish xs ts
-~~~
-
-# ghciでインタラクティブ ラブ
-![background](interactive.png)
-
-~~~
-$ sudo apt-get install haskell-platform
-$ rehash
-$ ghci
-GHCi, version 7.0.4: http://www.haskell.org/ghc/ :? for help
-Loading package ghc-prim ... linking ... done.
-Loading package integer-gmp ... linking ... done.
-Loading package base ... linking ... done.
-Prelude> fmap (foldr (++) "" . flip replicate "hoge") [1..3]
-["hoge","hogehoge","hogehogehoge"]
-~~~
-
-~~~
-$ irb
-irb(main)> (1..3).collect{|a|s="";a.times{s+="hoge"};s}
-=> ["hoge", "hogehoge", "hogehogehoge"]
-~~~
-
-似てるー
-
-# cabalを使えばよりどり緑
+# About Cabal
 ![background](cabal.png)
 
-* Hackage := Haskellのライブラリ
-* Ruby gemみたいな感じ
-* 使い方: "cabal install ライブラリ名"
-* 依存したHackageを芋蔓式にインストール
+* Hackage := packaged Haskell code
+* Cabal := installer of Hackage
+* Cabal is like Perl's CPAN.
+* Usage: "cabal install HACKAGE"
+* Cabal will install depended Hackages.
 
-# Debianならcabal使うのも簡単!
+# Using Cabal on Debian is easy.
 ![background](apt-get_moo.png)
 
 ~~~
-$ sudo apt-get install cabal-install
-$ rehash
+$ sudo apt-get install cabal-install haskell-platform
 $ cabal update
 $ cabal install carettah
-# がりがりっとコンパイルされる
+# ...cabal compiles the hackages...
 $ ~/.cabal/bin/carettah
 carettah version 0.0.4
 ~~~
 
-haskell-platformをインストールすれば
+Easy!
 
-cabal-installは自動でインストールされるけど
-
-# でもcabalには色々不都合が...
+# In case: Ruby's gem
 ![background](rubygem.png)
 
-Ruby gemとか使ってればよくある日常
+If you use Ruby gem,
 
 ~~~
 $ sudo gem update
-$ sudo gem install earchquake
-# 月日は流れ、 、そしてある日、 、
+$ sudo gem install earthquake
+# ...After some days...
 $ sudo gem update
 ~~~
 
-これで以前インストールしていたearchquake
+Always, you use latest applications.
 
-パッケージは依存ライブラリを含めて最新版に
-
-なる
-
-# yesod hackageのあるある (続く)
+# In case: Haskell's Cabal #1
 ![background](yesod_logo.png)
 
 ~~~
-$ cabal update # ローカルの Hackage データベースを更新
+$ cabal update # update Hackage database on local
 $ cabal install yesod
-# 後日yesodを最新版に更新しようと思いたつ
+# After some days, you will try to upgrade yesod.
 $ cabal upgrade
 --snip--
 The 'cabal upgrade' command has been removed
@@ -197,52 +74,37 @@ led to broken packages.
 --snip--
 ~~~
 
-なにこれーーーーー!？
+...What you say?????
 
-# yesod hackageのあるある (完)
+# In case: Haskell's Cabal #2
 ![background](accident.png)
 
-しょうがない、必要なパッケージだけ更新しよう
+...OK, I try to upgrade Hackages needed.
 
 ~~~
 $ cabal install yesod
-# yesodが動作しない or 依存関係をcabalが自動解決しない
-# とりあえずcabalでインストールしたHackageを全部消そう
+# Yesod runs with BUG, or Cabal doesn't solve dependency.
+# ...OK. Let's try install yesod from scratch.
 $ rm -rf ~/.ghc ~/.cabal
 $ cabal update
 $ cabal install yesod
 ~~~
 
-さっきのyesodのバグが再現しない。
+Yesod upgraded has problems.
 
-ふつーに動いとる。
+Yesod installed from scratch is no BUG.
 
-なぜだーーーーーーーーーーーーーーーー!?
+Why?????
 
-# これじゃあ、、、 #orz
-![background](orz.png)
-
-せっかくセットアップしても
-
-経年変化で環境がもくずと消える。。。
-
-* orz
-* orz orz
-* orz orz orz
-* orz orz orz orz
-* orz orz orz orz orz
-
-# どーしてcabalはこんななの？
+# Why Cabal support no upgrade?
 ![background](problem.png)
 
-それはそれはいくつもの問題があるんじゃよ
+There are two types of problems.
 
-* cabalのしくみの問題
-* Hackage作者達の文化の問題
+* Problem of Cabal mechanism
+* Problem of Hackage author's culture
 
-の2つに大別されます。
-
-# Hackage 作成の文化的問題
+# Problem of Hackage culture
 ![background](culture.png)
 
 ~~~
@@ -257,91 +119,106 @@ $ cabal info yesod
                    monad-control ==0.2.*, ...
 ~~~
 
-上限バージョンを決めてしまうんだ。。。 #orz
+It defines upper limit of Hackage.
 
-未来は誰にもわからないんじゃないのか？
+I think who never know future...
 
-# cabal の実装上の問題 #1
+# Hackage versioning policy
+
+~~~
+"http://www.haskell.org/haskellwiki/\
+Package_versioning_policy"
+~~~
+
+Above URL explain versioning poliy.
+
+* Example: 2.1.0.4 (A=2, B=1, C=0)
+* A.B is major version number.
+* C is minor version number.
+* Change major version if change API.
+
+# Problem of implementation #1
 
 ![background](gear.png)
-
-B-1 hackageがA hackageに依存している
 
 ![inline](cabal-1.png)
 
-# cabal の実装上の問題 #2
+# Problem of implementation #2
 
 ![background](gear.png)
-
-B-1をインストールするとA-1も一緒に入る
 
 ![inline](cabal-2.png)
 
-# cabal の実装上の問題 #3
+# Problem of implementation #3
 
 ![background](gear.png)
-
-B-1に依存したHackage群をインストール
 
 ![inline](cabal-3.png)
 
-# cabal の実装上の問題 #4
+# Problem of implementation #4
 
 ![background](gear.png)
-
-A-2に依存しているD-1をインストールしよう
 
 ![inline](cabal-4.png)
 
-# cabal の実装上の問題 #5
+# Problem of implementation #5
 
 ![background](gear.png)
-
-A-1のかわりにA-2をインストールするハメに
 
 ![inline](cabal-5.png)
 
-# cabal の実装上の問題 #6
+# Problem of implementation #6
 
 ![background](gear.png)
 
-B-1に依存していたHackageが依存が壊れる
-
 ![inline](cabal-6.png)
 
-# Haskellの外をcabalは感知しない
+# Cabal know only Haskell world.
 
 ![background](world.png)
 
-hcwiid hackageを例に取ると...
+Example: "hcwiid" Hackage
 
-* hcwiid hackageはlibcwiid-devに依存
-* cabal install hcwiidしても...
-* 自動でapt-get install libcwiid-devする？
-* するワケない。。。auto-aptたん。。。 orz
+* The hcwiid depends on libcwiid-dev.
+* If you run "cabal install hcwiid",
+* not install libcwiid-dev automatically.
+* Should we use auto-apt?
 
-# Hackage群全てを最新にはできない
+# Use latest Hackages sametime.
 
 ![background](new.png)
 
-yesod, hakyll, hamletを例に取ると...
+Example: yesod, hakyll, hamlet
 
-* yesod-0.9.2はhamlet-0.10.*に依存
-* hakyll-3.2.0.8はhamlet-0.{7,8}.*に依存
-* 理由:hamletのAPI変更にhakyllが追従×
-* yesodとhakyllを同時に使えない？
-* orz (今は改善されました)
+* yesod-0.9.2 depends on hamlet-0.10.*
+* hakyll-3.2.0.8 depends hamlet-0.{7,8}.*
+* can't use yesod and hakyll sametime?
+* hakyll is orphaned? No No No.
 
-# 妄想: @khibinoさんのアイデア
+# hakyll used hamlet old API. #1
+
+hakyll use Text.Hamlet.RT API.
+
+hamlet 0.8.2.1 provided it.
+
+![inline](hamlet_0.8.2.1.png)
+
+# hakyll used hamlet old API. #2
+
+But, Text.Hamlet.RT is removed,
+
+on hamlet 0.9.0.
+
+![inline](hamlet_0.9.0.png)
+
+# A dream: @khibino's idea
 ![background](khibino.png)
 
 ![inline](cabal_khibino.png)
 
-可能性の中から最新を選択してくれたらイイナ
+Upgrade is to search installable string.
 
-したらcabalさん最強!
-
-# そこでDebian DEATHよ!
+# Let's Debianize!
 ![background](marie_antoinette.png)
 
 * 最強のcabalができるまでどうすれば、、、
@@ -449,10 +326,10 @@ pkg-haskellチームになれるそうです！
 >> [Q2] Can the person as not DM (Debian Maintainer) join
 >> pkg-haskell team? Or they should become DM, first?
 > No need to be a DM, as there are DDs around that can do
-> the sponsoring."
+> the sponsoring.
 ~~~
 
-# aliothのアカウントを作りましょう
+# Get alioth account.
 
 ![background](alioth.png)
 
@@ -463,7 +340,7 @@ http://d.masterq.net/?date=20100325
 
 (あんま詳しくないかも。。。)
 
-# pkg-haskellチームにjoinセヨ!
+# Let's join pkg-haskell team.
 
 ![background](handshake.png)
 
@@ -650,21 +527,21 @@ pkg-haskell-checkout失敗するような気が。。。
 
 後darcsはhttp経由だととバグる sshでどぞ
 
-# ということで合言葉は
+# Then, let's say...
 ![background](omaeha_naniwo.png)
 
-お前の
+Can I remove your
 
-* ~/.cabal
-* ~/.ghc
+* $HOME/.cabal
+* $HOME/.ghc
 
-もカラッポにしてやろか！？
+directories?
 
-# 宣伝: プレゼンツール作ってます
+# PR: My presentation tool
 ![background](turtle.png)
 
 * http://carettah.masterq.net/
-* Haskell製
-* http://rabbit-shockers.org/ のパクり
-* このプレゼンもCarettah使ってます!
-* そのうちapt-getできるようにしたる!
+* made with Haskell
+* A clone of http://rabbit-shockers.org/
+* Now you see Carettah!
+* You can "apt-get install carettah".
