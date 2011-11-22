@@ -8,16 +8,16 @@ Kiwamu Okabe
 
 * twitter: @master_q
 * web: http://www.masterq.net/
-* I had met my wife with Debian.
+* I am a Debian Maintainer.
 * I am a Haskell NINJA.
 * (NINJA:=No Income No Job or Asset)
 
 # Do you like Haskell?
 ![background](haskell.png)
 
-* Do you like Haskell? Of course!
-* Do you like Hackages? Of course!
-* Do you like Hoogle? Of course!
+* Do you like Haskell? YES!
+* Do you like Hackages? YES!
+* Do you like Hoogle? YES!
 * Do you like Cabal? ............. no ...
 
 You know, Cabal has many problems.....
@@ -29,7 +29,7 @@ You know, Cabal has many problems.....
 * Cabal := installer of Hackage
 * Cabal is like Perl's CPAN.
 * Usage: "cabal install HACKAGE"
-* Cabal will install depended Hackages.
+* Cabal will install Hackages depended.
 
 # Using Cabal on Debian is easy.
 ![background](apt-get_moo.png)
@@ -101,8 +101,8 @@ Why?????
 
 There are two types of problems.
 
-* Problem of Cabal mechanism
 * Problem of Hackage author's culture
+* Problem of Cabal mechanism
 
 # Problem of Hackage culture
 ![background](culture.png)
@@ -126,7 +126,7 @@ I think who never know future...
 # Hackage versioning policy
 
 ~~~
-"http://www.haskell.org/haskellwiki/\
+"http://www.haskell.org/haskellwiki/
 Package_versioning_policy"
 ~~~
 
@@ -190,24 +190,24 @@ Example: "hcwiid" Hackage
 
 Example: yesod, hakyll, hamlet
 
-* yesod-0.9.2 depends on hamlet-0.10.*
-* hakyll-3.2.0.8 depends hamlet-0.{7,8}.*
-* can't use yesod and hakyll sametime?
-* hakyll is orphaned? No No No.
+* Yesod-0.9.2 depends on hamlet-0.10.*
+* Hakyll-3.2.0.8 depends hamlet-0.{7,8}.*
+* Can't use yesod and hakyll sametime?
+* Hakyll is orphaned? No. No. No.
 
 # hakyll used hamlet old API. #1
 
-hakyll use Text.Hamlet.RT API.
+Hakyll use Text.Hamlet.RT API.
 
-hamlet 0.8.2.1 provided it.
+Hamlet 0.8.2.1 provided it.
 
 ![inline](hamlet_0.8.2.1.png)
 
 # hakyll used hamlet old API. #2
 
-But, Text.Hamlet.RT is removed,
+But, Text.Hamlet.RT is removed on
 
-on hamlet 0.9.0.
+hamlet 0.9.0. Hakyll can't use it.
 
 ![inline](hamlet_0.9.0.png)
 
@@ -216,37 +216,37 @@ on hamlet 0.9.0.
 
 ![inline](cabal_khibino.png)
 
-Upgrade is to search installable string.
+Upgrade is to search installable strings.
 
 # Let's Debianize!
 ![background](marie_antoinette.png)
 
-* 最強のcabalができるまでどうすれば、、、
-* cabalダメならdeb化しちゃえばイイじゃない
-* Haskell以外のライブラリに紐づけ可だし
+* We can't wait better Cabal born.
+* How about Debianize Hackage?
+* Debian can maintain non Haskell libs.
 
-# Hackageのdeb化 #1
+# Debianize Hackage #1
 
 ![background](bbq3.png)
 
-Haskellパッケージ化環境整備
+Setup environment to debianize Hackage.
 
 ~~~
 $ sudo apt-get install \
    haskell-debian-utils haskell-devscripts
 ~~~
 
-debhelperななにかがインストールされる。
+Will be installed debhelpers.
 
-# Hackageのdeb化 #2
+# Debianize Hackage #2
 
 ![background](bbq2.png)
 
-cabal-debianでdebianディレクトリ作成
+Create "debian" dir with cabal-debian.
 
 ~~~
 $ wget http://hackage.haskell.org/packages/archive/\
-   hcwiid/0.0.1/hcwiid-0.0.1.tar.gz
+hcwiid/0.0.1/hcwiid-0.0.1.tar.gz
 $ tar xfz hcwiid-0.0.1.tar.gz
 $ cd hcwiid-0.0.1/
 $ cabal-debian --debianize --ghc \
@@ -255,7 +255,7 @@ $ ls debian
 changelog compat control copyright rules
 ~~~
 
-# Hackageのdeb化 #3
+# Debianize Hackage #3
 
 ![background](bbq1.png)
 
@@ -267,16 +267,16 @@ $ ls ../*hcwiid*deb
 ../libghc-hcwiid-prof_0.0.1-1~hackage1_amd64.deb
 ~~~
 
-* 通常使用するライブラリ
-* Haddockで生成されたドキュメント
-* プロファイラ対応ライブラリ
+* Library in general use
+* Document created Haddock
+* Library for profiler
 
-がでけた!
+3 packages are builded.
 
-# どうしてこんなに簡単なの？
+# Why is it easy?
 ![background](helper.png)
 
-debhelperの力です。
+It's debhelper's power.
 
 ~~~
 $ cat debian/rules
@@ -286,7 +286,7 @@ include /usr/share/cdbs/1/class/hlibrary.mk
 $
 ~~~
 
-ご覧の通りincludeしかないです。
+Makefile has only 2 lines.
 
 # hlibrary.mk #build
 
@@ -294,7 +294,7 @@ $
 
 ![inline](haskell-debian-utils_build.png)
 
-cabalが普段やっていることと同じ
+Above is same as Cabal's builder.
 
 # hlibrary.mk #install
 
@@ -302,64 +302,66 @@ cabalが普段やっていることと同じ
 
 ![inline](haskell-debian-utils_install.png)
 
-# どーせなら本家にdebをアップロード
+# Why don't you upload to Debian?
 
 ![background](temple.png)
 
-* 複数台PCの環境同期めんどい
-* そのうちubuntuも取り込むかもしれんし
-* やっちまえ! やっちまえ!
+* Many PC setup/install is messy.
+* Use apt-get, if it's uploaded in Debian.
+* Perhaps, Ubuntu may pickup it.
+* Go ahead! Go ahead!
 
-# とりあえずDMになりましょう
+# Become Debian Maintainer(DM)
 
 ![background](direct_mail.png)
 
-* DDにならなくてもできることはアル
-* 結構簡単になれる
-* こちらからドゾ
+* DM can upload the Debian package,
+* that is already uploaded by DD.
+* (DD := Debian Developer)
 
 http://wiki.debian.org/DebianMaintainer
 
 ~~~
-後日談) JoachimからメールがあってDDやDMでなくても
-pkg-haskellチームになれるそうです！
->> [Q2] Can the person as not DM (Debian Maintainer) join
+Note) Joachim (pkg-haskell team member) say below.
+>> [Q] Can the person as not DM (Debian Maintainer) join
 >> pkg-haskell team? Or they should become DM, first?
-> No need to be a DM, as there are DDs around that can do
-> the sponsoring.
+> No need to be a DM, as there are DDs around that can
+> do the sponsoring.
 ~~~
 
 # Get alioth account.
 
 ![background](alioth.png)
 
-* アカウントの作り方は日記に書いた
-* 読んでちょ
+![inline](alioth_logo.png)
 
-http://d.masterq.net/?date=20100325
-
-(あんま詳しくないかも。。。)
+* Open http://alioth.debian.org/.
+* Press "New Account".
+* Fill form.
+* You'll get guest account.
 
 # Let's join pkg-haskell team.
 
 ![background](handshake.png)
 
-ボスは
+Our boss is
 
 * Joachim Breitner
 * E-mail: nomeata@debian.org
 
-debian-haskell@lists.debian.org 常駐？
+Live in debian-haskell@lists.debian.org.
 
-頼まなくても活動してると勝手に登録される
+He'll accept you as pkg-haskell team,
 
-# さて作りますか
+if you send mail to debian-haskell ML.
+
+# Well, debianize it for upload.
 
 ![background](mail.png)
 
-http://wiki.debian.org/Haskell
+Read http://wiki.debian.org/Haskell.
 
-をまずは熟読のこと。とりあえずITPメール。
+Send ITP mail.
 
 ~~~
 Package: wnpp
@@ -376,11 +378,11 @@ http://anonscm.debian.org/gitweb/?p=collab-maint/haskell-ansi-wl-pprint.git
 * License         : BSD3
 ~~~
 
-# cabal-debianコマンドでdeb化
+# Debianize with cabal-debian
 
 ![background](sukiyaki.png)
 
-この時、debian/controlをpkg-haskell風に
+Write debian/control as below.
 
 ~~~
 $ vi debian/control
@@ -394,15 +396,15 @@ darcsweb.cgi?r=pkg-haskell/haskell-ansi-wl-pprint
 DM-Upload-Allowed: yes
 ~~~
 
-DMでもdput可能にしておこう
+DM can upload DM-Upload-Allowed deb.
 
-# debian/changelogにも注意
+# And write debian/changelog
 
 ![background](changelog.png)
 
-リリースしていないバージョンには
+Mark changelog lines are not released,
 
-とりあえずUNRELEASEDマークをつけとく
+as "UNRELEASED".
 
 ~~~
 haskell-ansi-wl-pprint (0.6.3-2) UNRELEASED; urgency=low
@@ -419,7 +421,7 @@ haskell-ansi-wl-pprint (0.6.3-1) UNRELEASED; urgency=low
  -- Kiwamu Okabe <kiwamu@debian.or.jp>  Wed, 05 Oct 2011 11:14:50 +0900
 ~~~
 
-# darcsリポジトリを作る
+# Create darcs repository
 
 ![background](darcs.png)
 
@@ -436,11 +438,11 @@ Finished applying...
 Put successful.
 ~~~
 
-debianディレクトリだけ管理って。。。
+Maintain only debian directory.
 
-どんなGentooだよwwwww
+...Gentoo?
 
-# darcsフックを設定
+# Setup darcs hook
 
 ![background](hook.png)
 
@@ -450,27 +452,25 @@ $ ssh kiwamu-guest@darcs.debian.org \
   haskell-ansi-wl-pprint
 ~~~
 
-これでコミットログが
+Automatically commit log is sended to
 
 ~~~
 pkg-haskell-commits@lists.alioth.debian.org
 ~~~
 
-に流れるようになる。
-
-# リリースを前提にしたお付き合い
+# Ready for release
 
 ![background](marriage_meeting.png)
 
-リリース対象バージョンを決める。
+Fix version number for release.
 
-debian/changelogの最新行をunstableに
+Mark latest line as "unstable".
 
 ~~~
-$ dch # エディタが起動される
+$ dch -v VERSION_NUM # will be opened with editor.
 ~~~
 
-バージョンが一つ上げた。そしてdarcs push。
+And darcs push it.
 
 ~~~
 $ darcs record -a
@@ -478,9 +478,9 @@ $ darcs push
 Sending mail to pkg-haskell-commits@lists.alioth.debian.org...
 ~~~
 
-さっきのフックで通報されるはず。
+The hook sends mail automatically.
 
-# Package Entropy Trackerが検出!
+# Package Entropy Tracker detect
 
 ![background](entropy.png)
 
@@ -488,25 +488,25 @@ Sending mail to pkg-haskell-commits@lists.alioth.debian.org...
 http://pkg-haskell.alioth.debian.org/cgi-bin/pet.cgi
 ~~~
 
-"Ready for upload"状態になる。
+Changed to "Ready for upload" state.
 
 ![inline](pit_cgi.png)
 
-# sponsor uploadを誰かにお願い
+# Find sponsor to upload it
 
 ![background](sponsor.png)
 
-debian-haskell@lists.debian.org
+If you send mail to
 
-にお願いメールすると、、、
+* debian-haskell@lists.debian.org
 
-、、、たぶんJoachimが反応する。
+... Joachim will reply it.
 
-無事dputされてしまえば、次回からは
+Once it's upload by sponsor,
 
-自分でdputできますね :)
+next time you can upload it.
 
-# sponsorはこんなことしてるらしい
+# Sponsor will upload it
 
 ![background](question.png)
 
@@ -523,9 +523,9 @@ $ darcs tag $(dpkg-parsechangelog -lchangelog |\
 $ darcs push -a
 ~~~
 
-pkg-haskell-checkout失敗するような気が。。。
+But is pkg-haskell-checkout broken?
 
-後darcsはhttp経由だととバグる sshでどぞ
+And darcs http has bug. Use ssh plz.
 
 # Then, let's say...
 ![background](omaeha_naniwo.png)
@@ -543,5 +543,5 @@ directories?
 * http://carettah.masterq.net/
 * made with Haskell
 * A clone of http://rabbit-shockers.org/
-* Now you see Carettah!
-* You can "apt-get install carettah".
+* Now you see Carettah's presentation!
+* Can "apt-get install carettah" on sid.
