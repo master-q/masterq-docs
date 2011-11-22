@@ -124,6 +124,7 @@ It defines upper limit of Hackage.
 I think who never know future...
 
 # Hackage versioning policy
+![background](versioning.png)
 
 ~~~
 "http://www.haskell.org/haskellwiki/
@@ -197,6 +198,8 @@ Example: yesod, hakyll, hamlet
 
 # hakyll used hamlet old API. #1
 
+![background](interface.png)
+
 Hakyll use Text.Hamlet.RT API.
 
 Hamlet 0.8.2.1 provided it.
@@ -204,6 +207,8 @@ Hamlet 0.8.2.1 provided it.
 ![inline](hamlet_0.8.2.1.png)
 
 # hakyll used hamlet old API. #2
+
+![background](interface.png)
 
 But, Text.Hamlet.RT is removed on
 
