@@ -6,8 +6,9 @@ Kiwamu Okabe
 # Who am I?
 ![background](enjoy.png)
 
-* twitter: @master_q
-* web: http://www.masterq.net/
+* Name: Kiwamu Okabe
+* Twitter ID: @master_q
+* Web: http://www.masterq.net/
 * I am a Debian Maintainer.
 * I am a Haskell NINJA.
 * (NINJA:=No Income No Job or Asset)
