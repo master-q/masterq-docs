@@ -1,4 +1,4 @@
-# Debian loves Haskell
+# Debian Loves Haskell
 ![background](debian.png)
 
 Kiwamu Okabe
@@ -11,7 +11,7 @@ Kiwamu Okabe
 * Web: http://www.masterq.net/
 * I am a Debian Maintainer.
 * I am a Haskell NINJA.
-* (NINJA:=No Income No Job or Asset)
+* (NINJA:=No Income No Job or Assets)
 
 # Do you like Haskell?
 ![background](haskell.png)
@@ -19,18 +19,18 @@ Kiwamu Okabe
 * Do you like Haskell? YES!
 * Do you like Hackages? YES!
 * Do you like Hoogle? YES!
-* Do you like Cabal? ............. no ...
+* Do you like Cabal? ............. no...
 
-You know, Cabal has many problems.....
+You know, Cabal has many problems...
 
 # About Cabal
 ![background](cabal.png)
 
 * Hackage := packaged Haskell code
-* Cabal := installer of Hackage
+* Cabal := hackage installer
 * Cabal is like Perl's CPAN.
 * Usage: "cabal install HACKAGE"
-* Cabal will install Hackages depended.
+* Cabal install a hackage's dependencies.
 
 # Using Cabal on Debian is easy.
 ![background](apt-get_moo.png)
@@ -46,27 +46,27 @@ carettah version 0.0.4
 
 Easy!
 
-# In case: Ruby's gem
+# Use case: Ruby's gem
 ![background](rubygem.png)
 
-If you use Ruby gem,
+If you use Ruby's gem,
 
 ~~~
 $ sudo gem update
 $ sudo gem install earthquake
-# ...After some days...
+# ...On a later date...
 $ sudo gem update
 ~~~
 
-Always, you use latest applications.
+You can always get the latest versions.
 
-# In case: Haskell's Cabal #1
+# Use case: Haskell's Cabal (#1)
 ![background](yesod_logo.png)
 
 ~~~
-$ cabal update # update Hackage database on local
+$ cabal update # update the local Hackage database
 $ cabal install yesod
-# After some days, you will try to upgrade yesod.
+# ...On a later date...
 $ cabal upgrade
 --snip--
 The 'cabal upgrade' command has been removed
@@ -75,37 +75,37 @@ led to broken packages.
 --snip--
 ~~~
 
-...What you say?????
+...What?!?!
 
-# In case: Haskell's Cabal #2
+# Use case: Haskell's Cabal (#2)
 ![background](accident.png)
 
-...OK, I try to upgrade Hackages needed.
+...OK, I try to upgrade Yesod and dependencies.
 
 ~~~
 $ cabal install yesod
-# Yesod runs with BUG, or Cabal doesn't solve dependency.
-# ...OK. Let's try install yesod from scratch.
+# Cabal cannot solve dependencies or Yesod has a bug.
+# ...OK, let's try again from scratch.
 $ rm -rf ~/.ghc ~/.cabal
 $ cabal update
 $ cabal install yesod
 ~~~
 
-Yesod upgraded has problems.
+Upgrading Yesod results in problems.
 
-Yesod installed from scratch is no BUG.
+Installing Yesod from scratch does not.
 
-Why?????
+...Why?!?!
 
-# Why Cabal support no upgrade?
+# Doesn't Cabal support 'upgrade'?
 ![background](problem.png)
 
-There are two types of problems.
+There are two problems:
 
-* Problem of Hackage author's culture
-* Problem of Cabal mechanism
+* Hackage authors' culture
+* Cabal implementation
 
-# Problem of Hackage culture
+# The Hackage culture problem
 ![background](culture.png)
 
 ~~~
@@ -120,9 +120,9 @@ $ cabal info yesod
                    monad-control ==0.2.*, ...
 ~~~
 
-It defines upper limit of Hackage.
+It specifies an upper limit.
 
-I think who never know future...
+I do not think we can know the future...
 
 # Hackage versioning policy
 ![background](versioning.png)
@@ -132,88 +132,95 @@ I think who never know future...
 Package_versioning_policy"
 ~~~
 
-Above URL explain versioning poliy.
+Example: 2.1.0.4
 
-* Example: 2.1.0.4 (A=2, B=1, C=0)
-* A.B is major version number.
-* C is minor version number.
-* Change major version if change API.
+* A.B is the major version number (2.1)
+* C is the minor version number (0)
 
-# Problem of implementation #1
+Change the major version if you
+
+change the API.
+
+# Implementation Problem (#1)
 
 ![background](gear.png)
 
 ![inline](cabal-1.png)
 
-# Problem of implementation #2
+# Implementation Problem (#2)
 
 ![background](gear.png)
 
 ![inline](cabal-2.png)
 
-# Problem of implementation #3
+# Implementation Problem (#3)
 
 ![background](gear.png)
 
 ![inline](cabal-3.png)
 
-# Problem of implementation #4
+# Implementation Problem (#4)
 
 ![background](gear.png)
 
 ![inline](cabal-4.png)
 
-# Problem of implementation #5
+# Implementation Problem (#5)
 
 ![background](gear.png)
 
 ![inline](cabal-5.png)
 
-# Problem of implementation #6
+# Implementation Problem (#6)
 
 ![background](gear.png)
 
 ![inline](cabal-6.png)
 
-# Cabal know only Haskell world.
+# Cabal only knows Haskell
 
 ![background](world.png)
 
 Example: "hcwiid" Hackage
 
-* The hcwiid depends on libcwiid-dev.
-* If you run "cabal install hcwiid",
-* not install libcwiid-dev automatically.
+* Hcwiid depends on system package
+* 'libcwiid-dev'.
+* Running "cabal install hcwiid",
+* does not install it.
 * Should we use auto-apt?
 
-# Use latest Hackages sametime.
+# Cannot use latest Hackages
 
 ![background](new.png)
 
-Example: yesod, hakyll, hamlet
+Example: Yesod, Hakyll, Hamlet
 
 * Yesod-0.9.2 depends on hamlet-0.10.*
 * Hakyll-3.2.0.8 depends hamlet-0.{7,8}.*
-* Can't use yesod and hakyll sametime?
-* Hakyll is orphaned? No. No. No.
 
-# hakyll used hamlet old API. #1
+Can't use latest Yesod and Hakyll
 
+at the same time?
+
+Hakyll is orphaned? No. No. No.
+
+# Hakyll uses the old Hamlet API #1
 ![background](interface.png)
 
-Hakyll use Text.Hamlet.RT API.
+Hakyll uses the Text.Hamlet.RT API.
 
 Hamlet 0.8.2.1 provided it.
 
 ![inline](hamlet_0.8.2.1.png)
 
-# hakyll used hamlet old API. #2
-
+# Hakyll uses the old Hamlet API #2
 ![background](interface.png)
 
-But, Text.Hamlet.RT is removed on
+Text.Hamlet.RT is removed
 
-hamlet 0.9.0. Hakyll can't use it.
+on Hamlet 0.9.0
+
+Hakyll can't use the latest version.
 
 ![inline](hamlet_0.9.0.png)
 
@@ -222,16 +229,16 @@ hamlet 0.9.0. Hakyll can't use it.
 
 ![inline](cabal_khibino.png)
 
-Upgrade is to search installable strings.
+Upgrade searches installable strings.
 
 # Let's Debianize!
 ![background](marie_antoinette.png)
 
-* We can't wait better Cabal born.
-* How about Debianize Hackage?
-* Debian can maintain non Haskell libs.
+* We can't wait for a better Cabal.
+* How about we Debianize Hackage?
+* Debian can maintain non-Haskell libs.
 
-# Debianize Hackage #1
+# Debianize Hackage (#1)
 
 ![background](bbq3.png)
 
@@ -242,9 +249,9 @@ $ sudo apt-get install \
    haskell-debian-utils haskell-devscripts
 ~~~
 
-Will be installed debhelpers.
+debhelpers will be installed.
 
-# Debianize Hackage #2
+# Debianize Hackage (#2)
 
 ![background](bbq2.png)
 
@@ -261,7 +268,7 @@ $ ls debian
 changelog compat control copyright rules
 ~~~
 
-# Debianize Hackage #3
+# Debianize Hackage (#3)
 
 ![background](bbq1.png)
 
@@ -300,7 +307,7 @@ Makefile has only 2 lines.
 
 ![inline](haskell-debian-utils_build.png)
 
-Above is same as Cabal's builder.
+This is the same as Cabal's builder.
 
 # hlibrary.mk #install
 
@@ -314,28 +321,31 @@ Above is same as Cabal's builder.
 
 * Many PC setup/install is messy.
 * Use apt-get, if it's uploaded in Debian.
-* Perhaps, Ubuntu may pickup it.
+* Perhaps, Ubuntu may pick it up.
 * Go ahead! Go ahead!
 
-# Become Debian Maintainer(DM)
+# Become a Debian Maintainer
 
 ![background](direct_mail.png)
 
-* DM can upload the Debian package,
-* that is already uploaded by DD.
-* (DD := Debian Developer)
-
 http://wiki.debian.org/DebianMaintainer
 
+* DM := Debian Maintainer
+* DD := Debian Developer
+
+A DM can upload a Debian package that
+
+is already uploaded by a DD.
+
 ~~~
-Note) Joachim (pkg-haskell team member) say below.
->> [Q] Can the person as not DM (Debian Maintainer) join
->> pkg-haskell team? Or they should become DM, first?
+Note: Joachim (pkg-haskell team member) said:
+>> [Q] Can someone who is not a DM join the pkg-haskell
+>> team, or should they become a DM first?
 > No need to be a DM, as there are DDs around that can
 > do the sponsoring.
 ~~~
 
-# Get alioth account.
+# Get an alioth account
 
 ![background](alioth.png)
 
@@ -343,25 +353,25 @@ Note) Joachim (pkg-haskell team member) say below.
 
 * Open http://alioth.debian.org/.
 * Press "New Account".
-* Fill form.
-* You'll get guest account.
+* Fill in the form.
+* You'll get a guest account.
 
-# Let's join pkg-haskell team.
+# Let's join the pkg-haskell team
 
 ![background](handshake.png)
 
-Our boss is
+Our boss is:
 
 * Joachim Breitner
 * E-mail: nomeata@debian.org
 
 Live in debian-haskell@lists.debian.org.
 
-He'll accept you as pkg-haskell team,
+He'll accept you into the pkg-haskell team
 
-if you send mail to debian-haskell ML.
+if you send mail to the debian-haskell ML.
 
-# Well, debianize it for upload.
+# Debianize the package for upload.
 
 ![background](mail.png)
 
@@ -404,13 +414,13 @@ DM-Upload-Allowed: yes
 
 DM can upload DM-Upload-Allowed deb.
 
-# And write debian/changelog
+# Write debian/changelog
 
 ![background](changelog.png)
 
-Mark changelog lines are not released,
+Mark changelog lines that are not yet
 
-as "UNRELEASED".
+released as "UNRELEASED".
 
 ~~~
 haskell-ansi-wl-pprint (0.6.3-2) UNRELEASED; urgency=low
@@ -427,7 +437,7 @@ haskell-ansi-wl-pprint (0.6.3-1) UNRELEASED; urgency=low
  -- Kiwamu Okabe <kiwamu@debian.or.jp>  Wed, 05 Oct 2011 11:14:50 +0900
 ~~~
 
-# Create darcs repository
+# Create a darcs repository
 
 ![background](darcs.png)
 
@@ -444,11 +454,11 @@ Finished applying...
 Put successful.
 ~~~
 
-Maintain only debian directory.
+Maintain only the debian directory.
 
 ...Gentoo?
 
-# Setup darcs hook
+# Setup a darcs hook
 
 ![background](hook.png)
 
@@ -458,13 +468,13 @@ $ ssh kiwamu-guest@darcs.debian.org \
   haskell-ansi-wl-pprint
 ~~~
 
-Automatically commit log is sended to
+The commit log is sent automatically to:
 
 ~~~
 pkg-haskell-commits@lists.alioth.debian.org
 ~~~
 
-# Ready for release
+# Prepare for release
 
 ![background](marriage_meeting.png)
 
@@ -473,10 +483,10 @@ Fix version number for release.
 Mark latest line as "unstable".
 
 ~~~
-$ dch -v VERSION_NUM # will be opened with editor.
+$ dch -v VERSION_NUM # will be opened with your editor
 ~~~
 
-And darcs push it.
+Then darcs push it.
 
 ~~~
 $ darcs record -a
@@ -484,9 +494,9 @@ $ darcs push
 Sending mail to pkg-haskell-commits@lists.alioth.debian.org...
 ~~~
 
-The hook sends mail automatically.
+The hook sends the mail automatically.
 
-# Package Entropy Tracker detect
+# Package Entropy Tracker
 
 ![background](entropy.png)
 
@@ -498,7 +508,7 @@ Changed to "Ready for upload" state.
 
 ![inline](pit_cgi.png)
 
-# Find sponsor to upload it
+# Find a sponsor to upload it
 
 ![background](sponsor.png)
 
@@ -506,11 +516,11 @@ If you send mail to
 
 * debian-haskell@lists.debian.org
 
-... Joachim will reply it.
+...Joachim will reply.
 
-Once it's upload by sponsor,
+Once it's uploaded by a sponsor,
 
-next time you can upload it.
+you will be able to upload it next time.
 
 # Sponsor will upload it
 
@@ -531,7 +541,7 @@ $ darcs push -a
 
 But is pkg-haskell-checkout broken?
 
-And darcs http has bug. Use ssh plz.
+Also, darcs http has bug. Please use ssh.
 
 # Then, let's say...
 ![background](omaeha_naniwo.png)
@@ -547,7 +557,11 @@ directories?
 ![background](turtle.png)
 
 * http://carettah.masterq.net/
-* made with Haskell
+* Made with Haskell
 * A clone of http://rabbit-shockers.org/
-* Now you see Carettah's presentation!
-* Can "apt-get install carettah" on sid.
+
+This presentation was done
+
+using Carettah!
+
+You can "apt-get install carettah" on sid.
