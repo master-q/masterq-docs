@@ -100,7 +100,16 @@ Installing Yesod from scratch does not.
 # Doesn't Cabal support 'upgrade'?
 ![background](problem.png)
 
-There are two problems:
+Cabal is not a Package Manager.
+
+~~~
+"http://ivanmiljenovic.wordpress.com/2010/03/15/
+repeat-after-me-cabal-is-not-a-package-manager/"
+~~~
+
+But many persons use Cabal as a Package
+
+Manager. There are two problems:
 
 * Hackage authors' culture
 * Cabal implementation
