@@ -17,7 +17,7 @@ Kiwamu Okabe
 ![background](haskell.png)
 
 * Do you like Haskell? YES!
-* Do you like Hackages? YES!
+* Do you like Haskell packages? YES!
 * Do you like Hoogle? YES!
 * Do you like Cabal? ............. no...
 
@@ -26,11 +26,11 @@ You know, Cabal has many problems...
 # About Cabal
 ![background](cabal.png)
 
-* Hackage := packaged Haskell code
-* Cabal := hackage installer
+* HackageDB := collection of packages
+* Cabal := Haskell package installer
 * Cabal is like Perl's CPAN.
-* Usage: "cabal install HACKAGE"
-* Cabal install a hackage's dependencies.
+* Usage: "cabal install PACKAGE"
+* Cabal install a package's dependencies.
 
 # Using Cabal on Debian is easy.
 ![background](apt-get_moo.png)
@@ -39,7 +39,7 @@ You know, Cabal has many problems...
 $ sudo apt-get install cabal-install haskell-platform
 $ cabal update
 $ cabal install carettah
-# ...cabal compiles the hackages...
+# ...cabal compiles the packages...
 $ ~/.cabal/bin/carettah
 carettah version 0.0.4
 ~~~
@@ -124,7 +124,7 @@ It specifies an upper limit.
 
 I do not think we can know the future...
 
-# Hackage versioning policy
+# Package versioning policy
 ![background](versioning.png)
 
 ~~~
@@ -181,7 +181,7 @@ change the API.
 
 ![background](world.png)
 
-Example: "hcwiid" Hackage
+Example: "hcwiid" Package
 
 * Hcwiid depends on system package
 * 'libcwiid-dev'.
@@ -189,7 +189,7 @@ Example: "hcwiid" Hackage
 * does not install it.
 * Should we use auto-apt?
 
-# Cannot use latest Hackages
+# Cannot use latest Packages
 
 ![background](new.png)
 
@@ -235,14 +235,16 @@ Upgrade searches installable strings.
 ![background](marie_antoinette.png)
 
 * We can't wait for a better Cabal.
-* How about we Debianize Hackage?
+* How about we Debianize packages?
 * Debian can maintain non-Haskell libs.
 
-# Debianize Hackage (#1)
+# Debianize Haskell Package (#1)
 
 ![background](bbq3.png)
 
-Setup environment to debianize Hackage.
+Setup environment to debianize Haskell
+
+package.
 
 ~~~
 $ sudo apt-get install \
@@ -251,7 +253,7 @@ $ sudo apt-get install \
 
 debhelpers will be installed.
 
-# Debianize Hackage (#2)
+# Debianize Haskell Package (#2)
 
 ![background](bbq2.png)
 
@@ -268,7 +270,7 @@ $ ls debian
 changelog compat control copyright rules
 ~~~
 
-# Debianize Hackage (#3)
+# Debianize Haskell Package (#3)
 
 ![background](bbq1.png)
 
