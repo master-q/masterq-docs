@@ -107,9 +107,9 @@ Cabal is not a Package Manager.
 repeat-after-me-cabal-is-not-a-package-manager/"
 ~~~
 
-But many persons use Cabal as a Package
+However, many people use it as one.
 
-Manager. There are two problems:
+There are two problems:
 
 * Hackage authors' culture
 * Cabal implementation
@@ -460,7 +460,7 @@ $ darcs init --darcs-2
 $ darcs record -a -l -m "Initial Check-In"
 Finished recording patch 'Initial Check-In'
 $ darcs put kiwamu-guest@darcs.debian.org:/darcs\
-  /pkg-haskell/haskell-ansi-wl-pprint
+/pkg-haskell/haskell-ansi-wl-pprint
 Finished applying...
 Put successful.
 ~~~
@@ -554,15 +554,19 @@ But is pkg-haskell-checkout broken?
 
 Also, darcs http has bug. Please use ssh.
 
-# Then, let's say...
-![background](omaeha_naniwo.png)
+# Debianize packages in the earth
+![background](earth.png)
 
-Can I remove your
+Let's remove your
 
 * $HOME/.cabal
 * $HOME/.ghc
 
-directories?
+directories.
+
+Then, Debianize all of the haskell
+
+packages in the earth!
 
 # PR: My presentation tool
 ![background](turtle.png)
