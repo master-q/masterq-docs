@@ -4,6 +4,8 @@
 Kiwamu Okabe
 
 # 13章 問題7 ってなんどす？
+![background](1.png)
+
 以下の定義が与えられているとする。
 
 ~~~
@@ -23,6 +25,7 @@ map f (map g xs) = map (f . g) xs
 xsに対する数学的帰納法で証明せよ。
 
 # 空リストに対して成り立つ？ #1
+![background](2.png)
 
 ~~~
 map f (map g []) = map (f . g) []
@@ -31,6 +34,7 @@ map f (map g []) = map (f . g) []
 は成立するのか？
 
 # 空リストに対して成り立つ？ #2
+![background](12.png)
 
 ~~~
 map f (map g []) = map (f . g) []
@@ -44,6 +48,7 @@ map f [] = []
 ~~~
 
 # 空リストに対して成り立つ？ #3
+![background](8.png)
 
 ~~~
 map f (map g []) = map (f . g) []
@@ -60,6 +65,7 @@ map f [] = []
 空リストに対しては成立しましたね。やった
 
 # 帰納法を使ってみよう #1
+![background](5.png)
 
 ~~~
 (仮定1) map f (map g xs) = map (f . g) xs
@@ -74,6 +80,7 @@ map f (map g (x:xs)) = map (f . g) (x:xs)
 であることが示せれば証明完了デスネ。
 
 # 帰納法を使ってみよう #2
+![background](9.png)
 
 ~~~
 map f (map g (x:xs)) = map (f . g) (x:xs)
@@ -87,6 +94,7 @@ map f (g x : map g xs) = (f . g) x : map (f . g) xs
 ~~~
 
 # 帰納法を使ってみよう #3
+![background](6.png)
 
 ~~~
 map f (map g (x:xs)) = map (f . g) (x:xs)
@@ -101,6 +109,7 @@ f (g x) : map f (map g xs) = (f . g) x : map (f . g) xs
 ~~~
 
 # 帰納法を使ってみよう #4
+![background](4.png)
 
 ~~~
 map f (map g (x:xs)) = map (f . g) (x:xs)
@@ -116,6 +125,7 @@ f (g x) : map f (map g xs) = f (g x) : map (f . g) xs
 ~~~
 
 # 帰納法を使ってみよう #5
+![background](7.png)
 
 ~~~
 map f (map g (x:xs)) = map (f . g) (x:xs)
