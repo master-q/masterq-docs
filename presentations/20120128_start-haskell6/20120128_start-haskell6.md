@@ -146,6 +146,7 @@ f (g x) : map (f . g) xs = f (g x) : map (f . g) xs
 めでたしめでたし。
 
 # 宣伝: λカ娘執筆者募集中!
+![background](haskell-logo.png)
 
 ~~~
 http://www.paraiso-lang.org/ikmsm/
