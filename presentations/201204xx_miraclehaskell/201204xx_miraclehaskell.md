@@ -8,15 +8,28 @@ Kiwamu Okabe
 * Haskellってなんだか知る
 * プログラミングができるようになる
 * 型について知る
-* Hackageに1パッケージ登録したら卒業
+* Hackageを使ってみる
+* Hackageに自分でパッケージ登録
+* ＼（＾ｏ＾）／ 卒業！
 
 # Haskellって何ですか？
 
 関数型言語です。
 
+。。。などということはどーでも良くて、
+
+使ってみましょう!
+
 # どうしてHaskellなんですか？
 
 それをこの勉強会で実感するんですよ!
+
+利点としては、、、
+
+* コンパイラで実行速度速い
+* ソースコードの行数が短かくなる
+* コンパイルエラーが増えて
+* ランタイムエラーが少なくなる # <= 重要!
 
 # Haskell製プログラムあるの？
 
@@ -35,6 +48,22 @@ Kiwamu Okabe
 
 その他↓にたくさん登録されてます
 http://hackage.haskell.org/packages/archive/pkg-list.html
+~~~
+
+# 使ってる会社あるの？
+
+ありますってば!
+
+~~~
+* Bluespec: SystemVerilogとSystemCのツール実装に使ってる
+* Bump Technologies: モバイル向け連絡先交換のサーバサイド
+* Microsoft Research: GHC(Haskellコンパイラ)の研究開発
+* Qualcomm: LuaのBREWバインディングジェネレータ
+* Standard Chartered Bank: デリバティブリスク分析
+* Tsuru Capital: 株式トレーディング
+
+その他:
+ http://www.haskell.org/haskellwiki/Haskell_in_industry
 ~~~
 
 # とりあえず本で勉強しましょう
@@ -69,4 +98,52 @@ Get something cool on the screen in under 10 minutes.
 
 なにやらOpenGLでお絵描きできるそうです。
 
-# インストール
+# Haskellのインストール
+
+Debian GNU/Linux sidをお使いの方
+
+~~~
+$ sudo apt-get install haskell-platform
+~~~
+
+それ以外のディストリビューション/OSの方は
+
+~~~
+http://hackage.haskell.org/platform/linux.html
+http://wiki.haskell.jp/Workshop/StartHaskell/0
+~~~
+
+から入れてみてください。
+
+# Glossのインストール
+
+~~~
+$ cabal update
+$ cabal install gloss
+$ cabal install gloss-examples
+~~~
+
+cabalというコマンドが
+
+http://hackage.haskell.org/
+
+からGlossが依存するパッケージも取ってきて
+
+くれます。Rubyのgemみたいな感じです。
+
+# エディタの設定
+
+# Gloss最初の一歩
+
+~~~
+$ ghci
+GHCi, version 7.4.1: http://www.haskell.org/ghc/  :? for help
+Loading package ghc-prim ... linking ... done.
+Loading package integer-gmp ... linking ... done.
+Loading package base ... linking ... done.
+Prelude> import Graphics.Gloss
+Prelude Graphics.Gloss> display (InWindow "Hoge" \
+                       (200, 200) (10, 10)) white (Circle 80)
+~~~
+
+さて。。。何が表示されるでしょうか？
