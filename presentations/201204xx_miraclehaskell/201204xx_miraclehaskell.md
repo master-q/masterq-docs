@@ -168,7 +168,7 @@ Prelude Graphics.Gloss> display (InWindow "Hoge" \
 
 # こんなウィンドウが出てきました？
 
-xxxxxxスクリーンショット貼るxxxxxx
+![inline](hellogloss.png)
 
 # コンパイルすることもできます
 
@@ -251,7 +251,7 @@ main関数の中身を定義します。
 
 # ソース解説:display関数 #4
 
-display関数ってなんぞ？
+display関数の型はghciで調べられます。
 
 ~~~
 Prelude Graphics.Gloss> :t display
@@ -301,3 +301,9 @@ white :: Color
 # で、結局どーなってんのよ？
 
 ![inline](draw1.png)
+
+# 次回
+
+* Glossを使ってなんか作って見せあおう!
+* 基本ライブラリのPreludeを見てみる？
+* 本出版されたら読書会に移行
