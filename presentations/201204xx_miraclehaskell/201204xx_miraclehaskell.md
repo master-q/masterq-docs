@@ -133,6 +133,22 @@ http://hackage.haskell.org/
 
 # エディタの設定
 
+Emacs + ghc-mod がおすすめです!
+
+Debian GNU/Linux sidをお使いの方
+
+~~~
+$ sudo apt-get install ghc-mod
+~~~
+
+それ以外のディストリビューション/OSの方は
+
+~~~
+$ cabal install ghc-mod
+~~~
+
+した後、Emacs lispの設定をしてください。
+
 # Gloss最初の一歩
 
 ~~~
@@ -146,4 +162,138 @@ Prelude Graphics.Gloss> display (InWindow "Hoge" \
                        (200, 200) (10, 10)) white (Circle 80)
 ~~~
 
+インタプリタ実行してみました。
+
 さて。。。何が表示されるでしょうか？
+
+# こんなウィンドウが出てきました？
+
+xxxxxxスクリーンショット貼るxxxxxx
+
+# コンパイルすることもできます
+
+~~~
+$ cat hellogloss.hs
+import Graphics.Gloss
+
+main :: IO ()
+main = display (InWindow "Hoge" (200, 200) (10, 10))
+       white (Circle 80)
+$ ghc hellogloss.hs
+[1 of 1] Compiling Main             ( hellogloss.hs, hellogloss.o )
+Linking hellogloss ...
+$ ./hellogloss
+~~~
+
+さっきと同じウィンドウが出てくるはず。
+
+# ソース解説 #0
+
+~~~
+$ cat hellogloss.hs
+import Graphics.Gloss
+
+main :: IO ()
+main = display (InWindow "Hoge" (200, 200) (10, 10))
+       white (Circle 80)
+~~~
+
+部分ごとに分けて解説します。
+
+# ソース解説:import #1
+
+~~~
+import Graphics.Gloss
+~~~
+
+Moduleのimportです。
+
+別の名前空間にあるライブラリを
+
+使えるようにします。
+
+Moduleの説明はWebでも見れます。
+
+~~~
+http://hackage.haskell.org/packages/archive/gloss/latest/\
+doc/html/Graphics-Gloss.html
+~~~
+
+# ソース解説:関数の型宣言 #2
+
+~~~
+main :: IO ()
+~~~
+
+最初に実行されるmain関数の型は
+
+IO ()
+
+ってのです。
+
+今のところ呪文だと思ってください。
+
+型宣言は書かなくても特に問題はありません。
+
+# ソース解説:関数定義 #3
+
+~~~
+main = display (InWindow "Hoge" (200, 200) (10, 10))
+       white (Circle 80)
+~~~
+
+main関数の中身を定義します。
+
+* display関数の
+* 第一引数に(InWindow "Hoge"...)
+* 第二引数にwhite
+* 第三引数に(Circle 80) を食わせてます
+
+# ソース解説:display関数 #4
+
+display関数ってなんぞ？
+
+~~~
+Prelude Graphics.Gloss> :t display
+display :: Display -> Color -> Picture -> IO ()
+~~~
+
+* 第一引数にDisplay型の値を
+* 第二引数にColor型の値を
+* 第三引数にPicture型の値を突っ込むと
+* IO ()型を返す # <= main関数の型と同じ!
+
+# ソース解説:display関数 #5
+
+実はHaddockでも型を調べられます。
+
+![inline](haddock_display_func.png)
+
+# ソース解説:Display型 #6
+
+なるほど! それで
+
+~~~
+(InWindow "Hoge" (200, 200) (10, 10))
+~~~
+
+がDisplay型になるんですね!
+
+![inline](haddock_Display.png)
+
+# ソース解説:Color型 #7
+
+whiteは定義済みでColor型みたい。
+
+~~~
+Prelude Graphics.Gloss> :t white
+white :: Color
+~~~
+
+好みの色を定義するにはmakeColor関数で。
+
+![inline](haddock_makeColor.png)
+
+# ソース解説:Picture型 #8
+
+![inline](haddock_Picture.png)
