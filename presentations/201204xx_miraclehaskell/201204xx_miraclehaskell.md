@@ -297,3 +297,7 @@ white :: Color
 # ソース解説:Picture型 #8
 
 ![inline](haddock_Picture.png)
+
+# で、結局どーなってんのよ？
+
+![inline](draw1.png)
