@@ -304,6 +304,12 @@ white :: Color
 
 # 次回
 
+* Haskell For Kidsてなお絵描き授業やる？
+
+~~~
+http://cdsmith.wordpress.com/category/haskell-for-kids/
+~~~
+
 * Glossを使ってなんか作って見せあおう!
 * 基本ライブラリのPreludeを見てみる？
 * 本出版されたら読書会に移行
