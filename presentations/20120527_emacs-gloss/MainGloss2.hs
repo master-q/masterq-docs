@@ -22,7 +22,7 @@ position l = pos (0, 0) WDown (0 : l)
     pos p w (x:xs) = let p' = p `tplus` jumpTo w x (head xs)
                      in p' : pos p' (next w) xs
     pos _ _ [] = []
-    tplus (a, a') (b, b') = (a + b, a' + b')
+    tplus a b = let (f, s) = unzip [a, b] in (sum f, sum s)
 
 putCircle :: (Float, Float) -> Float -> Picture
 putCircle (x, y) r = Translate x y $ Circle r
