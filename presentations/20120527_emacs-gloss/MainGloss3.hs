@@ -19,19 +19,19 @@ jumpTo WUp a b    = (-b + a, b + a)
 position :: Num b => [b] -> [(b, b)]
 position l = pos (0, 0) WDown (0 : l)
   where 
-    pos _ _ [] = []
-    pos _ _ [_]  = []
     pos p w (x:xs) = let p' = p `tplus` jumpTo w x (head xs)
                      in p' : pos p' (next w) xs
+    pos _ _ [] = []
     tplus (a, a') (b, b') = (a + b, a' + b')
 
 putCircle :: (Float, Float) -> Float -> Picture
 putCircle (x, y) r = Translate x y $ Circle r
 
 circles :: [Float] -> Float -> Picture
-circles l t = Scale s s $ Pictures $ zipWith putCircle (position r) r
-  where r = take (truncate t) $ fmap (*5) l
+circles l t = Scale s s . Pictures . take (truncate t) $ c
+  where r = fmap (*5) l
         s = 10 / (1.4 ** t)
+        c = zipWith putCircle (position r) r
 
 main :: IO ()
 main = animate win white $ circles fib

@@ -19,19 +19,18 @@ jumpTo WUp a b    = (-b + a, b + a)
 position :: Num b => [b] -> [(b, b)]
 position l = pos (0, 0) WDown (0 : l)
   where 
-    pos _ _ [] = []
-    pos _ _ [_]  = []
     pos p w (x:xs) = let p' = p `tplus` jumpTo w x (head xs)
                      in p' : pos p' (next w) xs
+    pos _ _ [] = []
     tplus (a, a') (b, b') = (a + b, a' + b')
 
 putCircle :: (Float, Float) -> Float -> Picture
 putCircle (x, y) r = Translate x y $ Circle r
 
 circles :: [Float] -> Picture
-circles l = Pictures $ zipWith putCircle (position r) r
-  where r = take 20 $ fmap (*5) l
-        
+circles l = Pictures $ take 20 $ zipWith putCircle (position r) r
+  where r = fmap (*5) l
+
 main :: IO ()
 main = display win white $ circles fib
   where win = InWindow "MyGlossApp" (1024 `div` 2, 768 `div` 2) (0, 0)
