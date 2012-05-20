@@ -95,5 +95,9 @@ http://ja.wikipedia.org/wiki/黄金長方形
 
 # 宣伝: HaskellやるならDebian!
 
-* 次のリリースではghc 7.4が使えるよ!
+* 次のリリースではghc 7.4が使えるよ
 * (実はUbuntuのHaskellパッケージはDebian開発者がメンテしてるんだよ!)
+* プロジェクトリーダーはOCaml使いだよ
+* 関数型ならDebianだね!
+* Debian勉強会やってるらしいよ
+* http://tokyodebian.alioth.debian.org/
