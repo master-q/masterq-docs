@@ -20,6 +20,9 @@ circles :: [Float] -> Picture
 circles l = Pictures $ zipWith putCircle (position r) r
   where r = take 20 $ fmap (*5) l
         
+underline :: Picture
+underline = Line [(0, 0), (10000, 0)]
+
 main :: IO ()
-main = display win white $ circles fib
+main = display win white $ Pictures [underline, circles fib]
   where win = InWindow "MyGlossApp" (1024 `div` 2, 768 `div` 2) (0, 0)
