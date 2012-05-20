@@ -29,8 +29,9 @@ putCircle :: (Float, Float) -> Float -> Picture
 putCircle (x, y) r = Translate x y $ Circle r
 
 circles :: [Float] -> Float -> Picture
-circles l t = Pictures $ zipWith putCircle (position r) r
+circles l t = Scale s s $ Pictures $ zipWith putCircle (position r) r
   where r = take (truncate t) $ fmap (*5) l
+        s = 10 / (1.4 ** t)
 
 main :: IO ()
 main = animate win white $ circles fib
