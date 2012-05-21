@@ -1,5 +1,5 @@
 # EmacsとGlossでお絵描きしてみるよ
-![background](debian.png)
+![background](teapot.png)
 
 Kiwamu Okabe
 
@@ -13,6 +13,8 @@ Kiwamu Okabe
 ![inline](MIRACLE-CI-base-yoko.png)
 
 # 今日のお題
+
+![background](sushi.png)
 
 * Emacsエディタ上の
 * ghc-modという編集モードで
@@ -31,6 +33,8 @@ http://hackage.haskell.org/package/gloss
 
 # 環境設定: Debian sidの場合
 
+![background](easy.png)
+
 $ sudo apt-get install ghc-mod
 
 $ cabal install gloss
@@ -38,6 +42,8 @@ $ cabal install gloss
 簡単〜
 
 # 環境設定: それ以外の方
+
+![background](messy.png)
 
 たぶんこんな感じ？
 
@@ -63,6 +69,8 @@ $ vi ~/.emacs
 
 # 参考書
 
+![background](books.png)
+
 * Preludeのhaddock
 
 ~~~
@@ -85,6 +93,8 @@ http://www.haskell.org/hoogle/
 
 # ライブコーディング開始です
 
+![background](guitar.png)
+
 Glossのhaddockに書かれている例から始めましょー
 
 ~~~ {.haskell}
@@ -93,6 +103,8 @@ main = display (InWindow "Nice Window" (200, 200) (10, 10)) white (Circle 80)
 ~~~
 
 # 今日作ったコード #1
+
+![background](gears.png)
 
 ~~~ {.haskell}
 import Graphics.Gloss
@@ -117,6 +129,8 @@ jumpTo WUp a b    = (-b + a, b + a)
 (次ページに続く)
 
 # 今日作ったコード #2
+
+![background](gears.png)
 
 ~~~ {.haskell}
 position :: Num b => [b] -> [(b, b)]
@@ -143,11 +157,15 @@ main = animate win white $ circles fib
 
 # ちょっとウンチク
 
+![background](goldenratio.png)
+
 http://ja.wikipedia.org/wiki/黄金長方形
 
 ![inline](golden_rect.png)
 
 # 宣伝: HaskellやるならDebian!
+
+![background](zacchiro.png)
 
 * 次のリリースではghc 7.4が使えるよ
 * (実はUbuntuのHaskellパッケージはDebian開発者がメンテしてるんだよ!)
