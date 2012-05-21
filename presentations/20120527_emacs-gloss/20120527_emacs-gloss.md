@@ -6,36 +6,90 @@ Kiwamu Okabe
 # わたしはだれ？
 
 * Twitter: @master_q
-* C言語とRubyは使えます
-* Haskellをごくたまに使う
-* てんぷれはすけるとかわかりません ＞＜
+* Haskellはあんまり上達してない。。。
+* ミラクル・リナックス株式会社 勤務
+* Linuxでデジタルサイネージを作ってるー
 
-# Emacs使う理由
+![inline](MIRACLE-CI-base-yoko.png)
 
-ghc-modが使えるから!
+# 今日のお題
+
+* Emacsエディタ上の
+* ghc-modという編集モードで
 
 ~~~
 http://www.mew.org/~kazu/proj/ghc-mod/en/
 ~~~
 
-# Glossってなんじゃらほい？
+* Glossというパッケージを使って
 
+~~~
 http://hackage.haskell.org/package/gloss
-
-~~~
-Gloss hides the pain of drawing simple vector graphics behind a nice data type and a few display functions. Gloss uses OpenGL under the hood, but you won't need to worry about any of that. Get something cool on the screen in under 10 minutes.
 ~~~
 
-OpenGLの上に作られたお絵描きライブラリなんですね。
+* 二次元萌え画像を作成せよ
 
-# 参考書とか説明書とか
+# 環境設定: Debian sidの場合
 
-PreludeとGlossのhaddockがあればなんとかなるんじゃなイカ？
+$ sudo apt-get install ghc-mod
+
+$ cabal install gloss
+
+簡単〜
+
+# 環境設定: それ以外の方
+
+たぶんこんな感じ？
+
+~~~
+$ cabal install gloss ghc-mod
+$ export PATH=$HOME/.cabal/bin:$PATH
+$ cd ~/.cabal/share/ghc-mod-1.10.15
+$ make
+$ ls
+Makefile         ghc-doc.el       ghc-func.elc    ghc-ins-mod.el
+ghc-command.el   ghc-doc.elc      ghc-indent.el   ghc-ins-mod.elc
+ghc-command.elc  ghc-flymake.el   ghc-indent.elc  ghc.el
+ghc-comp.el      ghc-flymake.elc  ghc-info.el     ghc.elc
+ghc-comp.elc     ghc-func.el      ghc-info.elc
+$ vi ~/.emacs
+(setq load-path (cons "/home/kiwamu/.cabal/share/ghc-mod-1.10.15"
+                      load-path))
+(autoload 'ghc-init "ghc" nil t)
+(add-hook 'haskell-mode-hook (lambda () (ghc-init) (flymake-mode)))
+~~~
+
+@kazu_yamamoto さんに聞いて!
+
+# 参考書
+
+* Preludeのhaddock
 
 ~~~
 http://hackage.haskell.org/packages/archive/base/latest/doc/html/Prelude.html
+~~~
+
+* Glossのhaddock
+
+~~~
 http://hackage.haskell.org/packages/archive/gloss/latest/doc/html/Graphics-Gloss.html
+~~~
+
+* Hoogle
+
+~~~
 http://www.haskell.org/hoogle/
+~~~
+
+があればなんとかなるんじゃなイカ？
+
+# ライブコーディング開始です
+
+Glossのhaddockに書かれている例から始めましょー
+
+~~~ {.haskell}
+import Graphics.Gloss
+main = display (InWindow "Nice Window" (200, 200) (10, 10)) white (Circle 80)
 ~~~
 
 # 今日作ったコード #1
