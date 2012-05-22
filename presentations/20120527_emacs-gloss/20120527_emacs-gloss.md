@@ -5,12 +5,12 @@ Kiwamu Okabe
 
 # わたしはだれ？
 
+![background](MIRACLE-CI-base_2.png)
+
 * Twitter: @master_q
 * Haskellはあんまり上達してない。。。
 * ミラクル・リナックス株式会社 勤務
 * Linuxでデジタルサイネージを作ってるー
-
-![inline](MIRACLE-CI-base-yoko.png)
 
 # 今日のお題
 
