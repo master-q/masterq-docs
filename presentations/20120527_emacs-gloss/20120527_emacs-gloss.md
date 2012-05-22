@@ -99,7 +99,8 @@ Glossのhaddockに書かれている例から始めましょー
 
 ~~~ {.haskell}
 import Graphics.Gloss
-main = display (InWindow "Nice Window" (200, 200) (10, 10)) white (Circle 80)
+main = display (InWindow "Nice Window" (200, 200) (10, 10))
+               white (Circle 80)
 ~~~
 
 # 今日作ったコード #1
@@ -152,7 +153,7 @@ circles l t = Scale s s . Pictures . take (truncate t) $ c
 
 main :: IO ()
 main = animate win white $ circles fib
-  where win = InWindow "MyGlossApp" (1024 `div` 2, 768 `div` 2) (0, 0)
+  where win = InWindow "MyApp" (1024 `div` 2, 768 `div` 2) (0, 0)
 ~~~
 
 # ちょっとウンチク
