@@ -1,4 +1,4 @@
-# CheetSheet
+# CheatSheet
 
 ## MyGloss1.hs
 
