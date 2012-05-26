@@ -11,6 +11,7 @@ Kiwamu Okabe
 * Haskellはあんまり上達してない。。。
 * ミラクル・リナックス株式会社 勤務
 * Linuxでデジタルサイネージを作ってるー
+* ユニクロ銀座店に行くと実機が見れるかも
 
 # 今日のお題
 
@@ -166,7 +167,7 @@ http://ja.wikipedia.org/wiki/黄金長方形
 
 # 宣伝: HaskellやるならDebian!
 
-![background](zacchiro.png)
+![background](wheezy.png)
 
 * 次のリリースではghc 7.4が使えるよ
 * (実はUbuntuのHaskellパッケージはDebian開発者がメンテしてるんだよ!)
