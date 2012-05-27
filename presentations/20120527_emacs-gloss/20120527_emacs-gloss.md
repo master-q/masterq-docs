@@ -8,7 +8,7 @@ Kiwamu Okabe
 ![background](MIRACLE-CI-base_2.png)
 
 * Twitter: @master_q
-* Haskellはあんまり上達してない。。。
+* 最近転職しました
 * ミラクル・リナックス株式会社 勤務
 * Linuxでデジタルサイネージを作ってるー
 * ユニクロ銀座店に行くと実機が見れるかも
@@ -170,8 +170,8 @@ http://ja.wikipedia.org/wiki/黄金長方形
 ![background](wheezy.png)
 
 * 次のリリースではghc 7.4が使えるよ
-* (実はUbuntuのHaskellパッケージはDebian開発者がメンテしてるんだよ!)
+* (実はUbuntuのHaskellパッケージはDebianをそのままパクってるんだよ!)
 * プロジェクトリーダーはOCaml使いだよ
-* 関数型ならDebianだね!
+* 関数型ならDebianで決まりだね!
 * Debian勉強会やってるらしいよ
 * http://tokyodebian.alioth.debian.org/
