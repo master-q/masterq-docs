@@ -1,4 +1,4 @@
-TARGETS := WaiStaticApp WaiStaticWebkit
+TARGETS := WaiStaticApp WaiStaticWebkit WaiEchoApp
 
 all: $(TARGETS)
 
