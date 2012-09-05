@@ -9,7 +9,8 @@ header = [("Content-Type", "text/plain")]
 
 myWaiApp :: W.Application -- Request -> ResourceT IO Response
 myWaiApp req | W.requestMethod req /= "GET" = return r
-  where r = W.responseLBS H.status405 header "Only GET is supported"
+  where
+    r = W.responseLBS H.status405 header "Only GET is supported"
 myWaiApp req = return r
   where
     s = "Path:" `L.append` L.fromChunks [W.rawPathInfo req]
