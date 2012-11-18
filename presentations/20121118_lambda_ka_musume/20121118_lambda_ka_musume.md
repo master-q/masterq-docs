@@ -13,9 +13,11 @@ Kiwamu Okabe
 * OSSに興味のある{エンジニア,インターン}募集中です!
 
 # 参照透明な海を守る会メンバーは
+![background](debian_clear.png)
 
 λカ娘4巻を今執筆中です。
 コミックマーケット83にて配布予定です。
+がむば!
 
 ~~~
 http://www.paraiso-lang.org/ikmsm/books/c83.html
@@ -24,14 +26,17 @@ http://www.paraiso-lang.org/ikmsm/books/c83.html
 ![inline](now_writing.png)
 
 # どんな記事になりそう？
+![background](mydesk.png)
 
 ぼくの記事だけさらっと紹介します
 
-# はじまり
+# 記事のはじまり
+![background](debian_clear.png)
 
 ![inline](start.png)
 
 # 今の体型 Haskellサイド
+![background](debian_clear.png)
 
 ~~~ {.haskell}
 -- File: Fib.hs
@@ -49,6 +54,7 @@ fib n | 0 <= n && n <= 40 = return $ fibonacci !! fromIntegral n
 ~~~
 
 # 今の体型 C言語サイド
+![background](debian_clear.png)
 
 ~~~ {.c}
 /* File: CMain.c */
@@ -72,6 +78,7 @@ int main(int argc, char *argv[])
 ~~~
 
 # ダイエット指標1
+![background](debian_clear.png)
 
 text/data/bssセクションの合計サイズをダイエット
 
@@ -86,6 +93,7 @@ $ size FibHs
 ~~~
 
 # ダイエット指標2
+![background](debian_clear.png)
 
 実行バイナリがリンクしているライブラリ数をダイエット
 
@@ -105,6 +113,7 @@ $ ldd FibHs | wc -l
 ~~~
 
 # ダイエット指標3
+![background](debian_clear.png)
 
 実行バイナリ内の未解決シンボル数をダイエット
 
@@ -124,6 +133,7 @@ $ nm FibHs | grep -c "U "
 ~~~
 
 # RTSの中で不要コード削除したよ
+![background](debian_clear.png)
 
 * セクション合計サイズ(Byte):
 
@@ -138,10 +148,12 @@ $ nm FibHs | grep -c "U "
 175 => 145
 
 # ダイエット作戦はまだまだある!
+![background](debian_clear.png)
 
 ![inline](gameplan.png)
 
 # 是非 参照透明な海を守る会ブースへ!
+![background](debian_clear.png)
 
 ~~~
 http://twitcmap.jp/?id=0083-3-YYa-02-a
