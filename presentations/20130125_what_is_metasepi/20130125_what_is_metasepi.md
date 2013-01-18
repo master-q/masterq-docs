@@ -80,6 +80,18 @@ http://itpro.nikkeibp.co.jp/article/COLUMN/20060915/248230/
 
 ![inline](draw/2013-01-18-few_error.png)
 
+# 技術背景: jhc
+
+http://repetae.net/computer/jhc/
+
+![inline](draw/2012-12-22-jhc_compile.png)
+
+# 技術背景: jhcはポータブル
+
+libc不要バイナリ吐ける
+
+![inline](draw/2012-12-22-jhc_custom_rts.png)
+
 # 技術背景: 過去プロジェクトの失敗
 
 * 同様の試みは他にもある
