@@ -4,17 +4,17 @@
 Kiwamu Okabe
 
 # プロローグ (cont.)
-![background](debian_clear.png)
+![background](cuttlefish_mono.png)
 
 ![inline](c84-1.png)
 
 # プロローグ
-![background](debian_clear.png)
+![background](cuttlefish_mono.png)
 
 ![inline](c84-2.png)
 
 # Metasepiって何？
-![background](debian_clear.png)
+![background](cuttlefish_mono.png)
 
 * http://metasepi.masterq.net/
 * UNIXモドキkernelを型によって設計する
@@ -39,27 +39,27 @@ http://www.paraiso-lang.org/ikmsm/
 * 既存設計を安全に改造できるようにしたい
 
 # 製品設計あるある: fork
-![background](debian_clear.png)
+![background](cuttlefish_mono.png)
 
 ![inline](draw/2013-01-18-fork1.png)
 
 # 製品設計あるある: merge
-![background](debian_clear.png)
+![background](cuttlefish_mono.png)
 
 ![inline](draw/2013-01-18-fork2.png)
 
 # 製品設計あるある: 完全fork
-![background](debian_clear.png)
+![background](cuttlefish_mono.png)
 
 ![inline](draw/2013-01-18-fork3.png)
 
 # なぜこんなことに？
-![background](debian_clear.png)
+![background](cuttlefish_mono.png)
 
 ![inline](draw/2013-01-18-fork4.png)
 
 # でも改造するのは本家も同じ
-![background](debian_clear.png)
+![background](cuttlefish_mono.png)
 
 ![inline](draw/2013-01-18-fork5.png)
 
@@ -105,7 +105,7 @@ http://research.microsoft.com/en-us/projects/singularity/
 などなど
 
 # 技術背景: 型システム
-![background](debian_clear.png)
+![background](cuttlefish_mono.png)
 
 * ランタイムエラーを少なくできる
 * 参考:数理科学的バグ撲滅方法論のすすめ
@@ -117,14 +117,14 @@ http://itpro.nikkeibp.co.jp/article/COLUMN/20060915/248230/
 ![inline](draw/2013-01-18-few_error.png)
 
 # 技術背景: jhcコンパイラ
-![background](debian_clear.png)
+![background](cuttlefish_mono.png)
 
 http://repetae.net/computer/jhc/
 
 ![inline](draw/2012-12-22-jhc_compile.png)
 
 # 技術背景: jhcはポータブル
-![background](debian_clear.png)
+![background](cuttlefish_mono.png)
 
 libc不要バイナリ吐ける
 
@@ -137,7 +137,6 @@ libc不要バイナリ吐ける
 * C言語のみで記述されている
 * コメント込み3000行
 * これなら改造/自作できそう
-* コンパイルパイプラインが賢いという証左
 * 実はプリミティブ型がC言語型
 
 # 技術背景: 過去プロジェクトの失敗
@@ -160,7 +159,7 @@ libc不要バイナリ吐ける
 * スクラッチからkernelを書くのは無謀では？
 
 # 作り方:NetBSD kernelを型で写経
-![background](debian_clear.png)
+![background](cuttlefish_mono.png)
 
 ![inline](draw/2012-12-27-arafura_design.png)
 
@@ -178,7 +177,7 @@ libc不要バイナリ吐ける
 * 関数型言語を生かした設計にはならない
 
 # 現状
-![background](debian_clear.png)
+![background](cuttlefish_mono.png)
 
 jhcでbootloaderの一部をHaskellで書けた
 
@@ -212,6 +211,6 @@ https://gitorious.org/metasepi/netbsd-arafura
 * 組み込みHaskell分野開拓
 
 # その他Metasepiプロジェクト近傍
-![background](debian_clear.png)
+![background](cuttlefish_mono.png)
 
 ![inline](map.png)
