@@ -34,7 +34,7 @@ Kiwamu Okabe
 http://www.paraiso-lang.org/ikmsm/
 
 # どうしてMetasepiを作るの？
-![background](debian_clear.png)
+![background](zelda.png)
 
 * 既存設計を安全に改造できるようにしたい
 
@@ -64,11 +64,14 @@ http://www.paraiso-lang.org/ikmsm/
 ![inline](draw/2013-01-18-fork5.png)
 
 # 既存コード改造工数を減らさねば
-![background](billgates2.png)
+![background](collapse.png)
 
 このままではOSS社会は崩壊しまう...
 
-一方MSは着々と手を打っている。
+# 一方MSは着々と手を打っている #1
+![background](billgates2.png)
+
+デバイスドライバに対する静的検証ツールをWDKで配布。
 
 ~~~
 http://msdn.microsoft.com/ja-jp/library/windows/hardware/gg487498.aspx
@@ -76,10 +79,19 @@ http://msdn.microsoft.com/ja-jp/library/windows/hardware/gg487498.aspx
 "Static Driver Verifier (SDV) は、カーネル モード ドライバー用に設計されている、コンパイル時用の徹底した静的な検証ツールで、 徹底したテストでも発見されない可能性がある重大なエラーを検出します。 SDV は、C および C++ で記述されている Windows ドライバーのソース コードを体系的に分析します。 一連のインターフェイスの規則とオペレーティング システムのモデルを使用して、ドライバーが Windows オペレーティング システムと適切に動作しているかどうかを判断します。"
 ~~~
 
-デバイスドライバに対する静的検証ツール。
+# 一方MSは着々と手を打っている #2
+![background](msr.png)
+
+~~~
+http://research.microsoft.com/en-us/projects/singularity/
+~~~
+
+"Singularity は マイクロソフトリサーチ が2003年から実験的に開発しているオペレーティングシステム (OS)。高度なディペンダブルOSとすることを目標とし、カーネルやデバイスドライバ、アプリケーションも全てマネージコードで書かれている。"
+
+"バージョン1.1は2007年3月、バージョン2.0は2008年11月14日にリリースされ、開発は現在も進行中である。"
 
 # 改造工数を小さくする方法はある？
-![background](debian_clear.png)
+![background](tapl.png)
 
 それが型システムです!
 
@@ -119,16 +131,17 @@ libc不要バイナリ吐ける
 ![inline](draw/2012-12-22-jhc_custom_rts.png)
 
 # 技術背景: jhcのRTSは小さい
-![background](debian_clear.png)
+![background](c.png)
 
 * RTS = ランタイム = VMみたいなもん
 * C言語のみで記述されている
 * コメント込み3000行
 * これなら改造/自作できそう
 * コンパイルパイプラインが賢いという証左
+* 実はプリミティブ型がC言語型
 
 # 技術背景: 過去プロジェクトの失敗
-![background](debian_clear.png)
+![background](climbing.png)
 
 * 同様の試みは他にもある
 
@@ -152,7 +165,7 @@ libc不要バイナリ吐ける
 ![inline](draw/2012-12-27-arafura_design.png)
 
 # この作り方のメリット/デメリット
-![background](debian_clear.png)
+![background](dogfood.png)
 
 メリット
 
@@ -172,7 +185,7 @@ jhcでbootloaderの一部をHaskellで書けた
 ![inline](draw/2013-01-09-sequence_diagram.png)
 
 # デモ
-![background](debian_clear.png)
+![background](demo.png)
 
 * 動画
 
@@ -183,7 +196,7 @@ http://www.nicovideo.jp/watch/sm19788831
 https://gitorious.org/metasepi/netbsd-arafura
 
 # これからの調査/実装計画
-![background](debian_clear.png)
+![background](way.png)
 
 * bootloaderを使った型づけトレーニング
 * jhcのソースコード解析
@@ -192,10 +205,10 @@ https://gitorious.org/metasepi/netbsd-arafura
 * kernelの型づけ手法の確立
 
 # Metasepiがもたらす副産物
-![background](debian_clear.png)
+![background](knowledge.png)
 
 * Haskellコンパイラ内部詳細理解
-* NetBSD kernel理解
+* NetBSD kernelの深い理解
 * 組み込みHaskell分野開拓
 
 # その他Metasepiプロジェクト近傍
