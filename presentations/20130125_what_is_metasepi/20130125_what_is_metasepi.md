@@ -63,7 +63,7 @@ http://www.paraiso-lang.org/ikmsm/
 
 ![inline](draw/2013-01-18-fork5.png)
 
-# 既存コード変更工数を減らさねば
+# 既存コード改造工数を減らさねば
 ![background](billgates2.png)
 
 このままではOSS社会は崩壊しまう...
@@ -77,6 +77,20 @@ http://msdn.microsoft.com/ja-jp/library/windows/hardware/gg487498.aspx
 ~~~
 
 デバイスドライバに対する静的検証ツール。
+
+# 改造工数を小さくする方法はある？
+![background](debian_clear.png)
+
+それが型システムです!
+
+以下のような言語は強い型をもっている。
+
+* Coq - http://coq.inria.fr/
+* Haskell - http://www.haskell.org/
+* OCaml - http://caml.inria.fr/
+* SML/NJ - http://www.smlnj.org/
+
+などなど
 
 # 技術背景: 型システム
 ![background](debian_clear.png)
@@ -103,6 +117,15 @@ http://repetae.net/computer/jhc/
 libc不要バイナリ吐ける
 
 ![inline](draw/2012-12-22-jhc_custom_rts.png)
+
+# 技術背景: jhcのRTSは小さい
+![background](debian_clear.png)
+
+* RTS = ランタイム = VMみたいなもん
+* C言語のみで記述されている
+* コメント込み3000行
+* これなら改造/自作できそう
+* コンパイルパイプラインが賢いという証左
 
 # 技術背景: 過去プロジェクトの失敗
 ![background](debian_clear.png)
@@ -148,6 +171,17 @@ jhcでbootloaderの一部をHaskellで書けた
 
 ![inline](draw/2013-01-09-sequence_diagram.png)
 
+# デモ
+![background](debian_clear.png)
+
+* 動画
+
+http://www.nicovideo.jp/watch/sm19788831
+
+* ソースコード
+
+https://gitorious.org/metasepi/netbsd-arafura
+
 # これからの調査/実装計画
 ![background](debian_clear.png)
 
@@ -160,7 +194,7 @@ jhcでbootloaderの一部をHaskellで書けた
 # Metasepiがもたらす副産物
 ![background](debian_clear.png)
 
-* jhcコンパイラ内部詳細
+* Haskellコンパイラ内部詳細理解
 * NetBSD kernel理解
 * 組み込みHaskell分野開拓
 
