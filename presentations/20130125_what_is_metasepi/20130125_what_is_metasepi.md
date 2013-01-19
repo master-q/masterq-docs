@@ -13,6 +13,16 @@ Kiwamu Okabe
 
 ![inline](c84-2.png)
 
+# 今日のおしながき
+![background](chef.png)
+
+* Metasepiとは何か
+* なぜMetasepiを作るのか
+* 開発の戦略 (POSIX互換、スナッチ開発)
+* 実現方法 (NetBSDとjhcの採用)
+* デモ
+* Metasepiの今後
+
 # Metasepiって何？
 ![background](cuttlefish_mono.png)
 
@@ -36,19 +46,54 @@ http://www.paraiso-lang.org/ikmsm/
 # どうしてMetasepiを作るの？
 ![background](zelda.png)
 
+* C言語より進化した言語を設計に使いたい
 * 既存設計を安全に改造できるようにしたい
 
-# 製品設計あるある: fork
+# C言語より進化した機能って？
+
+* パターンマッチ
+* パッケージ
+* 名前空間
+* 型推論
+* 対話環境
+* 高階関数
+* GC
+
+# そんな言語あるの？
+
+以下の言語はコンパイラで型推論を持つ。
+
+* Clean - http://clean.cs.ru.nl/
+* Coq - http://coq.inria.fr/
+* Haskell - http://www.haskell.org/
+* OCaml - http://caml.inria.fr/
+* SML/NJ - http://www.smlnj.org/
+
+などなど
+
+# 安全に改造？
+
+OSSをほぼそのまま製品搭載できれば良いのですが、
+機能を追加して製品設計するハメになることはありませんか？
+
+* システムコール追加
+* 起動時間改善
+* 気色わるいメモリマップ
+* ソフトリアルタイムスケジューラ
+
+などなど
+
+# OSS改造あるある: fork
 ![background](cuttlefish_mono.png)
 
 ![inline](draw/2013-01-18-fork1.png)
 
-# 製品設計あるある: merge
+# OSS改造あるある: merge
 ![background](cuttlefish_mono.png)
 
 ![inline](draw/2013-01-18-fork2.png)
 
-# 製品設計あるある: 完全fork
+# OSS改造あるある: 完全fork
 ![background](cuttlefish_mono.png)
 
 ![inline](draw/2013-01-18-fork3.png)
@@ -66,7 +111,9 @@ http://www.paraiso-lang.org/ikmsm/
 # 既存コード改造工数を減らさねば
 ![background](collapse.png)
 
-このままではOSS社会は崩壊しまう...
+* マネージャにmergeタイミング説得できない
+* 数々のforkが生まれるだけ？
+* このままではOSS社会は崩壊しまう...
 
 # 一方MSは着々と手を打っている #1
 ![background](billgates2.png)
@@ -95,16 +142,7 @@ http://research.microsoft.com/en-us/projects/singularity/
 
 それが型システムです!
 
-以下のような言語は強い型をもっている。
-
-* Coq - http://coq.inria.fr/
-* Haskell - http://www.haskell.org/
-* OCaml - http://caml.inria.fr/
-* SML/NJ - http://www.smlnj.org/
-
-などなど
-
-# 技術背景: 型システム
+# 型システムのうまみ
 ![background](cuttlefish_mono.png)
 
 * ランタイムエラーを少なくできる
@@ -116,21 +154,78 @@ http://itpro.nikkeibp.co.jp/article/COLUMN/20060915/248230/
 
 ![inline](draw/2013-01-18-few_error.png)
 
-# 技術背景: jhcコンパイラ
+# Metasepiはどうやって設計するの？
+
+* 既存のモノリシックkernelと同じ設計に
+* 当然POSIX互換
+* 既存kernelを少しずつ型で再設計
+* 動作可能状態を保ちながら開発(スナッチ)
+
+この設計をアラフラと呼ぶことにします。
+
+~~~
+http://metasepi.masterq.net/posts/2013-01-09-design_arafura.html
+~~~
+
+# なぜPOSIX互換に？
+
+早い段階でドッグフード可能にするため!
+
+![inline](draw/2013-01-19-posix-compat.png)
+
+# スナッチ開発
+
+http://ja.wikipedia.org/wiki/スナッチャー
+
+![inline](draw/2012-12-27-arafura_design.png)
+
+# 実現方法
+
+* 開発言語: Haskell
+
+~~~
+http://www.haskell.org/
+~~~
+
+* コンパイラ: jhc
+
+~~~
+http://repetae.net/computer/jhc/
+~~~
+
+* 元にするkernel: NetBSD
+
+~~~
+http://netbsd.org/
+~~~
+
+# プログラミング言語Haskell
+
+* 純粋関数型プログラミング言語
+* 型クラスによる柔軟な表現
+* gcc比較で2.36のパフォーマンス
+
+~~~
+http://benchmarksgame.alioth.debian.org/u64/which-programs-are-fastest.php
+~~~
+
+* 近年はOCamlよりもプログラマが多い？
+
+# jhcコンパイラ
 ![background](cuttlefish_mono.png)
 
 http://repetae.net/computer/jhc/
 
 ![inline](draw/2012-12-22-jhc_compile.png)
 
-# 技術背景: jhcはポータブル
+# jhcはポータブル
 ![background](cuttlefish_mono.png)
 
 libc不要バイナリ吐ける
 
 ![inline](draw/2012-12-22-jhc_custom_rts.png)
 
-# 技術背景: jhcのRTSは小さい
+# jhcのRTSは小さい
 ![background](c.png)
 
 * RTS = ランタイム = VMみたいなもん
@@ -138,6 +233,18 @@ libc不要バイナリ吐ける
 * コメント込み3000行
 * これなら改造/自作できそう
 * 実はプリミティブ型がC言語型
+* C言語との相性が良い
+
+# NetBSD kernel
+
+* 移植性高い = 高い抽象化
+* POSIX互換モノリシックkernel
+* ソースコード読みやすい
+* kernel内部APIドキュメント豊富
+
+http://netbsdman.masterq.net/
+
+* @master_q が昔仕事でいじってた
 
 # 技術背景: 過去プロジェクトの失敗
 ![background](climbing.png)
@@ -161,7 +268,64 @@ libc不要バイナリ吐ける
 # 作り方:NetBSD kernelを型で写経
 ![background](cuttlefish_mono.png)
 
-![inline](draw/2012-12-27-arafura_design.png)
+* C言語で書かれた
+* NetBSD kernelを
+* Haskellで少しずつ再設計して (スナッチ)
+* jhcでコンパイルする
+
+# 具体例: bootloader 元
+
+~~~ {.c}
+/* https://gitorious.org/metasepi/netbsd-arafura/blobs/arafura/sys/arch/i386/stand/lib/menuutils.c */
+const struct bootblk_command commands[] = {
+        { "help",       command_help },
+        { "boot",       command_boot },
+        { NULL,         NULL },
+};
+
+void
+bootmenu(void)
+{
+        char input[80];
+        for (;;) {
+                char *c = input;
+                input[0] = '\0';
+                printf("> ");
+                gets(input);
+                while (*c == ' ')
+                        c++;
+                if (*c)
+                        docommand(c);
+        }
+}
+~~~
+
+# 具体例: bootloader スナッチ
+
+~~~ {.haskell}
+-- https://gitorious.org/metasepi/netbsd-arafura/blobs/arafura/metasepi-arafura/sys/arch/i386/stand/boot/Boot2Ara.hs
+foreign import ccall "glue_netbsdstand.h command_boot" c_command_boot :: Ptr a -> IO ()
+
+commands :: Map String (IO ())
+commands = Map.fromList [("help", command_help),
+                         ("?", command_help),
+                         ("boot", c_command_boot nullPtr)]
+main :: IO ()
+main = do
+  putStrLn "Haskell bootmenu"
+  forever $ do
+    putStr "> "
+    s <- getLine
+    fromMaybe (putStr s) $ Map.lookup s commands
+~~~
+
+# 具体例: kernel 元
+
+xxx bus_space使うデバドラがいいかも
+
+# 具体例: kernel スナッチ
+
+xxx
 
 # この作り方のメリット/デメリット
 ![background](dogfood.png)
