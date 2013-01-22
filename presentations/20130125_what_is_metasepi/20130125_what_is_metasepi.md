@@ -13,7 +13,7 @@ Kiwamu Okabe
 
 ![inline](c84-2.png)
 
-# 今日のおしながき
+# おしながき
 ![background](chef.png)
 
 * Metasepiとは何か
@@ -319,13 +319,116 @@ main = do
     fromMaybe (putStr s) $ Map.lookup s commands
 ~~~
 
-# 具体例: kernel 元
+# 具体例: kernel 元 #1
 
-xxx bus_space使うデバドラがいいかも
+~~~ {.c}
+/* https://gitorious.org/metasepi/netbsd-arafura/blobs/arafura/sys/sys/lwp.h */
+struct lwp {
+	/* --snip-- */
+	int		l_flag;
+	int		l_stat;
+	/* --snip-- */
+};
+/* These flags are kept in l_flag. */
+#define	LW_IDLE		0x00000001
+#define	LW_LWPCTL	0x00000002
+#define	LW_SINTR	0x00000080
+#define	LW_SA_SWITCHING	0x00000100
+#define	LW_SYSTEM	0x00000200
+#define	LW_SA		0x00000400
+#define	LW_WSUSPEND	0x00020000
+/* Status values. */
+#define	LSIDL		1
+#define	LSRUN		2
+#define	LSSLEEP		3
+#define	LSSTOP		4
+#define	LSZOMB		5
+~~~
 
-# 具体例: kernel スナッチ
+# 具体例: kernel 元 #2
 
-xxx
+~~~ {.c}
+/* https://gitorious.org/metasepi/netbsd-arafura/blobs/arafura/sys/kern/kern_lwp.c */
+	switch (t->l_stat) {
+	case LSRUN:
+	case LSONPROC:
+		t->l_flag |= LW_WSUSPEND;
+		lwp_need_userret(t);
+		lwp_unlock(t);
+		break;
+	case LSSLEEP:
+		t->l_flag |= LW_WSUSPEND;
+		if ((t->l_flag & LW_SINTR) != 0)
+			setrunnable(t);
+		else
+			lwp_unlock(t);
+		break;
+	case LSSUSPENDED:
+		lwp_unlock(t);
+		break;
+	case LSSTOP:
+		t->l_flag |= LW_WSUSPEND;
+		setrunnable(t);
+		break;
+~~~
+
+# 具体例: kernel スナッチ #1
+
+~~~ {.haskell}
+data Lflag = Lflag { lwIdle        :: Bool
+                   , lwLwpctl      :: Bool
+                   , lwSintr       :: Bool
+                   , lwSaSwitching :: Bool
+                   , lwSystem      :: Bool
+                   , lwSa          :: Bool
+                   , lwWsuspend    :: Bool }
+data Lstat = LsIdl | LsRun | LsSleep | LsStop | LsZomb | LsOnProc
+           | LsSuspended
+
+data Lwp = Lwp { lflag :: Lflag
+               , lstat :: Lstat
+                 {-- ...... --} }
+
+data ErrNo = Eperm | Enoent | Esrch | Eintr | Eio | Enxio | E2big
+           | Enoexec | Ebadf | Echild | Edeadlk
+~~~
+
+# 具体例: kernel スナッチ #2
+
+~~~ {.haskell}
+lwpSuspend :: Lwp -> Lwp -> IO (Either ErrNo ())
+lwpSuspend curl t = go $ lstat t
+  where go LsRun       = fRunOnproc
+        go LsOnProc    = fRunOnproc
+        go LsSleep     = do lwpSetFlag lwWsuspend
+                            if lwSintr . lflag $ t
+                              then setRunnable t
+                              else lwpUnlock t
+                            return $ Right ()
+        go LsSuspended = do lwpUnlock t
+                            return $ Right ()
+        go LsStop      = do lwpSetFlag lwWsuspend
+                            setRunnable t
+                            return $ Right ()
+        go LsIdl       = fIdlZomb
+        go LsZomb      = fIdlZomb
+        fRunOnproc     = do lwpSetFlag lwWsuspend
+                            lwpNeedUserret t
+                            lwpUnlock t
+                            return $ Right ()
+        fIdlZomb       = do lwpUnlock t
+                            return $ Left Eintr
+~~~
+
+# 具体例: デバドラ 元
+
+xxx bus_spaceを使ったデバドラスニペット
+
+xxx intr文脈がいい？
+
+# 具体例: デバドラ スナッチ
+
+xxx bus_spaceをモナドにしてみる？他はlift？
 
 # この作り方のメリット/デメリット
 ![background](dogfood.png)
