@@ -468,6 +468,10 @@ Static int ehci_intr1(ehci_softc_t *sc) {
 }
 ~~~
 
+# 具体例: このデバドラは何してる？
+
+![inline](draw/2013-01-22-ehci.png)
+
 # 具体例: デバドラ スナッチ
 
 xxx bus_spaceをモナドにしてみる？他はlift？
