@@ -420,11 +420,53 @@ lwpSuspend curl t = go $ lstat t
                             return $ Left Eintr
 ~~~
 
-# 具体例: デバドラ 元
+# 具体例: デバドラ 元 #1
 
-xxx bus_spaceを使ったデバドラスニペット
+~~~ {.c}
+/* https://gitorious.org/metasepi/netbsd-arafura/blobs/arafura/sys/dev/usb/ehcireg.h */
+#define EHCI_USBINTR		0x08	/* RW Interrupt register */
+#define EHCI_USBSTS		0x04	/* RO, RW, RWC Status */
+#define  EHCI_STS_IAA		0x00000020 /* intr on async adv */
+#define  EHCI_STS_PCD		0x00000004 /* port change detect */
+#define  EHCI_STS_ERRINT	0x00000002 /* error interrupt */
+#define  EHCI_STS_INT		0x00000001 /* RWC interrupt */
+#define  EHCI_STS_INTRS(x)	((x) & 0x3f)
 
-xxx intr文脈がいい？
+/* https://gitorious.org/metasepi/netbsd-arafura/blobs/arafura/sys/dev/usb/ehcivar.h */
+#define EREAD4(sc, a) bus_space_read_4((sc)->iot, (sc)->ioh, (a))
+#define EWRITE4(sc, a, x) bus_space_write_4((sc)->iot, (sc)->ioh, (a), (x))
+#define EOREAD4(sc, a) bus_space_read_4((sc)->iot, (sc)->ioh, (sc)->sc_offs+(a))
+#define EOWRITE4(sc, a, x) bus_space_write_4((sc)->iot, (sc)->ioh, (sc)->sc_offs+(a), (x))
+~~~
+
+# 具体例: デバドラ 元 #2
+
+~~~ {.c}
+/* https://gitorious.org/metasepi/netbsd-arafura/blobs/arafura/sys/dev/usb/ehci.c */
+Static int ehci_intr1(ehci_softc_t *sc) {
+	u_int32_t intrs, eintrs;
+	intrs = EHCI_STS_INTRS(EOREAD4(sc, EHCI_USBSTS));
+	eintrs = intrs & sc->sc_eintrs;
+	EOWRITE4(sc, EHCI_USBSTS, intrs); /* Acknowledge */
+	if (eintrs & EHCI_STS_IAA) {
+		wakeup(&sc->sc_async_head);
+		eintrs &= ~EHCI_STS_IAA;
+	}
+	if (eintrs & (EHCI_STS_INT | EHCI_STS_ERRINT)) {
+		usb_schedsoftintr(&sc->sc_bus);
+		eintrs &= ~(EHCI_STS_INT | EHCI_STS_ERRINT);
+	}
+	if (eintrs & EHCI_STS_PCD) {
+		ehci_pcd(sc, sc->sc_intrxfer);
+		eintrs &= ~EHCI_STS_PCD;
+	}
+	if (eintrs != 0) {
+		sc->sc_eintrs &= ~eintrs;
+		EOWRITE4(sc, EHCI_USBINTR, sc->sc_eintrs);
+	}
+	return (1);
+}
+~~~
 
 # 具体例: デバドラ スナッチ
 
