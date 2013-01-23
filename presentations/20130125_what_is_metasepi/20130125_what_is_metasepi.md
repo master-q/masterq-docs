@@ -472,9 +472,76 @@ Static int ehci_intr1(ehci_softc_t *sc) {
 
 ![inline](draw/2013-01-22-ehci.png)
 
-# 具体例: デバドラ スナッチ
+# 具体例: デバドラ スナッチ #1
 
-xxx bus_spaceをモナドにしてみる？他はlift？
+~~~ {.haskell}
+data UsbdBus = UsbdBus -- xxx
+data SoftContext = SC { scBus :: UsbdBus
+                      , iot :: Int
+                      , ioh :: Int
+                      , scOffs :: Int
+                      , scEintrs :: Int
+                      , scAsyncHead :: Ptr Int
+                      , scIntrXfer :: Ptr Int }
+
+type BusSpace m a = StateT SoftContext m a
+type Addr = Int
+
+ehciUsbsts, ehciUsbIntr :: Addr
+ehciUsbsts  = 0x04
+ehciUsbIntr = 0x08
+ehciStsIaa, ehciStsPcd, ehciStsErrInt, ehciStsInt :: Int
+ehciStsIaa    = 0x00000020
+ehciStsPcd    = 0x00000004
+ehciStsErrInt = 0x00000002
+ehciStsInt    = 0x00000001
+~~~
+
+# 具体例: デバドラ スナッチ #2
+
+~~~ {.haskell}
+evalTmpl :: Int -> (SoftContext -> IO a) -> Int -> BusSpace IO Int
+evalTmpl flag io ei | ei .&. flag /= 0 = go
+                    | otherwise = return ei
+  where go = do sc <- get
+                liftIO . io $ sc
+                return $ ei .&. complement flag
+
+evalWakeup, evalSoftIntr, evalPcd :: Int -> BusSpace IO Int
+evalWakeup = evalTmpl ehciStsIaa $ wakeUp . scAsyncHead
+evalSoftIntr = evalTmpl (ehciStsErrInt .|. ehciStsInt) (usbSchedSoftIntr . scBus)
+evalPcd = evalTmpl ehciStsPcd (\sc -> ehciPcd sc . scIntrXfer $ sc)
+
+evalWrite :: Int -> BusSpace IO ()
+evalWrite ei = when (ei /= 0) go
+  where go = do sc <- get
+                let newEi = scEintrs sc .&. complement ei
+                put $ sc {scEintrs = newEi}
+                busSpaceOwrite4 ehciUsbIntr newEi
+~~~
+
+# 具体例: デバドラ スナッチ #3
+
+~~~ {.haskell}
+evaluateIntr1 :: BusSpace IO ()
+evaluateIntr1 =
+  do intrs <- fmap ehciStsIntrs $ busSpaceOread4 ehciUsbsts
+     sc <- get
+     let eintrs = intrs .&. scEintrs sc
+     busSpaceOwrite4 ehciUsbsts eintrs
+     evalWrite =<< evalPcd =<< evalSoftIntr =<< evalWakeup eintrs
+     return ()
+       where ehciStsIntrs r = r .&. 0x3f
+
+ehciIntr1 :: SoftContext -> IO (Either () SoftContext)
+ehciIntr1 sc = return . Right =<< execStateT evaluateIntr1 sc
+
+wakeUp           = undefined
+usbSchedSoftIntr = undefined
+ehciPcd          = undefined
+busSpaceOread4   = undefined
+busSpaceOwrite4  = undefined
+~~~
 
 # この作り方のメリット/デメリット
 ![background](dogfood.png)
