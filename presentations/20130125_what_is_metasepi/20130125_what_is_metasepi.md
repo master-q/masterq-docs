@@ -50,6 +50,7 @@ http://www.paraiso-lang.org/ikmsm/
 * 既存設計を安全に改造できるようにしたい
 
 # C言語より進化した機能って？
+![background](evolution.png)
 
 * パターンマッチ
 * パッケージ
@@ -60,6 +61,7 @@ http://www.paraiso-lang.org/ikmsm/
 * GC
 
 # そんな言語あるの？
+![background](inria.png)
 
 以下の言語はコンパイラで型推論を持つ。
 
@@ -72,6 +74,7 @@ http://www.paraiso-lang.org/ikmsm/
 などなど
 
 # 安全に改造？
+![background](borg.png)
 
 OSSをほぼそのまま製品搭載できれば良いのですが、
 機能を追加して製品設計するハメになることはありませんか？
@@ -143,7 +146,7 @@ http://research.microsoft.com/en-us/projects/singularity/
 それが型システムです!
 
 # 型システムのうまみ
-![background](cuttlefish_mono.png)
+![background](haribo.png)
 
 * ランタイムエラーを少なくできる
 * 参考:数理科学的バグ撲滅方法論のすすめ
@@ -155,6 +158,7 @@ http://itpro.nikkeibp.co.jp/article/COLUMN/20060915/248230/
 ![inline](draw/2013-01-18-few_error.png)
 
 # Metasepiはどうやって設計するの？
+![background](arafura.png)
 
 * 既存のモノリシックkernelと同じ設計に
 * 当然POSIX互換
@@ -168,18 +172,21 @@ http://metasepi.masterq.net/posts/2013-01-09-design_arafura.html
 ~~~
 
 # なぜPOSIX互換に？
+![background](pdp11.png)
 
 早い段階でドッグフード可能にするため!
 
 ![inline](draw/2013-01-19-posix-compat.png)
 
 # スナッチ開発
+![background](konami.png)
 
 http://ja.wikipedia.org/wiki/スナッチャー
 
 ![inline](draw/2012-12-27-arafura_design.png)
 
 # 実現方法
+![background](make.png)
 
 * 開発言語: Haskell
 
@@ -200,6 +207,7 @@ http://netbsd.org/
 ~~~
 
 # プログラミング言語Haskell
+![background](learnyou.png)
 
 * 純粋関数型プログラミング言語
 * 型クラスによる柔軟な表現
@@ -212,14 +220,14 @@ http://benchmarksgame.alioth.debian.org/u64/which-programs-are-fastest.php
 * 近年はOCamlよりもプログラマが多い？
 
 # jhcコンパイラ
-![background](cuttlefish_mono.png)
+![background](john.png)
 
 http://repetae.net/computer/jhc/
 
 ![inline](draw/2012-12-22-jhc_compile.png)
 
 # jhcはポータブル
-![background](cuttlefish_mono.png)
+![background](wingsuit.png)
 
 libc不要バイナリ吐ける
 
@@ -236,6 +244,7 @@ libc不要バイナリ吐ける
 * C言語との相性が良い
 
 # NetBSD kernel
+![background](netbsd.png)
 
 * 移植性高い = 高い抽象化
 * POSIX互換モノリシックkernel
@@ -266,7 +275,7 @@ http://netbsdman.masterq.net/
 * スクラッチからkernelを書くのは無謀では？
 
 # 作り方:NetBSD kernelを型で写経
-![background](cuttlefish_mono.png)
+![background](buddha.png)
 
 * C言語で書かれた
 * NetBSD kernelを
@@ -274,6 +283,7 @@ http://netbsdman.masterq.net/
 * jhcでコンパイルする
 
 # 具体例: bootloader 元
+![background](cuttlefish_mono.png)
 
 ~~~ {.c}
 /* https://gitorious.org/metasepi/netbsd-arafura/blobs/arafura/sys/arch/i386/stand/lib/menuutils.c */
@@ -301,6 +311,7 @@ bootmenu(void)
 ~~~
 
 # 具体例: bootloader スナッチ
+![background](cuttlefish_mono.png)
 
 ~~~ {.haskell}
 -- https://gitorious.org/metasepi/netbsd-arafura/blobs/arafura/metasepi-arafura/sys/arch/i386/stand/boot/Boot2Ara.hs
@@ -320,6 +331,7 @@ main = do
 ~~~
 
 # 具体例: kernel 元 #1
+![background](cuttlefish_mono.png)
 
 ~~~ {.c}
 /* https://gitorious.org/metasepi/netbsd-arafura/blobs/arafura/sys/sys/lwp.h */
@@ -346,6 +358,7 @@ struct lwp {
 ~~~
 
 # 具体例: kernel 元 #2
+![background](cuttlefish_mono.png)
 
 ~~~ {.c}
 /* https://gitorious.org/metasepi/netbsd-arafura/blobs/arafura/sys/kern/kern_lwp.c */
@@ -373,6 +386,7 @@ struct lwp {
 ~~~
 
 # 具体例: kernel スナッチ #1
+![background](cuttlefish_mono.png)
 
 ~~~ {.haskell}
 data Lflag = Lflag { lwIdle        :: Bool
@@ -394,6 +408,7 @@ data ErrNo = Eperm | Enoent | Esrch | Eintr | Eio | Enxio | E2big
 ~~~
 
 # 具体例: kernel スナッチ #2
+![background](cuttlefish_mono.png)
 
 ~~~ {.haskell}
 lwpSuspend :: Lwp -> Lwp -> IO (Either ErrNo ())
@@ -421,6 +436,7 @@ lwpSuspend curl t = go $ lstat t
 ~~~
 
 # 具体例: デバドラ 元 #1
+![background](cuttlefish_mono.png)
 
 ~~~ {.c}
 /* https://gitorious.org/metasepi/netbsd-arafura/blobs/arafura/sys/dev/usb/ehcireg.h */
@@ -440,6 +456,7 @@ lwpSuspend curl t = go $ lstat t
 ~~~
 
 # 具体例: デバドラ 元 #2
+![background](cuttlefish_mono.png)
 
 ~~~ {.c}
 /* https://gitorious.org/metasepi/netbsd-arafura/blobs/arafura/sys/dev/usb/ehci.c */
@@ -469,10 +486,12 @@ Static int ehci_intr1(ehci_softc_t *sc) {
 ~~~
 
 # 具体例: このデバドラは何してる？
+![background](cuttlefish_mono.png)
 
 ![inline](draw/2013-01-22-ehci.png)
 
 # 具体例: デバドラ スナッチ #1
+![background](cuttlefish_mono.png)
 
 ~~~ {.haskell}
 data UsbdBus = UsbdBus -- xxx
@@ -498,6 +517,7 @@ ehciStsInt    = 0x00000001
 ~~~
 
 # 具体例: デバドラ スナッチ #2
+![background](cuttlefish_mono.png)
 
 ~~~ {.haskell}
 evalTmpl :: Int -> (SoftContext -> IO a) -> Int -> BusSpace IO Int
@@ -521,6 +541,7 @@ evalWrite ei = when (ei /= 0) go
 ~~~
 
 # 具体例: デバドラ スナッチ #3
+![background](cuttlefish_mono.png)
 
 ~~~ {.haskell}
 evaluateIntr1 :: BusSpace IO ()
@@ -557,7 +578,7 @@ busSpaceOwrite4  = undefined
 * 関数型言語を生かした設計にはならない
 
 # 現状
-![background](cuttlefish_mono.png)
+![background](under_construction.png)
 
 jhcでbootloaderの一部をHaskellで書けた
 
