@@ -144,4 +144,9 @@ server: build
 
 TeXと組み合わせてもいいかもしれませんね!
 
-おわり。
+# PR:関数型言語の同人誌書きました
+![background](debian_clear.png)
+
+立ち読みしてして!
+
+![inline](c83-cover.png)
