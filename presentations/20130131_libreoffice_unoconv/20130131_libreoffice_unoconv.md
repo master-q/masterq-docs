@@ -4,7 +4,6 @@
 Kiwamu Okabe
 
 # 私は誰？
-
 ![background](MIRACLE-CI-base_2.png)
 
 * Twitter: @master_q
@@ -14,10 +13,12 @@ Kiwamu Okabe
 * OSSに興味のある{エンジニア,インターン}募集中です!
 
 # 最近よくWebページ作るんです
+![background](debian_clear.png)
 
 ![inline](webpage.png)
 
 # ややこしい表現には図が効きます
+![background](draw.png)
 
 * でも世の中良いドローソフトが不足
 * tgifとかにはもう耐えられないんです
@@ -25,6 +26,7 @@ Kiwamu Okabe
 * LibreOfficeをドローソフトとして使おう
 
 # でも図を貼り付けるの面倒...
+![background](confused.png)
 
 * LibreOfficeで描く
 * png化
@@ -33,10 +35,12 @@ Kiwamu Okabe
 * 最初に戻る
 
 # こんなことできますか？
+![background](debian_clear.png)
 
 ![inline](draw/unoconv_flow.png)
 
 # つまり一発で変換したい
+![background](debian_clear.png)
 
 ~~~
 $ tree ./draw # ビフォワー
@@ -64,6 +68,7 @@ $ tree ./draw # アフター
 ~~~
 
 # できました!
+![background](debian_clear.png)
 
 make一発でdrawディレクトリにあるodgファイルをpngファイル化
 
@@ -87,7 +92,8 @@ clean:
 .PHONY: clean
 ~~~
 
-# えっとなんで4回もunoconv呼ぶの？
+# なんで4回もunoconv呼ぶの？
+![background](why.png)
 
 * libreofficeが既に起動している場合には-nオプションを付ける必要がある
 * unoconvがなぜかエラー終了する...
@@ -97,6 +103,7 @@ clean:
 将来後者は改善されるといいなー(他力本願)
 
 # ところでjekyllとかHakyllとか
+![background](dio.png)
 
 * http://jekyllrb.com/
 * http://jaspervdj.be/hakyll/
@@ -106,6 +113,7 @@ clean:
 図の貼り付けも楽したい!
 
 # 応用: unoconv + Hakyll
+![background](debian_clear.png)
 
 ~~~ {.makefile}
 ODGS := $(wildcard draw/*.odg)
@@ -131,7 +139,8 @@ server: build
 	./hakyll server
 ~~~
 
-# 応用色々素敵なunoconv
+# 応用色々おいしいunoconv
+![background](konbu.png)
 
 TeXと組み合わせてもいいかもしれませんね!
 
