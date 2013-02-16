@@ -19,7 +19,7 @@ Kiwamu Okabe
 * 調べる方法を有識者がフォロー
 * printfの動作完全理解で勉強会卒業!
 
-# 簡単なプログラムを作ってみた
+# 簡単なプログラムを作りました
 
 ~~~ {.c}
 /* whileprint.c */
@@ -42,9 +42,13 @@ PCのシリアルポートに"."をひたすら書くだけのはず。
 http://community.osdev.info/index.php?%28serial%29PC16550
 ~~~
 
-I/Oポート0x03F8にASCIIコードを書けばOK
+I/Oポート0x3F8にASCIIコードを書けばOK
+
+![inline](out.png)
 
 # printf => I/Oポート の間は？
+
+![inline](draw/between.png)
 
 # backtrace取ってみたよ
 
@@ -139,6 +143,35 @@ clear=1
 ~~~
 
 # virtualboxでシリアルコンソール
+
+~~~
+http://www.reactos.org/wiki/VirtualBox
+~~~
+
+virtualboxのシリアルを名前付きpipeに設定
+
+~~~
+http://www.cetus-net.org/bsd/i386/serial.html
+~~~
+
+NetBSD側でシリアルコンソールを有効に
+
+~~~
+# diff /etc/ttys.back /etc/ttys
+13c13
+< tty00 "/usr/libexec/getty std.9600"   unknown off secure
+---
+> tty00 "/usr/libexec/getty std.9600"   vt100   on secure local
+~~~
+
+ホストOSから名前付きpipeを開く
+
+~~~
+$ socat unix-client:/hogehoge/com0.pipe stdio
+NetBSD/i386 (Amnesiac) (tty00)
+
+login:
+~~~
 
 # 何もかも解らない時どうすれば...
 
@@ -247,7 +280,7 @@ http://metasepi.masterq.net/
 # ということでソース読みましょう!
 
 * printf関数から読む
-* IOポートアクセスから読む
+* I/Oポートアクセスから読む
 
 あなたはどっち？
 
