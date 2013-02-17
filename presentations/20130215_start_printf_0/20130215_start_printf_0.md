@@ -19,6 +19,10 @@ Kiwamu Okabe
 * 調べる方法を有識者がフォロー
 * printfの動作完全理解で勉強会卒業!
 
+# つまり打ち出の小槌ですヨ!
+
+![inline](draw/frontback.png)
+
 # 簡単なプログラムを作りました
 
 ~~~ {.c}
@@ -285,3 +289,11 @@ http://metasepi.masterq.net/
 あなたはどっち？
 
 ![inline](draw/trace.png)
+
+# 参考資料
+
+* 本勉強会まとめサイト
+
+~~~
+http://start_printf.masterq.net/
+~~~
