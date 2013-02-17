@@ -3,7 +3,17 @@
 
 Kiwamu Okabe
 
+# 私は誰？
+![background](MIRACLE-CI-base_2.png)
+
+* Twitter: @master_q
+* ミラクル・リナックス勤務
+* 前はコピー機のOSをNetBSDで作ってた
+* デジタルサイネージのソフト開発してます
+* OSSに興味のある{エンジニア,インターン}募集中です!
+
 # この勉強会は何？
+![background](reading.png)
 
 * UNIXモドキのOSを理解するために
 * printf関数の動作を題材にして
@@ -13,6 +23,7 @@ Kiwamu Okabe
 する勉強会です
 
 # この勉強会の進め方
+![background](footstep.png)
 
 * backtraceを見て
 * 興味のある箇所を参加者が調べて発表
@@ -20,18 +31,21 @@ Kiwamu Okabe
 * printfの動作完全理解で勉強会卒業!
 
 # つまり打ち出の小槌ですヨ!
+![background](spring.png)
 
 ![inline](draw/frontback.png)
 
 # でもまたなんでprintfなの？
+![background](keyboard.png)
 
-* OSの学び方とか聞いたことあります？
+* OSの学び方とか聞いたことありますか？
 * ぼくのケース := 会社入っていきなり仕事
 * 独学でした... #orz
 * 10年ぐらいNetBSDのお守り
 * 皆さんには近道を通ってほしい!
 
 # ダメな例1: UNIX本読む
+![background](daemon.png)
 
 * 各部品については理解できる
 * 部品と部品の繋がりがイメージできない
@@ -40,6 +54,7 @@ Kiwamu Okabe
 * 本読むのは良いけどそれだけじゃぁ...
 
 # ダメな例2: 自作OS
+![background](cpu.png)
 
 * 楽しいけど...
 * x86セグメントとかイキナリ
@@ -49,6 +64,7 @@ Kiwamu Okabe
 * 結果: 単なるデバドラ屋になりさがる...
 
 # ダメな例3: 起動プロセスを調べる
+![background](surfing.png)
 
 * プロセスの生成、光あれ!
 * 過渡と定常
@@ -57,6 +73,7 @@ Kiwamu Okabe
 * アプリ結合で思考停止する人間になる
 
 # じゃあ何が近道なのさ!？
+![background](rally.png)
 
 * フリーUNIXのソース全部読めってか？
 * 無理だぽー
@@ -65,6 +82,7 @@ Kiwamu Okabe
 * printf関数の動作じゃね
 
 # 簡単なプログラムを作りました
+![background](typewriter.png)
 
 ~~~ {.c}
 /* whileprint.c */
@@ -82,6 +100,7 @@ int main()
 PCのシリアルポートに"."をひたすら書くだけのはず。
 
 # x86のシリアルポートのしくみ
+![background](serialport.png)
 
 ~~~
 http://community.osdev.info/index.php?%28serial%29PC16550
@@ -92,14 +111,17 @@ I/Oポート0x3F8にASCIIコードを書けばOK
 ![inline](out.png)
 
 # printf => I/Oポート の間は？
+![background](tachikoma.png)
 
 ![inline](draw/between.png)
 
 # backtrace取ってみたよ
+![background](bomberman.png)
 
 ![inline](draw/trace.png)
 
 # ソースコードの取得
+![background](git.png)
 
 CVS
 
@@ -122,8 +144,8 @@ $ git clone git://github.com/jsonn/src.git
 $ git checkout -b netbsd_6_0 remotes/origin/netbsd_6_0
 ~~~
 
-
 # 読むべきソースコードの在処
+![background](tree.png)
 
 ~~~
 src/lib/libc          := libc
@@ -140,6 +162,7 @@ src/sys/uvm           := バーチャルメモリ
 他のディレクトリはおいおい説明します
 
 # ドキュメントはmanpage
+![background](konnyaku.png)
 
 http://netbsd.gw.com/cgi-bin/man-cgi
 
@@ -148,6 +171,7 @@ http://netbsdman.masterq.net/
 翻訳環境構築中
 
 # 開発環境: build.sh
+![background](puyopuyo.png)
 
 以下の手順でkernelをコンパイルできます
 
@@ -166,6 +190,7 @@ netbsd: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), statically lin
 コードをちょっと変えて動作を見たいときどうぞ
 
 # 実行環境: NetBSD + virtualbox
+![background](virtualbox.png)
 
 isoでvirtualboxにNetBSDをインストール
 
@@ -188,6 +213,7 @@ clear=1
 ~~~
 
 # virtualboxでシリアルコンソール
+![background](serial.png)
 
 ~~~
 http://www.reactos.org/wiki/VirtualBox
@@ -219,6 +245,7 @@ login:
 ~~~
 
 # 何もかも解らない時どうすれば...
+![background](compass.png)
 
 ~~~ {.c}
 static int
@@ -248,6 +275,7 @@ vn_write(file_t *fp, off_t *offset, struct uio *uio, kauth_cred_t cred, int flag
 ~~~
 
 # 1. タグジャンプ
+![background](tagjump.png)
 
 以下どれかを使うとソースコード追いやすい
 
@@ -260,6 +288,7 @@ http://www.gnu.org/software/global/
 http://ctags.sourceforge.net/
 
 # 2. NetBSDドキュメント
+![background](999.png)
 
 * NetBSD Guide
 
@@ -286,6 +315,7 @@ http://cvsweb.netbsd.org/bsdweb.cgi/src/share/misc/style?rev=1.49&content-type=t
 ~~~
 
 # 3. 本
+![background](bsdbook.png)
 
 * 4.4BSDの設計と実装
 
@@ -306,6 +336,7 @@ http://www.amazon.co.jp/dp/4756120423
 ~~~
 
 # みなさんへのお願い
+![background](bigwave.png)
 
 勉強会の運営には皆さんの協力が必要です!
 
@@ -323,6 +354,7 @@ http://metasepi.masterq.net/
 ~~~
 
 # ということでソース読みましょう!
+![background](matrix.png)
 
 * printf関数から読む
 * I/Oポートアクセスから読む
@@ -332,6 +364,7 @@ http://metasepi.masterq.net/
 ![inline](draw/trace.png)
 
 # 参考資料
+![background](path.png)
 
 * 本勉強会まとめサイト
 
