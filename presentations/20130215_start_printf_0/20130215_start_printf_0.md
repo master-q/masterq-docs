@@ -290,22 +290,22 @@ http://ctags.sourceforge.net/
 # 2. NetBSDドキュメント
 ![background](999.png)
 
-* NetBSD Guide
+* NetBSD Documentationのkernel章
 
 ~~~
-http://netbsd.org/docs/guide/en/
+http://www.netbsd.org/docs/
 ~~~
 
-* Other FAQs and HOWTOs
+* NetBSD Documentation: Kernel
 
 ~~~
-http://netbsd.org/docs/misc/index.html
+http://www.netbsd.org/docs/kernel/
 ~~~
 
-* NetBSD Developer Documentation
+* NetBSD Wikiのkernel関連
 
 ~~~
-http://netbsd.org/developers/
+http://wiki.netbsd.org/wiki/sitemap/
 ~~~
 
 * NetBSD source code style guide
