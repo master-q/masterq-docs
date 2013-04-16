@@ -74,6 +74,7 @@ http://carettah.masterq.net/
 * もちろんこのプレゼンもCarettahです
 
 # Ajhcコンパイラ
+![background](img/john.png)
 
 http://ajhc.metasepi.org/
 
@@ -86,6 +87,7 @@ http://ajhc.metasepi.org/
 今日はこのプロジェクトに焦点をあてます
 
 # 宣伝:λカ娘に記事を書きませんか？
+![background](img/haskell-logo.png)
 
 http://www.paraiso-lang.org/ikmsm/
 
@@ -127,6 +129,8 @@ $ ./hs.out
 
 * LEDをぐりんぐりん
 * LEDにモールス信号
+
+![inline](img/stm32f3.png)
 
 # デモソースコード
 
