@@ -5,6 +5,7 @@ Kiwamu Okabe
 # [1] 自己紹介
 ![background](img/MIRACLE-CI-base_2.png)
 
+* http://www.masterq.net/
 * ミラクル・リナックス勤務
 * 前はコピー機のOSをNetBSDで作ってた
 * Debianメンテナ
@@ -78,11 +79,11 @@ http://carettah.masterq.net/
 
 http://ajhc.metasepi.org/
 
+* Ajhc := A fork of jhc
 * http://repetae.net/computer/jhc/
 * jhcはフットプリントが小さく、
 * 高速な実行バイナリを吐くらしい
 * jhcにMetasepiに必要な機能追加をしよう
-* Ajhc := A fork of jhc
 
 今日はこのプロジェクトに焦点をあてます
 
@@ -171,6 +172,10 @@ ledOn  = poke bsrrPtr
 
 ![inline](draw/2012-12-22-jhc_compile.png)
 
+# クロスコンパイル
+
+![inline](draw/cross_compile.png)
+
 # ランタイム
 
 * C言語コメント込み3000行 小さい!
@@ -178,8 +183,10 @@ ledOn  = poke bsrrPtr
 
 ![inline](draw/2012-12-22-jhc_custom_rts.png)
 
-# クロスコンパイル
-# デモでのメモリマップ
+# マイコンデモでのメモリマップ
+
+![inline](draw/memmap.png)
+
 # GC
 
 ~~~
@@ -192,7 +199,20 @@ http://www.slideshare.net/dec9ue/gc-16298437
 * AjhcではGCを修正して省メモリ化
 
 # デモ: GC頻度をgdbで調べる
+
+* GCを実行する関数にbreak pointはる
+* どれぐらいGCが起きてるかな？
+
 # 不足している機能/不具合
+
+* Haskell Platform移植
+* GHCコンパチ
+* 再入
+* 並列実行
+* GC中の割り込み
+* リージョン推論
+
+......むちゃくちゃ機能不足やないですか...
 
 # [3] 到達するために
 
@@ -208,6 +228,8 @@ http://www.slideshare.net/dec9ue/gc-16298437
 * 「必要は発明の母ではない」
 * 「イシューよりはじめよ」
 * 「客の困りごとを解決するのがビジネス」
+
+技術はそれらを解決するためにあると信じています
 
 # 専門領域をいったん忘れる
 
