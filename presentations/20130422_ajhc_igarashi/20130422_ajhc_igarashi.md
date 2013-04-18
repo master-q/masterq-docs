@@ -37,7 +37,7 @@ http://www.paraiso-lang.org/ikmsm/books/c84.html
 ~~~
 
 # おしながき
-![background](img/toc.png)
+![background](img/kyoto_night.png)
 
 * [1] 自己紹介
 * [2] Ajhcコンパイラとは
