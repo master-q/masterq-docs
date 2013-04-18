@@ -1,4 +1,5 @@
 # Ajhcコンパイラの押売りに来ました
+![background](img/furoshiki.png)
 
 Kiwamu Okabe
 
@@ -45,7 +46,7 @@ http://www.paraiso-lang.org/ikmsm/books/c84.html
 * [5] Ajhcのすゝめ
 
 # [2] Ajhcコンパイラとは
-![background](img/john.png)
+![background](img/ajhc.png)
 
 http://ajhc.metasepi.org/
 
@@ -86,6 +87,7 @@ http://itpro.nikkeibp.co.jp/article/COLUMN/20060915/248230/
 ~~~
 
 # 改造工数を小さくしたい
+![background](img/fork.png)
 
 OSSを使った製品開発あるある
 
@@ -139,7 +141,7 @@ ML系はあまり調べきれていません...
 # 型で設計されたOSは他にないのか
 ![background](img/os_boot.png)
 
-デスクトップ使用可能レベルではない
+デスクトップとして使用可能なレベルではない
 
 * Funk (OCaml製)
 
@@ -193,6 +195,7 @@ $ ./hs.out
 * マイコンでHaskellコード実行してみる？
 
 # まずはデモでもどうぞ
+![background](img/led.png)
 
 ~~~
 デモ動画: http://www.nicovideo.jp/watch/sm20336813
@@ -201,8 +204,6 @@ $ ./hs.out
 
 * LEDをぐりんぐりん
 * LEDにモールス信号
-
-![inline](img/stm32f3.png)
 
 # デモソースコード
 
@@ -228,26 +229,32 @@ ledOn  = poke bsrrPtr
 ~~~
 
 # 図にしましょう: 起動シーケンス
+![background](img/takeoff.png)
 
 ![inline](draw/boot.png)
 
 # 図にしましょう: Haskellコードの動き
+![background](img/circuit.png)
 
 ![inline](draw/running.png)
 
 # 図にしましょう: もっと簡単に
+![background](img/freefall.png)
 
 ![inline](draw/running_simple.png)
 
 # AjhcはC言語への変換器
+![background](img/john.png)
 
 ![inline](draw/2012-12-22-jhc_compile.png)
 
 # クロスコンパイル
+![background](img/cross.png)
 
 ![inline](draw/cross_compile.png)
 
 # ランタイム
+![background](img/wingsuit.png)
 
 * C言語コメント込み3000行 小さい!
 * 組み込み用途に向いている
@@ -255,12 +262,14 @@ ledOn  = poke bsrrPtr
 ![inline](draw/2012-12-22-jhc_custom_rts.png)
 
 # マイコンデモでのメモリマップ
+![background](img/memory_chip.png)
 
 モールス信号デモの場合
 
 ![inline](draw/memmap.png)
 
 # GC
+![background](img/dec9ue.png)
 
 ~~~
 http://www.slideshare.net/dec9ue/gc-16298437
@@ -272,11 +281,18 @@ http://www.slideshare.net/dec9ue/gc-16298437
 * AjhcではGCを修正して省メモリ化
 
 # デモ: GC頻度をgdbで調べる
+![background](img/gdb.png)
 
 * GCを実行する関数にbreak pointはる
+
+(gdb) break gc_perform_gc
+
+(gdb) continue
+
 * どれぐらいGCが起きてるかな？
 
 # 不足している機能/不具合
+![background](img/fuji.png)
 
 * Haskell Platform移植
 * GHCコンパチ
@@ -288,6 +304,7 @@ http://www.slideshare.net/dec9ue/gc-16298437
 研究開発テーマの山ですね!
 
 # [5] Ajhcのすゝめ
+![background](img/fukuzawa.png)
 
 * Ajhc使ってみませんか？
 * マニュアルはイカ
