@@ -13,6 +13,7 @@ Kiwamu Okabe
 * OSSに興味のあるエンジニア募集中です!
 
 # 経歴
+![background](img/san_ai.png)
 
 * 2001年: 東京都立大学 修士卒業
 * 専攻: 電気・電子工学
@@ -35,6 +36,7 @@ http://www.paraiso-lang.org/ikmsm/books/c84.html
 ~~~
 
 # おしながき
+![background](img/toc.png)
 
 * [1] 自己紹介
 * [2] Ajhcコンパイラとは
@@ -54,12 +56,14 @@ http://ajhc.metasepi.org/
 * 組み込みに向いてるかも
 
 # どうしてAjhcコンパイラを作るの？
+![background](img/metasepi.png)
 
 * Metasepiというkernelを作るため
 * UNIXモドキkernelを強い型によって設計
 * 言語: HaskellとかOCamlとかMLtonとか
 
 # [3] kernelに強い型が必要なのか
+![background](img/crash.png)
 
 * LinuxやWindowsが既にあるのでは？
 * しかし大規模組込開発は苦しんでいる
@@ -68,6 +72,7 @@ http://ajhc.metasepi.org/
 * 再現することでさえ困難
 
 # kernelにこそ型安全が必要
+![background](img/inria.png)
 
 * ほとんどのkernelはC言語で設計される
 * ユーザー空間でエラー → SEGV
@@ -87,6 +92,7 @@ OSSを使った製品開発あるある
 ![inline](draw/2013-01-18-fork2.png)
 
 # C言語の表現力は非力
+![background](img/c.png)
 
 モダンな言語機能を使いたい
 
@@ -98,6 +104,7 @@ OSSを使った製品開発あるある
 * STM
 
 # 型付けされていれば未来は広がる
+![background](img/hope.png)
 
 * 単体テストしやすい
 * 型による契約プログラミング
@@ -105,6 +112,7 @@ OSSを使った製品開発あるある
 * 証明器による設計
 
 # なぜGHCを使わないのか
+![background](img/sumo.png)
 
 GHCの吐くバイナリはサイズが大きい
 
@@ -129,6 +137,7 @@ casper$ ldd Hello_ghc | wc -l
 ML系はあまり調べきれていません...
 
 # 型で設計されたOSは他にないのか
+![background](img/os_boot.png)
 
 デスクトップ使用可能レベルではない
 
@@ -157,12 +166,14 @@ ML系はあまり調べきれていません...
 ~~~
 
 # 実用化に辿りつくために
+![background](img/konami.png)
 
 * ドッグフードを維持しながら開発
 
 ![inline](draw/2012-12-27-arafura_design.png)
 
 # [4] Ajhcコンパイラとマイコン
+![background](img/cabal.png)
 
 Ajhcの使い方は以下のような感じ
 
