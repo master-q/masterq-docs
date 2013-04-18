@@ -8,7 +8,7 @@ Kiwamu Okabe
 * http://www.masterq.net/
 * ミラクル・リナックス勤務
 * 前はコピー機のOSをNetBSDで作ってた
-* Debianメンテナ
+* Debian Maintainer
 * デジタルサイネージのソフト開発してます
 * OSSに興味のあるエンジニア募集中です!
 
@@ -16,8 +16,8 @@ Kiwamu Okabe
 
 * 2001年: 東京都立大学 修士卒業
 * 専攻: 電気・電子工学
-* 2001ー2012年: コピー機メーカー勤務
-* 2012年ー: 現職
+* 2001—2012年: コピー機メーカー勤務
+* 2012年—: 現職
 
 # 宣伝:λカ娘に記事を書きませんか？
 ![background](img/haskell-logo.png)
@@ -36,7 +36,11 @@ http://www.paraiso-lang.org/ikmsm/books/c84.html
 
 # おしながき
 
-* 自己紹介
+* [1] 自己紹介
+* [2] Ajhcコンパイラとは
+* [3] kernelに強い型が必要なのか
+* [4] Ajhcコンパイラとマイコン
+* [5] Ajhcのすゝめ
 
 # [2] Ajhcコンパイラとは
 ![background](img/john.png)
@@ -56,17 +60,111 @@ http://ajhc.metasepi.org/
 * 言語: HaskellとかOCamlとかMLtonとか
 
 # [3] kernelに強い型が必要なのか
+
+* LinuxやWindowsが既にあるのでは？
+* しかし大規模組込開発は苦しんでいる
+* kernelをカスタマイズして使用
+* kernelのランタイムエラー
+* 再現することでさえ困難
+
 # kernelにこそ型安全が必要
+
+* ほとんどのkernelはC言語で設計される
+* ユーザー空間でエラー → SEGV
+* kernel空間でエラー → システム停止
+* kernelの設計には細心の注意が必要
+* C言語は安全なのか？
+* 参考:数理科学的バグ撲滅方法論のすすめ
+
+~~~
+http://itpro.nikkeibp.co.jp/article/COLUMN/20060915/248230/
+~~~
+
 # 改造工数を小さくしたい
+
+OSSを使った製品開発あるある
+
+![inline](draw/2013-01-18-fork2.png)
+
 # C言語の表現力は非力
+
+モダンな言語機能を使いたい
+
+* パターンマッチ
+* 純粋関数
+* 高階関数
+* 型推論
+* 対話環境
+* STM
+
 # 型付けされていれば未来は広がる
+
+* 単体テストしやすい
+* 型による契約プログラミング
+* 検証しやすい
+* 証明器による設計
+
 # なぜGHCを使わないのか
+
+GHCの吐くバイナリはサイズが大きい
+
+~~~
+$ ajhc --version
+ajhc 0.8.0.5 (210da9343b6b7e38a89eb28f85602471a325647a)
+$ ghc --version
+The Glorious Glasgow Haskell Compilation System, version 7.4.1
+$ echo 'main = print "Hello"' > Hello.hs
+$ ajhc Hello.hs -o Hello_ajhc
+$ ghc Hello.hs -o Hello_ghc
+$ size Hello_ajhc Hello_ghc 
+   text    data     bss     dec     hex filename
+  19440    1324     744   21508    5404 Hello_ajhc
+ 709612   40840   46776  797228   c2a2c Hello_ghc
+$ ldd Hello_ajhc | wc -l
+3
+casper$ ldd Hello_ghc | wc -l
+9
+~~~
+
+ML系はあまり調べきれていません...
+
 # 型で設計されたOSは他にないのか
+
+デスクトップ使用可能レベルではない
+
+* Funk (OCaml製)
+
+~~~
+  http://home.gna.org/funk/
+~~~
+
+* snowflake-os (OCaml製)
+
+~~~
+  http://code.google.com/p/snowflake-os/
+~~~
+
+* House (Haskell製)
+
+~~~
+  http://programatica.cs.pdx.edu/House/
+~~~
+
+* HaLVM (Haskell製)
+
+~~~
+  http://corp.galois.com/halvm/
+~~~
+
 # 実用化に辿りつくために
+
+* ドッグフードを維持しながら開発
+
+![inline](draw/2012-12-27-arafura_design.png)
 
 # [4] Ajhcコンパイラとマイコン
 
-使い方は以下のような感じ
+Ajhcの使い方は以下のような感じ
 
 ~~~
 $ cabal install ajhc
