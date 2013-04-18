@@ -132,7 +132,7 @@ $ size Hello_ajhc Hello_ghc
  709612   40840   46776  797228   c2a2c Hello_ghc
 $ ldd Hello_ajhc | wc -l
 3
-casper$ ldd Hello_ghc | wc -l
+$ ldd Hello_ghc | wc -l
 9
 ~~~
 
