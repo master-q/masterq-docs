@@ -313,7 +313,7 @@ http://www.slideshare.net/dec9ue/gc-16298437
 * Ajhc使ってみませんか？
 * マニュアルはイカ
 
-http://ajhc.metasepi.org/manual_ja.html
+ajhc.metasepi.org/manual_ja.html
 
 * バグ/機能要望ありましたらイカまで
 
