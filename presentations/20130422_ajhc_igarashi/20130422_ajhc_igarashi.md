@@ -206,6 +206,7 @@ $ ./hs.out
 * LEDにモールス信号
 
 # デモソースコード
+![background](img/cuttlefish_mono.png)
 
 なんじゃこりゃ...
 
