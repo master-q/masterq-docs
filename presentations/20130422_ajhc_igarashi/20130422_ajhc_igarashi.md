@@ -60,6 +60,9 @@ http://ajhc.metasepi.org/
 ![background](img/metasepi.png)
 
 * Metasepiというkernelを作るため
+
+http://metasepi.org/
+
 * UNIXモドキkernelを強い型によって設計
 * 言語: HaskellとかOCamlとかMLtonとか
 
