@@ -1,4 +1,6 @@
-# Debianを用いたCortex-M3マイコン開発事例の紹介
+# Debianを用いたCortex-M3マイコン開発事例のご紹介
+
+![background](img/chip.png)
 
 Kiwamu Okabe
 
@@ -14,16 +16,20 @@ Kiwamu Okabe
 
 # Cortex-M3マイコン知ってますか？
 
-* ARMが開発した32bitマイコン
+![background](img/arm.png)
+
+* ARM社が開発した32bitマイコン
 * 各社から数千円で開発ボードが出てる
 
 ![inline](img/boards.png)
 
 # メーカー製のツールが使いにくい
 
-* eclipseよくわからない
+![background](img/eclipse.png)
+
+* Eclipseよくわからない
 * プログラムサイズに制限があったり
-* 素直なgccとgdbが使いたい...
+* 素直なGCCとGDBが使いたい...
 
 ![inline](img/badtools.png)
 
@@ -39,6 +45,8 @@ Kiwamu Okabe
 * 備考: デバッガ用のST-LINKチップ搭載
 
 # 開発全体の流れ
+
+![background](img/wave.png)
 
 ![inline](draw/flow.png)
 
@@ -151,6 +159,8 @@ Transfer rate: 7 KB/sec, 1248 bytes/write.
 
 # Haskellマイコンプログラミング
 
+![background](img/ajhc.png)
+
 * Ajhc - http://ajhc.metasepi.org/
 
 ![inline](draw/2012-12-22-jhc_compile.png)
@@ -163,3 +173,6 @@ Transfer rate: 7 KB/sec, 1248 bytes/write.
 * 3日目 東地区 ペ-06a
 * サークル名: 参照透明な海を守る会
 * http://www.paraiso-lang.org/ikmsm/
+* 関数型言語の同人誌
+* 今回のCortex-M3の話も掲載
+* 来て見て買ってね!
