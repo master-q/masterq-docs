@@ -379,6 +379,7 @@ http://metasepi.masterq.net/
 
 * 日時: 2013/07/27(土) 14:00-18:00
 * 場所: ミラクル・リナックス株式会社
+* 最寄り駅: 田町
 * テーマ: ld.elf_so (動的リンカ)
 
 http://start_printf.masterq.net/
@@ -390,11 +391,11 @@ http://partake.in/events/1bed8969-5bc9-4f02-bc19-2698cb5577a3
 # 宣伝:夏コミ(C84)で同人誌出します
 ![background](haskell-logo.png)
 
-* 2013/08/12(月)
+* 2013/08/12(月) 平日だぽ。。。
 * C84 3日目 東地区 ペ-06a
 * 関数型プログラミングに関する同人誌
 * Ajhc Haskellコンパイラの記事書いた
 * RAM 40kBのマイコンでHaskellが動く
-* 他: 圏論、囲碁AI、パーサ
+* 他の記事: 圏論、囲碁AI、パーサ
 
 http://www.paraiso-lang.org/ikmsm/
