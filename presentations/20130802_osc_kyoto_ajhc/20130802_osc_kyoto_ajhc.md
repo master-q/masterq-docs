@@ -551,4 +551,8 @@ http://www.paraiso-lang.org/ikmsm/books/c85.html
   http://www.flickr.com/photos/zanastardust/145197704/
 * flickr was here | Flickr - Photo Sharing!
   http://www.flickr.com/photos/sarahrosenau/185196442/
+* Hooded Cuttlefish | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/silkebaron/931381358/
+* Hooded Cuttlefish | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/silkebaron/931247866/
 ~~~
