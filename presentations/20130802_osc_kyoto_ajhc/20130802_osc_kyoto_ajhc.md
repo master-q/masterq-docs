@@ -7,17 +7,17 @@ Kiwamu Okabe
 
 * Twitter: @master_q
 * Metasepiプロジェクト主催
-* Ajhcコンパイラ開発者
-* Debianメンテナ
+* Ajhc Haskellコンパイラ開発者
+* Debian Maintainer
 * 前はデジタルサイネージの開発してました
-* 昔はコピー機のOSをNetBSDで作ってた
+* その昔はコピー機のOSをNetBSDで
 
 # おしながき
 
 * [1] Ajhcコンパイラとは
 * [2] Metasepi kernelとは
 * [3] OS開発向けコンパイラとは？
-* [4] Ajhcコンパイラの使い方
+* [4] AjhcコンパイラでPOSIXの外へ
 * [5] Ajhcコンパイラの今後
 
 # [1] Ajhcコンパイラとは
@@ -26,7 +26,7 @@ Kiwamu Okabe
 http://ajhc.metasepi.org/
 
 * Ajhc := A fork of jhc
-* jhc := A Haskell Compiler
+* jhc := John's Haskell Compiler
 * http://repetae.net/computer/jhc/
 * jhcはフットプリントが小さく、
 * 高速な実行バイナリを吐くらしい
@@ -147,11 +147,11 @@ $ nm hs.out | grep "U "
 
 # 実用化に辿りつくために
 
-* ドッグフードを維持しながら開発
+* 実行可能状態を維持しながら開発
 
 ![inline](draw/2012-12-27-arafura_design.png)
 
-# [4] Ajhcコンパイラの使い方
+# [4] AjhcコンパイラでPOSIXの外へ
 
 * インストールしてみましょう
 
@@ -354,6 +354,21 @@ $ nm small | grep "U "
 
 * main関数呼び出しとexitはまぁ...
 * mallocなどのメモリ管理だけが実行に必要
+
+# これでプログラミングできるの？
+
+以下2つのしくみを使ってC言語側を触れます
+
+* Foreign Function Interface (FFI)
+* Foreign.Storableクラス
+
+# FFIでお互いの関数を呼びあえる
+
+![inline](draw/ffi.png)
+
+# Storableでメモリ直読み書き
+
+![inline](draw/storable.png)
 
 # [5] Ajhcコンパイラの今後
 
