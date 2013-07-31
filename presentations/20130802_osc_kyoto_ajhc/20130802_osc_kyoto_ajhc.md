@@ -1,4 +1,4 @@
-# 組込向けHaskellコンパイラAjhc　OSC 2013 Kansai@Kyoto版
+# 組込向けHaskellコンパイラAjhc　POSIX依存から脱出しよう編
 
 Kiwamu Okabe
 
@@ -16,9 +16,11 @@ Kiwamu Okabe
 
 * [1] Ajhcコンパイラとは
 * [2] Metasepi kernelとは
-* [3] OS開発向けコンパイラとは？
-* [4] AjhcコンパイラでPOSIXの外へ
-* [5] Ajhcコンパイラの今後
+* [3] OS開発向けコンパイラとは
+* [4] Ajhcのインストールと使い方
+* [5] AjhcコンパイラでPOSIXの外へ
+* [6] これまでのAjhcコンパイラ
+* [7] Ajhcコンパイラの未来
 
 # [1] Ajhcコンパイラとは
 ![background](img/ajhc.png)
@@ -98,7 +100,7 @@ http://itpro.nikkeibp.co.jp/article/COLUMN/20060915/248230/
 * kernelの設計には細心の注意が必要
 * C言語は安全なのか？
 
-# [3] OS開発向けコンパイラとは？
+# [3] OS開発向けコンパイラとは
 
 * 強い型が使えてOSを作れるコンパイラは？
 * ないみたいなので作りましょう!
@@ -151,7 +153,7 @@ $ nm hs.out | grep "U "
 
 ![inline](draw/2012-12-27-arafura_design.png)
 
-# [4] AjhcコンパイラでPOSIXの外へ
+# [4] Ajhcのインストールと使い方
 
 * インストールしてみましょう
 
@@ -171,7 +173,7 @@ compiled by ghc-7.4 on a x86_64 running linux
 
 あっさりですね!
 
-# 簡単なプログラムを作りましょう
+# 簡単なプログラムを作ってみましょう
 
 ~~~
 $ vi MyDiff.hs
@@ -199,7 +201,17 @@ $ ./mydiff s1.txt s2.txt
 [Second 'f',First 'g',Second '0']
 ~~~
 
-# POSIX依存をなくそう
+# 使い方詳細
+
+「Ajhcユーザーズマニュアル」
+
+ajhc.metasepi.org/manual_ja.html
+
+を読んでみてください!
+
+# [5] AjhcコンパイラでPOSIXの外へ
+
+* 「何もしないプログラム」を作りましょう
 
 ~~~
 $ vi Small.hs
@@ -215,14 +227,19 @@ $ ajhc -o small Small.hs
 $ ./small
 ~~~
 
-* これは「何もしないプログラム」です
-* POSIX依存を少なくしてみましょう
-* ここでの依存とは未定義シンボルの個数
+* ではPOSIX依存を少なくしてみましょう
+* 現状では未定義シンボルは19個です
 
 ~~~
 $ nm small | grep -c "U "
 19
 ~~~
+
+# 現状のコンパイルフロー
+
+簡単ですね
+
+![inline](draw/0_only_ajhc.png)
 
 # GCCコンパイルオプションを調べる
 
@@ -231,12 +248,16 @@ $ ajhc --tdir rtsdir Small.hs
 $ ls
 Small.hs  hs.out*  rtsdir/
 $ head -1 rtsdir/main_code.c
-char jhc_c_compile[] = "gcc rtsdir/rts/profile.c rtsdir/rts/rts_support.c rtsdir/rts/gc_none.c rtsdir/rts/jhc_rts.c rtsdir/lib/lib_cbits.c rtsdir/rts/gc_jgc.c rtsdir/rts/stableptr.c rtsdir/rts/conc.c -Irtsdir/cbits -Irtsdir rtsdir/main_code.c -o hs.out '-std=gnu99' -D_GNU_SOURCE '-falign-functions=4' -ffast-math -Wextra -Wall -Wno-unused-parameter -fno-strict-aliasing -DNDEBUG -O3 '-D_JHC_GC=_JHC_GC_JGC' '-D_JHC_CONC=_JHC_CONC_NONE'";
+char jhc_c_compile[] = "gcc rtsdir/rts/profile.c rtsdir/rts/rts_support.c rtsdir/rts/gc_none.c rtsdir/rts/jhc_rts.c rtsdir/lib/lib_cbits.c rtsdir/rts/gc_jgc.c rtsdir/rts/stableptr.c rtsdir/rts/conc.c -Irtsdir/cbits -Irtsdir rtsdir/main_code.c '-std=gnu99' -D_GNU_SOURCE '-falign-functions=4' -ffast-math -Wextra -Wall -Wno-unused-parameter -fno-strict-aliasing -DNDEBUG -O3 '-D_JHC_GC=_JHC_GC_JGC' '-D_JHC_CONC=_JHC_CONC_NONE'";
 ~~~
 
 jhc_c_compile文字列からGCCのコンパイルオプションがわかる
 
 # Makefileを使ってコンパイル
+
+![inline](draw/1_use_make.png)
+
+# Makefileを使ってコンパイル(詳細)
 
 ~~~
 $ vi Makefile
@@ -244,7 +265,7 @@ $ vi Makefile
 
 ~~~ {.makefile}
 small: rtsdir/main_code.c
-	gcc rtsdir/rts/profile.c rtsdir/rts/rts_support.c rtsdir/rts/gc_none.c rtsdir/rts/jhc_rts.c rtsdir/lib/lib_cbits.c rtsdir/rts/gc_jgc.c rtsdir/rts/stableptr.c rtsdir/rts/conc.c -Irtsdir/cbits -Irtsdir rtsdir/main_code.c -o hs.out '-std=gnu99' -D_GNU_SOURCE '-falign-functions=4' -ffast-math -Wextra -Wall -Wno-unused-parameter -fno-strict-aliasing -DNDEBUG -O3 '-D_JHC_GC=_JHC_GC_JGC' '-D_JHC_CONC=_JHC_CONC_NONE' -o small
+	gcc rtsdir/rts/profile.c rtsdir/rts/rts_support.c rtsdir/rts/gc_none.c rtsdir/rts/jhc_rts.c rtsdir/lib/lib_cbits.c rtsdir/rts/gc_jgc.c rtsdir/rts/stableptr.c rtsdir/rts/conc.c -Irtsdir/cbits -Irtsdir rtsdir/main_code.c '-std=gnu99' -D_GNU_SOURCE '-falign-functions=4' -ffast-math -Wextra -Wall -Wno-unused-parameter -fno-strict-aliasing -DNDEBUG -O3 '-D_JHC_GC=_JHC_GC_JGC' '-D_JHC_CONC=_JHC_CONC_NONE' -o small
 
 rtsdir/main_code.c: Small.hs
 	ajhc --tdir rtsdir -C Small.hs
@@ -256,10 +277,14 @@ clean:
 ~~~
 $ make
 $ nm small | grep -c "U "
-19
+19 # <= 依存度は変化なし
 ~~~
 
 # ランタイムのソースを限定
+
+![inline](draw/2_less_src.png)
+
+# ランタイムのソースを限定(詳細)
 
 ~~~
 $ vi Makefile
@@ -267,7 +292,7 @@ $ vi Makefile
 
 ~~~ {.makefile}
 small: rtsdir/main_code.c dummy.c
-	gcc rtsdir/rts/rts_support.c rtsdir/rts/jhc_rts.c rtsdir/rts/gc_jgc.c rtsdir/rts/stableptr.c rtsdir/rts/conc.c dummy.c -Irtsdir/cbits -Irtsdir rtsdir/main_code.c -o hs.out '-std=gnu99' -D_GNU_SOURCE '-falign-functions=4' -ffast-math -Wextra -Wall -Wno-unused-parameter -fno-strict-aliasing -DNDEBUG -O3 '-D_JHC_GC=_JHC_GC_JGC' '-D_JHC_CONC=_JHC_CONC_NONE' -o small
+	gcc rtsdir/rts/rts_support.c rtsdir/rts/jhc_rts.c rtsdir/rts/gc_jgc.c rtsdir/rts/stableptr.c rtsdir/rts/conc.c dummy.c -Irtsdir/cbits -Irtsdir rtsdir/main_code.c '-std=gnu99' -D_GNU_SOURCE '-falign-functions=4' -ffast-math -Wextra -Wall -Wno-unused-parameter -fno-strict-aliasing -DNDEBUG -O3 '-D_JHC_GC=_JHC_GC_JGC' '-D_JHC_CONC=_JHC_CONC_NONE' -o small
 # --snip--
 ~~~
 
@@ -284,10 +309,14 @@ void jhc_print_profile(void) {}
 ~~~
 $ make
 $ nm small | grep -c "U "
-15
+15 # <= 依存度が4減少
 ~~~
 
 # ダミー関数をさらに投入
+
+![inline](draw/3_more_dummy.png)
+
+# ダミー関数をさらに投入(詳細)
 
 ~~~
 $ vi dummy.c
@@ -309,22 +338,20 @@ void jhc_print_profile(void) {}
 ~~~
 $ make
 $ nm small | grep -c "U "
-8
+8 # <= 依存度が7減少
 ~~~
 
 # 例外を無視する
 
+![inline](draw/4_no_exception.png)
+
+# 例外を無視する(詳細)
+
 ~~~
 $ vi Makefile
-small: rtsdir/main_code.c dummy.c
-	gcc rtsdir/rts/rts_support.c rtsdir/rts/jhc_rts.c rtsdir/rts/gc_jgc.c rtsdir/rts/stableptr.c rtsdir/rts/conc.c dummy.c main.c -Irtsdir/cbits -Irtsdir rtsdir/main_code.c -o hs.out '-std=gnu99' -D_GNU_SOURCE '-falign-functions=4' -ffast-math -Wextra -Wall -Wno-unused-parameter -fno-strict-aliasing -DNDEBUG -O3 '-D_JHC_GC=_JHC_GC_JGC' '-D_JHC_CONC=_JHC_CONC_NONE' '-D_JHC_STANDALONE=0' -o small
-~~~
-
-~~~
+small: rtsdir/main_code.c dummy.c main.c
+	gcc rtsdir/rts/rts_support.c rtsdir/rts/jhc_rts.c rtsdir/rts/gc_jgc.c rtsdir/rts/stableptr.c rtsdir/rts/conc.c dummy.c main.c -Irtsdir/cbits -Irtsdir rtsdir/main_code.c '-std=gnu99' -D_GNU_SOURCE '-falign-functions=4' -ffast-math -Wextra -Wall -Wno-unused-parameter -fno-strict-aliasing -DNDEBUG -O3 '-D_JHC_GC=_JHC_GC_JGC' '-D_JHC_CONC=_JHC_CONC_NONE' '-D_JHC_STANDALONE=0' -o small
 $ vi main.c
-~~~
-
-~~~ {.c}
 #include "jhc_rts_header.h"
 
 int
@@ -335,14 +362,14 @@ main(int argc, char *argv[])
         hs_exit();
         return 0;
 }
+$ nm small | grep -c "U "
+7 # <= 依存度が1減少
 ~~~
 
 # 残ったPOSIX依存は何？
 
 ~~~
-$ nm small | grep -c "U "
-7
-$ nm small | grep "U "   
+$ nm small | grep "U "
                  U __libc_start_main@@GLIBC_2.2.5
                  U exit@@GLIBC_2.2.5
                  U free@@GLIBC_2.2.5
@@ -352,8 +379,8 @@ $ nm small | grep "U "
                  U realloc@@GLIBC_2.2.5
 ~~~
 
-* main関数呼び出しとexitはまぁ...
 * mallocなどのメモリ管理だけが実行に必要
+* mallocのない環境ではNetBSD alloc.cを流用するのがおすすめ
 
 # これでプログラミングできるの？
 
@@ -370,7 +397,23 @@ $ nm small | grep "U "
 
 ![inline](draw/storable.png)
 
-# [5] Ajhcコンパイラの今後
+# [6] これまでのAjhcコンパイラ
+
+* ユーザーズマニュアルの翻訳
+* Cortex-M4マイコンへの移植
+* cabalによるインストール
+* 省メモリGC
+* 再入可能の実現
+* スレッドの実現
+
+# [7] Ajhcコンパイラの未来
+
+* 内部仕様ドキュメント作成中
+* 型によるスレッド間状態共有
+* GHCのライブラリを移植
+* さらなる応用例の提案
+* 小さな組み込みOSを型によって再設計
+* NetBSD kernelを型によって再設計
 
 # PR: λカ娘に記事を書きませんか？
 
