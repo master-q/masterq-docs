@@ -15,11 +15,10 @@ Kiwamu Okabe
 # おしながき
 
 * [1] Ajhcコンパイラとは
-* [2] Metasepi OSとは
+* [2] Metasepi kernelとは
 * [3] OS開発向けコンパイラとは？
-* [4] Ajhcコンパイラのインストール
-* [5] POSIXの外でプログラムを動かす
-* [6] Ajhcコンパイラの今後
+* [4] Ajhcコンパイラの使い方
+* [5] Ajhcコンパイラの今後
 
 # [1] Ajhcコンパイラとは
 ![background](img/ajhc.png)
@@ -27,6 +26,7 @@ Kiwamu Okabe
 http://ajhc.metasepi.org/
 
 * Ajhc := A fork of jhc
+* jhc := A Haskell Compiler
 * http://repetae.net/computer/jhc/
 * jhcはフットプリントが小さく、
 * 高速な実行バイナリを吐くらしい
@@ -40,12 +40,12 @@ http://ajhc.metasepi.org/
 * なぜ別のHaskellコンパイラが必要？
 * Metasepiというkernelを作るため
 
-# [2] Metasepi OSとは
+# [2] Metasepi kernelとは
 
 http://metasepi.org/
 
 * UNIXモドキkernelを強い型によって設計
-* ML同等以上に強い型を持つ言語
+* ML同等以上に強い型を持つ言語を使う
 
 Haskell http://www.haskell.org/
 
@@ -53,7 +53,9 @@ OCaml http://caml.inria.fr/
 
 MLton http://mlton.org/
 
-# どうしてMetasepi OSが必要？
+などなど
+
+# どうしてMetasepiが必要？
 
 * LinuxやWindowsが既にあるのでは？
 * しかし組込開発は苦しんでいる
@@ -141,15 +143,19 @@ $ nm hs.out | grep "U "
 
 # クロスコンパイルも簡単
 
+![inline](draw/cross_compile.png)
+
 # 実用化に辿りつくために
 
 * ドッグフードを維持しながら開発
 
 ![inline](draw/2012-12-27-arafura_design.png)
 
-# [4] Ajhcコンパイラのインストール
+# [4] Ajhcコンパイラの使い方
 
-* 想定環境: Ubuntu 12.04 amd64
+* インストールしてみましょう
+
+Ubuntu 12.04 amd64 の場合
 
 ~~~
 $ sudo apt-get install haskell-platform libncurses5-dev libwww-perl gcc m4
@@ -163,15 +169,196 @@ ajhc 0.8.0.8 (f6c3f4b070acad8a5012682810f0f4d7b7b9ed44)
 compiled by ghc-7.4 on a x86_64 running linux
 ~~~
 
-* 他のOSの場合は以下に書いてあるかも
+あっさりですね!
 
-https://github.com/ajhc/ajhc
+# 簡単なプログラムを作りましょう
 
-# どうすればPOSIXの外へ行ける？
+~~~
+$ vi MyDiff.hs
+~~~
 
+~~~ {.haskell}
+import System.Environment
+import Data.Algorithm.Diff
 
-# PR:"簡約!?λカ娘Go!"に寄稿したよ
+main :: IO ()
+main = do [s1, s2] <- getArgs
+          c1 <- readFile s1
+          c2 <- readFile s2
+          print . filter f $ getDiff c1 c2
+  where
+    f (Both _ _) = False
+    f _ = True
+~~~
+
+~~~
+$ ajhc -p Diff -o mydiff MyDiff.hs
+$ echo "hoge"  > s1.txt
+$ echo "hofe0" > s2.txt
+$ ./mydiff s1.txt s2.txt
+[Second 'f',First 'g',Second '0']
+~~~
+
+# POSIX依存をなくそう
+
+~~~
+$ vi Small.hs
+~~~
+
+~~~ {.haskell}
+main :: IO ()
+main = return ()
+~~~
+
+~~~
+$ ajhc -o small Small.hs
+$ ./small
+~~~
+
+* これは「何もしないプログラム」です
+* POSIX依存を少なくしてみましょう
+* ここでの依存とは未定義シンボルの個数
+
+~~~
+$ nm small | grep -c "U "
+19
+~~~
+
+# GCCコンパイルオプションを調べる
+
+~~~
+$ ajhc --tdir rtsdir Small.hs
+$ ls
+Small.hs  hs.out*  rtsdir/
+$ head -1 rtsdir/main_code.c
+char jhc_c_compile[] = "gcc rtsdir/rts/profile.c rtsdir/rts/rts_support.c rtsdir/rts/gc_none.c rtsdir/rts/jhc_rts.c rtsdir/lib/lib_cbits.c rtsdir/rts/gc_jgc.c rtsdir/rts/stableptr.c rtsdir/rts/conc.c -Irtsdir/cbits -Irtsdir rtsdir/main_code.c -o hs.out '-std=gnu99' -D_GNU_SOURCE '-falign-functions=4' -ffast-math -Wextra -Wall -Wno-unused-parameter -fno-strict-aliasing -DNDEBUG -O3 '-D_JHC_GC=_JHC_GC_JGC' '-D_JHC_CONC=_JHC_CONC_NONE'";
+~~~
+
+jhc_c_compile文字列からGCCのコンパイルオプションがわかる
+
+# Makefileを使ってコンパイル
+
+~~~
+$ vi Makefile
+~~~
+
+~~~ {.makefile}
+small: rtsdir/main_code.c
+	gcc rtsdir/rts/profile.c rtsdir/rts/rts_support.c rtsdir/rts/gc_none.c rtsdir/rts/jhc_rts.c rtsdir/lib/lib_cbits.c rtsdir/rts/gc_jgc.c rtsdir/rts/stableptr.c rtsdir/rts/conc.c -Irtsdir/cbits -Irtsdir rtsdir/main_code.c -o hs.out '-std=gnu99' -D_GNU_SOURCE '-falign-functions=4' -ffast-math -Wextra -Wall -Wno-unused-parameter -fno-strict-aliasing -DNDEBUG -O3 '-D_JHC_GC=_JHC_GC_JGC' '-D_JHC_CONC=_JHC_CONC_NONE' -o small
+
+rtsdir/main_code.c: Small.hs
+	ajhc --tdir rtsdir -C Small.hs
+
+clean:
+	rm -rf rtsdir small *~
+~~~
+
+~~~
+$ make
+$ nm small | grep -c "U "
+19
+~~~
+
+# ランタイムのソースを限定
+
+~~~
+$ vi Makefile
+~~~
+
+~~~ {.makefile}
+small: rtsdir/main_code.c dummy.c
+	gcc rtsdir/rts/rts_support.c rtsdir/rts/jhc_rts.c rtsdir/rts/gc_jgc.c rtsdir/rts/stableptr.c rtsdir/rts/conc.c dummy.c -Irtsdir/cbits -Irtsdir rtsdir/main_code.c -o hs.out '-std=gnu99' -D_GNU_SOURCE '-falign-functions=4' -ffast-math -Wextra -Wall -Wno-unused-parameter -fno-strict-aliasing -DNDEBUG -O3 '-D_JHC_GC=_JHC_GC_JGC' '-D_JHC_CONC=_JHC_CONC_NONE' -o small
+# --snip--
+~~~
+
+~~~
+$ vi dummy.c
+~~~
+
+~~~ {.c}
+#include "jhc_rts_header.h"
+
+void jhc_print_profile(void) {}
+~~~
+
+~~~
+$ make
+$ nm small | grep -c "U "
+15
+~~~
+
+# ダミー関数をさらに投入
+
+~~~
+$ vi dummy.c
+~~~
+
+~~~ {.c}
+#include "jhc_rts_header.h"
+
+void abort() {for (;;);}
+char *setlocale(int category, const char *locale) {return NULL;}
+int fputc(int c, FILE *stream) {return 0;}
+int fputs(const char *s, FILE *stream) {return 0;}
+int fprintf(FILE *stream, const char *format, ...) {return 0;}
+int fflush(FILE* stream) {return 0;}
+size_t fwrite(const void *ptr, size_t size, size_t nmemb, FILE *stream) {return 0;}
+void jhc_print_profile(void) {}
+~~~
+
+~~~
+$ make
+$ nm small | grep -c "U "
+8
+~~~
+
+# 例外を無視する
+
+~~~
+$ vi Makefile
+small: rtsdir/main_code.c dummy.c
+	gcc rtsdir/rts/rts_support.c rtsdir/rts/jhc_rts.c rtsdir/rts/gc_jgc.c rtsdir/rts/stableptr.c rtsdir/rts/conc.c dummy.c main.c -Irtsdir/cbits -Irtsdir rtsdir/main_code.c -o hs.out '-std=gnu99' -D_GNU_SOURCE '-falign-functions=4' -ffast-math -Wextra -Wall -Wno-unused-parameter -fno-strict-aliasing -DNDEBUG -O3 '-D_JHC_GC=_JHC_GC_JGC' '-D_JHC_CONC=_JHC_CONC_NONE' '-D_JHC_STANDALONE=0' -o small
+~~~
+
+~~~
+$ vi main.c
+~~~
+
+~~~ {.c}
+#include "jhc_rts_header.h"
+
+int
+main(int argc, char *argv[])
+{
+        hs_init(&argc,&argv);
+	_amain();
+        hs_exit();
+        return 0;
+}
+~~~
+
+# 残ったPOSIX依存は何？
+
+~~~
+$ nm small | grep -c "U "
+7
+$ nm small | grep "U "   
+                 U __libc_start_main@@GLIBC_2.2.5
+                 U exit@@GLIBC_2.2.5
+                 U free@@GLIBC_2.2.5
+                 U malloc@@GLIBC_2.2.5
+                 U memset@@GLIBC_2.2.5
+                 U posix_memalign@@GLIBC_2.2.5
+                 U realloc@@GLIBC_2.2.5
+~~~
+
+* main関数呼び出しとexitはまぁ...
+* mallocなどのメモリ管理だけが実行に必要
+
+# [5] Ajhcコンパイラの今後
+
+# PR: λカ娘に記事を書きませんか？
 
 http://www.paraiso-lang.org/ikmsm/
 
-# プレゼンで使用した画像について
+# 本スライドで使用した画像
