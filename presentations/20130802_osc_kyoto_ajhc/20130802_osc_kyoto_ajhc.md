@@ -1,4 +1,5 @@
 # 組込向けHaskellコンパイラAjhc　POSIX依存から脱出しよう編
+![background](img/portal.png)
 
 Kiwamu Okabe
 
@@ -13,6 +14,7 @@ Kiwamu Okabe
 * その昔はコピー機のOSをNetBSDで
 
 # おしながき
+![background](img/green_tea.png)
 
 * [1] Ajhcコンパイラとは
 * [2] Metasepi kernelとは
@@ -35,6 +37,7 @@ http://ajhc.metasepi.org/
 * 組み込みに向いてるかも
 
 # どうしてAjhcコンパイラ作るの？
+![background](img/fphaskell.png)
 
 * HaskellコミュニティではGHCがデファクト
 * GHC := Glasgow Haskell Compiler
@@ -43,6 +46,7 @@ http://ajhc.metasepi.org/
 * Metasepiというkernelを作るため
 
 # [2] Metasepi kernelとは
+![background](img/metasepi.png)
 
 http://metasepi.org/
 
@@ -58,6 +62,7 @@ MLton http://mlton.org/
 などなど
 
 # どうしてMetasepiが必要？
+![background](img/mud.png)
 
 * LinuxやWindowsが既にあるのでは？
 * しかし組込開発は苦しんでいる
@@ -66,6 +71,7 @@ MLton http://mlton.org/
 * 再現することでさえ困難
 
 # 既存OSSの品質は高いのでは？
+![background](img/egg.png)
 
 * OSSは品質が高いと言われている
 * 伽藍とバザール
@@ -78,10 +84,12 @@ http://cruel.org/freeware/cathedral.html
 * ところが社内開発は...
 
 # 主開発からそれると品質急降下
+![background](img/jump.png)
 
 ![inline](draw/oss_quality.png)
 
 # 型安全とは
+![background](img/safe.png)
 
 * ランタイムエラーを少なくできる
 * 参考:数理科学的バグ撲滅方法論のすすめ
@@ -93,6 +101,7 @@ http://itpro.nikkeibp.co.jp/article/COLUMN/20060915/248230/
 ![inline](draw/2013-01-18-few_error.png)
 
 # kernelにこそ型安全が必要
+![background](img/stop.png)
 
 * ほとんどのkernelはC言語で設計される
 * ユーザー空間でエラー → SEGV
@@ -101,19 +110,23 @@ http://itpro.nikkeibp.co.jp/article/COLUMN/20060915/248230/
 * C言語は安全なのか？
 
 # [3] OS開発向けコンパイラとは
+![background](img/c.png)
 
 * 強い型が使えてOSを作れるコンパイラは？
+* C言語のような使い勝手が必要
 * ないみたいなので作りましょう!
 * スクラッチから作るのはツライ
 * 要求に近いコンパイラはないかな？
 
 # POSIX外で使いやすいコンパイラ
+![background](img/hiking.png)
 
 ![inline](img/compiler_list.png)
 
 各数値が小さいほどPOSIX APIへの依存度が小さい
 
 # jhcバイナリは未定義シンボル20個
+![background](img/20.png)
 
 ~~~
 $ nm hs.out | grep "U "
@@ -140,20 +153,24 @@ $ nm hs.out | grep "U "
 ~~~
 
 # jhcはC言語への変換器
+![background](img/mix.png)
 
 ![inline](draw/ajhc_compile.png)
 
 # クロスコンパイルも簡単
+![background](img/cross.png)
 
 ![inline](draw/cross_compile.png)
 
 # 実用化に辿りつくために
+![background](img/goal.png)
 
 * 実行可能状態を維持しながら開発
 
 ![inline](draw/2012-12-27-arafura_design.png)
 
 # [4] Ajhcのインストールと使い方
+![background](img/blank.png)
 
 * インストールしてみましょう
 
@@ -174,6 +191,7 @@ compiled by ghc-7.4 on a x86_64 running linux
 あっさりですね!
 
 # 簡単なプログラムを作ってみましょう
+![background](img/blank.png)
 
 ~~~
 $ vi MyDiff.hs
@@ -202,6 +220,7 @@ $ ./mydiff s1.txt s2.txt
 ~~~
 
 # 使い方詳細
+![background](img/minix.png)
 
 「Ajhcユーザーズマニュアル」
 
@@ -210,6 +229,7 @@ ajhc.metasepi.org/manual_ja.html
 を読んでみてください!
 
 # [5] AjhcコンパイラでPOSIXの外へ
+![background](img/blank.png)
 
 * 「何もしないプログラム」を作りましょう
 
@@ -236,12 +256,14 @@ $ nm small | grep -c "U "
 ~~~
 
 # 現状のコンパイルフロー
+![background](img/simple.png)
 
 簡単ですね
 
 ![inline](draw/0_only_ajhc.png)
 
 # GCCコンパイルオプションを調べる
+![background](img/blank.png)
 
 ~~~
 $ ajhc --tdir rtsdir Small.hs
@@ -254,10 +276,12 @@ char jhc_c_compile[] = "gcc rtsdir/rts/profile.c rtsdir/rts/rts_support.c rtsdir
 jhc_c_compile文字列からGCCのコンパイルオプションがわかる
 
 # Makefileを使ってコンパイル
+![background](img/gnu.png)
 
 ![inline](draw/1_use_make.png)
 
 # Makefileを使ってコンパイル(詳細)
+![background](img/blank.png)
 
 ~~~
 $ vi Makefile
@@ -281,10 +305,12 @@ $ nm small | grep -c "U "
 ~~~
 
 # ランタイムのソースを限定
+![background](img/core.png)
 
 ![inline](draw/2_less_src.png)
 
 # ランタイムのソースを限定(詳細)
+![background](img/blank.png)
 
 ~~~
 $ vi Makefile
@@ -313,10 +339,12 @@ $ nm small | grep -c "U "
 ~~~
 
 # ダミー関数をさらに投入
+![background](img/dummy.png)
 
 ![inline](draw/3_more_dummy.png)
 
 # ダミー関数をさらに投入(詳細)
+![background](img/blank.png)
 
 ~~~
 $ vi dummy.c
@@ -342,10 +370,12 @@ $ nm small | grep -c "U "
 ~~~
 
 # 例外を無視する
+![background](img/ignore.png)
 
 ![inline](draw/4_no_exception.png)
 
 # 例外を無視する(詳細)
+![background](img/blank.png)
 
 ~~~
 $ vi Makefile
@@ -367,6 +397,7 @@ $ nm small | grep -c "U "
 ~~~
 
 # 残ったPOSIX依存は何？
+![background](img/sweep.png)
 
 ~~~
 $ nm small | grep "U "
@@ -383,6 +414,7 @@ $ nm small | grep "U "
 * mallocのない環境ではNetBSD alloc.cを流用するのがおすすめ
 
 # これでプログラミングできるの？
+![background](img/carrier.png)
 
 以下2つのしくみを使ってC言語側を触れます
 
@@ -390,33 +422,133 @@ $ nm small | grep "U "
 * Foreign.Storableクラス
 
 # FFIでお互いの関数を呼びあえる
+![background](img/arrow.png)
 
 ![inline](draw/ffi.png)
 
 # Storableでメモリ直読み書き
+![background](img/handshake.png)
 
 ![inline](draw/storable.png)
 
 # [6] これまでのAjhcコンパイラ
+![background](img/stm32.png)
 
 * ユーザーズマニュアルの翻訳
+
+~~~
+http://ajhc.metasepi.org/manual_ja.html
+~~~
+
 * Cortex-M4マイコンへの移植
+
+~~~
+https://github.com/ajhc/demo-cortex-m3
+~~~
+
 * cabalによるインストール
 * 省メモリGC
-* 再入可能の実現
-* スレッドの実現
+* 再入可能とスレッドの実現
 
 # [7] Ajhcコンパイラの未来
+![background](img/netbsd.png)
 
 * 内部仕様ドキュメント作成中
+
+~~~
+https://github.com/ajhc/ajhc-hacking-guide
+~~~
+
 * 型によるスレッド間状態共有
 * GHCのライブラリを移植
 * さらなる応用例の提案
 * 小さな組み込みOSを型によって再設計
 * NetBSD kernelを型によって再設計
 
-# PR: λカ娘に記事を書きませんか？
+# 宣伝:λカ娘に記事を書きませんか？
+![background](img/haskell-logo.png)
 
-http://www.paraiso-lang.org/ikmsm/
+* http://www.paraiso-lang.org/ikmsm/
+* 関数型言語の同人誌
+* HaskellとかOCamlとか圏論とか
+* 囲碁AIの記事まで、なんでもあり？
+* C84にはAjhcの解説記事を投稿しました
+* Call For Articlesはイカ
 
-# 本スライドで使用した画像
+~~~
+http://www.paraiso-lang.org/ikmsm/books/c85.html
+~~~
+
+# 本スライドで使用した画像 #1
+![background](img/flickr1.png)
+
+~~~
+* sunny side up | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/97335141@N00/4623354472/
+* Mud Slide | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/ben_salter/2676953286/
+* Feelin' Safe | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/mstyne/3654056683/
+* STOP ALL WAY | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/peterkaminski/1510724/
+* Bungee jump | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/gj_thewhite/8855033499/
+* The C Programming Language | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/mrbill/2482009942/
+* The 20 Yard Line | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/eschipul/2957264066/
+* _MG_3881 | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/63209717@N05/6873025064/
+* Mini Cross | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/hdrexperience/6727601691/
+* Goal for the Sky | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/giantsqurl/5165392772/
+* Manual and driver disc | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/tseedmund/3859079008/
+~~~
+
+# 本スライドで使用した画像 #2
+![background](img/flickr2.png)
+
+~~~
+* Simple Heart | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/21148821@N02/2055189101/
+* GNU Wallpaper | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/jeffpro/8603895629/
+* The core | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/mukluk/484631726/
+* Dummies. Someday they'll take over the world. They already have.
+  http://www.flickr.com/photos/keoni101/5244610841/
+* Michael Caputo, "just tryin' to break the ice, with nothin'...
+  http://www.flickr.com/photos/sixteen-miles/3757672365/
+* Groundskeeper sweeping, Citi Field | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/48913243@N00/4605448536/
+* Carrier Pigeon | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/enzymedesign/4983070657/
+* Arrows showing up (Blender) | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/61423903@N06/7382239368/
+* Handshakes | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/ndanger/4425413794/
+* STM32 Development Board | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/randomskk/3920434183/
+* Hiking | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/aigle_dore/5824862885/
+~~~
+
+# 本スライドで使用した画像 #3
+![background](img/flickr3.png)
+
+~~~
+* Next Kyoto 懐石 | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/edsel_/8330803003/
+* Portal 2 fly | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/warvan/4984607550/
+* Sticker Nation - 8 | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/oskay/411003747/
+* I love flickr | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/theresasthompson/3279837886/
+* flickr | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/zanastardust/145197704/
+* flickr was here | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/sarahrosenau/185196442/
+~~~
