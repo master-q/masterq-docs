@@ -1,4 +1,5 @@
 # ReVIEWとLibreOfficeとOMakeで本を書きましょう！
+![background](img/typewriter.png)
 
 Kiwamu Okabe
 
@@ -13,6 +14,7 @@ Kiwamu Okabe
 * その昔はコピー機のOSをNetBSDで
 
 # まとまったドキュメント書くはめに
+![background](img/msword.png)
 
 なることがありますよね
 
@@ -24,6 +26,7 @@ Kiwamu Okabe
 * 雑誌記事
 
 # 方法はいろいろ
+![background](img/word.png)
 
 * Word ？
 * LaTeX ？
@@ -33,6 +36,7 @@ Kiwamu Okabe
 いろいろあるんだけど...
 
 # ドキュメント作成には手間がかかる
+![background](img/sandclock.png)
 
 * 元ファイルの管理
 * 修正→プレビューに手間がかかる
@@ -42,6 +46,7 @@ Kiwamu Okabe
 * EPUB？おいしい？
 
 # そこで複数の技術を組み合わせよう
+![background](img/lego.png)
 
 * ReVIEW + LaTeX
 * LibreOffice + unoconv
@@ -139,10 +144,12 @@ ajhc-hg.pdf: $(RE_FILES) $(PNG_FILES) $(OTHER_FILES)
            || unoconv -f png -o $@ $< || unoconv -n -f png -o $@ $<
 
 .DEFAULT: ajhc-hg.pdf
+
 # --ship--
 ~~~
 
 # OMakefileは何やってんの？
+![background](img/flow.png)
 
 ![inline](draw/omakefile.png)
 
@@ -155,3 +162,25 @@ ajhc-hg.pdf: $(RE_FILES) $(PNG_FILES) $(OTHER_FILES)
 * 将来はAjhcでOSを書きたい!
 * 詳しくは同人誌「λカ娘 Go!」を読んでね!
 * http://www.paraiso-lang.org/ikmsm/
+
+# プレゼンで使った画像
+![background](img/flickr1.png)
+
+~~~
+* Digital Flow | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/lum1neuz/4409364826/
+* Lego airplane | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/criminalintent/5101528210/
+* スライム砂時計 SLIME | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/norio-nakayama/9384737756/
+* Microsoft Word Must Die! | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/notionscapital/7077645349/
+* Microsoft Word | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/quinnanya/5251378117/
+* flickr | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/zanastardust/145197704/
+* Hooded Cuttlefish | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/silkebaron/931381358/
+* Erika 9 typewriter | Flickr - Photo Sharing!
+  http://www.flickr.com/photos/shordzi/3026500531/in/photostream/
+~~~
