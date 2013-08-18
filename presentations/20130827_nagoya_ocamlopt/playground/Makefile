@@ -3,7 +3,7 @@ SRC  = hello.ml
 
 all: $(PROG)
 $(PROG): $(SRC)
-	ocamlopt -g -o $@ $<
+	ocamlopt -g -runtime-variant d -o $@ $<
 
 clean:
 	rm -f *~ *.bin *.cmi *.cmx *.o
