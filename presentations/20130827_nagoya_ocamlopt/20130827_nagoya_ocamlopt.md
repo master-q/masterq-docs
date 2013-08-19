@@ -292,6 +292,12 @@ void caml_init_signals(void)
 # segv_handler関数
 
 ~~~ {.c}
+/* File: asmrun/signals_osdep.h */
+#define CONTEXT_PC (context->uc_mcontext.gregs[REG_RIP])
+#define CONTEXT_EXCEPTION_POINTER (context->uc_mcontext.gregs[REG_R14])
+#define CONTEXT_YOUNG_PTR (context->uc_mcontext.gregs[REG_R15])
+#define CONTEXT_FAULTING_ADDRESS ((char *) context->uc_mcontext.gregs[REG_CR2])
+
 /* File: asmrun/signals_asm.c */
 DECLARE_SIGNAL_HANDLER(segv_handler)
 {
@@ -330,7 +336,6 @@ void caml_raise(value v)
          (char *) caml_local_roots PUSHED_AFTER caml_exception_pointer) {
     caml_local_roots = caml_local_roots->next;
   }
-#undef PUSHED_AFTER
 
   caml_raise_exception(v);
 }
@@ -341,12 +346,76 @@ void caml_raise_stack_overflow(void)
 }
 ~~~
 
-~~~ {.c}
+# caml_raise_exception
 
+~~~ {.gnuassembler}
+#define C_ARG_1 %rdi
+#define TESTL_VAR(imm,label) \
+        testl   imm, G(label)(%rip)
+#define LOAD_VAR(srclabel,dstreg) \
+        movq    G(srclabel)(%rip), dstreg
+
+FUNCTION(G(caml_raise_exception))
+        TESTL_VAR($1, caml_backtrace_active)
+        jne     LBL(111)
+        movq    C_ARG_1, %rax
+        LOAD_VAR(caml_exception_pointer, %rsp)  /* Cut stack */
+        popq    %r14                  /* Recover previous exception handler */
+        LOAD_VAR(caml_young_ptr, %r15) /* Reload alloc ptr */
+        ret
+~~~
+
+# 特別扱いするレジスタ
+
+~~~ {.ocaml}
+(* File: asmcomp/amd64/emit.mlp *)
+let emit_instr fallthrough i =
+    emit_debug_info i.dbg;
+    match i.desc with
+(* --snip-- *)
+    | Lpushtrap ->
+        cfi_adjust_cfa_offset 8;
+        `	pushq	%r14\n`;
+        cfi_adjust_cfa_offset 8;
+        `	movq	%rsp, %r14\n`;
+        stack_offset := !stack_offset + 16
+    | Lpoptrap ->
+        `	popq	%r14\n`;
+        cfi_adjust_cfa_offset (-8);
+        `	addq	$8, %rsp\n`;
+        cfi_adjust_cfa_offset (-8);
+        stack_offset := !stack_offset - 16
+    | Lraise ->
+        if !Clflags.debug then begin
+          `	{emit_call "caml_raise_exn"}\n`;
+          record_frame Reg.Set.empty i.dbg
+        end else begin
+          `	movq	%r14, %rsp\n`;
+          `	popq	%r14\n`;
+          `	ret\n`
+        end
 ~~~
 
 # caml_debugger_init関数
+
+CAML_DEBUG_SOCKET環境変数が定義されていたらBSDソケットを使ったデバッグ環境を設定
+
+~~~
+http://caml.inria.fr/pub/docs/manual-ocaml/manual030.html
+~~~
+
 # caml_sys_init関数
+
+プログラム名と引数の保管
+
+~~~ {.c}
+/* File: byterun/sys.c */
+void caml_sys_init(char * exe_name, char **argv)
+{
+  caml_exe_name = exe_name;
+  caml_main_argv = argv;
+}
+~~~
 
 # caml_main関数後半
 
@@ -362,8 +431,149 @@ void caml_raise_stack_overflow(void)
 }
 ~~~
 
+# longjmpするのは誰？
+
+スレッドが終了するとlongjmpする。
+mainスレッドじゃなければ、caml_termination_jmpbufには飛ばない。
+
+~~~ {.c}
+/* File: otherlibs/systhreads/st_stubs.c */
+CAMLprim value caml_thread_initialize(value unit)   /* ML */
+{
+/* --snip-- */
+  curr_thread->exit_buf = &caml_termination_jmpbuf;
+
+/* --snip-- */
+static ST_THREAD_FUNCTION caml_thread_start(void * arg)
+{
+/* --snip-- */
+  if (sigsetjmp(termination_buf.buf, 0) == 0) {
+    th->exit_buf = &termination_buf;
+
+/* --snip-- */
+CAMLprim value caml_thread_exit(value unit)   /* ML */
+{
+/* --snip-- */
+  exit_buf = curr_thread->exit_buf;
+  caml_thread_stop();
+  if (exit_buf != NULL) {
+    siglongjmp(exit_buf->buf, 1);
+~~~
+
+# caml_start_program
+
+~~~ {.gnuassembler}
+/* File: asmrun/amd64.S */
+FUNCTION(G(caml_start_program))
+        CFI_STARTPROC
+    /* Save callee-save registers */
+        PUSH_CALLEE_SAVE_REGS
+        CFI_ADJUST(56)
+    /* Initial entry point is G(caml_program) */
+        leaq    GCALL(caml_program)(%rip), %r12
+    /* Common code for caml_start_program and caml_callback* */
+LBL(caml_start_program):
+    /* Build a callback link */
+        subq    $8, %rsp        /* stack 16-aligned */
+        PUSH_VAR(caml_gc_regs)
+        PUSH_VAR(caml_last_return_address)
+        PUSH_VAR(caml_bottom_of_stack)
+        CFI_ADJUST(32)
+    /* Setup alloc ptr and exception ptr */
+        LOAD_VAR(caml_young_ptr, %r15)
+        LOAD_VAR(caml_exception_pointer, %r14)
+    /* Build an exception handler */
+        lea     LBL(108)(%rip), %r13
+        pushq   %r13
+        pushq   %r14
+        CFI_ADJUST(16)
+        movq    %rsp, %r14
+    /* Call the OCaml code */
+        call    *%r12
+~~~
+
+# caml_program
+
+~~~ {.gnuassembler}
+/* File: hello.bin.startup.s (コンパイル時生成) */
+caml_program:
+	.cfi_startproc
+	subq	$8, %rsp
+	.cfi_adjust_cfa_offset	8
+	call	camlPervasives__entry@PLT
+	movq	caml_globals_inited@GOTPCREL(%rip), %rax
+	addq	$1, (%rax)
+	call	camlHello__entry@PLT
+~~~
+
+# camlPervasives__entry
+
+~~~ {.ocaml}
+(* File: stdlib/pervasives.ml *)
+external flush : out_channel -> unit = "caml_ml_flush"
+external out_channels_list : unit -> out_channel list
+                           = "caml_ml_out_channels_list"
+let flush_all () =
+  let rec iter = function
+      [] -> ()
+    | a :: l -> (try flush a with _ -> ()); iter l
+  in iter (out_channels_list ())
+let exit_function = ref flush_all
+let do_at_exit () = (!exit_function) ()
+external register_named_value : string -> 'a -> unit
+                              = "caml_register_named_value"
+let _ = register_named_value "Pervasives.do_at_exit" do_at_exit
+~~~
+
+# caml_register_named_value
+
+~~~ {.c}
+/* File: byterun/callback.c */
+CAMLprim value caml_register_named_value(value vname, value val)
+{
+  struct named_value * nv;
+  char * name = String_val(vname);
+  unsigned int h = hash_value_name(name);
+
+  for (nv = named_value_table[h]; nv != NULL; nv = nv->next) {
+    if (strcmp(name, nv->name) == 0) {
+      nv->val = val;
+      return Val_unit;
+    }
+  }
+  nv = (struct named_value *)
+         caml_stat_alloc(sizeof(struct named_value) + strlen(name));
+  strcpy(nv->name, name);
+  nv->val = val;
+  nv->next = named_value_table[h];
+  named_value_table[h] = nv;
+  caml_register_global_root(&nv->val);
+  return Val_unit;
+}
+~~~
+
+# caml_register_global_root
+
+flush処理を登録する
+
+xxx 誰が実行するの？
+
+~~~ {.c}
+/* File: byterun/globroots.c */
+CAMLexport void caml_register_global_root(value *r)
+{
+  Assert (((intnat) r & 3) == 0);  /* compact.c demands this (for now) */
+  caml_insert_global_root(&caml_global_roots, r);
+}
+~~~
+
+# camlHello__entry
+
+caml_globals_inited++ してから呼ばれる
+
+ゴール!
+
 # 起動の地図にまとめましょう
 
-# ほげ
+# じゃーどうやって文字列を出力しているの？
 
-xxx caml_c_callがC言語関数の呼び出しかな？
