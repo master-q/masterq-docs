@@ -12,16 +12,29 @@ Kiwamu Okabe
 * 前はデジタルサイネージの開発してました
 * その昔はNetBSDでコピー機作ってた
 
+# ぼくとOCaml
+
+* 最初の会社で社内勉強会
+* letの嵐にとまどう
+* 数年後にPFDSを読む
+* lazyきもちいい!
+* camloebaさんに脅されてocamlopt読む
+* OCamlコードわかりやすい! <= イマココ
+
 # 今日のもくじ
 
-# まずはOCaml 4.00.1をインストール
+* [1] ocamloptについて簡単に
+* [2] ソース探検のシナリオ
 
-あ、Debian sid前提です...
+# [1] ocamloptについて簡単に
+
+まずはOCaml 4.00.1をインストール
 
 ~~~
 $ git clone git@github.com:ocaml/ocaml.git
 $ cd ocaml
 $ git checkout 4.00.1
+$ sudo apt-get build-dep ocaml
 $ ./configure -with-debug-runtime
 $ make world.opt
 $ sudo make install
@@ -30,6 +43,10 @@ $ which ocamlopt
 $ ocamlopt -version
 4.00.1
 ~~~
+
+想定環境
+
+* Debian GNU/Linux sid amd64
 
 # ocamloptってなんどすか？
 
@@ -69,12 +86,14 @@ Hello world!
 
 すばらしい!
 
+# [2] ソース探検のシナリオ
+
+![inline](draw/scenario.png)
+
 # OCamlプログラムの起動
 
 * main関数から実行が開始されて
 * camlHello__entry関数がプログラム入口
-
-かな？
 
 ~~~
 $ ocamlopt -o hello.bin hello.ml
@@ -96,7 +115,7 @@ Breakpoint 1, 0x0000000000402260 in camlHello__entry ()
 
 * "byterun/main.c"です
 * え？バイトコード？
-* OCamlには"{byte,asm}run"のディレクトリ
+* "{byte,asm}run"のディレクトリがある
 * でもなんかきっちり分離されていない
 * バイナリでも適宜byterunの下を使います
 
@@ -110,35 +129,15 @@ int main(int argc, char **argv)
 {
   caml_main(argv);
   caml_sys_exit(Val_int(0));
-  return 0; /* not reached */
+  return 0;
 }
 ~~~
 
 むちゃくちゃ簡単です
 
-# caml_main関数前半
+# caml_main関数
 
-まー最初は初期化です
-
-~~~ {.c}
-/* File: asmrun/startup.c caml_main関数前半 */
-void caml_main(char **argv)
-{
-/* --snip-- */
-  caml_init_ieee_floats();
-  caml_init_custom_operations();
-  caml_top_of_stack = &tos;
-  parse_camlrunparam();
-  caml_init_gc (minor_heap_init, heap_size_init, heap_chunk_init,
-                percent_free_init, max_percent_free_init);
-  init_atoms();
-  caml_init_signals();
-  caml_debugger_init (); /* force debugger.o stub to be linked */
-  exe_name = argv[0];
-  if (exe_name == NULL) exe_name = "";
-  exe_name = caml_search_exe_in_path(exe_name);
-  caml_sys_init(exe_name, argv);
-~~~
+![inline](draw/c_main.png)
 
 # caml_init_ieee_floats関数
 
@@ -159,7 +158,8 @@ void caml_init_ieee_floats(void)
 }
 ~~~
 
-これは...FreeBSDへのバグ対策では...
+* FreeBSDへのバグ対策？
+* 気にしないことにしましょう
 
 # caml_init_custom_operations #1
 
@@ -192,11 +192,11 @@ $ grep "caml_.*_ops" asmcomp/cmmgen.ml
       Csymbol_address("caml_int64_ops") :: Cint lo :: Cint hi :: cont
 ~~~
 
-コンパイラパイプラインが勝手にシンボルからアドレス引く
+ocamloptではシンボルから直接呼び出しに
 
 # parse_camlrunparam関数
 
-OCAMLRUNPARAM環境変数を見る、まぁddy
+OCAMLRUNPARAM環境変数を見るだけ
 
 ~~~
 http://caml.inria.fr/pub/docs/manual-ocaml/manual024.html
@@ -232,42 +232,21 @@ static void parse_camlrunparam(void)
 
 # caml_init_gc関数
 
-メジャー/マイナーGC用のヒープ初期化
+* メジャー/マイナーGC用のヒープ初期化
+* Real World OCaml読んだ方がいいかも!
 
-Real World OCaml読んだ方がいいかも
-
-~~~ {.c}
-/* File: byterun/gc_ctrl.c */
-void caml_init_gc (uintnat minor_size, uintnat major_size,
-                   uintnat major_incr, uintnat percent_fr,
-                   uintnat percent_m)
-{
-  uintnat major_heap_size = Bsize_wsize (norm_heapincr (major_size));
-
-  if (caml_page_table_initialize(Bsize_wsize(minor_size) + major_heap_size)){
-    caml_fatal_error ("OCaml runtime error: cannot initialize page table\n");
-  }
-  caml_set_minor_heap_size (Bsize_wsize (norm_minsize (minor_size)));
-  caml_major_heap_increment = Bsize_wsize (norm_heapincr (major_incr));
-  caml_percent_free = norm_pfree (percent_fr);
-  caml_percent_max = norm_pmax (percent_m);
-  caml_init_major_heap (major_heap_size);
-}
-~~~
+![inline](img/rwo.png)
 
 # init_atoms関数
 
-xxx caml_data_segmentsとcaml_code_segmentsを解析しているように見える。わからんな...
-
-~~~ {.c}
-/* File: asmrun/startup.c */
-
-/* Initialize the atom table and the static data and code area limits. */
-~~~
+* これよくわからなかったです
+* caml_data_segmentsと
+* caml_code_segmentsを解析している？
+* 目的がよくわからない...
 
 # caml_init_signals関数
 
-SIGSEGVのシグナルハンドラを通常コンテキストとは別のスタックで実行するように設定
+SEGVシグナルハンドラを通常コンテキストとは別のスタックで実行するように設定
 
 ~~~ {.c}
 /* File: asmrun/signals_asm.c */
@@ -283,116 +262,39 @@ void caml_init_signals(void)
     act.sa_flags |= SA_ONSTACK | SA_NODEFER;
     sigemptyset(&act.sa_mask);
     system_stack_top = (char *) &act;
-    if (sigaltstack(&stk, NULL) == 0) { sigaction(SIGSEGV, &act, NULL); }
+    if (sigaltstack(&stk, NULL) == 0) {
+      sigaction(SIGSEGV, &act, NULL);
+    }
 }
 ~~~
 
 # segv_handler関数
 
-~~~ {.c}
-/* File: asmrun/signals_osdep.h */
-#define CONTEXT_PC (context->uc_mcontext.gregs[REG_RIP])
-#define CONTEXT_EXCEPTION_POINTER (context->uc_mcontext.gregs[REG_R14])
-#define CONTEXT_YOUNG_PTR (context->uc_mcontext.gregs[REG_R15])
-#define CONTEXT_FAULTING_ADDRESS ((char *) context->uc_mcontext.gregs[REG_CR2])
+* SEGVシグナルで起動
+* スタック溢れが起きていたら例外発生
+* 最終的にcaml_raise_exceptionを呼ぶ
 
-/* File: asmrun/signals_asm.c */
-DECLARE_SIGNAL_HANDLER(segv_handler)
-{
-  fault_addr = CONTEXT_FAULTING_ADDRESS;
-  if (((uintnat) fault_addr & (sizeof(intnat) - 1)) == 0
-      && getrlimit(RLIMIT_STACK, &limit) == 0
-      && fault_addr < system_stack_top
-      && fault_addr >= system_stack_top - limit.rlim_cur - EXTRA_STACK
-      && Is_in_code_area(CONTEXT_PC)
-      ) {
-    /* Turn this into a Stack_overflow exception */
-    caml_exception_pointer = (char *) CONTEXT_EXCEPTION_POINTER;
-    caml_young_ptr = (char *) CONTEXT_YOUNG_PTR;
-    caml_raise_stack_overflow();
-  }
-  /* Otherwise, deactivate our exception handler and return,
-     causing fatal signal to be generated at point of error. */
-  act.sa_handler = SIG_DFL;
-  act.sa_flags = 0;
-  sigemptyset(&act.sa_mask);
-  sigaction(SIGSEGV, &act, NULL);
-}
-~~~
+# OCamlの例外初期化
 
-# caml_raise_stack_overflow関数
+![inline](draw/exception_setup.png)
 
-~~~ {.c}
-/* File: asmrun/fail.c */
-void caml_raise(value v)
-{
-  Unlock_exn();
-  if (caml_exception_pointer == NULL) caml_fatal_uncaught_exception(v);
+# OCamlの例外投げ
 
-#define PUSHED_AFTER <
-  while (caml_local_roots != NULL &&
-         (char *) caml_local_roots PUSHED_AFTER caml_exception_pointer) {
-    caml_local_roots = caml_local_roots->next;
-  }
+![inline](draw/exception.png)
 
-  caml_raise_exception(v);
-}
+# つまり？
 
-void caml_raise_stack_overflow(void)
-{
-  caml_raise((value) &caml_bucket_Stack_overflow);
-}
-~~~
+OCamlサイド
 
-# caml_raise_exception
+* r14レジスタ: try時スタック
+* r15レジスタ: GCヒープへのポインタ
 
-~~~ {.gnuassembler}
-#define C_ARG_1 %rdi
-#define TESTL_VAR(imm,label) \
-        testl   imm, G(label)(%rip)
-#define LOAD_VAR(srclabel,dstreg) \
-        movq    G(srclabel)(%rip), dstreg
+C言語サイド
 
-FUNCTION(G(caml_raise_exception))
-        TESTL_VAR($1, caml_backtrace_active)
-        jne     LBL(111)
-        movq    C_ARG_1, %rax
-        LOAD_VAR(caml_exception_pointer, %rsp)  /* Cut stack */
-        popq    %r14                  /* Recover previous exception handler */
-        LOAD_VAR(caml_young_ptr, %r15) /* Reload alloc ptr */
-        ret
-~~~
+* caml_exception_pointer: try時スタック
+* caml_young_ptr: GCヒープへのポインタ
 
-# 特別扱いするレジスタ
-
-~~~ {.ocaml}
-(* File: asmcomp/amd64/emit.mlp *)
-let emit_instr fallthrough i =
-    emit_debug_info i.dbg;
-    match i.desc with
-(* --snip-- *)
-    | Lpushtrap ->
-        cfi_adjust_cfa_offset 8;
-        `	pushq	%r14\n`;
-        cfi_adjust_cfa_offset 8;
-        `	movq	%rsp, %r14\n`;
-        stack_offset := !stack_offset + 16
-    | Lpoptrap ->
-        `	popq	%r14\n`;
-        cfi_adjust_cfa_offset (-8);
-        `	addq	$8, %rsp\n`;
-        cfi_adjust_cfa_offset (-8);
-        stack_offset := !stack_offset - 16
-    | Lraise ->
-        if !Clflags.debug then begin
-          `	{emit_call "caml_raise_exn"}\n`;
-          record_frame Reg.Set.empty i.dbg
-        end else begin
-          `	movq	%r14, %rsp\n`;
-          `	popq	%r14\n`;
-          `	ret\n`
-        end
-~~~
+いつでも戻れますね
 
 # caml_debugger_init関数
 
@@ -401,6 +303,8 @@ CAML_DEBUG_SOCKET環境変数が定義されていたらBSDソケットを使っ
 ~~~
 http://caml.inria.fr/pub/docs/manual-ocaml/manual030.html
 ~~~
+
+そんなものがあったのか...
 
 # caml_sys_init関数
 
@@ -415,94 +319,30 @@ void caml_sys_init(char * exe_name, char **argv)
 }
 ~~~
 
-# caml_main関数後半
+まぁありがち
 
-~~~ {.c}
-/* File: asmrun/startup.c caml_main関数後半 */
-  if (sigsetjmp(caml_termination_jmpbuf.buf, 0)) {
-    if (caml_termination_hook != NULL) caml_termination_hook(NULL);
-    return;
-  }
-  res = caml_start_program();
-  if (Is_exception_result(res))
-    caml_fatal_uncaught_exception(Extract_exception(res));
-}
-~~~
+# sigsetjmp
 
-# longjmpするのは誰？
+![inline](draw/sigsetjmp.png)
 
 スレッドが終了するとlongjmpする。
 mainスレッドじゃなければ、caml_termination_jmpbufには飛ばない。
 
-~~~ {.c}
-/* File: otherlibs/systhreads/st_stubs.c */
-CAMLprim value caml_thread_initialize(value unit)   /* ML */
-{
-/* --snip-- */
-  curr_thread->exit_buf = &caml_termination_jmpbuf;
+# caml_start_program関数
 
-/* --snip-- */
-static ST_THREAD_FUNCTION caml_thread_start(void * arg)
-{
-/* --snip-- */
-  if (sigsetjmp(termination_buf.buf, 0) == 0) {
-    th->exit_buf = &termination_buf;
-
-/* --snip-- */
-CAMLprim value caml_thread_exit(value unit)   /* ML */
-{
-/* --snip-- */
-  exit_buf = curr_thread->exit_buf;
-  caml_thread_stop();
-  if (exit_buf != NULL) {
-    siglongjmp(exit_buf->buf, 1);
-~~~
-
-# caml_start_program
-
-~~~ {.gnuassembler}
-/* File: asmrun/amd64.S */
-FUNCTION(G(caml_start_program))
-        CFI_STARTPROC
-    /* Save callee-save registers */
-        PUSH_CALLEE_SAVE_REGS
-        CFI_ADJUST(56)
-    /* Initial entry point is G(caml_program) */
-        leaq    GCALL(caml_program)(%rip), %r12
-    /* Common code for caml_start_program and caml_callback* */
-LBL(caml_start_program):
-    /* Build a callback link */
-        subq    $8, %rsp        /* stack 16-aligned */
-        PUSH_VAR(caml_gc_regs)
-        PUSH_VAR(caml_last_return_address)
-        PUSH_VAR(caml_bottom_of_stack)
-        CFI_ADJUST(32)
-    /* Setup alloc ptr and exception ptr */
-        LOAD_VAR(caml_young_ptr, %r15)
-        LOAD_VAR(caml_exception_pointer, %r14)
-    /* Build an exception handler */
-        lea     LBL(108)(%rip), %r13
-        pushq   %r13
-        pushq   %r14
-        CFI_ADJUST(16)
-        movq    %rsp, %r14
-    /* Call the OCaml code */
-        call    *%r12
-~~~
+* calleeのレジスタ退避
+* caml_gc_regsをpush
+* caml_last_return_addressをpush
+* caml_bottom_of_stackをpush
+* caml_young_ptrを%r15に
+* caml_exception_pointerを%r14に
+* caml_program関数呼び出し
 
 # caml_program
 
-~~~ {.gnuassembler}
-/* File: hello.bin.startup.s (コンパイル時生成) */
-caml_program:
-	.cfi_startproc
-	subq	$8, %rsp
-	.cfi_adjust_cfa_offset	8
-	call	camlPervasives__entry@PLT
-	movq	caml_globals_inited@GOTPCREL(%rip), %rax
-	addq	$1, (%rax)
-	call	camlHello__entry@PLT
-~~~
+コンパイル時に生成されるstartup.sで定義
+
+![inline](draw/caml_program.png)
 
 # camlPervasives__entry
 
