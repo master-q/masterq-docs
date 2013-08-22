@@ -25,6 +25,8 @@ Kiwamu Okabe
 
 * [1] ocamloptについて簡単に
 * [2] ソース探検のシナリオ
+* [3] プログラムの起動
+* [4] 文字列を画面に印字
 
 # [1] ocamloptについて簡単に
 
@@ -90,7 +92,7 @@ Hello world!
 
 ![inline](draw/scenario.png)
 
-# OCamlプログラムの起動
+# [3] プログラムの起動
 
 * main関数から実行が開始されて
 * camlHello__entry関数がプログラム入口
@@ -274,11 +276,11 @@ void caml_init_signals(void)
 * スタック溢れが起きていたら例外発生
 * 最終的にcaml_raise_exceptionを呼ぶ
 
-# OCamlの例外初期化
+# OCamlの例外キャッチ
 
 ![inline](draw/exception_setup.png)
 
-# OCamlの例外投げ
+# OCamlの例外スロー
 
 ![inline](draw/exception.png)
 
@@ -346,188 +348,31 @@ mainスレッドじゃなければ、caml_termination_jmpbufには飛ばない�
 
 # camlPervasives__entry
 
-~~~ {.ocaml}
-(* File: stdlib/pervasives.ml *)
-external flush : out_channel -> unit = "caml_ml_flush"
-external out_channels_list : unit -> out_channel list
-                           = "caml_ml_out_channels_list"
-let flush_all () =
-  let rec iter = function
-      [] -> ()
-    | a :: l -> (try flush a with _ -> ()); iter l
-  in iter (out_channels_list ())
-let exit_function = ref flush_all
-let do_at_exit () = (!exit_function) ()
-external register_named_value : string -> 'a -> unit
-                              = "caml_register_named_value"
-let _ = register_named_value "Pervasives.do_at_exit" do_at_exit
-~~~
+* Pervasivesモジュール初期化
 
-# caml_register_named_value
+![inline](draw/camlPervasives__entry.png)
 
-~~~ {.c}
-/* File: byterun/callback.c */
-CAMLprim value caml_register_named_value(value vname, value val)
-{
-  struct named_value * nv;
-  char * name = String_val(vname);
-  unsigned int h = hash_value_name(name);
+# メジャーGCタイミングで全flush
 
-  for (nv = named_value_table[h]; nv != NULL; nv = nv->next) {
-    if (strcmp(name, nv->name) == 0) {
-      nv->val = val;
-      return Val_unit;
-    }
-  }
-  nv = (struct named_value *)
-         caml_stat_alloc(sizeof(struct named_value) + strlen(name));
-  strcpy(nv->name, name);
-  nv->val = val;
-  nv->next = named_value_table[h];
-  named_value_table[h] = nv;
-  caml_register_global_root(&nv->val);
-  return Val_unit;
-}
-~~~
-
-# caml_register_global_root
-
-flush処理を登録する
-flush処理はメジャーGCを実行した直後に呼ばれるっぽい。
-
-~~~ {.c}
-/* File: byterun/globroots.c */
-CAMLexport void caml_register_global_root(value *r)
-{
-  Assert (((intnat) r & 3) == 0);  /* compact.c demands this (for now) */
-  caml_insert_global_root(&caml_global_roots, r);
-}
-
-static void caml_iterate_global_roots(scanning_action f,
-                                      struct global_root_list * rootlist)
-{
-  struct global_root * gr;
-
-  for (gr = rootlist->forward[0]; gr != NULL; gr = gr->forward[0]) {
-    f(*(gr->root), gr->root);
-  }
-}
-
-void caml_scan_global_roots(scanning_action f)
-{
-  caml_iterate_global_roots(f, &caml_global_roots);
-  caml_iterate_global_roots(f, &caml_global_roots_young);
-  caml_iterate_global_roots(f, &caml_global_roots_old);
-}
-~~~
-
-~~~ {.c}
-/* File: asmrun/roots.c */
-void caml_darken_all_roots (void)
-{
-  caml_do_roots (caml_darken);
-}
-
-void caml_do_roots (scanning_action f)
-{
-/* --snip-- */
-  /* Global C roots */
-  caml_scan_global_roots(f);
-  /* Finalised values */
-  caml_final_do_strong_roots (f);
-  /* Hook */
-  if (caml_scan_roots_hook != NULL) (*caml_scan_roots_hook)(f);
-}
-~~~
-
-~~~ {.c}
-/* File: byterun/major_gc.c */
-static void start_cycle (void)
-{
-  Assert (caml_gc_phase == Phase_idle);
-  Assert (gray_vals_cur == gray_vals);
-  caml_gc_message (0x01, "Starting new major GC cycle\n", 0);
-  caml_darken_all_roots();
-  caml_gc_phase = Phase_mark;
-  caml_gc_subphase = Subphase_main;
-  markhp = NULL;
-}
-
-intnat caml_major_collection_slice (intnat howmuch)
-{
-  double p, dp;
-  intnat computed_work;
-  if (caml_gc_phase == Phase_idle) start_cycle ();
-/* --snip-- */
-
-void caml_finish_major_cycle (void)
-{
-  if (caml_gc_phase == Phase_idle) start_cycle ();
-  while (caml_gc_phase == Phase_mark) mark_slice (LONG_MAX);
-  Assert (caml_gc_phase == Phase_sweep);
-  while (caml_gc_phase == Phase_sweep) sweep_slice (LONG_MAX);
-  Assert (caml_gc_phase == Phase_idle);
-  caml_stat_major_words += caml_allocated_words;
-  caml_allocated_words = 0;
-}
-~~~
+![inline](draw/caml_scan_global_roots.png)
 
 # camlHello__entry
 
-caml_globals_inited++ してから呼ばれる
+最初のゴールに到着しました
 
-ゴール!
+![inline](draw/caml_program.png)
 
-# 起動の地図にまとめましょう
+# [4] 文字列を画面に印字
 
-# じゃーどうやって文字列を出力しているの？
+* print_endlineが開始
 
-print_endlineが開始
+![inline](draw/print_buff.png)
 
-~~~ {.ocaml}
-(* File: stdlib/pervasives.ml *)
-external string_length : string -> int = "%string_length"
-external unsafe_output : out_channel -> string -> int -> int -> unit
-                       = "caml_ml_output"
-external output_char : out_channel -> char -> unit = "caml_ml_output_char"
-external open_descriptor_out : int -> out_channel
-                             = "caml_ml_open_descriptor_out"
-external flush : out_channel -> unit = "caml_ml_flush"
-let stdout = open_descriptor_out 1
-let output_string oc s =
-  unsafe_output oc s 0 (string_length s)
-let print_endline s =
-  output_string stdout s; output_char stdout '\n'; flush stdout
-~~~
+# print_endlineはバッファへ書き込む
 
-# %string_length
+![inline](draw/print_endline.png)
 
-たぶんプリミティブ。コンパイル時に解釈されるはず
-
-~~~ {.ocaml}
-let string_length exp =
-  bind "str" exp (fun str ->
-    let tmp_var = Ident.create "tmp" in
-    Clet(tmp_var,
-         Cop(Csubi,
-             [Cop(Clsl,
-                   [Cop(Clsr, [header str; Cconst_int 10]);
-                     Cconst_int log2_size_addr]);
-              Cconst_int 1]),
-         Cop(Csubi,
-             [Cvar tmp_var;
-               Cop(Cload Byte_unsigned,
-                     [Cop(Cadda, [str; Cvar tmp_var])])])))
-
-and transl_prim_1 p arg dbg =
-  match p with
-(* --snip-- *)
-  (* String operations *)
-  | Pstringlength ->
-      tag_int(string_length (transl arg))
-~~~
-
-# caml_ml_open_descriptor_out
+# blocking_sectionって何？
 
 ~~~ {.c}
 /* File: byterun/io.c */
@@ -535,35 +380,17 @@ CAMLexport struct channel * caml_open_descriptor_in(int fd)
 {
   struct channel * channel;
 
-  channel = (struct channel *) caml_stat_alloc(sizeof(struct channel));
+  channel = (struct channel *)
+              caml_stat_alloc(sizeof(struct channel));
   channel->fd = fd;
   caml_enter_blocking_section();
   channel->offset = lseek(fd, 0, SEEK_CUR);
   caml_leave_blocking_section();
   channel->curr = channel->max = channel->buff;
   channel->end = channel->buff + IO_BUFFER_SIZE;
-  channel->mutex = NULL;
-  channel->revealed = 0;
-  channel->old_revealed = 0;
-  channel->refcount = 0;
-  channel->flags = 0;
-  channel->next = caml_all_opened_channels;
-  channel->prev = NULL;
-  if (caml_all_opened_channels != NULL)
-    caml_all_opened_channels->prev = channel;
-  caml_all_opened_channels = channel;
-  return channel;
-}
-
-CAMLexport struct channel * caml_open_descriptor_out(int fd)
-{
-  struct channel * channel;
-
-  channel = caml_open_descriptor_in(fd);
-  channel->max = NULL;
-  return channel;
-}
 ~~~
+
+システムコールを囲むように配置されている...
 
 # caml_enter_blocking_section()のしくみ
 
@@ -675,134 +502,4 @@ int caml_set_signal_action(int signo, int action)
 (* File: stdlib/sys.mlp *)
 external signal : int -> signal_behavior -> signal_behavior
                 = "caml_install_signal_handler"
-~~~
-
-# caml_ml_output
-
-~~~ {.c}
-/* File: byterun/io.c */
-CAMLprim value caml_ml_output(value vchannel, value buff, value start,
-                              value length)
-{
-  CAMLparam4 (vchannel, buff, start, length);
-  struct channel * channel = Channel(vchannel);
-  intnat pos = Long_val(start);
-  intnat len = Long_val(length);
-
-  Lock(channel);
-    while (len > 0) {
-      int written = caml_putblock(channel, &Byte(buff, pos), len);
-      pos += written;
-      len -= written;
-    }
-  Unlock(channel);
-  CAMLreturn (Val_unit);
-}
-~~~
-
-# CAMLreturn
-
-~~~ {.c}
-/* File: asmrun/roots.c */
-struct caml__roots_block {
-  struct caml__roots_block *next;
-  intnat ntables;
-  intnat nitems;
-  value *tables [5];
-};
-
-struct caml__roots_block *caml_local_roots = NULL;
-
-/* File: byterun/memory.h */
-#define CAMLparam0() \
-  struct caml__roots_block *caml__frame = caml_local_roots
-
-#define CAMLparam4(x, y, z, t) \
-  CAMLparam0 (); \
-  CAMLxparam4 (x, y, z, t)
-
-#define CAMLxparam4(x, y, z, t) \
-  struct caml__roots_block caml__roots_##x; \
-  CAMLunused int caml__dummy_##x = ( \
-    (caml__roots_##x.next = caml_local_roots), \
-    (caml_local_roots = &caml__roots_##x), \
-    (caml__roots_##x.nitems = 1), \
-    (caml__roots_##x.ntables = 4), \
-    (caml__roots_##x.tables [0] = &x), \
-    (caml__roots_##x.tables [1] = &y), \
-    (caml__roots_##x.tables [2] = &z), \
-    (caml__roots_##x.tables [3] = &t), \
-    0)
-
-#define CAMLreturnT(type, result) do{ \
-  type caml__temp_result = (result); \
-  caml_local_roots = caml__frame; \
-  return (caml__temp_result); \
-}while(0)
-
-#define CAMLreturn(result) CAMLreturnT(value, result)
-~~~
-
-# caml_ml_output_char
-
-~~~ {.c}
-/* File: byterun/io.c */
-CAMLprim value caml_ml_output_char(value vchannel, value ch)
-{
-  CAMLparam2 (vchannel, ch);
-  struct channel * channel = Channel(vchannel);
-
-  Lock(channel);
-  putch(channel, Long_val(ch));
-  Unlock(channel);
-  CAMLreturn (Val_unit);
-}
-~~~
-
-# caml_ml_flush
-
-~~~ {.c}
-/* File: byterun/io.c */
-static int do_write(int fd, char *p, int n)
-{
-  int retcode;
-
-again:
-  caml_enter_blocking_section();
-  retcode = write(fd, p, n);
-  caml_leave_blocking_section();
-  if (retcode == -1) {
-    if (errno == EINTR) goto again;
-    if ((errno == EAGAIN || errno == EWOULDBLOCK) && n > 1) {
-      /* We couldn't do a partial write here, probably because
-         n <= PIPE_BUF and POSIX says that writes of less than
-         PIPE_BUF characters must be atomic.
-         We first try again with a partial write of 1 character.
-         If that fails too, we'll raise Sys_blocked_io below. */
-      n = 1; goto again;
-    }
-  }
-  if (retcode == -1) caml_sys_io_error(NO_ARG);
-  return retcode;
-}
-
-CAMLexport int caml_flush_partial(struct channel *channel)
-{
-  int towrite, written;
-
-  towrite = channel->curr - channel->buff;
-  if (towrite > 0) {
-    written = do_write(channel->fd, channel->buff, towrite);
-    channel->offset += written;
-    if (written < towrite)
-      memmove(channel->buff, channel->buff + written, towrite - written);
-    channel->curr -= written;
-  }
-  return (channel->curr == channel->buff);
-}
-
-CAMLexport void caml_flush(struct channel *channel)
-{
-  while (! caml_flush_partial(channel)) /*nothing*/;
-}
 ~~~
