@@ -31,6 +31,7 @@ Kiwamu Okabe
 * [5] シグナルの扱い
 
 # [1] ocamloptについて簡単に
+![background](img/blank.png)
 
 まずはOCaml 4.00.1をインストール
 
@@ -53,6 +54,7 @@ $ ocamlopt -version
 * Debian GNU/Linux sid amd64
 
 # ocamloptってなんどすか？
+![background](img/blank.png)
 
 OCamlソースを実行バイナリにするコンパイラ
 
@@ -95,6 +97,7 @@ Hello world!
 ![inline](draw/scenario.png)
 
 # [3] プログラムの起動
+![background](img/blank.png)
 
 * main関数から実行が開始されて
 * camlHello__entry関数がプログラム入口
@@ -124,6 +127,7 @@ Breakpoint 1, 0x0000000000402260 in camlHello__entry ()
 * バイナリでも適宜byterunの下を使います
 
 # main関数ソース
+![background](img/blank.png)
 
 デバッグ機能なしだとこんなん
 
@@ -144,6 +148,7 @@ int main(int argc, char **argv)
 ![inline](draw/c_main.png)
 
 # caml_init_ieee_floats関数
+![background](img/blank.png)
 
 ~~~ {.c}
 /* File: byterun/floats.c */
@@ -166,6 +171,7 @@ void caml_init_ieee_floats(void)
 * 気にしないことにしましょう
 
 # caml_init_custom_operations #1
+![background](img/blank.png)
 
 ボックス化されたintのプリミティブ関数を登録
 
@@ -180,6 +186,7 @@ void caml_init_custom_operations(void)
 ~~~
 
 # caml_init_custom_operations #2
+![background](img/blank.png)
 
 でもたぶんこれバイトコードでだけ必要？
 
@@ -199,6 +206,7 @@ $ grep "caml_.*_ops" asmcomp/cmmgen.ml
 ocamloptではシンボルから直接呼び出しに
 
 # parse_camlrunparam関数
+![background](img/blank.png)
 
 OCAMLRUNPARAM環境変数を見るだけ
 
@@ -249,6 +257,7 @@ static void parse_camlrunparam(void)
 * 目的がよくわからない...
 
 # caml_init_signals関数
+![background](img/blank.png)
 
 SEGVシグナルハンドラを通常コンテキストとは別のスタックで実行するように設定
 
@@ -311,6 +320,7 @@ http://caml.inria.fr/pub/docs/manual-ocaml/manual030.html
 そんなものがあったのか...
 
 # caml_sys_init関数
+![background](img/blank.png)
 
 プログラム名と引数の保管
 
@@ -374,6 +384,7 @@ void caml_sys_init(char * exe_name, char **argv)
 ![inline](draw/print_endline.png)
 
 # [5] シグナルの扱い
+![background](img/blank.png)
 
 blocking_sectionって何？
 
@@ -404,6 +415,7 @@ CAMLexport struct channel * caml_open_descriptor_in(int fd)
 ![inline](draw/handle_signal.png)
 
 # 宣伝: Ajhc Haskellコンパイラ
+![background](img/ajhc.png)
 
 * http://ajhc.metasepi.org/
 * 組込を狙ったHaskellコンパイラ
@@ -414,6 +426,7 @@ CAMLexport struct channel * caml_open_descriptor_in(int fd)
 * もちろんPOSIXの上でも動きます
 
 # 宣伝: 「簡約!?λカ娘 Go!」はイカが？
+![background](img/c84.png)
 
 http://www.paraiso-lang.org/ikmsm/
 
