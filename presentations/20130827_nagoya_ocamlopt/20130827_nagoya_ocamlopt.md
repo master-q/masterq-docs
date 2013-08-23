@@ -18,6 +18,7 @@ Kiwamu Okabe
 * letの嵐にとまどう
 * 数年後にPFDSを読む
 * lazyきもちいい!
+* camlp4に脳味噌を焼きはらわれる...
 * camloebaさんに脅されてocamlopt読む
 * OCamlコードわかりやすい! <= イマココ
 
@@ -27,6 +28,7 @@ Kiwamu Okabe
 * [2] ソース探検のシナリオ
 * [3] プログラムの起動
 * [4] 文字列を画面に印字
+* [5] シグナルの扱い
 
 # [1] ocamloptについて簡単に
 
@@ -179,7 +181,7 @@ void caml_init_custom_operations(void)
 
 # caml_init_custom_operations #2
 
-でもたぶんこれバイトコードでだけ必要なんだと思う
+でもたぶんこれバイトコードでだけ必要？
 
 ~~~
 $ grep "caml_.*_ops" asmcomp/cmmgen.ml
@@ -241,7 +243,7 @@ static void parse_camlrunparam(void)
 
 # init_atoms関数
 
-* これよくわからなかったです
+* これよくわからなかったです orz
 * caml_data_segmentsと
 * caml_code_segmentsを解析している？
 * 目的がよくわからない...
@@ -325,10 +327,9 @@ void caml_sys_init(char * exe_name, char **argv)
 
 # sigsetjmp
 
-![inline](draw/sigsetjmp.png)
+スレッドが終了するとlongjmp
 
-スレッドが終了するとlongjmpする。
-mainスレッドじゃなければ、caml_termination_jmpbufには飛ばない。
+![inline](draw/sigsetjmp.png)
 
 # caml_start_program関数
 
@@ -372,7 +373,9 @@ mainスレッドじゃなければ、caml_termination_jmpbufには飛ばない�
 
 ![inline](draw/print_endline.png)
 
-# blocking_sectionって何？
+# [5] シグナルの扱い
+
+blocking_sectionって何？
 
 ~~~ {.c}
 /* File: byterun/io.c */
@@ -392,114 +395,32 @@ CAMLexport struct channel * caml_open_descriptor_in(int fd)
 
 システムコールを囲むように配置されている...
 
-# caml_enter_blocking_section()のしくみ
+# シグナルハンドラの実行
 
-~~~ {.c}
-/* File: byterun/signals.c */
-CAMLexport intnat volatile caml_signals_are_pending = 0;
+![inline](draw/enter_blocking.png)
 
-void caml_record_signal(int signal_number)
-{
-  caml_pending_signals[signal_number] = 1;
-  caml_signals_are_pending = 1;
-  caml_something_to_do = 1;
-}
+# ハンドラ登録とシグナル受信
 
-void caml_process_pending_signals(void)
-{
-  int i;
+![inline](draw/handle_signal.png)
 
-  if (caml_signals_are_pending) {
-    caml_signals_are_pending = 0;
-    for (i = 0; i < NSIG; i++) {
-      if (caml_pending_signals[i]) {
-        caml_pending_signals[i] = 0;
-        caml_execute_signal(i, 0);
-      }
-    }
-  }
-}
+# 宣伝: Ajhc Haskellコンパイラ
 
-CAMLexport void caml_enter_blocking_section(void)
-{
-  while (1){
-    /* Process all pending signals now */
-    caml_process_pending_signals();
-    caml_enter_blocking_section_hook ();
-    /* Check again for pending signals.
-       If none, done; otherwise, try again */
-    if (! caml_signals_are_pending) break;
-    caml_leave_blocking_section_hook ();
-  }
-}
+* http://ajhc.metasepi.org/
+* 組込を狙ったHaskellコンパイラ
+* Haskell => C言語 への変換器
+* jhc Haskellコンパイラのfork
+* mbedプラットフォームなどで動作
+* 要求RAMサイズ = 30kBぐらい
+* もちろんPOSIXの上でも動きます
 
-CAMLexport void caml_leave_blocking_section(void)
-{
-  caml_leave_blocking_section_hook ();
-  caml_process_pending_signals();
-}
-~~~
+# 宣伝: 「簡約!?λカ娘 Go!」はイカが？
 
-pendingしているsignalを実行し終わってからblocking_sectionに入るみたい。
+http://www.paraiso-lang.org/ikmsm/
 
-# シグナルを受けるのは誰？
+* Lensライブラリの解説
+* パーサの解説
+* 圏論とモナド
+* 囲碁AI
+* Ajhcコンパイラの開発秘話
 
-~~~ {.c}
-/* File: asmrun/signals_asm.c */
-DECLARE_SIGNAL_HANDLER(handle_signal)
-{
-#if !defined(POSIX_SIGNALS) && !defined(BSD_SIGNALS)
-  signal(sig, handle_signal);
-#endif
-  if (sig < 0 || sig >= NSIG) return;
-  if (caml_try_leave_blocking_section_hook ()) {
-    caml_execute_signal(sig, 1);
-    caml_enter_blocking_section_hook();
-  } else {
-    caml_record_signal(sig);
-  /* Some ports cache [caml_young_limit] in a register.
-     Use the signal context to modify that register too, but only if
-     we are inside OCaml code (not inside C code). */
-#if defined(CONTEXT_PC) && defined(CONTEXT_YOUNG_LIMIT)
-    if (Is_in_code_area(CONTEXT_PC))
-      CONTEXT_YOUNG_LIMIT = (context_reg) caml_young_limit;
-#endif
-  }
-}
-
-// <= call from caml_install_signal_handler <= OCamlコード
-int caml_set_signal_action(int signo, int action)
-{
-  signal_handler oldact;
-  struct sigaction sigact, oldsigact;
-
-  switch(action) {
-  case 0:
-    sigact.sa_handler = SIG_DFL;
-    sigact.sa_flags = 0;
-    break;
-  case 1:
-    sigact.sa_handler = SIG_IGN;
-    sigact.sa_flags = 0;
-    break;
-  default:
-    SET_SIGACT(sigact, handle_signal);
-    break;
-  }
-  sigemptyset(&sigact.sa_mask);
-  if (sigaction(signo, &sigact, &oldsigact) == -1) return -1;
-  oldact = oldsigact.sa_handler;
-  if (oldact == (signal_handler) handle_signal)
-    return 2;
-  else if (oldact == SIG_IGN)
-    return 1;
-  else
-    return 0;
-}
-~~~
-
-~~~ {.ocaml}
-(* File: stdlib/sys.mlp *)
-external signal : int -> signal_behavior -> signal_behavior
-                = "caml_install_signal_handler"
-~~~
+などなどの話題を掲載!
