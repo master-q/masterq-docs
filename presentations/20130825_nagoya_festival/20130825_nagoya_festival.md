@@ -106,7 +106,7 @@ https://github.com/ajhc/demo-android-ndk
 * インストールは簡単
 
 ~~~
-$ sudo apt-get install haskell-platform gcc make
+$ sudo apt-get install haskell-platform gcc make m4
 $ cabal install ajhc
 $ export PATH=$HOME/.cabal/bin:$PATH
 ~~~
