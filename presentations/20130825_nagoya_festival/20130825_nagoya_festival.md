@@ -128,7 +128,7 @@ $ file Hoge.c
 Hoge.c: C source, ASCII text, with very long lines
 ~~~
 
-# 「簡約!?λカ娘 Go!」はイカが？
+# 「簡約!?λカ娘 Go!」に記事書いたよ
 ![background](img/c84.png)
 
 http://www.paraiso-lang.org/ikmsm/
@@ -137,7 +137,7 @@ http://www.paraiso-lang.org/ikmsm/
 * パーサの解説
 * 圏論とモナド
 * 囲碁AI
-* Ajhcコンパイラの開発秘話
+* Ajhcコンパイラの開発秘話 <= コレ書いた
 
 ちょっとだけ中身のご紹介！
 
