@@ -18,19 +18,19 @@ Kiwamu Okabe
 
 * OSにも強い型をつけたい！
 * Ajhc http://ajhc.metasepi.org/
-* ランタイムエラーを少なくなるんでは？
+* ランタイムエラーを少なくできるのでは？
 
 ![inline](draw/2013-01-18-few_error.png)
 
-# GHCと何が違うの？
+# AjhcはGHCと何が違うの？
 ![background](img/wingsuit.png)
 
-* AjhcはHaskell→C言語への変換器
-* バイナリサイズ小さい、ポータブル
+* Ajhcは Haskell→C言語 への変換器
+* バイナリサイズ小さく、POSIX依存少ない
 
 ![inline](img/compiler_list.png)
 
-# 応用: POSIX API
+# 応用例: POSIX API
 ![background](img/pdp11.png)
 
 * スレッドセーフ/再入可能/パラレルGC
@@ -51,7 +51,7 @@ haskell-extras-0.8.1.hl  transformers-0.2.1.0.hl
 haskell2010-0.8.1.hl     xhtml-3000.2.1.hl
 ~~~
 
-# 応用: mbedマイコン (ARM)
+# 応用例: mbedマイコン (ARM)
 ![background](img/mbed.png)
 
 ~~~
@@ -65,7 +65,7 @@ https://github.com/ajhc/demo-cortex-m3
 
 ![inline](img/cortexm.png)
 
-# 応用: 非POSIXなOS上でのアプリ
+# 応用例: 非POSIXなOS上でのアプリ
 ![background](img/sakamura.png)
 
 ~~~
@@ -73,11 +73,11 @@ https://github.com/metasepi/chibios-arafura
 ~~~
 
 * ChibiOS/RTに対応
-* FreeRTOSとかμITRONとかもやる？
+* FreeRTOSやμITRONでも (要やる気)
 
 ![inline](draw/chibi_thr.png)
 
-# 応用: Android NDK
+# 応用例: Android NDK
 ![background](img/android.png)
 
 ~~~
@@ -85,11 +85,11 @@ https://github.com/ajhc/demo-android-ndk
 ~~~
 
 * 現在開発中
-* OpenGL ESでGUI
+* OpenGL ESでGUIできるとイイネ
 * pthreadがあるのでスレッド使える
 * Haskellゲームをマーケットで売りさばこう!
 
-# 使ってみてみて！
+# まずは使ってみてみて！
 ![background](img/easy.png)
 
 ~~~
