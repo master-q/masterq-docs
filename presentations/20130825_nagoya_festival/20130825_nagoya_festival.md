@@ -73,9 +73,9 @@ https://github.com/metasepi/chibios-arafura
 ~~~
 
 * ChibiOS/RTに対応
-* マイコンでHaskellスレッド使える
-* FreeRTOSとか
-* μITRONとかにも対応できるかも
+* FreeRTOSとかμITRONとかもやる？
+
+![inline](draw/chibi_thr.png)
 
 # 応用: Android NDK
 ![background](img/android.png)
