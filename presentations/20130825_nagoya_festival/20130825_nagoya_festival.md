@@ -14,7 +14,7 @@ Kiwamu Okabe
 * その昔はNetBSDでコピー機作ってた
 
 # 名古屋といえば...関数型！
-![background](img/nagoya.png)
+![background](img/garrigue.png)
 
 * 組込でも関数型しませんか？
 * しましょう！
