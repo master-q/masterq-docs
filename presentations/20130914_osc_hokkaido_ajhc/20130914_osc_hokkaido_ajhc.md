@@ -24,6 +24,46 @@ Kiwamu Okabe
 
 # [1] まずはデモでも
 
+xxx youtube URL
+
+* mbedでRSSリーダーを作ってみました
+* redditのRSSをLCDにヘッドライン表示
+
+# ハードウェア構成
+
+xxx mbedボードとオレンジボード
+
+# ソフトウェア構成
+
+![inline](draw/mbed_rss_arch.png)
+
+# ソースコードツリー
+
+~~~
+demo-cortex-m3
+`-- mbed-nxp-lpc1768
+    |-- BuildShell                 <= コンパイル環境設定
+    |-- build
+    |   `-- mbed.ld                <= リンカスクリプト
+    |-- external
+    |   `-- mbed
+    |       `-- LPC1768
+    |           `-- GCC_ARM
+    |               `-- libmbed.a  <= コンパイル済みmbedライブラリ
+    |-- linux_install              <= コンパイル環境構築スクリプト
+    |-- samples
+    |   `-- Haskell_Http
+    |       |-- EthernetInterface  <= TCP/IPプロトコルスタック
+    |       |-- c_extern.h
+    |       |-- dummy4jhc.c        <= Haskell用C言語スタブ
+    |       |-- hs_src
+    |       |   `-- *.hs           <= Haskellソースコード
+    |       |-- main.c             <= C言語main関数
+    |       `-- mbed-rtos          <= mbed-rtos OS
+    `-- src
+        `-- gcc4mbed.c
+~~~
+
 # [2] Ajhcコンパイラとは
 ![background](img/ajhc.png)
 
