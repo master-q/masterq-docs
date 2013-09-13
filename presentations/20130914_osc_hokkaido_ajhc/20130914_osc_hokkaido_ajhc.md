@@ -668,7 +668,7 @@ realmain = forever $ do
 
 # このHaskellコードはどう動く？
 
-xxx 図
+![inline](draw/how_run.png)
 
 # [7] Ajhcコンパイラの過去と未来
 
