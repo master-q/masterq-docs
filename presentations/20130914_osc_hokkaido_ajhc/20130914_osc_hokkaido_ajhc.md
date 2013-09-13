@@ -596,6 +596,7 @@ Blink.hex  alloc.c   dummy4jhc.c    main.c
 うんコンパイルできました
 
 # 完成したHaskell開発環境
+![background](img/type.png)
 
 ![inline](draw/dev_haskell.png)
 
@@ -684,6 +685,7 @@ realmain = forever $ do
 ~~~
 
 # このHaskellコードはどう動く？
+![background](img/lego.png)
 
 ![inline](draw/how_run.png)
 
