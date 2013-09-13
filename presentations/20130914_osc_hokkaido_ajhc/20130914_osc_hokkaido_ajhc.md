@@ -1,4 +1,5 @@
 # 組込向けHaskellコンパイラAjhc　mbedマイコンどうでしょう編
+![background](img/mbed_hello.png)
 
 Kiwamu Okabe
 
@@ -13,6 +14,7 @@ Kiwamu Okabe
 * その昔はコピー機のOSをNetBSDで
 
 # ようこそ、ピストルMetasepiへ
+![background](img/suidou.png)
 
 * [1] 前菜としてデモでも
 * [2] Ajhcコンパイラとは
@@ -23,6 +25,7 @@ Kiwamu Okabe
 * [7] Ajhcコンパイラの過去と未来
 
 # [1] 前菜としてデモでも
+![background](img/demo_movie.png)
 
 ~~~
 http://www.youtube.com/watch?v=C9JsJXWyajQ
@@ -52,6 +55,7 @@ http://bit.ly/mbedhask
 ![inline](draw/mbed_rss_arch.png)
 
 # デモのソースコードツリー
+![background](img/blank.png)
 
 ~~~
 demo-cortex-m3
@@ -264,6 +268,7 @@ mbedマイコン上でHaskellコードを動かす手順をステップ毎に説
 の大きく二つに分かれています
 
 # ベースとなるソースコードを入手
+![background](img/blank.png)
 
 ~~~
 https://github.com/adamgreen/gcc4mbed
@@ -276,6 +281,7 @@ $ git clone https://github.com/adamgreen/gcc4mbed.git
 ~~~
 
 # ビルド手順を確認
+![background](img/blank.png)
 
 クロスコンパイル環境構築
 
@@ -300,6 +306,7 @@ Blink.bin  Blink.elf  Blink.hex  LPC176x  main.c  makefile
 Blink.elfがコンパイル結果です
 
 # mbedにプログラムを書き込む #1
+![background](img/blank.png)
 
 * mbedファームウェアをrev.141212以降に
 
@@ -328,6 +335,7 @@ load
 ~~~
 
 # mbedにプログラムを書き込む #2
+![background](img/blank.png)
 
 * gcc4mbed.mkにgdbターゲット追加
 
@@ -352,6 +360,7 @@ load
 ~~~
 
 # mbedにプログラムを書き込む #3
+![background](img/blank.png)
 
 * mbedとPCをUSBケーブルで接続
 * 一つ目のターミナルで以下を実行
@@ -378,6 +387,7 @@ $ make gdbwrite
 ![inline](draw/dev_c.png)
 
 # Haskellプログラミング開始
+![background](img/blank.png)
 
 * Haskellプロジェクトディレクトリを掘る
 
@@ -390,6 +400,7 @@ main.c  makefile
 ~~~
 
 # 旧makefileを新Makefileでラップ
+![background](img/blank.png)
 
 ~~~
 $ mv makefile forc.mk
@@ -404,17 +415,12 @@ include forc.mk
 
 $(HSBUILD)/hs_main.c: $(HSSRC)
         mkdir -p $(HSBUILD)
-        echo "[mbed]"               > $(TINI)
-        echo "cc=arm-none-eabi-gcc" >> $(TINI)
-        echo "byteorder=le"         >> $(TINI)
-        echo "cflags=$(GCFLAGS)"    >> $(TINI)
-        echo "cflags_debug="        >> $(TINI)
-        echo "cflags_nodebug="      >> $(TINI)
-        ajhc --targetsini=$(TINI) --cross -mmbed -fffi --tdir=$(HSBUILD) -C --include=hs_src -o $@ $(HSMAIN)
+        ajhc -fffi -p containers --tdir=$(HSBUILD) -C --include=hs_src -o $@ $<
         rm -f $(HSBUILD)/rts/gc_none.c $(HSBUILD)/rts/profile.c $(HSBUILD)/rts/slub.c
 ~~~
 
 # forc.mkにAjhc用オプション追加
+![background](img/blank.png)
 
 ~~~
 $ vi forc.mk # <= 以下を追加
@@ -437,6 +443,7 @@ GCFLAGS += -D_JHC_CONC=_JHC_CONC_NONE
 GCのチューニングにもオプションが必要
 
 # gcc4mbed.mkを修正 #1
+![background](img/blank.png)
 
 ~~~ {.diff}
 --- gcc4mbed/build/gcc4mbed.mk.back
@@ -456,6 +463,7 @@ GCのチューニングにもオプションが必要
 ~~~
 
 # gcc4mbed.mkを修正 #2
+![background](img/blank.png)
 
 ~~~ {.diff}
 @@ -212,13 +217,14 @@
@@ -477,6 +485,7 @@ GCのチューニングにもオプションが必要
 ~~~
 
 # gcc4mbed.mkを修正 #3
+![background](img/blank.png)
 
 ~~~ {.diff}
 @@ -279,7 +285,7 @@
@@ -493,6 +502,7 @@ GCのチューニングにもオプションが必要
 ぜぇぜぇ。これでpatchあておわりました
 
 # C言語main関数修正(main.c)
+![background](img/blank.png)
 
 ~~~ {.c}
 #include "LPC17xx.h"
@@ -521,6 +531,7 @@ int main()
 ~~~
 
 # 雑多なAjhc向け設定
+![background](img/blank.png)
 
 * 標準入出力を無力化
 
@@ -547,6 +558,7 @@ void delay();
 ~~~
 
 # 独自のmalloc関数(alloc.c)
+![background](img/blank.png)
 
 ソースコードが大きいのでwget
 
@@ -564,6 +576,7 @@ malloc用ヒープは2kBに設定してみました
 通常用途ならたぶん十分です
 
 # 何もしないHaskellコードでお試し
+![background](img/blank.png)
 
 ~~~
 $ mkdir hs_src
@@ -587,6 +600,7 @@ Blink.hex  alloc.c   dummy4jhc.c    main.c
 ![inline](draw/dev_haskell.png)
 
 # HaskellからLEDチカチカ
+![background](img/blank.png)
 
 * まず時間待ちを作りましょう
 * C言語のdelay関数をHaskellから呼出
@@ -599,6 +613,7 @@ foreign import ccall "c_extern.h delay" delay :: Int -> IO ()
 ~~~
 
 # LED操作 #1
+![background](img/blank.png)
 
 ~~~ {.haskell}
 -- File: hs_src/Led.hs (つづく)
@@ -618,6 +633,7 @@ addr_FIOPIN = addr_LPC_GPIO1_BASE `plusPtr` (4 + 4 * 3 + 4)
 ~~~
 
 # LED操作 #2
+![background](img/blank.png)
 
 ~~~ {.haskell}
 -- File: hs_src/Led.hs (つづき)
@@ -640,6 +656,7 @@ ledsOn ls = poke addr_FIOPIN $ foldl (.|.) 0 ls
 あとで概要を説明します!
 
 # Haskellのmain関数
+![background](img/blank.png)
 
 ~~~ {.haskell}
 -- File: hs_src/Main.hs
@@ -671,6 +688,7 @@ realmain = forever $ do
 ![inline](draw/how_run.png)
 
 # [7] Ajhcコンパイラの過去と未来
+![background](img/chronotrigger.png)
 
 * Ajhcの開発をはじめて9ヶ月
 * いろいろありました...
@@ -697,6 +715,26 @@ https://github.com/ajhc/demo-cortex-m3
 * mbed-rtos上でのTCP/IPプログラミング
 
 # Ajhcにまつわる発表資料
+![background](img/slideshare.png)
+
+~~~
+* "How do you like jhc?"
+  http://www.slideshare.net/master_q/20121216-jhc
+* "What is Metasepi?"
+  http://www.slideshare.net/master_q/what-is-metasepi
+* "HaskellではじめるCortex-M3組込みプログラミング"
+  http://www.slideshare.net/master_q/20130222-jhc-stm32
+* "Ajhcコンパイラの押売りに来ました"
+  http://www.slideshare.net/master_q/20130422-ajhc-igarashi
+* "Debianを用いたCortex-M3マイコン開発事例のご紹介"
+  http://www.slideshare.net/master_q/20130629-deb-cortexm3
+* "組込向けHaskellコンパイラAjhc / POSIX依存から脱出しよう編"
+  http://www.slideshare.net/master_q/20130802-osc-kyotoajhc
+* "組込Haskellとλカ娘本の紹介"
+  http://www.slideshare.net/master_q/20130825-nagoya-festival
+* "組込向けHaskellコンパイラAjhc / mbedマイコンどうでしょう編"
+  http://www.slideshare.net/master_q/haskellajhc-mbed
+~~~
 
 # Ajhcコンパイラの未来
 ![background](img/netbsd.png)
@@ -725,82 +763,4 @@ https://github.com/ajhc/ajhc-hacking-guide
 
 ~~~
 http://www.paraiso-lang.org/ikmsm/books/c85.html
-~~~
-
-# 本スライドで使用した画像 #1
-![background](img/flickr1.png)
-
-~~~
-* sunny side up | Flickr - Photo Sharing!
-  http://www.flickr.com/photos/97335141@N00/4623354472/
-* Mud Slide | Flickr - Photo Sharing!
-  http://www.flickr.com/photos/ben_salter/2676953286/
-* Feelin' Safe | Flickr - Photo Sharing!
-  http://www.flickr.com/photos/mstyne/3654056683/
-* STOP ALL WAY | Flickr - Photo Sharing!
-  http://www.flickr.com/photos/peterkaminski/1510724/
-* Bungee jump | Flickr - Photo Sharing!
-  http://www.flickr.com/photos/gj_thewhite/8855033499/
-* The C Programming Language | Flickr - Photo Sharing!
-  http://www.flickr.com/photos/mrbill/2482009942/
-* The 20 Yard Line | Flickr - Photo Sharing!
-  http://www.flickr.com/photos/eschipul/2957264066/
-* _MG_3881 | Flickr - Photo Sharing!
-  http://www.flickr.com/photos/63209717@N05/6873025064/
-* Mini Cross | Flickr - Photo Sharing!
-  http://www.flickr.com/photos/hdrexperience/6727601691/
-* Goal for the Sky | Flickr - Photo Sharing!
-  http://www.flickr.com/photos/giantsqurl/5165392772/
-* Manual and driver disc | Flickr - Photo Sharing!
-  http://www.flickr.com/photos/tseedmund/3859079008/
-~~~
-
-# 本スライドで使用した画像 #2
-![background](img/flickr2.png)
-
-~~~
-* Simple Heart | Flickr - Photo Sharing!
-  http://www.flickr.com/photos/21148821@N02/2055189101/
-* GNU Wallpaper | Flickr - Photo Sharing!
-  http://www.flickr.com/photos/jeffpro/8603895629/
-* The core | Flickr - Photo Sharing!
-  http://www.flickr.com/photos/mukluk/484631726/
-* Dummies. Someday they'll take over the world. They already have.
-  http://www.flickr.com/photos/keoni101/5244610841/
-* Michael Caputo, "just tryin' to break the ice, with nothin'...
-  http://www.flickr.com/photos/sixteen-miles/3757672365/
-* Groundskeeper sweeping, Citi Field | Flickr - Photo Sharing!
-  http://www.flickr.com/photos/48913243@N00/4605448536/
-* Carrier Pigeon | Flickr - Photo Sharing!
-  http://www.flickr.com/photos/enzymedesign/4983070657/
-* Arrows showing up (Blender) | Flickr - Photo Sharing!
-  http://www.flickr.com/photos/61423903@N06/7382239368/
-* Handshakes | Flickr - Photo Sharing!
-  http://www.flickr.com/photos/ndanger/4425413794/
-* STM32 Development Board | Flickr - Photo Sharing!
-  http://www.flickr.com/photos/randomskk/3920434183/
-* Hiking | Flickr - Photo Sharing!
-  http://www.flickr.com/photos/aigle_dore/5824862885/
-~~~
-
-# 本スライドで使用した画像 #3
-![background](img/flickr3.png)
-
-~~~
-* Next Kyoto 懐石 | Flickr - Photo Sharing!
-  http://www.flickr.com/photos/edsel_/8330803003/
-* Portal 2 fly | Flickr - Photo Sharing!
-  http://www.flickr.com/photos/warvan/4984607550/
-* Sticker Nation - 8 | Flickr - Photo Sharing!
-  http://www.flickr.com/photos/oskay/411003747/
-* I love flickr | Flickr - Photo Sharing!
-  http://www.flickr.com/photos/theresasthompson/3279837886/
-* flickr | Flickr - Photo Sharing!
-  http://www.flickr.com/photos/zanastardust/145197704/
-* flickr was here | Flickr - Photo Sharing!
-  http://www.flickr.com/photos/sarahrosenau/185196442/
-* Hooded Cuttlefish | Flickr - Photo Sharing!
-  http://www.flickr.com/photos/silkebaron/931381358/
-* Hooded Cuttlefish | Flickr - Photo Sharing!
-  http://www.flickr.com/photos/silkebaron/931247866/
 ~~~
