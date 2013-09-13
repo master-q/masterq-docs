@@ -27,22 +27,18 @@ Kiwamu Okabe
 # [1] 前菜としてデモでも
 ![background](img/demo_movie.png)
 
-~~~
-http://www.youtube.com/watch?v=C9JsJXWyajQ
-~~~
-
 * mbedでRSSリーダーを作ってみました
 * redditのRSSをLCDにヘッドライン表示
+* 動画は以下のURLから観れます
 
-　
+http://bit.ly/mbedmov
 
-　
-
-このスライドは以下のURLでご覧になれます
+* このスライドは下のURLに置かれています
 
 http://bit.ly/mbedhask
 
 # デモのハードウェア構成
+![background](img/ethernet.png)
 
 アーキティクチャ: ARM Cortex-M3
 
@@ -51,6 +47,7 @@ http://bit.ly/mbedhask
 ![inline](img/mbed_StarBoard_Orange.png)
 
 # デモのソフトウェア構成
+![background](img/ice.png)
 
 ![inline](draw/mbed_rss_arch.png)
 
@@ -259,13 +256,15 @@ ajhc.metasepi.org/manual_ja.html
 を読んでみてください!
 
 # [6] mbedマイコン上でのHaskell
+![background](img/stairs.png)
 
 mbedマイコン上でHaskellコードを動かす手順をステップ毎に説明します
 
-* 前半: C言語の開発環境構築
-* 後半: Haskellの開発環境構築
+* C言語の開発環境構築
+* Haskellの開発環境構築
+* Haskellを使ったプログラミング
 
-の大きく二つに分かれています
+の大きく3つに分けようと思います
 
 # ベースとなるソースコードを入手
 ![background](img/blank.png)
@@ -383,6 +382,7 @@ $ make gdbwrite
 チカチカしました？
 
 # 完成したC言語開発環境
+![background](img/compile.png)
 
 ![inline](draw/dev_c.png)
 
@@ -752,7 +752,7 @@ https://github.com/ajhc/ajhc-hacking-guide
 * Metasepi上でMetasepi開発を可能に
 
 # 宣伝:λカ娘に記事を書きませんか？
-![background](img/haskell-logo.png)
+![background](img/c84.png)
 
 * http://www.paraiso-lang.org/ikmsm/
 * 関数型言語の同人誌
