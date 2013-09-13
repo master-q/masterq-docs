@@ -14,7 +14,7 @@ Kiwamu Okabe
 
 # ようこそ、ピストルMetasepiへ
 
-* [1] まずはデモでも
+* [1] 前菜としてデモでも
 * [2] Ajhcコンパイラとは
 * [3] Metasepi kernelとは
 * [4] OS開発向けコンパイラとは
@@ -22,9 +22,11 @@ Kiwamu Okabe
 * [6] mbedマイコン上でのHaskell
 * [7] Ajhcコンパイラの過去と未来
 
-# [1] まずはデモでも
+# [1] 前菜としてデモでも
 
-xxx youtube URL
+~~~
+http://www.youtube.com/watch?v=C9JsJXWyajQ
+~~~
 
 * mbedでRSSリーダーを作ってみました
 * redditのRSSをLCDにヘッドライン表示
@@ -35,7 +37,7 @@ xxx youtube URL
 
 デバイス: Ethernet, LED, LCD, SDカード, USBホスト/デバイス, シリアル
 
-xxx mbedボードとオレンジボードの写真
+![inline](img/mbed_StarBoard_Orange.png)
 
 # ソフトウェア構成
 
@@ -227,13 +229,13 @@ $ export PATH=$HOME/.cabal/bin/:$PATH
 $ cabal install ajhc
 $ which ajhc
 /home/ユーザ名/.cabal/bin/ajhc
-$ ajhc --version
-ajhc 0.8.0.8 (f6c3f4b070acad8a5012682810f0f4d7b7b9ed44)
-compiled by ghc-7.4 on a x86_64 running linux
+$ echo 'main = print "hoge"' > Hoge.hs
+$ ajhc Hoge.hs
+$ ./hs.out
+"hoge"
 ~~~
 
 バージョン0.8.0.9からはWindowsとOS Xでもインストール可能になる予定です
-
 
 # 使い方詳細
 ![background](img/minix.png)
@@ -255,10 +257,14 @@ mbedマイコン上でHaskellコードを動かす手順をステップ毎に説
 
 # ベースとなるソースコードを入手
 
+~~~
+https://github.com/adamgreen/gcc4mbed
+~~~
+
 githubにmbedのC言語プロジェクトがあったので、これをベースに開発をはじめます
 
 ~~~
-https://github.com/adamgreen/gcc4mbed
+$ git clone https://github.com/adamgreen/gcc4mbed.git
 ~~~
 
 # ビルド手順を確認
@@ -287,47 +293,54 @@ Blink.elfがコンパイル結果です
 
 # mbedにプログラムを書き込む #1
 
-プログラム書き込み環境を作りましょう
-
-* mbedファームウェアを更新
+* mbedファームウェアをrev.141212以降に
 
 ~~~
 http://mbed.org/handbook/Firmware-LPC1768-LPC11U24
 ~~~
-
-rev.141212以降のファームウェアが必要です
 
 * pyOCDのインストール
 
 ~~~
 $ sudo apt-get install python libusb-1.0-0-dev
 $ git clone git@github.com:walac/pyusb.git
-$ cd pyusb
-$ sudo python setup.py install
+$ cd pyusb && sudo python setup.py install
 $ git clone git@github.com:mbedmicro/mbed.git
 $ cd mbed/workspace_tools/debugger
 $ sudo python setup.py install
+$ cp test/gdb_test.py ~/gcc4mbed/gdbserver.py
+~~~
+
+* gdbスクリプト設置
+
+~~~
+$ vi gcc4mbed/gdbwrite.boot
+target remote localhost:3333
+load
 ~~~
 
 # mbedにプログラムを書き込む #2
 
-* 書き込みスクリプト設定
+* gcc4mbed.mkにgdbターゲット追加
 
-~~~
-$ cd gcc4mbed
-$ cp ~/mbed/workspace_tools/debugger/test/gdb_test.py gdbserver.py
-~~~
-
-* Makefileにgdbターゲット追加
-
-~~~
-$ vi gcc4mbed/samples/Blink/makefile
---snip--
-gdbwrite: all
-        @echo '################################################'
-        @echo '# Use me after running "sudo ./gdbserver4.py". #'
-        @echo '################################################'
-        $(GDB) -x ../../gdbwrite.boot $(PROJECT).elf
+~~~ {.diff}
+--- a/build/gcc4mbed.mk
++++ b/build/gcc4mbed.mk
+@@ -255,6 +255,14 @@ endif
+ 
+ all:: $(PROJECT).hex $(PROJECT).bin $(OUTDIR)/$(PROJECT).disasm size
+ 
++GDB = arm-none-eabi-gdb
++
++gdbwrite: all
++       @echo '################################################'
++       @echo '# Use me after running "sudo ./gdbserver4.py". #'
++       @echo '################################################'
++       $(GDB) -x ../../gdbwrite.boot $(PROJECT).elf
++
+ $(PROJECT).bin: $(PROJECT).elf
+        @echo Extracting $@
+        $(Q) $(OBJCOPY) -O binary $(PROJECT).elf $(PROJECT).bin
 ~~~
 
 # mbedにプログラムを書き込む #3
@@ -350,13 +363,303 @@ $ make gdbwrite
 (gdb) c
 ~~~
 
+チカチカしました？
+
 # 完成したC言語開発環境
 
 ![inline](draw/dev_c.png)
 
+# Haskellプログラミング開始
+
+* Haskellプロジェクトディレクトリを掘る
+
+~~~
+$ cd gcc4mbed/samples
+$ cp -a Blink Haskell
+$ cd Haskell
+$ ls
+main.c  makefile
+~~~
+
+# 旧makefileを新Makefileでラップ
+
+~~~
+$ mv makefile forc.mk
+$ vi Makefile
+HSBUILD = build_haskell
+TINI = $(HSBUILD)/targets.ini
+
+all:: $(HSBUILD)/hs_main.c
+        make -f forc.mk
+
+include forc.mk
+
+$(HSBUILD)/hs_main.c: $(HSSRC)
+        mkdir -p $(HSBUILD)
+        echo "[mbed]"               > $(TINI)
+        echo "cc=arm-none-eabi-gcc" >> $(TINI)
+        echo "byteorder=le"         >> $(TINI)
+        echo "cflags=$(GCFLAGS)"    >> $(TINI)
+        echo "cflags_debug="        >> $(TINI)
+        echo "cflags_nodebug="      >> $(TINI)
+        ajhc --targetsini=$(TINI) --cross -mmbed -fffi --tdir=$(HSBUILD) -C --include=hs_src -o $@ $(HSMAIN)
+        rm -f $(HSBUILD)/rts/gc_none.c $(HSBUILD)/rts/profile.c $(HSBUILD)/rts/slub.c
+~~~
+
+# forc.mkにAjhc用オプション追加
+
+~~~
+$ vi forc.mk # <= 以下を追加
+HS_ENABLE = 1
+GCFLAGS += -std=gnu99 -ffreestanding -nostdlib -falign-functions=4
+GCFLAGS += -Wno-unused-parameter -fno-strict-aliasing -D_GNU_SOURCE
+GCFLAGS += -DNDEBUG -D_JHC_GC=_JHC_GC_JGC -D_JHC_STANDALONE=0
+GCFLAGS += -D_LITTLE_ENDIAN -D_JHC_USE_OWN_STDIO
+GCFLAGS += -D_JHC_ARM_STAY_IN_THUMB_MODE -D_JHC_JGC_STACKGROW=16
+GCFLAGS += -D_JHC_JGC_LIMITED_NUM_MEGABLOCK=2
+GCFLAGS += -D_JHC_JGC_MEGABLOCK_SHIFT=13 -D_JHC_JGC_BLOCK_SHIFT=8
+GCFLAGS += -D_JHC_JGC_GC_STACK_SHIFT=8
+GCFLAGS += -D_JHC_JGC_LIMITED_NUM_GC_STACK=1
+GCFLAGS += -D_JHC_JGC_NAIVEGC -D_JHC_JGC_SAVING_MALLOC_HEAP
+GCFLAGS += -D_JHC_CONC=_JHC_CONC_NONE
+~~~
+
+普段はajhcがgcc呼び出し時に自動的につけてくれるものもある
+
+GCのチューニングにもオプションが必要
+
+# gcc4mbed.mkを修正 #1
+
+~~~ {.diff}
+--- gcc4mbed/build/gcc4mbed.mk.back
++++ gcc4mbed/build/gcc4mbed.mk
+@@ -100,6 +100,11 @@
+ GCC4MBED_TYPE ?= Release
+ MRI_BREAK_ON_INIT ?= 1
+ MRI_UART ?= MRI_UART_MBED_USB
++HS_ENABLE ?= 0
++HSDIR ?= hs_src
++HSBUILD ?= build_haskell
++HSSRC ?= $(wildcard $(HSDIR)/*.hs $(HSDIR)/*/*.hs $(HSDIR)/*/*/*.hs $(HSDIR)/*/*/*/*.hs $(HSDIR)/*/*/*/*/*.hs)
++HSMAIN ?= $(HSDIR)/Main.hs
+ 
+ 
+ # Configure MRI variables based on GCC4MBED_TYPE build type variable.
+~~~
+
+# gcc4mbed.mkを修正 #2
+
+~~~ {.diff}
+@@ -212,13 +217,14 @@
+ ifneq "$(NO_FLOAT_PRINTF)" "1"
+ LDFLAGS += -u _printf_float
+ endif
++LDFLAGS += -Wl,--defsym,jhc_zeroAddress=0
+ 
+ 
+ #  Compiler/Assembler/Linker Paths
+ GCC = arm-none-eabi-gcc
+ GPP = arm-none-eabi-g++
+ AS = arm-none-eabi-as
+-LD = arm-none-eabi-g++
++LD = arm-none-eabi-gcc
+ OBJCOPY = arm-none-eabi-objcopy
+ OBJDUMP = arm-none-eabi-objdump
+ SIZE = arm-none-eabi-size
+~~~
+
+# gcc4mbed.mkを修正 #3
+
+~~~ {.diff}
+@@ -279,7 +285,7 @@
+        @echo Cleaning up all build generated files
+        $(Q) $(REMOVE) -f $(call convert-slash,$(OBJECTS)) $(QUIET)
+        $(Q) $(REMOVE) -f $(call convert-slash,$(DEPFILES)) $(QUIET)
+-       $(Q) $(REMOVE_DIR) $(OUTDIR) $(QUIET)
++       $(Q) $(REMOVE_DIR) $(OUTDIR) $(HSBUILD) $(QUIET)
+        $(Q) $(REMOVE) -f $(call convert-slash,$(OUTDIR)/$(PROJECT).map) $(QUIET)
+        $(Q) $(REMOVE) -f $(call convert-slash,$(OUTDIR)/$(PROJECT).disasm) $(QUIET)
+        $(Q) $(REMOVE) -f $(PROJECT).bin $(QUIET)
+~~~
+
+ぜぇぜぇ。これでpatchあておわりました
+
+# C言語main関数修正(main.c)
+
+~~~ {.c}
+#include "LPC17xx.h"
+#include "jhc_rts_header.h"
+#include "c_extern.h"
+
+volatile int g_LoopDummy;
+
+void delay(int times)
+{
+        int i;
+        for (i = 0 ; i < times && !g_LoopDummy ; i++) {}
+}
+
+int main() 
+{
+        int hsargc = 1;
+        char *hsargv = "q";
+        char **hsargvp = &hsargv;
+        hs_init(&hsargc, &hsargvp); // Ajhcランタイム初期化
+        _amain();                   // Haskellコード呼び出し
+        hs_exit();
+        for (;;) {}
+        return 0;
+}
+~~~
+
+# 雑多なAjhc向け設定
+
+* 標準入出力を無力化
+
+~~~ {.c}
+// File: dummy4jhc.c
+#include "jhc_rts_header.h"
+
+int jhc_printf_stderr(const char *format, ...) { return 0; }
+int jhc_fputs_stderr(const char *s) { return 0; }
+int jhc_fflush_stdout() { return 0; }
+void jhc_print_profile(void) {}
+int jhc_utf8_getchar(void) { return 0; }
+int jhc_utf8_getc(FILE *f)  { return 0; }
+int jhc_utf8_putchar(int ch)  { return 0; }
+int jhc_utf8_putc(int ch, FILE *f)  { return 0; }
+~~~
+
+* Haskellから使うC言語API
+
+~~~ {.c}
+// File: c_extern.h
+extern volatile void jhc_zeroAddress;
+void delay();
+~~~
+
+# 独自のmalloc関数(alloc.c)
+
+ソースコードが大きいのでwget
+
+~~~
+$ wget https://raw.github.com/ajhc/demo-cortex-m3/master/mbed-nxp-lpc1768/samples/Haskell/alloc.c
+$ grep MALLOC_HEAPSIZE alloc.c 
+#define MALLOC_HEAPSIZE _JHC_MALLOC_HEAP_SIZE
+#define MALLOC_HEAPSIZE (2*1024)
+char malloc_heapstart[MALLOC_HEAPSIZE];
+char *malloc_heaplimit = (char *) (malloc_heapstart + MALLOC_HEAPSIZE);
+~~~
+
+malloc用ヒープは2kBに設定してみました
+
+通常用途ならたぶん十分です
+
+# 何もしないHaskellコードでお試し
+
+~~~
+$ mkdir hs_src
+$ vi hs_src/Main.hs
+main :: IO ()
+main = return ()
+$ ls
+Makefile  c_extern.h   forc.mk  main.c
+alloc.c   dummy4jhc.c  hs_src/
+$ make
+$ ls
+Blink.bin  LPC176x   build_haskell  forc.mk
+Blink.elf  Makefile  c_extern.h     hs_src
+Blink.hex  alloc.c   dummy4jhc.c    main.c
+~~~
+
+うんコンパイルできました
+
 # 完成したHaskell開発環境
 
 xxx 概要図
+
+# HaskellからLEDチカチカ
+
+* まず時間待ちを作りましょう
+* C言語のdelay関数をHaskellから呼出
+
+~~~ {.haskell}
+-- File: hs_src/Delay.hs
+module Delay where
+
+foreign import ccall "c_extern.h delay" delay :: Int -> IO ()
+~~~
+
+# LED操作 #1
+
+~~~ {.haskell}
+-- File: hs_src/Led.hs (つづく)
+module Led where
+import Data.Word
+import Data.Bits
+import Foreign.Ptr
+import Foreign.Storable
+
+foreign import ccall "c_extern.h &jhc_zeroAddress" c_jhc_zeroAddress32 :: Ptr Word32
+
+addr_LPC_GPIO_BASE, addr_LPC_GPIO1_BASE, addr_FIODIR, addr_FIOPIN :: Ptr Word32
+addr_LPC_GPIO_BASE = c_jhc_zeroAddress32 `plusPtr` 0x2009C000
+addr_LPC_GPIO1_BASE = addr_LPC_GPIO_BASE `plusPtr` 0x00020
+addr_FIODIR = addr_LPC_GPIO1_BASE
+addr_FIOPIN = addr_LPC_GPIO1_BASE `plusPtr` (4 + 4 * 3 + 4)
+~~~
+
+# LED操作 #2
+
+~~~ {.haskell}
+-- File: hs_src/Led.hs (つづき)
+led1, led2, led3, led4, ledAll :: Word32
+led1 = 1 `shiftL` 18
+led2 = 1 `shiftL` 20
+led3 = 1 `shiftL` 21
+led4 = 1 `shiftL` 23
+ledAll = foldl (.|.) 0 [led1, led2, led3, led4]
+
+initLeds :: IO ()
+initLeds = poke addr_FIODIR ledAll
+
+ledsOn :: [Word32] -> IO ()
+ledsOn ls = poke addr_FIOPIN $ foldl (.|.) 0 ls
+~~~
+
+長いです。。。
+
+あとで概要を説明します!
+
+# Haskellのmain関数
+
+~~~ {.haskell}
+import Control.Monad
+import Data.Word
+import Led
+import Delay
+
+main :: IO ()
+main = do
+  initLeds
+  realmain
+
+ledList :: [Word32]
+ledList = [led1, led2, led3, led4]
+
+realmain :: IO ()
+realmain = forever $ do
+  ledsOn []               >> mydelay
+  ledsOn (take 1 ledList) >> mydelay
+  ledsOn (take 2 ledList) >> mydelay
+  ledsOn (take 3 ledList) >> mydelay
+  ledsOn (take 4 ledList) >> mydelay
+  where mydelay = delay 1000000
+~~~
+
+# このHaskellコードはどう動く？
+
+xxx 図
 
 # [7] Ajhcコンパイラの過去と未来
 
