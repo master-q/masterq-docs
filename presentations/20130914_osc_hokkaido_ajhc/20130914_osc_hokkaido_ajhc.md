@@ -31,7 +31,11 @@ xxx youtube URL
 
 # ハードウェア構成
 
-xxx mbedボードとオレンジボード
+アーキティクチャ: ARM Cortex-M3
+
+デバイス: Ethernet, LED, LCD, SDカード, USBホスト/デバイス, シリアル
+
+xxx mbedボードとオレンジボードの写真
 
 # ソフトウェア構成
 
@@ -205,7 +209,7 @@ $ nm hs.out | grep "U "
 # 実用化に辿りつくために
 ![background](img/goal.png)
 
-* 実行可能状態を維持しながら開発
+実行可能状態を維持しながら開発 (スナッチ)
 
 ![inline](draw/2012-12-27-arafura_design.png)
 
@@ -217,10 +221,10 @@ $ nm hs.out | grep "U "
 Ubuntu 12.04 amd64 の場合
 
 ~~~
-$ sudo apt-get install haskell-platform libncurses5-dev libwww-perl gcc m4
+$ sudo apt-get install haskell-platform libncurses5-dev gcc m4
 $ cabal update
-$ cabal install ajhc
 $ export PATH=$HOME/.cabal/bin/:$PATH
+$ cabal install ajhc
 $ which ajhc
 /home/ユーザ名/.cabal/bin/ajhc
 $ ajhc --version
@@ -228,7 +232,8 @@ ajhc 0.8.0.8 (f6c3f4b070acad8a5012682810f0f4d7b7b9ed44)
 compiled by ghc-7.4 on a x86_64 running linux
 ~~~
 
-あっさりですね!
+バージョン0.8.0.9からはWindowsとOS Xでもインストール可能になる予定です
+
 
 # 使い方詳細
 ![background](img/minix.png)
@@ -240,6 +245,118 @@ ajhc.metasepi.org/manual_ja.html
 を読んでみてください!
 
 # [6] mbedマイコン上でのHaskell
+
+mbedマイコン上でHaskellコードを動かす手順をステップ毎に説明します
+
+* 前半: C言語の開発環境構築
+* 後半: Haskellの開発環境構築
+
+の大きく二つに分かれています
+
+# ベースとなるソースコードを入手
+
+githubにmbedのC言語プロジェクトがあったので、これをベースに開発をはじめます
+
+~~~
+https://github.com/adamgreen/gcc4mbed
+~~~
+
+# ビルド手順を確認
+
+クロスコンパイル環境構築
+
+~~~
+$ cd gcc4mbed
+$ ./linux_install
+~~~
+
+設定したクロスコンパイラを使うには...
+
+~~~
+$ cd gcc4mbed
+$ ./BuildShell
+$ cd samples/Blink
+$ ls
+main.c  makefile
+$ make
+$ ls
+Blink.bin  Blink.elf  Blink.hex  LPC176x  main.c  makefile
+~~~
+
+Blink.elfがコンパイル結果です
+
+# mbedにプログラムを書き込む #1
+
+プログラム書き込み環境を作りましょう
+
+* mbedファームウェアを更新
+
+~~~
+http://mbed.org/handbook/Firmware-LPC1768-LPC11U24
+~~~
+
+rev.141212以降のファームウェアが必要です
+
+* pyOCDのインストール
+
+~~~
+$ sudo apt-get install python libusb-1.0-0-dev
+$ git clone git@github.com:walac/pyusb.git
+$ cd pyusb
+$ sudo python setup.py install
+$ git clone git@github.com:mbedmicro/mbed.git
+$ cd mbed/workspace_tools/debugger
+$ sudo python setup.py install
+~~~
+
+# mbedにプログラムを書き込む #2
+
+* 書き込みスクリプト設定
+
+~~~
+$ cd gcc4mbed
+$ cp ~/mbed/workspace_tools/debugger/test/gdb_test.py gdbserver.py
+~~~
+
+* Makefileにgdbターゲット追加
+
+~~~
+$ vi gcc4mbed/samples/Blink/makefile
+--snip--
+gdbwrite: all
+        @echo '################################################'
+        @echo '# Use me after running "sudo ./gdbserver4.py". #'
+        @echo '################################################'
+        $(GDB) -x ../../gdbwrite.boot $(PROJECT).elf
+~~~
+
+# mbedにプログラムを書き込む #3
+
+* mbedとPCをUSBケーブルで接続
+* 一つ目のターミナルで以下を実行
+
+~~~
+$ cd gcc4mbed
+$ sudo python gdbserver.py
+~~~
+
+* 別のターミナルを開き以下を実行
+
+~~~
+$ cd gcc4mbed
+$ ./BuildShell
+$ cd samples/Blink
+$ make gdbwrite
+(gdb) c
+~~~
+
+# 完成したC言語開発環境
+
+![inline](draw/dev_c.png)
+
+# 完成したHaskell開発環境
+
+xxx 概要図
 
 # [7] Ajhcコンパイラの過去と未来
 
