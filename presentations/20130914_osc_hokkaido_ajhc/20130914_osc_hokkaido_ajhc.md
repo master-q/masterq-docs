@@ -31,7 +31,15 @@ http://www.youtube.com/watch?v=C9JsJXWyajQ
 * mbedでRSSリーダーを作ってみました
 * redditのRSSをLCDにヘッドライン表示
 
-# ハードウェア構成
+　
+
+　
+
+このスライドは以下のURLでご覧になれます
+
+http://bit.ly/mbedhask
+
+# デモのハードウェア構成
 
 アーキティクチャ: ARM Cortex-M3
 
@@ -39,11 +47,11 @@ http://www.youtube.com/watch?v=C9JsJXWyajQ
 
 ![inline](img/mbed_StarBoard_Orange.png)
 
-# ソフトウェア構成
+# デモのソフトウェア構成
 
 ![inline](draw/mbed_rss_arch.png)
 
-# ソースコードツリー
+# デモのソースコードツリー
 
 ~~~
 demo-cortex-m3
@@ -576,7 +584,7 @@ Blink.hex  alloc.c   dummy4jhc.c    main.c
 
 # 完成したHaskell開発環境
 
-xxx 概要図
+![inline](draw/dev_haskell.png)
 
 # HaskellからLEDチカチカ
 
@@ -634,6 +642,7 @@ ledsOn ls = poke addr_FIOPIN $ foldl (.|.) 0 ls
 # Haskellのmain関数
 
 ~~~ {.haskell}
+-- File: hs_src/Main.hs
 import Control.Monad
 import Data.Word
 import Led
