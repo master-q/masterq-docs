@@ -42,6 +42,8 @@ http://bit.ly/mbedhask
 
 アーキティクチャ: ARM Cortex-M3
 
+メモリサイズ: 64kB
+
 デバイス: Ethernet, LED, LCD, SDカード, USBホスト/デバイス, シリアル
 
 ![inline](img/mbed_StarBoard_Orange.png)
@@ -266,8 +268,10 @@ mbedマイコン上でHaskellコードを動かす手順をステップ毎に説
 
 の大きく3つに分けようと思います
 
-# ベースとなるソースコードを入手
+# C言語の開発環境構築
 ![background](img/blank.png)
+
+まずベースとなるソースコードを入手しましょう
 
 ~~~
 https://github.com/adamgreen/gcc4mbed
@@ -386,7 +390,7 @@ $ make gdbwrite
 
 ![inline](draw/dev_c.png)
 
-# Haskellプログラミング開始
+# Haskellの開発環境構築
 ![background](img/blank.png)
 
 * Haskellプロジェクトディレクトリを掘る
@@ -530,6 +534,24 @@ int main()
 }
 ~~~
 
+# 独自のmalloc関数(alloc.c)
+![background](img/blank.png)
+
+ソースコードが大きいのでwget
+
+~~~
+$ wget https://raw.github.com/ajhc/demo-cortex-m3/master/mbed-nxp-lpc1768/samples/Haskell/alloc.c
+$ grep MALLOC_HEAPSIZE alloc.c
+#define MALLOC_HEAPSIZE _JHC_MALLOC_HEAP_SIZE
+#define MALLOC_HEAPSIZE (2*1024)
+char malloc_heapstart[MALLOC_HEAPSIZE];
+char *malloc_heaplimit = (char *) (malloc_heapstart + MALLOC_HEAPSIZE);
+~~~
+
+malloc用ヒープは2kBに設定してみました
+
+通常用途ならたぶん十分です
+
 # 雑多なAjhc向け設定
 ![background](img/blank.png)
 
@@ -557,24 +579,6 @@ extern volatile void jhc_zeroAddress;
 void delay();
 ~~~
 
-# 独自のmalloc関数(alloc.c)
-![background](img/blank.png)
-
-ソースコードが大きいのでwget
-
-~~~
-$ wget https://raw.github.com/ajhc/demo-cortex-m3/master/mbed-nxp-lpc1768/samples/Haskell/alloc.c
-$ grep MALLOC_HEAPSIZE alloc.c 
-#define MALLOC_HEAPSIZE _JHC_MALLOC_HEAP_SIZE
-#define MALLOC_HEAPSIZE (2*1024)
-char malloc_heapstart[MALLOC_HEAPSIZE];
-char *malloc_heaplimit = (char *) (malloc_heapstart + MALLOC_HEAPSIZE);
-~~~
-
-malloc用ヒープは2kBに設定してみました
-
-通常用途ならたぶん十分です
-
 # 何もしないHaskellコードでお試し
 ![background](img/blank.png)
 
@@ -600,9 +604,10 @@ Blink.hex  alloc.c   dummy4jhc.c    main.c
 
 ![inline](draw/dev_haskell.png)
 
-# HaskellからLEDチカチカ
+# Haskellを使ったプログラミング
 ![background](img/blank.png)
 
+* HaskellからLEDチカチカしたい!
 * まず時間待ちを作りましょう
 * C言語のdelay関数をHaskellから呼出
 
