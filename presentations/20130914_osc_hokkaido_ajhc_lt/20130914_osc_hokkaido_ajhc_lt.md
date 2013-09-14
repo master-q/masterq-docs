@@ -19,7 +19,7 @@ Kiwamu Okabe
 http://mbed.org/
 
 * プロトタイピング用ワンボードマイコン
-* ARM Cortex-M3などのマイコンを使用
+* Cortex-M3などのARMマイコンを使用
 * Arduinoみたいなのの32bit CPU版
 * Webブラウザだけで開発できる
 * もちろんGCCを使った開発も可能
@@ -64,8 +64,8 @@ http://bit.ly/mbedmov
 
 ~~~
 $ sudo apt-get install haskell-platform gcc make m4
-$ cabal install ajhc
 $ export PATH=$HOME/.cabal/bin:$PATH
+$ cabal install ajhc
 ~~~
 
 * 使い方も簡単
@@ -96,4 +96,4 @@ http://www.paraiso-lang.org/ikmsm/
 * 囲碁AI
 * Ajhcコンパイラの開発秘話 <= コレ書いた
 
-立ち読みしたい方はぼくに声かけて!
+立ち読み/購入したい方はぼくに声かけて!
