@@ -19,6 +19,8 @@ Kiwamu Okabe
 * [3] What is Metasepi?
 * [4] What is compiler to build OS
 * [5] How to use Ajhc
+* [6] Ajhc project overview
+* [7] Ajhc project status
 
 xxx
 
@@ -206,7 +208,7 @@ $ nm hs.out | grep "U "
 # Jhc is translator to C language
 ![background](img/mix.png)
 
-![inline](draw/ajhc_compile.png)
+![inline](draw/2012-12-22-jhc_compile.png)
 
 # Easy to cross build
 ![background](img/cross.png)
@@ -216,7 +218,7 @@ $ nm hs.out | grep "U "
 # Survive burning out
 ![background](img/goal.png)
 
-Let's develop in dogfooding style. (The method is called "snatch".)
+Let's develop in dogfooding style. (The method is called "Snatch".)
 
 ![inline](draw/2012-12-27-arafura_design.png)
 
@@ -233,7 +235,7 @@ $ cabal update
 $ export PATH=$HOME/.cabal/bin/:$PATH
 $ cabal install ajhc
 $ which ajhc
-/home/ユーザ名/.cabal/bin/ajhc
+/home/USER/.cabal/bin/ajhc
 $ echo 'main = print "hoge"' > Hoge.hs
 $ ajhc Hoge.hs
 $ ./hs.out
@@ -252,6 +254,42 @@ Please read "Ajhc User's Manual".
 Also you can read in Japanese.
 
 * ajhc.metasepi.org/manual_ja.html
+
+# [6] Ajhc project overview
+
+![inline](img/ajhc_website.png)
+
+# User's Manual
+
+![inline](img/ajhc_manual.png)
+
+# Source code hosting at github
+
+![inline](img/ajhc_github.png)
+
+# Build test on Travis CI
+
+![inline](img/ajhc_travisci.png)
+
+# Demo movies at youtube
+
+![inline](img/ajhc_demomovies.png)
+
+# Demo code also at github
+
+* github.com/ajhc/demo-cortex-m3
+* github.com/ajhc/demo-android-ndk
+* github.com/metasepi/chibios-arafura
+
+# Bug tracker at github
+
+![inline](img/ajhc_bts.png)
+
+# Hacking Guide Book (writing)
+
+github.com/ajhc/ajhc-hacking-guide
+
+![inline](img/ajhc_hg.png)
 
 # PR: Call For Articles
 ![background](img/c84.png)
