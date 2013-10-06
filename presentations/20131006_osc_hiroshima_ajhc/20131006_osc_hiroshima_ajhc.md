@@ -174,6 +174,8 @@ http://itpro.nikkeibp.co.jp/article/COLUMN/20060915/248230/
 # Want POSIX free compiler
 ![background](img/hiking.png)
 
+Programs to print "hoge" on terminal.
+
 ![inline](img/compiler_list.png)
 
 Measurement value is smaller, dependence on POSIX is small.
@@ -259,6 +261,10 @@ Also you can read in Japanese.
 
 ![inline](img/ajhc_website.png)
 
+# Hackage DB
+
+![inline](img/ajhc_hackage.png)
+
 # User's Manual
 
 ![inline](img/ajhc_manual.png)
@@ -290,6 +296,50 @@ Also you can read in Japanese.
 github.com/ajhc/ajhc-hacking-guide
 
 ![inline](img/ajhc_hg.png)
+
+# [7] Ajhc project status
+
+Following functions developed by us.
+
+* Install with cabal.
+* Support compiling on Windows.
+* GC eating low memory.
+* Support thread.
+* Shape reentrant.
+
+# Application on bootloader
+
+gitorious.org/metasepi/netbsd-arafura
+
+![inline](draw/boot_sequence_diagram.png)
+
+# Application without OS
+
+github.com/ajhc/demo-cortex-m3
+
+![inline](draw/running_blink.png)
+
+# Application on tiny OS
+
+github.com/metasepi/chibios-arafura
+
+![inline](draw/chibi_thr.png)
+
+# Application on Android NDK
+
+github.com/ajhc/demo-android-ndk
+
+![inline](draw/app_on_android.png)
+
+# What's comming next?
+
+* Support more Haskell libraries.
+* Own package manager.
+* Implement MVar.
+* Clang backend.
+* Application on iOS?
+* Benchmark.
+* Write NetBSD driver with Ajhc.
 
 # PR: Call For Articles
 ![background](img/c84.png)
