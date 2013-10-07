@@ -1,4 +1,5 @@
 # Metasepi team meeting:　　　Ajhc Project Overview
+![background](img/prospect.png)
 
 Kiwamu Okabe
 
@@ -13,6 +14,7 @@ Kiwamu Okabe
 * 10 years' experience in developing OS using NetBSD.
 
 # Agenda
+![background](img/htv.png)
 
 * [1] Demo
 * [2] What is Ajhc?
@@ -21,8 +23,6 @@ Kiwamu Okabe
 * [5] How to use Ajhc
 * [6] Ajhc project overview
 * [7] Ajhc project status
-
-xxx
 
 # [1] Demo
 ![background](img/demo_movie.png)
@@ -156,10 +156,10 @@ http://itpro.nikkeibp.co.jp/article/COLUMN/20060915/248230/
 # Kernel desperately wants type
 ![background](img/stop.png)
 
-* Kernels are developed with C lang
+* Kernels are developed with C lang.
 * Error on user space => SEGV
 * Error on kernel space => halt!
-* Should design kernel with the greatest care
+* Should design kernel with the greatest care.
 * C language is safe?
 
 # [4] What is compiler to build OS
@@ -227,8 +227,6 @@ Let's develop in dogfooding style. (The method is called "Snatch".)
 # [5] How to use Ajhc
 ![background](img/blank.png)
 
-* Install
-
 Case of Ubuntu 12.04 amd64.
 
 ~~~
@@ -244,7 +242,7 @@ $ ./hs.out
 "hoge"
 ~~~
 
-You can use on WIndows or Mac OS X.
+You can use on Windows or Mac OS X.
 
 # Detail of usage
 ![background](img/minix.png)
@@ -258,46 +256,56 @@ Also you can read in Japanese.
 * ajhc.metasepi.org/manual_ja.html
 
 # [6] Ajhc project overview
+![background](img/ocean.png)
 
 ![inline](img/ajhc_website.png)
 
 # Hackage DB
+![background](img/ocean.png)
 
 ![inline](img/ajhc_hackage.png)
 
 # User's Manual
+![background](img/ocean.png)
 
 ![inline](img/ajhc_manual.png)
 
 # Source code hosting at github
+![background](img/ocean.png)
 
 ![inline](img/ajhc_github.png)
 
 # Build test on Travis CI
+![background](img/ocean.png)
 
 ![inline](img/ajhc_travisci.png)
 
 # Demo movies at youtube
+![background](img/ocean.png)
 
 ![inline](img/ajhc_demomovies.png)
 
 # Demo code also at github
+![background](img/github.png)
 
 * github.com/ajhc/demo-cortex-m3
 * github.com/ajhc/demo-android-ndk
 * github.com/metasepi/chibios-arafura
 
 # Bug tracker at github
+![background](img/ocean.png)
 
 ![inline](img/ajhc_bts.png)
 
 # Hacking Guide Book (writing)
+![background](img/ocean.png)
 
 github.com/ajhc/ajhc-hacking-guide
 
 ![inline](img/ajhc_hg.png)
 
 # [7] Ajhc project status
+![background](img/yumemiru_chikara.png)
 
 Following functions developed by us.
 
@@ -308,30 +316,35 @@ Following functions developed by us.
 * Shape reentrant.
 
 # Application on bootloader
+![background](img/ocean_surf.png)
 
 gitorious.org/metasepi/netbsd-arafura
 
 ![inline](draw/boot_sequence_diagram.png)
 
 # Application without OS
+![background](img/ocean_surf.png)
 
 github.com/ajhc/demo-cortex-m3
 
 ![inline](draw/running_blink.png)
 
 # Application on tiny OS
+![background](img/ocean_surf.png)
 
 github.com/metasepi/chibios-arafura
 
 ![inline](draw/chibi_thr.png)
 
 # Application on Android NDK
+![background](img/ocean_surf.png)
 
 github.com/ajhc/demo-android-ndk
 
 ![inline](draw/app_on_android.png)
 
 # What's comming next?
+![background](img/ship.png)
 
 * Support more Haskell libraries.
 * Own package manager.
