@@ -19,8 +19,8 @@ Kiwamu Okabe
 * [3] What is Metasepi?
 * [4] What is compiler to build OS
 * [5] How to use Ajhc
-* [6] Snatch-driven development
-* [7] Case: Android NDK Apps
+* [6] Detail of Snatch method
+* [7] Case study: Android NDK
 
 # [1] Demo
 ![background](img/demo_movie.png)
@@ -253,8 +253,8 @@ Also you can read in Japanese.
 
 * ajhc.metasepi.org/manual_ja.html
 
-# [6] Snatch-driven development
-# [7] Case: Android NDK Apps
+# [6] Detail of Snatch method
+# [7] Case study: Android NDK
 
 # PR: Call For Articles
 ![background](img/c84.png)
