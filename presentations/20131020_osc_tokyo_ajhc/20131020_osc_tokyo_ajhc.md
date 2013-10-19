@@ -1,4 +1,5 @@
 # Metasepi team meeting #6:　"Snatch-driven development"
+![background](img/pc88_snatcher.png)
 
 Kiwamu Okabe
 
@@ -13,6 +14,7 @@ Kiwamu Okabe
 * 10 years' experience in developing OS using NetBSD.
 
 # Agenda
+![background](img/chibi_snatcher.png)
 
 * [1] Demo
 * [2] What is Ajhc?
@@ -254,7 +256,70 @@ Also you can read in Japanese.
 * ajhc.metasepi.org/manual_ja.html
 
 # [6] Detail of Snatch method
+![background](img/snatcher_cast.png)
+
 # [7] Case study: Android NDK
+![background](img/randam_hajile.png)
+
+Let's watch Snatch animation on Android NDK Apps. Have popcorn?
+
+If you want to know more detail, try the following.
+
+~~~
+$ git clone https://github.com/ajhc/demo-android-ndk.git
+$ cd demo-android-ndk
+$ git log -p
+~~~
+
+# Step0: Before Snatch
+
+~~~ {.c}
+// ### native-activity/jni/main.c ###
+static int engine_init_display(struct engine* engine) {
+// --snip--
+}
+static void engine_draw_frame(struct engine* engine) {
+// --snip--
+}
+static void engine_term_display(struct engine* engine) {
+// --snip--
+}
+static int32_t engine_handle_input(struct android_app* app, AInputEvent* event) {
+// --snip--
+}
+static void engine_handle_cmd(struct android_app* app, int32_t cmd) {
+// --snip--
+}
+void android_main(struct android_app* state) {
+// --snip--
+}
+~~~
+
+# Step1: Call Haskell empty code
+
+~~~ {.haskell}
+-- ### native-activity/hs_src/Main.hs ###
+main :: IO ()
+main = return ()
+~~~
+
+~~~ {.c}
+// ### native-activity/jni/main.c ###
+void android_main(struct android_app* state) {
+// --snip--
+    { // Run Haskell code.
+        int hsargc = 1;
+        char *hsargv = "q";
+        char **hsargvp = &hsargv;
+
+        hs_init(&hsargc, &hsargvp);
+        _amain();
+        hs_exit();
+    }
+// --snip--
+~~~
+
+# Step2:
 
 # PR: Call For Articles
 ![background](img/c84.png)
