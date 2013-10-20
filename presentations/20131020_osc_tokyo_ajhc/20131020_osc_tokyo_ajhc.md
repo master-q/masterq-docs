@@ -364,7 +364,7 @@ struct saved_state {
 };
 ~~~
 
-# Step3: Snatch first func (cont.)
+# Step3: Snatch 1st func (cont.)
 
 ~~~ {.haskell}
 -- ### native-activity/hs_src/AndroidNdk.hs ###
@@ -387,17 +387,69 @@ engineHandleInput eng event = do
             return 1
 ~~~
 
-# Step3: Snatch first func
+# Step3: Snatch 1st func
 
 ~~~ {.c}
 // ### native-activity/jni/main.c ###
-int32_t engineHandleInput(struct engine* engine, AInputEvent* event); // Haskell impl
+extern int32_t engineHandleInput(struct engine* engine, AInputEvent* event); // Haskell impl
 
 static int32_t engine_handle_input(struct android_app* app, AInputEvent* event) {
     struct engine* engine = (struct engine*)app->userData;
     return engineHandleInput(engine, event);
 }
 ~~~
+
+# Step4: Snatch 2nd func (cont.)
+
+~~~ {.haskell}
+-- ### native-activity/hs_src/AndroidNdk.hs ###
+foreign import primitive "const.APP_CMD_SAVE_STATE" c_APP_CMD_SAVE_STATE :: Int
+-- snip --
+foreign import ccall "c_extern.h engine_init_display" c_engine_init_display :: Ptr AndroidEngine -> IO Int
+foreign import ccall "c_extern.h engine_draw_frame" c_engine_draw_frame :: Ptr AndroidEngine -> IO ()
+-- snip --
+foreign import ccall "c_extern.h ASensorEventQueue_disableSensor" c_ASensorEventQueue_disableSensor :: Ptr ASensorEventQueue -> Ptr ASensor -> IO Int
+
+engineHandleCmd :: Ptr AndroidEngine -> Int -> IO ()
+engineHandleCmd eng cmd
+  | cmd == c_APP_CMD_SAVE_STATE = do enghs <- peek eng
+                                     let app = engApp enghs
+                                     apphs <- peek app
+                                     sstat <- malloc
+                                     poke sstat $ engState enghs
+-- snip --
+~~~
+
+# Step4: Snatch 2nd func
+
+~~~ {.c}
+// ### native-activity/jni/c_extern.h ###
+int engine_init_display(struct engine* engine);
+void engine_draw_frame(struct engine* engine);
+void engine_term_display(struct engine* engine);
+~~~
+
+~~~ {.c}
+// ### native-activity/jni/main.c ###
+extern void engineHandleCmd(struct engine* engine, int32_t cmd);
+
+static void engine_handle_cmd(struct android_app* app, int32_t cmd) {
+    struct engine* engine = (struct engine*)app->userData;
+    engineHandleCmd(engine, cmd);
+}
+~~~
+
+# Step5: Snatch remaining funcs
+
+Snatch the following functions.
+
+* engine_init_display()
+* engine_draw_frame()
+* engine_term_display()
+
+# Step6: Snatch android_main
+
+
 
 # PR: Call For Articles
 ![background](img/c84.png)
