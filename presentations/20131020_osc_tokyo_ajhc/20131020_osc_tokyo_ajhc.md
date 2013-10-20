@@ -21,8 +21,8 @@ Kiwamu Okabe
 * [3] What is Metasepi?
 * [4] What is compiler to build OS
 * [5] How to use Ajhc
-* [6] Detail of Snatch method
-* [7] Case study: Android NDK
+* [6] Case study: Snatch Android
+* [7] Detail of Snatch process
 
 # [1] Demo
 ![background](img/demo_movie.png)
@@ -255,10 +255,9 @@ Also you can read in Japanese.
 
 * ajhc.metasepi.org/manual_ja.html
 
-# [6] Detail of Snatch method
-![background](img/snatcher_cast.png)
+# [6] Case study: Snatch Android
 
-# [7] Case study: Android NDK
+# [7] Detail of Snatch method
 ![background](img/randam_hajile.png)
 
 Let's watch Snatch animation on Android NDK Apps. Have popcorn?
@@ -272,6 +271,7 @@ $ git log -p
 ~~~
 
 # Step0: Before Snatch
+![background](img/blank.png)
 
 ~~~ {.c}
 // ### native-activity/jni/main.c ###
@@ -294,6 +294,7 @@ void android_main(struct android_app* state) {
 ~~~
 
 # Step1: Call Haskell empty code
+![background](img/blank.png)
 
 ~~~ {.haskell}
 -- ### native-activity/hs_src/Main.hs ###
@@ -318,6 +319,7 @@ void android_main(struct android_app* state) {
 ~~~
 
 # Step2: struct => Storable (cont.)
+![background](img/blank.png)
 
 ~~~ {.haskell}
 -- ### native-activity/hs_src/AndroidNdk.hs ###
@@ -338,6 +340,7 @@ data SavedState = SavedState { sStateAngle :: Float
 ~~~
 
 # Step2: struct => Storable
+![background](img/blank.png)
 
 ~~~ {.haskell}
 instance Storable SavedState where
@@ -365,6 +368,7 @@ struct saved_state {
 ~~~
 
 # Step3: Snatch 1st func (cont.)
+![background](img/blank.png)
 
 ~~~ {.haskell}
 -- ### native-activity/hs_src/AndroidNdk.hs ###
@@ -388,6 +392,7 @@ engineHandleInput eng event = do
 ~~~
 
 # Step3: Snatch 1st func
+![background](img/blank.png)
 
 ~~~ {.c}
 // ### native-activity/jni/main.c ###
@@ -400,6 +405,7 @@ static int32_t engine_handle_input(struct android_app* app, AInputEvent* event) 
 ~~~
 
 # Step4: Snatch 2nd func (cont.)
+![background](img/blank.png)
 
 ~~~ {.haskell}
 -- ### native-activity/hs_src/AndroidNdk.hs ###
@@ -421,6 +427,7 @@ engineHandleCmd eng cmd
 ~~~
 
 # Step4: Snatch 2nd func
+![background](img/blank.png)
 
 ~~~ {.c}
 // ### native-activity/jni/c_extern.h ###
@@ -440,6 +447,7 @@ static void engine_handle_cmd(struct android_app* app, int32_t cmd) {
 ~~~
 
 # Step5: Snatch remaining funcs
+![background](img/blank.png)
 
 Snatch the following functions.
 
@@ -448,6 +456,7 @@ Snatch the following functions.
 * engine_term_display()
 
 # Step6: Snatch main func (cont.)
+![background](img/blank.png)
 
 ~~~ {.haskell}
 -- ### native-activity/hs_src/Main.hs ###
@@ -473,6 +482,7 @@ androidMain app = do
 ~~~
 
 # Step6: Snatch main func
+![background](img/blank.png)
 
 ~~~ {.c}
 // ### native-activity/jni/main.c ###
@@ -491,8 +501,9 @@ void android_main(struct android_app* state) {
 ~~~
 
 # Step7: Get clean => GOAL
+![background](img/snatcher_cast.png)
 
-It's Haskell turn!
+Haskell's turn, now!
 
 # PR: Call For Articles
 ![background](img/c84.png)
