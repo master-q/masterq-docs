@@ -275,24 +275,22 @@ $ git log -p
 
 ~~~ {.c}
 // ### native-activity/jni/main.c ###
+struct saved_state {
+// --snip--
+struct engine {
+// --snip--
 static int engine_init_display(struct engine* engine) {
 // --snip--
-}
 static void engine_draw_frame(struct engine* engine) {
 // --snip--
-}
 static void engine_term_display(struct engine* engine) {
 // --snip--
-}
 static int32_t engine_handle_input(struct android_app* app, AInputEvent* event) {
 // --snip--
-}
 static void engine_handle_cmd(struct android_app* app, int32_t cmd) {
 // --snip--
-}
 void android_main(struct android_app* state) {
 // --snip--
-}
 ~~~
 
 # Step1: Call Haskell empty code
@@ -319,7 +317,52 @@ void android_main(struct android_app* state) {
 // --snip--
 ~~~
 
-# Step2:
+# Step2: struct => Storable (cont.)
+
+~~~ {.haskell}
+-- ### native-activity/hs_src/AndroidNdk.hs ###
+{-# LANGUAGE ForeignFunctionInterface #-}
+module AndroidNdk where
+import Foreign.Storable
+import Foreign.C.Types
+import Foreign.Ptr
+
+foreign import primitive "const.sizeof(struct saved_state)" sizeOf_SavedState :: Int
+foreign import primitive "const.offsetof(struct saved_state, angle)" offsetOf_SavedState_angle :: Int
+foreign import primitive "const.offsetof(struct saved_state, x)" offsetOf_SavedState_x :: Int
+foreign import primitive "const.offsetof(struct saved_state, y)" offsetOf_SavedState_y :: Int
+
+data SavedState = SavedState { sStateAngle :: Float
+                             , sStateX     :: Int
+                             , sStateY     :: Int }
+~~~
+
+# Step2: struct => Storable
+
+~~~ {.haskell}
+instance Storable SavedState where
+  sizeOf    = const sizeOf_SavedState
+  alignment = sizeOf
+  poke p sstat = do
+    pokeByteOff p offsetOf_SavedState_angle $ sStateAngle sstat
+    pokeByteOff p offsetOf_SavedState_x     $ sStateX sstat
+    pokeByteOff p offsetOf_SavedState_y     $ sStateY sstat
+  peek p = do
+    angle <- peekByteOff p offsetOf_SavedState_angle
+    x     <- peekByteOff p offsetOf_SavedState_x
+    y     <- peekByteOff p offsetOf_SavedState_y
+    return $ SavedState { sStateAngle = angle, sStateX = x, sStateY = y }
+-- snip --
+~~~
+
+~~~ {.c}
+// ### native-activity/jni/c_extern.h ###
+struct saved_state {
+    float angle;
+    int32_t x;
+    int32_t y;
+};
+~~~
 
 # PR: Call For Articles
 ![background](img/c84.png)
