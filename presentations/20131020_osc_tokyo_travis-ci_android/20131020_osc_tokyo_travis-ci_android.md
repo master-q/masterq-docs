@@ -1,4 +1,5 @@
 # AndroidアプリをTravis CIでビルド
+![background](img/android_book.png)
 
 Kiwamu Okabe
 
@@ -17,6 +18,7 @@ Kiwamu Okabe
 ![inline](img/travis-ci.png)
 
 # AndroidアプリもCIしたい
+![background](img/eclipse.png)
 
 * Eclipseとかじゃなくって
 * 自動ビルドしたいんだ。。。
@@ -30,6 +32,7 @@ Kiwamu Okabe
 ![inline](draw/travis-ci_android.png)
 
 # 実際どんな感じか見てみましょう!
+![background](img/timeattack.png)
 
 5分以内に終わるかな。。。
 
