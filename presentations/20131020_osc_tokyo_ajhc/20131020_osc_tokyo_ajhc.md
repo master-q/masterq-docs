@@ -257,6 +257,8 @@ Also you can read in Japanese.
 
 # [6] Case study: Snatch Android
 
+![background](img/android_wallpaper.png)
+
 Let's snatch sample app "native-activity".
 
 developer.android.com/tools/sdk/ndk/
@@ -264,6 +266,7 @@ developer.android.com/tools/sdk/ndk/
 ![inline](img/ndk_sample_app.png)
 
 # Snatch plan
+![background](img/arrow.png)
 
 ![inline](draw/snatch_plan.png)
 
