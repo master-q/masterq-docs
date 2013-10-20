@@ -257,6 +257,16 @@ Also you can read in Japanese.
 
 # [6] Case study: Snatch Android
 
+Let's snatch sample app "native-activity".
+
+developer.android.com/tools/sdk/ndk/
+
+![inline](img/ndk_sample_app.png)
+
+# Snatch plan
+
+![inline](draw/snatch_plan.png)
+
 # [7] Detail of Snatch method
 ![background](img/randam_hajile.png)
 
@@ -502,6 +512,8 @@ void android_main(struct android_app* state) {
 
 # Step7: Get clean => GOAL
 ![background](img/snatcher_cast.png)
+
+We are in the strong typed world.
 
 Haskell's turn, now!
 
