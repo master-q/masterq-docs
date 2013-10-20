@@ -513,7 +513,7 @@ void android_main(struct android_app* state) {
 }
 ~~~
 
-# Step7: Get clean => GOAL
+# Step7: Get clear => GOAL
 ![background](img/snatcher_cast.png)
 
 We are in the strong typed world.
