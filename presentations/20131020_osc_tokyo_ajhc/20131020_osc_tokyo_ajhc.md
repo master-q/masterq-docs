@@ -364,6 +364,41 @@ struct saved_state {
 };
 ~~~
 
+# Step3: Snatch first func (cont.)
+
+~~~ {.haskell}
+-- ### native-activity/hs_src/AndroidNdk.hs ###
+newtype {-# CTYPE "AInputEvent" #-} AInputEvent = AInputEvent ()
+foreign import primitive "const.AINPUT_EVENT_TYPE_MOTION" c_AINPUT_EVENT_TYPE_MOTION :: Int
+foreign import ccall "c_extern.h AInputEvent_getType" c_AInputEvent_getType :: Ptr AInputEvent -> IO Int
+foreign import ccall "c_extern.h AMotionEvent_getX" c_AMotionEvent_getX :: Ptr AInputEvent -> CSize -> IO Float
+foreign import ccall "c_extern.h AMotionEvent_getY" c_AMotionEvent_getY :: Ptr AInputEvent -> CSize -> IO Float
+
+engineHandleInput :: Ptr AndroidEngine -> Ptr AInputEvent -> IO Int
+engineHandleInput eng event = do
+  t <- c_AInputEvent_getType event
+  if t /= c_AINPUT_EVENT_TYPE_MOTION then return 0
+    else do enghs <- peek eng
+            let stat = engState enghs
+            x <- c_AMotionEvent_getX event 0
+            y <- c_AMotionEvent_getY event 0
+            let enghs' = enghs { engAnimating = 1, engState = stat { sStateX = truncate x,  sStateY = truncate y } }
+            poke eng enghs'
+            return 1
+~~~
+
+# Step3: Snatch first func
+
+~~~ {.c}
+// ### native-activity/jni/main.c ###
+int32_t engineHandleInput(struct engine* engine, AInputEvent* event); // Haskell impl
+
+static int32_t engine_handle_input(struct android_app* app, AInputEvent* event) {
+    struct engine* engine = (struct engine*)app->userData;
+    return engineHandleInput(engine, event);
+}
+~~~
+
 # PR: Call For Articles
 ![background](img/c84.png)
 
