@@ -447,9 +447,52 @@ Snatch the following functions.
 * engine_draw_frame()
 * engine_term_display()
 
-# Step6: Snatch android_main
+# Step6: Snatch main func (cont.)
 
+~~~ {.haskell}
+-- ### native-activity/hs_src/Main.hs ###
+main :: IO () -- Dummy
+main = return ()
 
+foreign export ccall "androidMain" androidMain :: Ptr AndroidApp -> IO ()
+androidMain :: Ptr AndroidApp -> IO () -- True main
+androidMain app = do
+  eng <- malloc
+  poke eng defaultAndroidEngine
+  apphs <- peek app
+  let apphs' = apphs { appUserData = eng, appOnAppCmd = p_engineHandleCmd , appOnInputEvent = p_engineHandleInput }
+  poke app apphs'
+  enghs <- peek eng
+  -- Prepare to monitor accelerometer
+  sManage <- c_ASensorManager_getInstance
+  accel <- c_ASensorManager_getDefaultSensor sManage c_ASENSOR_TYPE_ACCELEROMETER
+  let looper = appLooper apphs'
+  when (ss_p /= nullPtr) $ do
+    ss <- peek ss_p
+-- snip --
+~~~
+
+# Step6: Snatch main func
+
+~~~ {.c}
+// ### native-activity/jni/main.c ###
+void android_main(struct android_app* state) {
+	app_dummy(); // Make sure glue isn't stripped.
+
+	// Init & run Haskell code.
+	int hsargc = 1;
+	char *hsargv = "q";
+	char **hsargvp = &hsargv;
+
+	hs_init(&hsargc, &hsargvp);
+	androidMain(state);
+	hs_exit();
+}
+~~~
+
+# Step7: Get clean => GOAL
+
+It's Haskell turn!
 
 # PR: Call For Articles
 ![background](img/c84.png)
