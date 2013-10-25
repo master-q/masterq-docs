@@ -10,7 +10,7 @@
 \begin{hcarentry}{Ajhc Haskell Compiler}
 \report{Kiwamu Okabe}
 \status{Experimental}
-\participants{John Meacham, Hiroki MIZUNO}% optional
+\participants{John Meacham, Hiroki MIZUNO, Hidekazu SEGAWA}% optional
 \makeheader
 
 \newcommand{\WhatsIsIt}{\subsubsection*{What is it?}}
@@ -30,6 +30,25 @@ Ajhc is, so to speak, an accelerator to develop jhc.
 
 \WhatsNew
 
+\noindent Runtime:
+
+Get thread-safe and reentrant.
+
+\vspace*{10pt}
+
+\noindent GC:
+
+Take Erlang style GC. It means Haskell context has own GC heap.
+
+\vspace*{10pt}
+
+\noindent Document:
+
+Translate Jhc User's Manual into Japanese.
+Translating into the other language is also easy, because the traslaters are using gettext.
+
+\noindent \url{https://github.com/ajhc/ajhc/blob/arafura/po/ja.po}
+
 xxx
 
 \Demo
@@ -43,6 +62,13 @@ The touchable cube application is written with Haskell and compiled by Ajhc. The
 \noindent \url{http://www.youtube.com/watch?v=C9JsJXWyajQ}
 
 The demo is running code that compiled with Ajhc on Cortex-M3 board, mbed. It's a simple RSS reader for reddit.com, show the RSS titles on Text LCD panel. You can get the demo detail and source code at \url{https://github.com/ajhc/demo-cortex-m3}.
+
+\vspace*{10pt}
+
+\noindent \url{http://www.youtube.com/watch?v=zkSy0ZroRIs}
+
+The demo is running Haskell code without any OS.
+And also the clock exception handler is written with Haskell.
 
 \Usage
 
@@ -63,7 +89,7 @@ Please read ``Ajhc User's Manual'' to know more detail. \url{http://ajhc.metasep
 
 \FuturePlans
 
-Try to rewrite (snatch) NetBSD kernel driver with Haskell. If we have luck, can port some library from GHC, like array or vector. After that, we are going to report back about developing Ajhc.
+Try to rewrite (snatch) NetBSD kernel driver with Haskell. If we have a luck, port some library like array or vector from GHC world. After that, we are going to report back about developing Ajhc.
 
 \License
 
@@ -79,6 +105,7 @@ GPL2 or later.
 \FurtherReading
   \begin{itemize}
     \item Ajhc - Haskell everywhere \url{http://ajhc.metasepi.org/}
+    \item jhc \url{http://repetae.net/computer/jhc/}
     \item Metasepi Project \url{http://metasepi.org/}
     \item Snatch-driven-development \url{http://www.slideshare.net/master\_q/20131020-osc-tokyoajhc}
   \end{itemize}
