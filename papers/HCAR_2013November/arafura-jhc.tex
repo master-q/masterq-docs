@@ -13,26 +13,36 @@
 \participants{John Meacham, Hiroki MIZUNO}% optional
 \makeheader
 
-Put the text here. 
-If you want to include Haskell code, consider using lhs2tex syntax (\url{http://people.cs.uu.nl/andres/lhs2tex/}).
-
-What's following are suggestions for the content of an entry.
-
-(WHAT IS IT?)
-
-(WHAT IS ITS STATUS? / WHAT HAS HAPPENED SINCE LAST TIME?)
-
-(CAN OTHERS GET IT?)
-
-(WHAT ARE THE IMMEDIATE PLANS?)
-
 \newcommand{\WhatsIsIt}{\subsubsection*{What is it?}}
 \newcommand{\Usage}{\subsubsection*{Usage}}
 \newcommand{\License}{\subsubsection*{License}}
+\newcommand{\Demo}{\subsubsection*{Demonstrations}}
 
 \WhatsIsIt
 
+Ajhc is a Haskell compiler, and acronym for ``A fork of jhc''.
+
+Jhc \url{http://repetae.net/computer/jhc/} converts Haskell code into pure C language code running with jhc's runtime. And the runtime is written with 3000 line (include comments) pure C code. It's a magic!
+
+Ajhc's mission is to keep contribution to jhc in the repository. Because the upstream author of jhc, John Meacham, can't pull the contribution speedy. (I think he is too busy to do it.) We should feedback jhc any changes. And also Ajhc aims to provide Metasepi project with a method to rewrite NetBSD kernel using Haskell. The method is called Snatch-driven development.
+
+Ajhc is, so to speak, an accelerator to develop jhc.
+
 \WhatsNew
+
+xxx
+
+\Demo
+
+\noindent \url{http://www.youtube.com/watch?v=n6cepTfnFoo}
+
+The touchable cube application is written with Haskell and compiled by Ajhc. The demo breaks the application when running GC using ndk-gdb debugger. You can get the demo source code at \url{https://github.com/ajhc/demo-android-ndk}. Also you can read slide about the detail at \url{http://www.slideshare.net/master\_q/20131020-osc-tokyoajhc}.
+
+\vspace*{10pt}
+
+\noindent \url{http://www.youtube.com/watch?v=C9JsJXWyajQ}
+
+The demo is running code that compiled with Ajhc on Cortex-M3 board, mbed. It's a simple RSS reader for reddit.com, show the RSS titles on Text LCD panel. You can get the demo detail and source code at \url{https://github.com/ajhc/demo-cortex-m3}.
 
 \Usage
 
@@ -53,6 +63,8 @@ Please read ``Ajhc User's Manual'' to know more detail. \url{http://ajhc.metasep
 
 \FuturePlans
 
+Try to rewrite (snatch) NetBSD kernel driver with Haskell. If we have luck, can port some library from GHC, like array or vector. After that, we are going to report back about developing Ajhc.
+
 \License
 
 GPL2 or later.
@@ -68,6 +80,7 @@ GPL2 or later.
   \begin{itemize}
     \item Ajhc - Haskell everywhere \url{http://ajhc.metasepi.org/}
     \item Metasepi Project \url{http://metasepi.org/}
+    \item Snatch-driven-development \url{http://www.slideshare.net/master\_q/20131020-osc-tokyoajhc}
   \end{itemize}
 \end{hcarentry}
 
