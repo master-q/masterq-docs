@@ -1,0 +1,74 @@
+\documentclass[DIV16,twocolumn,10pt]{scrreprt}
+\usepackage{paralist}
+\usepackage{graphicx}
+\usepackage[final]{hcar}
+
+%include polycode.fmt
+
+\begin{document}
+
+\begin{hcarentry}{Ajhc Haskell Compiler}
+\report{Kiwamu Okabe}
+\status{Experimental}
+\participants{John Meacham, Hiroki MIZUNO}% optional
+\makeheader
+
+Put the text here. 
+If you want to include Haskell code, consider using lhs2tex syntax (\url{http://people.cs.uu.nl/andres/lhs2tex/}).
+
+What's following are suggestions for the content of an entry.
+
+(WHAT IS IT?)
+
+(WHAT IS ITS STATUS? / WHAT HAS HAPPENED SINCE LAST TIME?)
+
+(CAN OTHERS GET IT?)
+
+(WHAT ARE THE IMMEDIATE PLANS?)
+
+\newcommand{\WhatsIsIt}{\subsubsection*{What is it?}}
+\newcommand{\Usage}{\subsubsection*{Usage}}
+\newcommand{\License}{\subsubsection*{License}}
+
+\WhatsIsIt
+
+\WhatsNew
+
+\Usage
+
+You can install Ajhc at Hackage DB.
+
+\begin{verbatim}
+$ cabal install ajhc
+$ ajhc --version
+ajhc 0.8.0.9 (9c264872105597700e2ba403851cf3b236cb1646)
+compiled by ghc-7.6 on a x86_64 running linux
+$ echo 'main = print "hoge"' > Hoge.hs
+$ ajhc Hoge.hs
+$ ./hs.out
+"hoge"
+\end{verbatim}
+
+Please read ``Ajhc User's Manual'' to know more detail. \url{http://ajhc.metasepi.org/manual.html}
+
+\FuturePlans
+
+\License
+
+GPL2 or later.
+
+\Contact
+  \begin{itemize}
+    \item Mailing list: \url{http://groups.google.com/group/metasepi}
+    \item Bug tracker: \url{https://github.com/ajhc/ajhc/issues}
+    \item Metasepi team: \url{https://github.com/ajhc?tab=members}
+  \end{itemize}
+
+\FurtherReading
+  \begin{itemize}
+    \item Ajhc - Haskell everywhere \url{http://ajhc.metasepi.org/}
+    \item Metasepi Project \url{http://metasepi.org/}
+  \end{itemize}
+\end{hcarentry}
+
+\end{document}

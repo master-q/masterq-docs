@@ -1,0 +1,11 @@
+TEX = latex
+DVIPDFM = dvipdfmx
+
+LaTeXDocument(arafura-jhc, arafura-jhc)
+
+.PHONY: clean
+.DEFAULT: arafura-jhc.pdf arafura-jhc.dvi
+
+clean:
+	rm -f *.aux *.dvi *.log *.fls *.out *.pdf *~
+
