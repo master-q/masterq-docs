@@ -33,14 +33,15 @@ Ajhc is, so to speak, an accelerator to develop jhc.
 \noindent Runtime:
 
 Ajhc now has thread-safe and reentrant runtime.
-Ajhc now supports pthread and custom thread, that shape forkOS on tiny CPU with ChibiOS/RT.
+The runtime supports pthread and custom thread
+that can shape forkOS API on tiny CPU with ChibiOS/RT.
 \url{https://github.com/metasepi/chibios-arafura}
 
 \vspace*{10pt}
 
 \noindent GC:
 
-Erlang style GC. It means Ajhc's Haskell context has own GC heap.
+New Erlang style GC. It means Ajhc's Haskell context has own GC heap.
 Also new GC can run on tiny CPU such as Cortex-M3 with 64kB RAM.
 
 \vspace*{10pt}
@@ -48,7 +49,8 @@ Also new GC can run on tiny CPU such as Cortex-M3 with 64kB RAM.
 \noindent Document:
 
 We have translated Jhc User's Manual into Japanese.
-Translating into the other language will be also easy, because the traslaters are using gettext.
+The translating into the other language will be also easy,
+because the traslaters are using gettext.
 
 \noindent \url{https://github.com/ajhc/ajhc/blob/arafura/po/ja.po}
 
@@ -56,7 +58,9 @@ Translating into the other language will be also easy, because the traslaters ar
 
 \noindent \url{http://www.youtube.com/watch?v=n6cepTfnFoo}
 
-The touchable cube application is written with Haskell and compiled by Ajhc. The demo breaks the application when running GC using ndk-gdb debugger. You could watch the demo source code at \url{https://github.com/ajhc/demo-android-ndk}. Also you could read slide about the detail at \url{http://www.slideshare.net/master\_q/20131020-osc-tokyoajhc}.
+The touchable cube application is written with Haskell and compiled by Ajhc.
+In the demo, the application is breaked by ndk-gdb debugger when running GC.
+You could watch the demo source code at \url{https://github.com/ajhc/demo-android-ndk}.
 
 \vspace*{10pt}
 
@@ -69,7 +73,7 @@ The demo is running code that compiled with Ajhc on Cortex-M3 board, mbed. It's 
 \noindent \url{http://www.youtube.com/watch?v=zkSy0ZroRIs}
 
 The demo is running Haskell code without any OS.
-And also the clock exception handler is written with Haskell.
+Also the clock exception handler is written with Haskell.
 
 \Usage
 
@@ -90,7 +94,7 @@ Please read ``Ajhc User's Manual'' to know more detail. \url{http://ajhc.metasep
 
 \FuturePlans
 
-Try to rewrite (snatch) NetBSD kernel driver with Haskell. If we have a luck, port some library like array or vector from GHC world. After that, we are going to report back about developing Ajhc.
+Fix many BUGs. Try to rewrite (snatch) NetBSD kernel driver with Haskell. If we have a luck, will port some library like array or vector from GHC world. After that, we are going to report back about developing Ajhc.
 
 \License
 
