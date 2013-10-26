@@ -22,9 +22,9 @@
 
 Ajhc is a Haskell compiler, and acronym for ``A fork of jhc''.
 
-Jhc \url{http://repetae.net/computer/jhc/} converts Haskell code into pure C language code running with jhc's runtime. And the runtime is written with 3000 line (include comments) pure C code. It's a magic!
+Jhc \url{http://repetae.net/computer/jhc/} converts Haskell code into pure C language code running with jhc's runtime. And the runtime is written with 3000 lines (include comments) pure C code. It's a magic!
 
-Ajhc's mission is to keep contribution to jhc in the repository. Because the upstream author of jhc, John Meacham, can't pull the contribution speedy. (I think he is too busy to do it.) We should feedback jhc any changes. And also Ajhc aims to provide Metasepi project with a method to rewrite NetBSD kernel using Haskell. The method is called Snatch-driven development.
+Ajhc's mission is to keep contribution to jhc in the repository. Because the upstream author of jhc, John Meacham, can't pull the contribution speedy. (I think he is too busy to do it.) We should feedback jhc any changes. Also Ajhc aims to provide Metasepi project with a method to rewrite NetBSD kernel using Haskell. The method is called Snatch-driven development.
 
 Ajhc is, so to speak, an accelerator to develop jhc.
 
@@ -32,36 +32,37 @@ Ajhc is, so to speak, an accelerator to develop jhc.
 
 \noindent Runtime:
 
-Get thread-safe and reentrant.
+Ajhc now has thread-safe and reentrant runtime.
+Ajhc now supports pthread and custom thread, that shape forkOS on tiny CPU with ChibiOS/RT.
+\url{https://github.com/metasepi/chibios-arafura}
 
 \vspace*{10pt}
 
 \noindent GC:
 
-Take Erlang style GC. It means Haskell context has own GC heap.
+Erlang style GC. It means Ajhc's Haskell context has own GC heap.
+Also new GC can run on tiny CPU such as Cortex-M3 with 64kB RAM.
 
 \vspace*{10pt}
 
 \noindent Document:
 
-Translate Jhc User's Manual into Japanese.
-Translating into the other language is also easy, because the traslaters are using gettext.
+We have translated Jhc User's Manual into Japanese.
+Translating into the other language will be also easy, because the traslaters are using gettext.
 
 \noindent \url{https://github.com/ajhc/ajhc/blob/arafura/po/ja.po}
-
-xxx
 
 \Demo
 
 \noindent \url{http://www.youtube.com/watch?v=n6cepTfnFoo}
 
-The touchable cube application is written with Haskell and compiled by Ajhc. The demo breaks the application when running GC using ndk-gdb debugger. You can get the demo source code at \url{https://github.com/ajhc/demo-android-ndk}. Also you can read slide about the detail at \url{http://www.slideshare.net/master\_q/20131020-osc-tokyoajhc}.
+The touchable cube application is written with Haskell and compiled by Ajhc. The demo breaks the application when running GC using ndk-gdb debugger. You could watch the demo source code at \url{https://github.com/ajhc/demo-android-ndk}. Also you could read slide about the detail at \url{http://www.slideshare.net/master\_q/20131020-osc-tokyoajhc}.
 
 \vspace*{10pt}
 
 \noindent \url{http://www.youtube.com/watch?v=C9JsJXWyajQ}
 
-The demo is running code that compiled with Ajhc on Cortex-M3 board, mbed. It's a simple RSS reader for reddit.com, show the RSS titles on Text LCD panel. You can get the demo detail and source code at \url{https://github.com/ajhc/demo-cortex-m3}.
+The demo is running code that compiled with Ajhc on Cortex-M3 board, mbed. It's a simple RSS reader for reddit.com, show the RSS titles on Text LCD panel. You could watch the demo detail and source code at \url{https://github.com/ajhc/demo-cortex-m3}.
 
 \vspace*{10pt}
 
@@ -72,7 +73,7 @@ And also the clock exception handler is written with Haskell.
 
 \Usage
 
-You can install Ajhc at Hackage DB.
+You could install Ajhc at Hackage DB.
 
 \begin{verbatim}
 $ cabal install ajhc
