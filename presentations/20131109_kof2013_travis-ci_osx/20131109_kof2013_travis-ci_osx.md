@@ -16,7 +16,7 @@ Kiwamu Okabe
 
 ![inline](img/travis-ci.png)
 
-# My compiler tested on Travis CI
+# Ajhc is tested on Travis CI
 
 * Travis CI is a continuous integration service.
 * It builds code on Ubuntu Linux.
@@ -25,7 +25,7 @@ Kiwamu Okabe
 
 # Travis CI can build iOS apps
 
-Travis CI can also build Mac OS X apps?
+If so, also can build Mac OS X apps?
 
 ~~~
 http://about.travis-ci.org/docs/user/osx-ci-environment/
@@ -33,7 +33,7 @@ http://about.travis-ci.org/docs/user/osx-ci-environment/
 
 ![inline](img/osx_build_env.png)
 
-# Detail about build OS X Apps
+# Detail to build Mac OS X Apps
 
 ~~~
 Detail: https://github.com/ajhc/ajhc/tree/arafura-ci4osx
@@ -42,14 +42,12 @@ Detail: https://github.com/ajhc/ajhc/tree/arafura-ci4osx
 ![inline](draw/travis-ci_osx.png)
 
 # Setting to build OS X Apps #1
+![background](img/blank.png)
 
 ~~~{.yaml}
 # .travis.yml
 language: objective-c
 
-branches:
-  except:
-    - master
 before_install:
   - date
   - export PATH="$HOME/Library/Haskell/bin:$PATH"
@@ -65,6 +63,7 @@ after_script:
 ~~~
 
 # Setting to build OS X Apps #2
+![background](img/blank.png)
 
 ~~~{.sh}
 # travis-ci/setup_osx.sh
@@ -80,6 +79,10 @@ export HSOPTS="-j --disable-documentation --disable-library-profiling --disable-
 cabal install $HSOPTS cabal-install
 cabal install $HSOPTS $HSPACKS
 ~~~
+
+# Demonstration
+
+We have a time to watch demo?
 
 # PR: Ajhc Haskell compiler
 ![background](img/ajhc.png)
