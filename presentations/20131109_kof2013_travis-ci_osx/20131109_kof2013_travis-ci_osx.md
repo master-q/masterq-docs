@@ -1,4 +1,5 @@
 # Build OS X Apps on Travis CI
+![background](img/travis.png)
 
 Kiwamu Okabe
 
@@ -17,6 +18,7 @@ Kiwamu Okabe
 ![inline](img/travis-ci.png)
 
 # Ajhc is tested on Travis CI
+![background](img/inspection.png)
 
 * Travis CI is a continuous integration service.
 * It builds code on Ubuntu Linux.
@@ -24,6 +26,7 @@ Kiwamu Okabe
 * Are there CI services for OS X Apps?
 
 # Travis CI can build iOS apps
+![background](img/iphone.png)
 
 If so, also can build Mac OS X apps?
 
@@ -34,6 +37,7 @@ http://about.travis-ci.org/docs/user/osx-ci-environment/
 ![inline](img/osx_build_env.png)
 
 # Detail to build Mac OS X Apps
+![background](img/osx.png)
 
 ~~~
 Detail: https://github.com/ajhc/ajhc/tree/arafura-ci4osx
@@ -81,6 +85,7 @@ cabal install $HSOPTS $HSPACKS
 ~~~
 
 # Demonstration
+![background](img/demo_travisci.png)
 
 We have a time to watch demo?
 
