@@ -225,7 +225,130 @@ Also you can read in Japanese.
 * ajhc.metasepi.org/manual_ja.html
 
 # [6] Haskell on Android NDK
+
+xxx What should we write here?
+
+# Setup Android SDK/NDK
+
+* Download Android SDK/NDK
+
+~~~
+* Android SDK (adt-bundle-linux-x86_64-20130917.zip)
+  http://developer.android.com/sdk/index.html
+* Android NDK (android-ndk-r9-linux-x86_64.tar.bz2)
+  http://developer.android.com/tools/sdk/ndk/index.html
+~~~
+
+* Install Android SDK/NDK
+
+~~~
+$ cd $HOME
+$ unzip -x adt-bundle-linux-x86_64-20130917.zip
+$ mv adt-bundle-linux-x86_64-20130917/sdk $HOME/android-sdk
+$ rm -f adt-bundle-linux-x86_64-20130917
+$ export PATH=$PATH:$HOME/android-sdk/tools:$HOME/android-sdk/platform-tools
+$ tar xf android-ndk-r9-linux-x86_64.tar.bz2
+$ mv android-ndk-r9 android-ndk
+$ export PATH=$PATH:$HOME/android-ndk
+$ sudo apt-get install openjdk-7-jdk ant lib32z1-dev lib32stdc++6
+$ android update sdk --no-ui --force
+~~~
+
+# Build test using C application
+
+* Build
+
+~~~
+$ cd $HOME/android-ndk/samples/native-activity
+$ android update project -p ./ -n native-activity -t android-10
+$ ndk-build NDK_DEBUG=1
+$ ant debug
+$ file bin/native-activity-debug.apk
+bin/native-activity-debug.apk: Java Jar file data (zip)
+~~~
+
+* Flash to Android device
+
+~~~
+$ sudo adb devices
+* daemon not running. starting it now on port 5037 *
+* daemon started successfully *
+List of devices attached
+015d4906053c1605        device
+$ sudo adb install -r bin/native-activity-debug.apk
+1221 KB/s (156823 bytes in 0.125s)
+        pkg: /data/local/tmp/native-activity-debug.apk
+Success
+~~~
+
+# Build Haskell applications
+
+* Checkout the source code.
+
+~~~
+$ git clone https://github.com/ajhc/demo-android-ndk.git
+$ cd demo-android-ndk
+~~~
+
+* Build
+
+~~~
+$ make
+$ find . -name "*.hl"
+./lib/android-ndk-0.1.hl
+$ find . -name "*debug.apk"
+./cube/bin/cube-debug.apk
+./native-activity/bin/native-activity-debug.apk
+~~~
+
+* "hl" suffix file: Ajhc library
+* "apk" suffix file: Android application
+
+# Source code tree
+
+~~~
+demo-android-ndk
+|-- lib                      # Framework library
+|   `-- android-ndk
+|       |-- AndroidNdk
+|       |   |-- EGL.hs
+|       |   |-- OpenGLES.hs
+|       |   `-- Storable.hs
+|       |-- AndroidNdk.hs
+|       `-- android-ndk.yaml
+|-- cube ...                 # Application
+`-- native-activity          # Application
+    |-- AndroidManifest.xml
+    |-- hs_src
+    |   `-- Main.hs          # Haskell code on application side
+    |-- jni
+    |   |-- Android.mk
+    |   |-- Application.mk
+    |   |-- c_extern.h
+    |   |-- dummy4jhc.c      # Stub code for Ajhc runtime
+    |   `-- main.c           # C language code to kick Haskell code
+    `-- res
+        `-- values
+            `-- strings.xml
+~~~
+
+# Build process on Makefile
+
+xxx Figure
+
 # [7] Status report of framework
+
+Let's see "native-activity" demo internal.
+
+But the Android NDK framework doesn't get stability yet.
+
+# Architecture: Using C language
+
+xxx Figure
+
+# Architecture: Using Haskell
+
+xxx Figure
 
 # Code #1: Imports
 
