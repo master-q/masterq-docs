@@ -226,7 +226,10 @@ Also you can read in Japanese.
 
 # [6] Haskell on Android NDK
 
-xxx What should we write here?
+github.com/ajhc/demo-android-ndk
+
+* First, build the demo apps.
+* Then, see more detail of the code.
 
 # Setup Android SDK/NDK
 
@@ -254,7 +257,7 @@ $ sudo apt-get install openjdk-7-jdk ant lib32z1-dev lib32stdc++6
 $ android update sdk --no-ui --force
 ~~~
 
-# Build test using C application
+# Build sample C application
 
 * Build
 
@@ -334,21 +337,21 @@ demo-android-ndk
 
 # Build process on Makefile
 
-xxx Figure
+![inline](draw/makefile.png)
 
 # [7] Status report of framework
 
 Let's see "native-activity" demo internal.
 
-But the Android NDK framework doesn't get stability yet.
+But, the framework has no stability yet.
 
 # Architecture: Using C language
 
-xxx Figure
+![inline](draw/arch_c_lang.png)
 
 # Architecture: Using Haskell
 
-xxx Figure
+![inline](draw/arch_haskell.png)
 
 # Code #1: Imports
 
