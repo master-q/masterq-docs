@@ -225,6 +225,7 @@ Also you can read in Japanese.
 * ajhc.metasepi.org/manual_ja.html
 
 # [6] Haskell on Android NDK
+![background](img/stairs.png)
 
 github.com/ajhc/demo-android-ndk
 
@@ -232,6 +233,7 @@ github.com/ajhc/demo-android-ndk
 * Then, see more detail of the code.
 
 # Setup Android SDK/NDK
+![background](img/blank.png)
 
 * Download Android SDK/NDK
 
@@ -258,6 +260,7 @@ $ android update sdk --no-ui --force
 ~~~
 
 # Build sample C application
+![background](img/blank.png)
 
 * Build
 
@@ -285,6 +288,7 @@ Success
 ~~~
 
 # Build Haskell applications
+![background](img/blank.png)
 
 * Checkout the source code.
 
@@ -308,6 +312,7 @@ $ find . -name "*debug.apk"
 * "apk" suffix file: Android application
 
 # Source code tree
+![background](img/blank.png)
 
 ~~~
 demo-android-ndk
@@ -336,48 +341,59 @@ demo-android-ndk
 ~~~
 
 # Build process on Makefile
+![background](img/build.png)
 
 ![inline](draw/makefile.png)
 
 # [7] Status report of framework
+![background](img/unstable.png)
 
 Let's see "native-activity" demo internal.
 
 But, the framework has no stability yet.
 
 # Architecture: Using C language
+![background](img/arch.png)
 
 ![inline](draw/arch_c_lang.png)
 
 # Architecture: Using Haskell
+![background](img/arch.png)
 
 ![inline](draw/arch_haskell.png)
 
 # Code #1: Imports
+![background](img/rms.png)
 
 ![inline](img/1_import.png)
 
 # Code #2: Some magic
+![background](img/rms.png)
 
 ![inline](img/2_magic.png)
 
 # Code #3: Main entry
+![background](img/rms.png)
 
 ![inline](img/3_main.png)
 
 # Code #4: Handle inputs
+![background](img/rms.png)
 
 ![inline](img/4_handleinput.png)
 
 # Code #5: Handle cmds
+![background](img/rms.png)
 
 ![inline](img/5_handlecmd.png)
 
 # Code #6: Draw frame
+![background](img/rms.png)
 
 ![inline](img/6_drawframe.png)
 
 # Code #7: Init display
+![background](img/rms.png)
 
 ![inline](img/7_initdisp.png)
 
