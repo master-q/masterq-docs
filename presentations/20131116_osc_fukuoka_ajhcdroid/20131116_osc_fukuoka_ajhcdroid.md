@@ -227,6 +227,34 @@ Also you can read in Japanese.
 # [6] Haskell on Android NDK
 # [7] Status report of framework
 
+# Code #1: Imports
+
+![inline](img/1_import.png)
+
+# Code #2: Some magic
+
+![inline](img/2_magic.png)
+
+# Code #3: Main entry
+
+![inline](img/3_main.png)
+
+# Code #4: Handle inputs
+
+![inline](img/4_handleinput.png)
+
+# Code #5: Handle cmds
+
+![inline](img/5_handlecmd.png)
+
+# Code #6: Draw frame
+
+![inline](img/6_drawframe.png)
+
+# Code #7: Init display
+
+![inline](img/7_initdisp.png)
+
 # PR: Call For Articles
 ![background](img/c84.png)
 
