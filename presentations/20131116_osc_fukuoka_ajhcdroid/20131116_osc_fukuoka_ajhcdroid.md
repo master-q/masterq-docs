@@ -122,12 +122,12 @@ http://itpro.nikkeibp.co.jp/article/COLUMN/20060915/248230/
 
 ![inline](draw/2013-01-18-few_error.png)
 
-# Kernel desperately wants type
+# Kernel wants type desperately
 ![background](img/stop.png)
 
 * Kernels are developed with C lang.
 * Error on user space => SEGV
-* Error on kernel space => halt!
+* Error on kernel space => Halt!
 * Should design kernel with the greatest care.
 * C language is safe?
 
@@ -189,7 +189,7 @@ $ nm hs.out | grep "U "
 # Survive burning out
 ![background](img/goal.png)
 
-Let's develop in dogfooding style. (The method is called "Snatch".)
+Let's develop with dogfooding style. (The method is called "Snatch".)
 
 ![inline](draw/2012-12-27-arafura_design.png)
 
@@ -216,13 +216,13 @@ You can use on Windows or Mac OS X.
 # Detail of usage
 ![background](img/minix.png)
 
-Please read "Ajhc User's Manual".
+* Please read "Ajhc User's Manual".
 
-* ajhc.metasepi.org/manual.html
+ajhc.metasepi.org/manual.html
 
-Also you can read in Japanese.
+* Also you can read in Japanese.
 
-* ajhc.metasepi.org/manual_ja.html
+ajhc.metasepi.org/manual_ja.html
 
 # [6] Haskell on Android NDK
 ![background](img/stairs.png)
@@ -259,6 +259,15 @@ $ sudo apt-get install openjdk-7-jdk ant lib32z1-dev lib32stdc++6
 $ android update sdk --no-ui --force
 ~~~
 
+# Start with sample C application
+![background](img/android_wallpaper.png)
+
+Sample application "native-activity".
+
+developer.android.com/tools/sdk/ndk/
+
+![inline](img/ndk_sample_app.png)
+
 # Build sample C application
 ![background](img/blank.png)
 
@@ -273,7 +282,7 @@ $ file bin/native-activity-debug.apk
 bin/native-activity-debug.apk: Java Jar file data (zip)
 ~~~
 
-* Flash to Android device
+* Flash to your Android device
 
 ~~~
 $ sudo adb devices
