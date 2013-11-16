@@ -1,0 +1,9 @@
+.omakedb
+.omakedb.lock
+OMakefile.omc
+OMakeroot.omc
+papers/*/*.aux
+papers/*/*.dvi
+papers/*/*.fls
+papers/*/*.log
+papers/*/*.pdf
