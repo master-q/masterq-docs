@@ -1,0 +1,11 @@
+LATEX = platex
+DVIPDFM = dvipdfmx -f ipa.map
+
+LaTeXDocument(prosym55_kiwamuokabe, prosym55_kiwamuokabe)
+
+.PHONY: clean
+.DEFAULT: prosym55_kiwamuokabe.pdf prosym55_kiwamuokabe.dvi
+
+clean:
+	rm -f *.aux *.dvi *.log *.fls *.out *.pdf *~
+
