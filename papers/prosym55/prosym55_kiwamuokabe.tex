@@ -25,31 +25,19 @@
 \begin{document}
 
 
-\title{情報処理学会論文誌ジャーナル論文の準備方法\\
-（2012年10月12日版）}
+\title{強い型によるOSの開発手法の提案}
 
 %\etitle{How to Prepare Your Paper for IPSJ Journal \\
 %(version 2012/10/12)}
 
-\affiliate{IPSJ}{情報処理学会\\
-IPSJ, Chiyoda, Tokyo 101--0062, Japan}
+\affiliate{METASEPI}{Metasepi Project}
 
-
-\paffiliate{JU}{情報処理大学\\
-Johoshori Uniersity}
-
-\author{情報 太郎}{Joho Taro}{IPSJ}[joho.taro@ipsj.or.jp]
-\author{処理 花子}{Shori Hanako}{IPSJ}
-\author{学会 次郎}{Gakkai Jiro}{IPSJ,JU}[gakkai.jiro@ipsj.or.jp]
+\author{岡部 究}{Kiwamu Okabe}{METASEPI}[kiwamu@debian.or.jp]
+\author{Hiroki MIZUNO}{Hiroki MIZUNO}{}
+\author{瀬川 秀一}{Hidekazu SEGAWA}{}
 
 \begin{abstract}
-本稿は，情報処理学会論文誌ジャーナルに投稿する原稿を執筆する際，および論
-文採択後に最終原稿を準備する際の注意点等をまとめたものである．大きく分け
-ると，論文投稿の流れと，\LaTeX と専用のスタイルファイルを用いた場合の論
-文フォーマットに関する指針，および論文の内容に関してするべきこと，するべ
-きでないことをまとめたべからずチェックリストからなる．本稿自体も \LaTeX 
-と専用のスタイルファイルを用いて執筆されているため，論文執筆の際に参考に
-なれば幸いである．
+本稿では、MLやHaskell言語のような型推論を持つ言語を使い
 \end{abstract}
 
 
@@ -90,8 +78,6 @@ A4縦型2段組で受け付けることにした．
 のコマンドをそのまま使うことができる．本稿は，そのスタイルファイルを実際
 に使っているので，論文執筆の際に参考にされたい．
 
-
-\footnotetext{本文は実際には論文誌ジャーナル編集委員会で作成したものである．}
 
 また，論文誌ジャーナル編集委員会では，論文の執筆する際に，著者がするべき
 こと，するべきでないことを「べからず集」としてまとめた．本稿の後半に，論
@@ -856,218 +842,5 @@ SIAM (1998).
 (2011.09.15).
 
 \end{thebibliography}
-
-
-
-\pagebreak%%!!!
-\vspace*{-\baselineskip}%%!!!
-
-\appendix
-%7
-\section{付録の書き方}
-
-付録がある場合には，参考文献リストの直後にコマンド \|\appendix| に引き続
-いて書く．付録では，\|\section| コマンドが{\bf A.1}，{\bf A.2}などの見出
-しを生成する．
-
-%7.1
-\subsection{見出しの例}
-
-付録の \|\subsetion| ではこのよう見出しになる．
-
-%8
-\section{研究会論文用コマンド}
-\label{sig}
-
-各研究会論文誌（トランザクション）には各々に固有のサブタイトル，略称，通
-番がある．最終原稿では，以下のコマンドを \|\documentclass| の{\bf オプショ
-ン}とすることで，これらの情報を与える．
-
-\begin{itemize}
-\item \|PRO|（プログラミング）
-\item \|TOM|（数理モデル化と応用）
-\item \|TOD|（データベース）
-\item \|ACS|（コンピューティングシステム）
-\item \|CDS|（コンシューマ・デバイス\,\&\,システム）
-\item \|TBIO|（Bioinformatics）\footnote{%
-TBIO, SLDM, CVAは英文論文誌であるので和名はない．}
-\item \|SLDM|（System LSI Design Methodology）\footnotemark[5]
-\item \|CVA|（Computer Vision and Applicaitons）\footnotemark[5]
-\end{itemize}
-
-また英文論文作成の際には \|english| をオプションに追加すればよい．したがっ
-て，\|\documentclass[PRO]{ipsj}| とすれば「プログラミング」の和文用，
-\|\documentclass[PRO,english]| \|{ipsj}| とすれば英文用となる．
-
-また研究会には「号」と連動しない「発行月」があるため，学会あるいは編集委
-員会の指示に基づき，発行月を
-%
-\begin{itemize}\item[]
-\|\setcounter{|{\bf 月数}\|}{<発行月>}|
-\end{itemize}
-%
-によって指定する．
-
-この他，以下の各節で示すように，いくつかの論文誌に固有の機能を実現するた
-めのコマンドなどが用意されている．
-
-%\newpage%%
-
-%9
-\section{各分冊固有コマンド}
-
-各分冊によってそれぞれ細かい仕様が違うため，同じコマンドでも出力結果が異
-なる場合がある．また「再受付」，「再々受付」が入る場合があり，それらは
-
-\noindent
-和文では
-\begin{itemize}\item[]
-\|\|{\bf 再受付}\|{<年>}{<月>}{<日>}|\\
-\|\|{\bf 再再受付}\|{<年>}{<月>}{<日>}|
-\end{itemize}
-英文では
-\begin{itemize}\item[]
-\|\|{\bf rereceived}\|{<年>}{<月>}{<日>}|\\
-\|\|{\bf rerereceived}\|{<年>}{<月>}{<日>}|
-\end{itemize}
-とプリアンブルに追加する．
-
-%9.1
-\subsection{\<「プログラミング（PRO）」固有機能}
-
-\<「論文誌：プログラミング」には論文以外に，プログラミング研究会での研究
-発表の内容梗概が含まれている．この内容梗概は，\|\documentclass|のオプショ
-ンとして\|abstract|を指定する．\ref{config}~節の\|\maketitle|までの内容
-からなるファイル（すなわち本文がないファイル）から生成する．なお\|\|{\bf 
-受付}や\|\|{\bf 採録}は不要であるが，代わりに発表年月日を，
-
-\noindent
-和文では
-\begin{itemize}\item[]
-\|\|{\bf 発表}\|{<年>}{<月>}{<日>}|
-\end{itemize}
-英文では
-\begin{itemize}\item[]
-\|\|{\bf Presents}\|{<年>}{<月>}{<日>}|
-\end{itemize}
-により指定する．
-
-%9.1
-\subsection{\<「データベース（TOD）」固有機能}
-
-\<「論文誌：データベース」の論文の担当編集委員は，
-\begin{itemize}\item[]
-\|\Editor{<氏名>}|
-\end{itemize}
-により指定する．和文では「担当編集委員」，英文では「Editor in Charge:」
-と入る．
-
-またスタイルの変更に伴い，\underline{本文の最後}に入るので，
-\|\end{document}|の前に直接置く．
-
-%9.2
-\subsection{\<「コンシューマ・デバイス\,\&\,システム（CDS）」固有機能}
-
-\<「論文誌：コンシューマ・デバイス\,\&\,システム」では，
-論文の種類によって見出しが変わるため，
-オプションで切替えを行う．
-
-各種別は
-\begin{itemize}
-\item \|systems  |コンシューマ・システム論文\\
-\|         |Paper on Consumer Systems
-
-\item \|services |コンシューマ・サービス論文\\
-\|         |Paper on Consumer Services
-
-\item \|devices  |コンシューマ・デバイス論文\\
-\|         |Paper on Consumer Devices
-
-\item \|research |研究論文\\
-\|         |Research Paper
-\end{itemize}
-となる．
-
-和文のコンシューマ・システム論文なら，\\
-\|\documentclass[CDS,systems]{ipsj}|
-となり，英文原稿なら \|english|を追加すればよい．
-
-%9.3
-\subsection{\<「Bioinformatics（TBIO）」固有機能}
-
-Trans.\ Bioinformatics (TBIO)は英文論文誌であるので，\|TBIO|オプションの
-指定によって自動的に\|english|オプションが指定されたものとみなされ，
-\|english| オプションの省略が可能．
-
-論文種別は以下の3種．
-\begin{itemize}
-\item \makebox[4.9zw][l]{指定なし} Original Paper (Default)
-\item \|Data     | Database/Software Paper
-\item \|Survey   | Survey Paper
-\end{itemize}
-
-\|\documentclass[TBIO]{ipsj}|でOriginal Paper，\\
-\|\documentclass[TBIO,Survey]{ipsj}|でSurvey Paperとなる．
-
-また，担当編集委員はTOD同様，\|\Editor|で定義するが，「Communicated by」
-となる．TOD同様，\|\end{document}|の前に直接置く．
-
-%9.4
-\subsection{\<「Computer Vision and Applicaitons\\\<（CVA）」固有機能}
-
-Trans.\ CVAも英文論文誌であるため，\|english| オプションの省略が可．
-
-論文種別は3種類あり，
-\begin{itemize}
-\item \makebox[4.9zw][l]{指定なし} Regular Paper (Default)
-\item \|Research | Research Paper
-\item \|system   | Systems Paper
-\end{itemize}
-となる．
-
-TBIO同様，担当編集委員が入り，
-挿入文章もTBIO同様，「Communicated by」となる．
-
-%9.5
-\subsection{\<「System LSI Design Methodology（SLDM）」固有機能}
-
-Trans.\ SLDMも英文論文誌であるため，\|english| オプションの省略が可．
-
-論文種別は2種類あり，
-\begin{itemize}
-\item \makebox[4.9zw][l]{指定なし} Regular Paper (Default)
-\item \|Short    | Short Paper
-\end{itemize}
-となる．
-
-SLDMも担当編集委員が入るが挿入文章が論文によって自動挿入文章が異なる．
-
-通常は「Recommended by Associate Editor:」，\|invited|のオプションが入っ
-た場合のみ，「Invited by Editor-in-Chief:」となる．
-
-
-
-%% 以下は無視されます
-
-\begin{biography}
-\profile{m}{情報 太郎}{1970年生．1992年情報処理大学理学部情報科学科卒．
-1994年同大大学院修士課程了．同年情報処理学会入社．オンライン出版の研究
-に従事．電子情報通信学会，IEEE，ACM 各会員}
-%
-\profile{n}{処理 花子}{1960年生．1982年情報処理大学理学部情報科学科卒．
-1984年同大大学院修士課程了．1987年同博士課程了．理学博士．1987年情報処
-理大学助手．1992年架空大学助教授．1997年同大教授．オンライン出版の研究
-に従事．2010年情報処理記念賞受賞．電子情報通信学会，IEEE，IEEE-CS，ACM
-各会員}
-%
-\profile{s}{学会 次郎}{1950年生．1974年架空大学大学院修士課程了．
-1987年同博士課程了．工学博士．1977年架空大学助手．1992年情報処理大学助
-教授．1987年同大教授．2000年から情報処理学会顧問．オンライン出版の研究
-に従事．2010年情報処理記念賞受賞．情報処理学会理事．電子情報通信学会，
-IEEE，IEEE-CS，ACM 各会員}
-%
-\end{biography}
-
-
 
 \end{document}
