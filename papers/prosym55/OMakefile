@@ -1,5 +1,12 @@
 LATEX = platex
-DVIPDFM = dvipdfmx -f ipa.map
+BIBTEX = pbibtex
+DVIPDFM = dvipdfmx
+DVIPDFMFLAGS = -p a4 -f ipa.map
+
+TEXDEPS[] =
+	prosym55_kiwamuokabe.tex
+	../bibtex/reference.bib
+	../bibtex/jreference.bib
 
 LaTeXDocument(prosym55_kiwamuokabe, prosym55_kiwamuokabe)
 
@@ -7,5 +14,4 @@ LaTeXDocument(prosym55_kiwamuokabe, prosym55_kiwamuokabe)
 .DEFAULT: prosym55_kiwamuokabe.pdf prosym55_kiwamuokabe.dvi
 
 clean:
-	rm -f *.aux *.dvi *.log *.fls *.out *.pdf *~
-
+	rm -f *.aux *.dvi *.log *.fls *.out *.pdf *.bbl *.blg *~
