@@ -30,7 +30,10 @@
 \author{瀬川 秀一}{Hidekazu SEGAWA}{}
 
 \begin{abstract}
-本稿ではMLやHaskell言語のような型推論を持つ言語を使い xxx
+現在でも実用化されているOSはC言語によって設計されている．
+一方アプリケーション領域ではMLやHaskell言語のような型推論を持つ言語を用いて
+安全な設計をする手法が確立されている．
+本稿では強い型を使った安全な設計手法をOSのような低レベルのソフトウェアに適用する方法を提案する．
 \end{abstract}
 
 \begin{jkeyword}
@@ -42,10 +45,36 @@
 % Body %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{はじめに}
 
+xxx 本稿の概要を簡単に
+
 \subsection{アウトライン xxx}
 
 筆者らはjhc Haskellコンパイラに組込み向け拡張を加えて \cite{j-ikamusume5}
 その成果をAjhc Haskellコンパイラとして公開している \cite{ajhc} ．
+
+\section{既存手法の問題}
+
+xxx 割り込みを受けられないために，既存OSの設計を転用できない
+
+xxx ドッグフードに辿り着く前に息絶える
+
+xxx 移植性
+
+xxx C言語デバイスドライバとの共存
+
+\section{本稿で提案する開発手法}
+
+xxx jhcを選択した理由
+
+xxx Ajhcでの改造項目
+
+xxx スナッチ設計
+
+\section{開発手法の評価と考察}
+
+xxx 適用例: OSなし動作，ChibiOS/RTによるスレッド，Android NDK
+
+\section{結論と今後の課題}
 
 \begin{acknowledgment}
 偉大なHaskellコンパイラを産み出し，
