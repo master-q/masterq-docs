@@ -1,4 +1,4 @@
-# Metasepi team meeting #8:　Haskell apps on Android NDK
+# Metasepi team meeting #8':　Haskell apps on Android NDK
 ![background](img/android_idf13.png)
 
 Kiwamu Okabe
@@ -30,6 +30,10 @@ Kiwamu Okabe
 * A touchable cube demo.
 * Haskell App runs on Android NDK.
 * GC is breaked by ndk-gdb debugger.
+* The App is available at Google Play.
+
+http://bit.ly/cubeplay
+
 * You can watch the movie following.
 
 http://bit.ly/jhcdroid
