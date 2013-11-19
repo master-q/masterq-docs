@@ -3,12 +3,21 @@ BIBTEX = pbibtex
 DVIPDFM = dvipdfmx
 DVIPDFMFLAGS = -p a4 -f ipa.map
 
+ODG_FILES = $(glob draw/*.odg)
+EPS_FILES = $(replacesuffixes .odg, .eps, $(ODG_FILES))
+
 TEXDEPS[] =
 	prosym55_kiwamuokabe.tex
 	../bibtex/reference.bib
 	../bibtex/jreference.bib
+	$(EPS_FILES)
 
 LaTeXDocument(prosym55_kiwamuokabe, prosym55_kiwamuokabe)
+
+.SUBDIRS: draw
+	%.eps: %.odg
+		unoconv -f eps -o $@ $< || unoconv -n -f eps -o $@ $< \
+		|| unoconv -f eps -o $@ $< || unoconv -n -f eps -o $@ $<
 
 .PHONY: clean
 .DEFAULT: prosym55_kiwamuokabe.pdf prosym55_kiwamuokabe.dvi

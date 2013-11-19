@@ -31,10 +31,9 @@
 \author{瀬川 秀一}{Hidekazu SEGAWA}{}[]
 
 \begin{abstract}
-実用化されているOSは現在でもC言語によって設計されている．
-一方アプリケーション領域ではMLやHaskellのような型推論を持つ言語を用いて
-安全な設計をする手法が確立されている．
-本稿では強い型を使った安全な設計手法をOSのような低レベルのソフトウェアに適用する方法を提案する．
+現在でもOSはC言語によって設計されている．
+一方アプリケーションは強い型付けの言語を用いた安全な設計手法が確立されている．
+本稿ではその設計手法をOSにも適用する手法を提案する．
 \end{abstract}
 
 \begin{jkeyword}
@@ -46,14 +45,13 @@
 % Body %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{はじめに}
 
-筆者らは既存のjhcコンパイラ \cite{jhc}
-に組込み向け拡張を加えて \cite{j-ikamusume5}
-その成果をAjhcとして公開している \cite{ajhc} ．
+筆者らはAjhc Haskellコンパイラ\cite{ajhc}を開発している．
 Ajhcは実用化可能なOSを設計可能な型推論をそなえたコンパイラを目指している．
 本稿ではAjhcを使ったOSの開発手法を提案し，その手法を小規模ソフトウェアに対して適用/評価する．
 最後に今後の研究計画について述べる．
 
 \section{OS開発における既存手法の問題}
+\label{sec:problems}
 
 ソフトウェア開発について実行時エラーの削減は重要なテーマである．
 エラー削減には設計後のテストや検証など多くの手法があり，
@@ -66,7 +64,7 @@ C言語はMLやHaskellのような型推論をそなえた言語より弱い型�
 より強い型付けの言語が実用化設計に応用されている．
 研究レベルにおいて，
 型推論をそなえた強い型付け言語でOSを設計する試みは複数存在する
-\cite{funk} \cite{snowflake-os} \cite{house} ．
+\cite{funk}\cite{snowflake-os}\cite{house}．
 しかしこれらのOSはLinuxやBSDのようにデスクトップ/サーバ用途として実用化されていない．
 筆者らは上記のOSが実用化されていない原因は主に3つに大別できると考える．
 
@@ -75,7 +73,7 @@ C言語はMLやHaskellのような型推論をそなえた言語より弱い型�
 彼等はまた開発以外の日常のデスクトップ用途にもLinux kernelを使用する．
 このような開発スタイルはドッグフードと属に呼ばれている．
 この開発サイクルで自然に実用的なテストが行なわれ，OSの品質は向上する．
-OS開発ではこのドッグフード開発にすばやく辿り着く方法を採用する必要がある．
+OS開発ではこのドッグフード開発にすばやく辿り着く手法を採用する必要がある．
 
 二つ目は，ハードウェア割込をポーリングで検出していることである．
 型推論を持つ言語実装の多くは再入可能ではない．
@@ -88,20 +86,31 @@ OS実装側は定期的にランタイムにためられたイベント通知を
 最後に，これらのOSはC言語で設計された既存のデバイスドライバと共存することができない．
 OSの存在意義はアプリケーションを動作させるためであるが，
 そのためにはコンピュータに接続されたデバイスを抽象化してアプリケーション側に見せてやる必要がある．
-世界中には様々な種類のデバイスが存在し，それぞれに異なるドライバ実装が必要である．
+世界中には膨大な種類のデバイスが存在し，それぞれに異なるドライバ実装が必要である．
 これらのOSではドッグフード開発に必要なドライバ群をすべてゼロから再実装する必要がある．
 
 \section{本稿で提案する開発手法}
 
-xxx スナッチ設計
+筆者らは上記の問題を解決するために\textbf{スナッチ設計}という手法を提案する．
+スナッチ設計ではOSをゼロから設計することはせず，既存のC言語によって設計されたOSのソースコードを元に少しずつC言語による設計に強い型を付ける．
+この手法によってドッグフード開発をしながら強い型を持つ言語によるOS開発が可能で，
+さらに既存のデバイスドライバを再利用することもできる．
 
-xxx jhcを選択した理由
+既存の再入可能でないコンパイラでは，
+イベントドリブンで設計されたOSをスナッチ設計することができない．
+そこでスナッチ設計を行なうためのコンパイラを作成する基礎となるコンパイラを選定するために
+``hoge''と印字するだけのプログラムをコンパイルして比較評価した
+（\tabref{tab:compilerlist}）．
+各評価値が小さいほどPOSIX依存度が低いことを示している．
+評価対象の実装の中ではjhc\cite{jhc}がずば抜けて良い特性を持っていることがわかる．
+しかしjhcは再入可能なバイナリを扱えず，もちろんスレッドさえサポートされていない．
+そこで筆者らはjhcをスレッドと再入可能をサポートしたAjhcコンパイラを開発した\cite{j-ikamusume5}．
 
 \begin{table}[tb]
 \caption{``hoge''と印字するプログラムに見るコンパイラの特性}
 \label{tab:compilerlist}
 \hbox to\hsize{\hfil
-\begin{tabular}{l|lll}\hline\hline
+\begin{tabular}{l|rrr}\hline\hline
 コンパイラ実装	& サイズ & 未定義シンボル & 依存ライブラリ \\\hline
 GHC-7.4.1	& 797228 B & 144 個 & 9 個 \\
 SML\#-1.2.0	& 813460 B & 134 個 & 7 個 \\
@@ -111,19 +120,57 @@ jhc-0.8.0	& 21248 B  & 20  個 & 3 個 \\\hline
 \end{tabular}\hfil}
 \end{table}
 
-xxx Ajhcでの改造項目: 再入可能に
-
 \section{開発手法の評価と考察}
 
-xxx 適用例: OSなし動作，ChibiOS/RTによるスレッド，Android NDK
+スナッチ設計とAjhcの組合せをLinuxやBSDのような実用的なOSの開発に投入する前に
+手法の評価を行なった．
+
+最初に，RAMサイズが40kBのマイコン上でOSを搭載せずに直接Haskellコードを動作させた
+\footnote{https://github.com/ajhc/demo-cortex-m3/tree/master/stm32f3-discovery}．
+この評価では通常コンテキストとハードウェア割込コンテキストの両方をHaskell言語で実装した．
+コンテキスト間の通信はポインタを経由するがAjhcの再入可能拡張が正常に動作することを実証した．
+またjhcの小さなバイナリを生成する特性がOSの省メモリ化に寄与することも実証できた．
+
+次に，スレッドをサポートした組込み向けOSの上に小さなTCP/IPプロトコルスタック
+\footnote{https://savannah.nongnu.org/projects/lwip/}
+を搭載し，その上で動作するネットワークアプリケーションをHaskellで作成した
+\footnote{https://github.com/ajhc/demo-cortex-m3/tree/master/mbed-nxp-lpc1768}．
+OSとプロトコルスタックのC言語実装とHaskell実装が協調動作させることが可能で，
+まだHaskell化が進んでいない段階でもドッグフード開発に移行できることを実証できた．
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=75mm]{draw/chibi_thr.eps}
+\caption{RTOSのスレッドを利用したHaskellスレッド実装}
+\label{fig:forkos}
+\end{figure}
+
+最後に，組込み向けOS
+\footnote{ChibiOS/RT http://www.chibios.org/}
+のスレッドを使ってHaskell言語のスレッド（forkOS）を実装した
+\footnote{https://github.com/metasepi/chibios-arafura}．
+AjhcのHaskellスレッド実装を，
+ランタイム側に用意されているforkOS\_createThread APIを独自ものに差し換えれば
+POSIXスレッド以外のOS側スレッド実装を使って実現できるように変更した（図\ref{fig:forkos}）．
+Ajhcが再入可能であるだけではなくスレッドセーフであることを実証した．
 
 \section{結論と今後の課題}
 
-xxx わかったこと: メモリ管理さえあればHaskellは動く，省メモリ化は可能，C言語とHaskellの共存
+スナッチ設計とAjhcの組合せによって\ref{sec:problems}章
+でのOS実用化の3つの障壁を解決する見込みがたった．
+しかしその過程でいくつかの問題が見つかった．
+一つ目，C言語の構造体のように構造の一部を局所的に更新する簡単な方法がないことがある．
+これはGHCで使われているvector\footnote{http://hackage.haskell.org/package/vector}
+ライブラリをAjhcに移植することで解決できると考えられる．
+二つ目，コンテキスト間の状態共有方法がポインタのみでしか許されず，型を使った状態共有ができない．
+これはMVar\footnote{http://hackage.haskell.org/package/base/docs/Control-Concurrent-MVar.html}
+をAjhcで使用可能にすべきである．
 
-xxx まだわかっていないこと: コンテキスト間状態共有，メモリの局所書き換え，大規模設計が可能か
-
-xxx 今後の計画: vector/arrayライブラリ移植，NetBSD kernelのスナッチ，ATS2 \cite{ats} の調査
+今後は上記2つの問題を解決した後，
+スナッチ設計によってNetBSD kernelの一部のデバイスドライバをHaskell化する予定である．
+またjhc以外のスナッチ可能なコンパイラとして有望に思われるATS言語
+\footnote{http://www.ats-lang.org/}
+の調査を行なう．
 
 \begin{acknowledgment}
 偉大なHaskellコンパイラを産み出し，
@@ -133,12 +180,5 @@ xxx 今後の計画: vector/arrayライブラリ移植，NetBSD kernelのスナ�
 % BibTeX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliographystyle{ipsjunsrt}
 \bibliography{../bibtex/reference,../bibtex/jreference}
-
-% Biography %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{biography}
-\profile{n}{岡部 究}{}
-\profile{n}{Hiroki MIZUNO}{}
-\profile{n}{瀬川 秀一}{}
-\end{biography}
 
 \end{document}
