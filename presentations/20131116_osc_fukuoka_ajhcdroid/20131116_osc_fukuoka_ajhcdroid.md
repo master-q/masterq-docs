@@ -63,6 +63,13 @@ http://ajhc.metasepi.org/
 * Jhc outputs binary that has low-memory-footprint and runs fast.
 * Good for embedded software.
 
+# Who is John?
+
+* John Meacham
+* http://repetae.net/
+
+![background](img/john.png)
+
 # Why need Ajhc?
 ![background](img/fphaskell.png)
 
