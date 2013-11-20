@@ -33,7 +33,8 @@
 \begin{abstract}
 現在でもOSはC言語によって設計されている．
 一方アプリケーションは強い型付けの言語を用いた安全な設計手法が確立されている．
-本稿ではその設計手法をOSにも適用する手法を提案する．
+本稿ではOSの安全な設計手法として，C言語によって設計されたOSのソースコードを元に少しずつ型推論をそなえた言語による実装に置き換えるスナッチ設計という手法を提案する．
+また当該手法の評価として小規模OSに対して適用し，その結果を考察する．
 \end{abstract}
 
 \begin{jkeyword}
@@ -70,7 +71,7 @@ C言語はMLやHaskellのような型推論をそなえた言語より弱い型�
 実用化されたLinuxのようなOSはLinux kernelの動作するデスクトップでLinux kernel自体を開発している．
 彼等はまた開発以外の日常のデスクトップ用途にもLinux kernelを使用する．
 このような開発スタイルはドッグフード開発と呼ばれている．
-この開発サイクルで自然に実用上のテストが行なわれ，OSの品質は向上する．
+この開発サイクルによって自然に実用上のテストが行なわれ，OSの品質は向上する．
 OS開発ではこのドッグフード開発にすばやく辿り着く必要がある．
 
 2つ目は，ハードウェア割込をポーリングで検出していることである．
@@ -127,17 +128,22 @@ jhc-0.8.0	& 21248 B  & 20  個 & 3 個 \\\hline
 手法の評価を行なった．
 
 最初に，RAMサイズが40kBのマイコン上でOSを搭載せずに直接Haskellコードを動作させた
-\footnote{https://github.com/ajhc/demo-cortex-m3/tree/master/stm32f3-discovery}．
+\cite{demo-cortex-m3}．
 この評価では通常コンテキストとハードウェア割込コンテキストの両方をHaskell言語で実装した．
 コンテキスト間の通信はポインタを経由するがAjhcの再入可能拡張が正常に動作することを実証した．
 またjhcの小さなバイナリを生成する特性がOSの省メモリ化に寄与することも実証できた．
 
 次に，組込み向けOSの上に小さなTCP/IPプロトコルスタック
-\footnote{https://savannah.nongnu.org/projects/lwip/}
-を搭載し，その上で動作するネットワークアプリケーションをHaskellで作成した
-\footnote{https://github.com/ajhc/demo-cortex-m3/tree/master/mbed-nxp-lpc1768}．
+を搭載し，その上で動作するネットワークアプリケーションをHaskellで作成した．
 OSとプロトコルスタックのC言語実装とHaskell実装が協調動作させることが可能で，
 まだHaskell化が進んでいない段階でもドッグフード開発に移行できることを実証できた．
+
+最後に，組込み向けOSの一つであるChibiOS/RT\cite{chibiosrt}のスレッドを使って
+Haskell言語のスレッドを実装した\cite{chibios-arafura}．
+AjhcのHaskellスレッド実装を，
+ランタイム側に用意されているforkOS\_createThread APIを独自ものに差し換えれば
+POSIXスレッド以外のOS側スレッド実装を使って実現できるように変更した（図\ref{fig:forkos}）．
+Ajhcが再入可能であるだけではなくスレッドセーフであることを実証した．
 
 \begin{figure}[h]
 \centering
@@ -146,32 +152,21 @@ OSとプロトコルスタックのC言語実装とHaskell実装が協調動作�
 \label{fig:forkos}
 \end{figure}
 
-最後に，組込み向けOS
-\footnote{ChibiOS/RT http://www.chibios.org/}
-のスレッドを使ってHaskell言語のスレッド（forkOS）を実装した
-\footnote{https://github.com/metasepi/chibios-arafura}．
-AjhcのHaskellスレッド実装を，
-ランタイム側に用意されているforkOS\_createThread APIを独自ものに差し換えれば
-POSIXスレッド以外のOS側スレッド実装を使って実現できるように変更した（図\ref{fig:forkos}）．
-Ajhcが再入可能であるだけではなくスレッドセーフであることを実証した．
-
 \section{結論と今後の課題}
 
 スナッチ設計とAjhcの組合せによって\ref{sec:problems}章
 でのOS実用化の3つの障壁を解決する見込みがたった．
 しかしその過程でいくつかの問題が見つかった．
-1つ目，C言語の構造体のように構造の一部を局所的に更新する簡単な方法がないことがある．
+1つ目に，C言語の構造体のように構造の一部を局所的に更新する簡単な方法がないことがある．
 これはGHCで使われているvector\footnote{http://hackage.haskell.org/package/vector}
 ライブラリをAjhcに移植することで解決できると考えられる．
-2つ目，コンテキスト間の状態共有方法がポインタのみでしか許されず，型を使った状態共有ができない．
+2つ目に，コンテキスト間の状態共有方法がポインタのみでしか許されず，型を使った状態共有ができない．
 これはMVar\footnote{http://hackage.haskell.org/package/base/docs/Control-Concurrent-MVar.html}
 をAjhcで使用可能にすべきである．
 
 今後は上記2つの問題を解決した後，
 スナッチ設計によってNetBSD kernelの一部のデバイスドライバをHaskell化する予定である．
-またjhc以外のスナッチ可能なコンパイラとして有望に思われるATS言語
-\footnote{The ATS Programming Language http://www.ats-lang.org/}
-の調査を行なう．
+またjhc以外のスナッチ可能なコンパイラとして有望に思われるATS言語\cite{ats}の調査を行なう．
 
 \begin{acknowledgment}
 誰もが望みを捨ててしまっていたOS領域にかすかな光をもたらしたJohn Meachamに感謝する．
