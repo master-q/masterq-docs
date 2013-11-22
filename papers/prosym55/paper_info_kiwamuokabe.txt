@@ -1,17 +1,41 @@
 論文タイトル：
+強い型によるOSの開発手法の提案
 
 論文タイトル英語：
+A method to develop OS with strong type
 
 キーワード：
+プログラミング・シンポジウム，プログラミング言語，コンパイラ，Haskell，OS
 
 著者名：
+岡部 究
+水野 洋樹
+瀬川 秀一
 
 著者名英語：
+Kiwamu Okabe
+Hiroki MIZUNO
+Hidekazu SEGAWA
 
 著者所属：
+Metasepi Project
+ocaml-nagoya
 
 著者所属英語：
+Metasepi Project
+ocaml-nagoya
 
 論文抄録：
+現在でもOSはC言語によって設計されている．
+一方アプリケーションは強い型付けの言語を用いた安全な設計手法が確立されている．
+本稿ではOSの安全な設計手法として，C言語によって設計されたOSのソースコードを元に少しずつ型推論をそなえた言語による実装に置き換えるスナッチ設計
+という手法を提案する．
+また当該手法を小規模OSに対して適用し，その結果を考察する．
 
 論文抄録英語：
+Today, many OS are designed by C language.
+On another side, method developing by strong typed languange is established at application domain.
+This paper presents a method that little by little rewrite C language designed OS by strong typed language has type inference.
+The method is named "Snatch-driven development".
+Finally, discuss about result that apply the method to tiny OS.
+
