@@ -86,14 +86,14 @@
 % Don't indent paragraphs.
 \setlength\parindent{0.2em}
 
-% Make lists without bullets
-\renewenvironment{itemize}{
-  \begin{list}{}{
-    \setlength{\leftmargin}{1.5em}
-  }
-}{
-  \end{list}
-}
+%% Make lists without bullets
+%\renewenvironment{itemize}{
+%  \begin{list}{}{
+%    \setlength{\leftmargin}{1.5em}
+%  }
+%}{
+%  \end{list}
+%}
 
 \begin{document}
 
@@ -126,6 +126,10 @@ Haskell programming, NetBSD kernel programming, Debian project.
 
 \section*{Work Experience}
 \subsection*{2013年08月 - 現在: フリーランス}
+
+\begin{itemize}
+  \item Ajhc Haskellコンパイラの研究開発
+\end{itemize}
 
 %%%%%%%%%%%%%%%%
 \subsection*{2012年03月 - 2013年07月: ミラクル-リナックス株式会社}
@@ -215,7 +219,7 @@ ARMアーキティクチャを使った無線LAN MACチップの開発メンバ�
 
 \subsubsection*{2001年07月: 社内初のx86アーキティクチャコピー機のBIOS/bootloader開発 (主担当)}
 それまでmipsアーキティクチャを採用していたコピー機をx86アーキティクチャを用いて開発するプロジェクトに新人として配属。
-開発した製品はimagioシリーズ <\href{http://www.ricoh.co.jp/imagio/}{\tt http://www.ricoh.co.jp/imagio/}> として現在も出荷され続けている。
+開発した製品はimagioシリーズ \href{http://www.ricoh.co.jp/imagio/}{\tt http://www.ricoh.co.jp/imagio/} として現在も出荷され続けている。
 また現在出荷されているx86 CPUを用いたリコー製のコピー機とプリンタは、新人時代に設計したBIOSとbootloaderの基本設計をそのまま引き継いでいる。
 
 主な開発項目は以下の通り。
@@ -237,18 +241,30 @@ ARMアーキティクチャを使った無線LAN MACチップの開発メンバ�
 
 \section*{Activities}
 
+\subsection*{Open-source projects}
+
+\subsubsection*{Metasepi project}
 \begin{itemize}
-  \item Metasepiプロジェクト <\href{http://metasepi.org/}{\tt http://metasepi.org/}> :
-  \item Ajhcコンパイラ <\href{http://ajhc.metasepi.org/}{\tt http://ajhc.metasepi.org/}> :
-  \item Debianメンテナ <\href{http://bit.ly/nfdFmf}{\tt http://bit.ly/nfdFmf}> :
-    Debian squeezeにてuim、sidにてHaskell関連パッケージメンテナ
-  \item NetBSD man翻訳 <\href{http://netbsdman.masterq.net/}{\tt http://netbsdman.masterq.net/}>
-  \item 初心者Haskell勉強会主催 <\href{http://bit.ly/of3JSg}{\tt http://bit.ly/of3JSg}>
-  \item Purely Functional Data Structures読書会主催 <\href{http://bit.ly/tbycm7}{\tt http://bit.ly/tbycm7}>
-  \item Carettah <\href{http://carettah.masterq.net/}{\tt http://carettah.masterq.net/}> : Haskell製プレゼンツール
-  \item 他作成したソースコード :
-    <\href{https://github.com/master-q}{\tt https://github.com/master-q}>
-    <\href{https://gitorious.org/\~{}masterq}{\tt https://gitorious.org/\~{}masterq}>
+\item \href{http://metasepi.org/}{\tt http://metasepi.org/}
+\item MLやHaskellのような強い型を使ってUNIXライクkernelを書き直すプロジェクト。現在NetBSD kernelのドライバをHaskell化中。 \href{https://github.com/metasepi/netbsd-arafura-s1}{\tt https://github.com/metasepi/netbsd-arafura-s1}
+\end{itemize}
+
+\subsubsection*{Ajhc Haskell compiler}
+\begin{itemize}
+\item \href{http://ajhc.metasepi.org/}{\tt http://ajhc.metasepi.org/}
+\item Jhc Haskell Compiler \href{http://repetae.net/computer/jhc/}{\tt http://repetae.net/computer/jhc/} に組み込み拡張を加えたHaskellコンパイラ。再入可能なプログラムを作成でき、メモリ数十kBでも動作可能なバイナリを吐く。
+\end{itemize}
+
+\subsubsection*{Debian Maintainer}
+\begin{itemize}
+\item \href{http://qa.debian.org/developer.php?login=kiwamu@debian.or.jp}{\tt http://qa.debian.org/developer.php?login=kiwamu@debian.or.jp}
+\item Debian squeezeにてuim、sidにてHaskell関連パッケージメンテナ。
+\end{itemize}
+
+\subsubsection*{Carettah}
+\begin{itemize}
+\item \href{http://carettah.masterq.net/}{\tt http://carettah.masterq.net/}
+\item Haskell製プレゼンテーションツール。2011年08月以降全てのプレゼンテーションをこのツールを使って作成。
 \end{itemize}
 
 \section*{Computer Skills}
@@ -261,8 +277,9 @@ ARMアーキティクチャを使った無線LAN MACチップの開発メンバ�
 \section*{Reference available upon request}
 
 \begin{itemize}
-  \item 関本 仁 教授 - 首都大学東京 工学部電気工学科 電気・電子工学
+  \item 児玉 崇 社長 - ミラクル-リナックス株式会社
   \item 丸山 輝幸 GL - 株式会社リコー コントローラ開発本部　BP開発センター 第三開発室　開発三グループ
+  \item 関本 仁 教授 - 首都大学東京 工学部電気工学科 電気・電子工学
 \end{itemize}
 
 \bigskip
