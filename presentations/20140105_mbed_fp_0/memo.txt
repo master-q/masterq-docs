@@ -1,0 +1,20 @@
+こんなメールが来てATSに興味をもったんだよもん
+
+----------------------------------------
+sylvain nahas <sylvain.nahas@gmail.com>
+10/15/13
+
+Hi Kiwamu,
+
+I have a lot of experience with embedded systems and kernel programming. Me too I am fed up with C programming and I have looked up an alternative in the functional programming world. That's how I came to know JHC. 
+
+I was soon disappointed because it is way too immature and will probably always stay such. You already begin to notice this. Furthermore, I concluded in general that Haskell is simply not well adapted to system programming because it does not allow explicit control on resources, which is a must; especially for tasks where garbage collecting is not possible.
+
+I believe I have searched thoroughly, and I have found only one working alternative. It is called ATS (http://www.ats-lang.org). With it, it is possible to do system programming and explicit resource managements while keeping the expressiveness of a functional language. In fact, it goes farther than Haskell because it allows to do static verification (the language type system is more expressive than Haskell). AND it is mature and well supported. In fact, I know for a fact that the language developers are very keen to see their baby adopted for system programming, so if you contact them they will happily support you, I guess.
+
+I do not send you this email to ditch JHC. I would very much love it to be a good solution. I just do not believe it is and I think it will never be. 
+
+Maybe I will be able to let you spare time in the long term, with this suggestion. Or maybe you can just ignore what I wrote. It's your call.
+
+All the best,
+Sylvain
