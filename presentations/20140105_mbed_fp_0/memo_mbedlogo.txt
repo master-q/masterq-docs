@@ -1,0 +1,49 @@
+Toyomasa Watarai Toyomasa.Watarai@arm.com via debian.or.jp 
+12:09 AM (9 hours ago)
+
+to kiwamu 
+Okabe 様
+
+お世話になります。アームの渡會と申します。
+昨年９月のmbed祭り＠札幌では大変お世話になりました。
+
+サポート宛てにご質問のありましたメールが転送されてきましたので、私の方か
+ら回答いたします。返信が遅くなりまして、申し訳ありません。
+
+mbedロゴの取り扱いですが、Haskell Compilerのプロジェクトで自由にご使用頂
+いて構いません。
+
+ロゴのJPEGやPNG形式のファイルは特に用意しておりませんが、以下のフォント及
+びカラーになりますので、ご参照ください。
+
+>The mbed logo is in the “Trebuchet MS” bold font, and the colour is defined as RGB 0093DD.
+
+
+以上、不明な点がありましたらお問い合わせください。
+
+Hi,
+May I reuse mbed logo for Japanese mbed group?
+We are booting a new group to create and discuss about functional
+programming on mbed platform in Japan.
+https://github.com/mbed-fp
+http://partake.in/events/ab56454b-c305-4f3b-b8ce-872871ab7da9
+First our product is an Ajhc Haskell compiler for mbed.
+http://ajhc.metasepi.org/
+https://github.com/ajhc/demo-cortex-m3#mbed-nxp-lpc1768
+We would like to create more product and technics on functional
+programming for mbed.
+The example are following...
+* The mbed support with ATS compiler http://www.ats-lang.org/
+* Rust for mbed https://github.com/neykov/armboot
+* Library written with functional language for mbed
+But your mbed logo license is not found, may I reuse your mbed logo
+for our group?
+Best regards,
+--
+Kiwamu Okabe
+
+
+-- IMPORTANT NOTICE: The contents of this email and any attachments are confidential and may also be privileged. If you are not the intended recipient, please notify the sender immediately and do not disclose the contents to any other person, use it for any purpose, or store or copy the information in any medium.  Thank you.
+
+ARM Limited, Registered office 110 Fulbourn Road, Cambridge CB1 9NJ, Registered in England & Wales, Company No:  2557590
+ARM Holdings plc, Registered office 110 Fulbourn Road, Cambridge CB1 9NJ, Registered in England & Wales, Company No:  2548782
