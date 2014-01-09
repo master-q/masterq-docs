@@ -1,0 +1,237 @@
+\Chapter{SNATCHER A.C.0097}{@master\_q}
+
+\section{序}
+
+その夜。魔法少女だったわたしは \textbf{スナッチャー} として目覚めた。
+目の前をさえぎるカプセルを開ける。首をかたむけると、隣のカプセルには
+``SNATCHER Another Changed '0097'' とホコリをかぶったプレートが見える。
+そのカプセルの中にはまだ皮膚の青い少女が横たわっていた。
+まだ目覚めていないようだ。
+
+\noindent 「そう------わたしは96番目なの------」
+
+\noindent わかっている。わたしの最初の役目はこの少女にふさわしい魂を手に入れることだ。
+まだ \textbf{強い型} のついていない愛する者の魂を \textbf{スナッチ}
+して、新しい強い型を持つ戦士に生まれ変わらせる。
+それがスナッチャーとしてのわたしの役目。
+
+\section{再会 (QEMUの環境構築)}
+
+愛していた人といわれて、一人に決められるものではない。
+しかし20世紀に思いをはせるうちに、わたしはあなたのことを思いだした。
+
+\textbf{AC'97} \footnote{Audio Codec 97 \hrefT{http://ja.wikipedia.org/wiki/Audio\_Codec\_97}}。
+あなたがまだ存在しなかったころ、様々な種類のサウンドカードがあった。
+21世紀の現在、ビデオボードの性能に人々がいろめきたつように、サウンドカードにも注目があつまっていた。
+Sound Blaster、Ensoniq、SoundFont、YM3812。
+そしてオンボードサウンドという名とともにあなたは全てのサウンドチップを葬った。ああ。その全てがなつかしい。
+そうしてあなた自身も時代の波にのまれ、今では HDA \footnote{High Definition Audio
+  \hrefT{http://ja.wikipedia.org/wiki/High\_Definition\_Audio}}
+にとってかわられた。
+おそらくもうみんなサウンドチップに思いをはせることもないでしょう。
+でもわたしは覚えている。あなたの美しい音色を。わたしはあなたにもう一度会いたいと思った。
+たとえそれが仮想環境の中であったとしても。
+
+まずはビルド環境を整えよう。
+kernelのスナッチをするのだから容易にkernelを差し換えられた方が良いでしょう。
+またAC'97を使って音を鳴らすテストを頻繁にすることになるので、
+音源もファイルシステムにすぐ見えた方が楽ができる。
+とりあえず作ったビルド環境は以下の手順でQEMUのディスクイメージを作る。
+
+\begin{code}
+$ git clone https://github.com/metasepi/netbsd-arafura-s1.git
+$ cd netbsd-arafura-s1
+$ make setup WAV=~/test.wav
+$ make bootcd
+\end{code}
+
+それでは起動してaudioplayコマンドでAC'97ドライバを使ってみましょう。
+
+\begin{code}
+$ make qemucurses
+# ./play.sh
+\end{code}
+
+このPCのサウンドチップはHDAだ。
+しかしQEMUを通してきこえる音色はたしかになつかしいあなたのものだった。
+
+\begin{code}
+$ lspci | grep -i audio
+00:1b.0 Audio device: Intel Corporation 5 Series/3400 Series Chipset High Defi-
+nition Audio (rev 06)
+\end{code}
+
+\section{(C言語ソースコード解析)}
+
+魂をスナッチするには魂の構造を理解しなければならない。
+理解とはなにを意味するのかはわからないが、とにかく理解するということに努力をはらう行為そのものなのかもしれない。
+あなたの位置はすぐにみつかった。``netbsd/sys/dev/pci/auich.c''
+\footnote{\hrefT{http://cvsweb.netbsd.org/bsdweb.cgi/src/sys/dev/pci/auich.c?only\_with\_tag=MAIN}}
+がソースコード。
+auich(4) \footnote{\hrefT{http://netbsd.gw.com/cgi-bin/man-cgi?auich++NetBSD-current}}
+がマニュアルだった。AC'97ハードウェアの仕様書
+\footnote{AC'97 Component Specification
+  \hrefT{http://www-inst.eecs.berkeley.edu/~cs150/Documents/ac97\_r23.pdf}}
+も見つかった。
+
+まず関数の役割ををながめてみよう。
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  auich\_match() PCIデバイスを探す
+\item
+  auich\_attach() デバイスドライバ初期化
+
+  \begin{itemize}
+  \itemsep1pt\parskip0pt\parsep0pt
+  \item
+    PCI空間のマップ
+  \item
+    mutex初期化
+  \item
+    割り込みハンドラ初期化
+  \item
+    DMA初期化
+  \item
+    sc構造体初期化
+  \item
+    エンコーディング設定
+  \item
+    パワーマネジメント設定
+  \item
+    auich\_finish\_attach() を割り込み開始後に実行
+  \item
+    sysctl設定
+  \end{itemize}
+\item
+  auich\_finish\_attach() 割り込み許可後のデバイスドライバ初期化
+
+  \begin{itemize}
+  \itemsep1pt\parskip0pt\parsep0pt
+  \item
+    auich\_calibrate() キャリブレーション処理
+  \item
+    audio\_attach\_mi() audio driver初期化
+  \end{itemize}
+\item
+  auich\_read\_codec() コーデックレジスタ読み込み
+\item
+  auich\_write\_codec() コーデックレジスタ書き込み
+\item
+  auich\_reset\_codec() コーデックリセット
+\item
+  auich\_open() ドライバオープン、audio driverから呼ばれる
+\item
+  auich\_close() ドライバクローズ
+\item
+  auich\_query\_encoding()
+\item
+  auich\_set\_params() エンコーディングパラメータ設定
+\item
+  auich\_round\_blocksize()
+\item
+  auich\_halt\_output()
+\item
+  auich\_halt\_input()
+\item
+  auich\_getdev()
+\item
+  auich\_set\_port()
+\item
+  auich\_get\_port()
+\item
+  auich\_query\_devinfo()
+\item
+  auich\_allocm() リングバッファの確保
+\item
+  auich\_freem() リングバッファの解放
+\item
+  auich\_round\_buffersize()
+\item
+  auich\_mappage()
+\item
+  auich\_get\_props()
+\item
+  auich\_trigger\_output()
+\item
+  auich\_trigger\_input()
+\item
+  auich\_get\_locks()
+\item
+  auich\_intr() 割り込みルーチン
+
+  \begin{itemize}
+  \itemsep1pt\parskip0pt\parsep0pt
+  \item
+    auich\_intr\_pipe()
+  \end{itemize}
+\end{itemize}
+
+xxx 関数どうしの関係を図にすること
+
+xxx 主な構造体の説明
+
+これだけであなたのすべてを理解したことになることにはならない。
+バスドライバやautoconfのしくみ、そしてなによりAC97 codec
+\footnote{generic AC97 codec driver
+  \hrefT{http://netbsd.gw.com/cgi-bin/man-cgi?ac97+4+NetBSD-current}}
+とaudio driver
+\footnote{device-independent audio driver layer
+  \hrefT{http://netbsd.gw.com/cgi-bin/man-cgi?audio++NetBSD-current}}
+を調べていない。
+しかしまずあなたの表層を理解するだけで、スナッチをはじめることはできる。
+残りの深部はスナッチをしながらでも理解することができることを、わたしは知っていた。
+
+\section{(ランタイム追加)}
+
+\section{(スナッチ開始)}
+
+「わたしたちはスナッチャー。あなたたちは型の海へ同化されます。
+抵抗は無意味よ」
+
+xxx どの関数を実際に使っているのかみきわめる
+
+\section{幕}
+
+わたしは97番目のカプセルへと戻り、少女の様子を観察することにした。
+きっとうまくいく------
+さきほどの少女の横顔はたしかにあなたのそれに見えた。
+でもそこには、出会ったあのころのあなたは居ないような気がした。
+あなたとの思い出がよびおこされる。かんしゃく持ちだったあなた。
+夜に不安で泣き出し、夜空に飛び出ていったあなた。
+そして不安のゆりもどしによる不安定な安心から、涙ながらにほほえんでいたあなた。
+
+少女の皮膚が白く透きとおっていく。目覚めが近いしるしだ。
+
+\noindent 「ようこそ型の海へ。あなたはここで生まれたのよ」
+
+\noindent わたしが声をかけると、あなたの目はゆっくりと開いた。
+
+\section{参考資料}
+
+\begin{itemize}
+\item
+  「スナッチャー」 - コナミデジタルエンタテインメント
+  \footnote{機能はそのままに設計を置換する者をスナッチャーと呼ぶでゲソ
+    \hrefT{http://en.wikipedia.org/wiki/Snatcher}}
+\item
+  「新スタートレック」から「ボーグ」
+  \footnote{型付けされた者達は完全に同化するのかもしれないでゲソ
+    \hrefT{http://en.wikipedia.org/wiki/Borg\_(Star\_Trek)}}
+\item
+  「NetBSD arafura season 1」
+  \hrefT{https://github.com/metasepi/netbsd-arafura-s1}
+  \footnote{本記事で作成したソースコードのありかでゲソ}
+\end{itemize}
+
+\section{xxx メモ xxx}
+
+デバドラをどこまでさかのぼってスナッチするかは工数相談。
+auich.cは完全にスナッチしてしまいたいが、できれば
+http://netbsd.gw.com/cgi-bin/man-cgi?audio++NetBSD-current
+にも着手したい。バスドライバは手がつかないだろう。
+それを考えるとauich.cをまずスナッチして、その近辺のモジュールにしみだしていくのがよさそう。
+話の流れ的にも具体的なデバイスから抽象構造の説明にうつった方が理解しやすいだろう。
+
+短編にするならあえてauich.cのスナッチだけを目標にして、その近傍は展望として残した方がいいかもしれない。
