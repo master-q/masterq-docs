@@ -1,0 +1,44 @@
+\begin{thebibliography}{10}
+
+\bibitem{ajhc}
+team, M.: Ajhc - Haskell everywhere, Metasepi Project (online),
+  \urle{http://ajhc.metasepi.org/} \refdatee{2013-03-01}.
+
+\bibitem{funk}
+funk team, T.: Funk ^^e2^^80^^93 The Functional Kernel, The funk team (online),
+  \urle{http://home.gna.org/funk/} \refdatee{2005-09-16}.
+
+\bibitem{snowflake-os}
+jessica.l.hamilton: snowflake-os An O'Caml Operating System, snowflake-os
+  members (online), \urle{https://code.google.com/p/snowflake-os/}
+  \refdatee{2012-05-23}.
+
+\bibitem{house}
+Hallgren, T. et al.: A Principled Approach to Operating System Construction in
+  Haskell, {\em ICFP 2005} (2005).
+
+\bibitem{jhc}
+Meacham, J.: Jhc Haskell Compiler, (online),
+  \urle{http://repetae.net/computer/jhc/} \refdatee{2013-11-18}.
+
+\bibitem{j-ikamusume5}
+　岡部究\：めたせぴ☆ふぁうんでーしょん，簡約! λカ娘， Vol.~5, pp.\ 3--44
+  (2013).
+
+\bibitem{demo-cortex-m3}
+team, M.: Ajhc demo for Cortex-M3/4 board, (online),
+  \urle{https://github.com/ajhc/demo-cortex-m3} \refdatee{2013-11-20}.
+
+\bibitem{chibiosrt}
+Sirio, G.~D.: ChibiOS/RT Homepage, (online), \urle{http://www.chibios.org/}
+  \refdatee{2013-11-20}.
+
+\bibitem{chibios-arafura}
+team, M.: Snatch ChibiOS/RT using Ajhc, (online),
+  \urle{https://github.com/metasepi/chibios-arafura} \refdatee{2013-11-20}.
+
+\bibitem{ats}
+Xi, H.: The ATS Programming Language, Boston University (online),
+  \urle{http://www.ats-lang.org/} \refdatee{2013-11-18}.
+
+\end{thebibliography}
