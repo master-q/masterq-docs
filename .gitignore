@@ -7,3 +7,5 @@ papers/*/*.dvi
 papers/*/*.fls
 papers/*/*.log
 papers/*/*.pdf
+books/snatcher_ac0097/snatcher_ac0097-pdf/
+books/snatcher_ac0097/snatcher_ac0097.pdf
