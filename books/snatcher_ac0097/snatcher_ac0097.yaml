@@ -1,0 +1,89 @@
+# review-epubmaker向けの設定ファイルの例。
+# yamlファイルをReVIEWファイルのある場所に置き、
+# 「review-epubmaker yamlファイル」を実行すると、<bookname>.epubファイルが
+# 生成されます。
+# このファイルはUTF-8エンコーディングで記述してください。
+
+# ブック名(ファイル名になるもの。ASCII範囲の文字を使用)
+bookname: snatcher_ac0097
+
+# 書名
+booktitle: SNATCHER A.C.0097
+
+# 著者
+aut: Metasepiチーム (岡部 究)
+prt_url: https://github.com/ajhc/ajhc-hacking-guide
+rights: Text (C) 2013 Metasepi team - Creative Commons Attribution-ShareAlike 3.0 Unported License. / Cover Photo (C) Charlie - Creative Commons Attribution 2.0 Generic License.
+# 以下はオプション
+# prt: 出版社
+# asn: Associated name
+# ant: Bibliographic antecedent
+# clb: 貢献者
+# edt: 編集者
+# dsr: デザイナ
+# ill: イラストレータ
+# pht: 撮影者
+# trl: 翻訳者
+# date: 刊行日
+# rights: 権利表記
+# description: ブックの説明
+
+#
+# coverfile: カバーページのbody要素内に挿入する内容を記述したファイル名
+#
+coverfile: _cover.html
+
+#
+# coverimage: カバー用画像。画像ディレクトリ内に置いてもディレクトリ名は不要(例: cover.jpg)
+#
+
+# 固有IDに使用するドメイン。指定しない場合には、時刻に基づくランダムUUIDが入る
+# urnid: urn:uid:http://example.com/some-book-title/1.0.2/
+
+# CSSファイル (yamlファイルおよびReVIEWファイルを置いたディレクトリにあること)
+stylesheet: snatcher_ac0097.css
+
+# LaTeX用のスタイルファイル(styディレクトリ以下に置くこと)
+texstyle: ruby,snatcher_ac0097
+
+# LaTeX用のdocumentclassを指定する
+texdocumentclass: ["jsbook", "a4j"]
+
+# 目次として抽出するレベル
+toclevel: 1
+
+# セクション番号を表示するレベル
+secnolevel: 2
+
+# EPUBのバージョン(現時点では2または3。デフォルトは2)
+epubversion: 3
+
+# HTMLのバージョン(現時点では4または5。デフォルトは4。epubversionを3にした場合は自動で5に設定される)
+htmlversion: 5
+
+# EPUB標準の目次以外に目次を作成するか
+mytoc: true
+
+# 奥付を作成するか。デフォルトでは作成されない。trueを指定するとデフォ
+# ルトの奥付、ファイル名を指定するとそれがcolophon.htmlとしてコピーさ
+# れる
+# colophon: true
+
+# XHTML生成後に実行するプログラム。$1:HTMLの生成されたディレクトリ
+# $2:ReVIEWファイルのあるディレクトリ $3:起動時指定のyamlファイル名
+# posthook: hook.sh
+
+# EPUBで表紙をコンテンツに含めるか。デフォルト(no)では作成されない。
+# yesにするとiBooks等でも最初に表紙が表示されるようになる
+# cover_linear: yes
+
+# review-compileに渡すパラメータ
+params: --stylesheet=snatcher_ac0097.css --subdirmode --chapterlink
+
+# デバッグフラグ。nilでないときには一時ファイルをカレントディレクトリ
+# に作成し、削除もしない
+# debug: nil
+debug: true
+
+# 奥付生成用
+colophon: true

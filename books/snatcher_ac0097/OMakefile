@@ -1,0 +1,24 @@
+RE_FILES    = $(glob *.re)
+ODG_FILES   = $(glob images/*/*.odg)
+PNG_FILES   = $(replacesuffixes .odg, .png, $(ODG_FILES))
+BOOKNAME    = snatcher_ac0097
+OTHER_FILES = $(BOOKNAME).yaml CHAPS PREDEF POSTDEF _cover.tex
+
+$(BOOKNAME).pdf: _cover.tex $(RE_FILES) $(OTHER_FILES) # $(PNG_FILES)
+	rm -f $(BOOKNAME).pdf
+	rm -rf $(BOOKNAME)-pdf
+	review-pdfmaker $(BOOKNAME).yaml
+
+.SUBDIRS: $(glob images/*/)
+	%.png: %.odg
+		unoconv -f png -o $@ $< || unoconv -n -f png -o $@ $< \
+		|| unoconv -f png -o $@ $< || unoconv -n -f png -o $@ $<
+
+.DEFAULT: $(BOOKNAME).pdf
+
+.PHONY: clean
+
+clean:
+	rm -f $(BOOKNAME).pdf *~
+	rm -f images/*/*.png
+	rm -rf $(BOOKNAME)-pdf
