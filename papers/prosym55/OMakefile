@@ -23,4 +23,4 @@ LaTeXDocument(prosym55_kiwamuokabe, prosym55_kiwamuokabe)
 .DEFAULT: prosym55_kiwamuokabe.pdf prosym55_kiwamuokabe.dvi
 
 clean:
-	rm -f *.aux *.dvi *.log *.fls *.out *.pdf *.bbl *.blg *~
+	rm -f *.aux *.dvi *.log *.fls *.out *.bbl *.blg *~ prosym55_kiwamuokabe.pdf
