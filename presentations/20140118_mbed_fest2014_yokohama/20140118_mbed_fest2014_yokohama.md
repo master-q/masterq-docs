@@ -150,6 +150,7 @@ http://openocd.sourceforge.net/
 http://www.signal11.us/oss/hidapi/
 
 # OpenOCD enabling CMSIS-DAP
+![background](img/blank.png)
 
 ~~~
 $ git clone git://github.com/signal11/hidapi.git
@@ -161,15 +162,15 @@ $ sudo make install
 ~~~
 
 ~~~
-$ git clone git://git.code.sf.net/p/openocd/code openocd
+$ git clone https://github.com/master-q/openocd.git
 $ cd openocd
+$ git checkout masterq-mbedfest-201401
 $ ./bootstrap
 $ ./configure --enable-cmsis-dap
 --ship--
 Olimex ARM-JTAG-EW Programmer           yes (auto)
 CMSIS-DAP Compliant Debugger            yes
 $ make
-$ sudo make install
 ~~~
 
 ~~~
@@ -178,9 +179,10 @@ http://permalink.gmane.org/gmane.comp.debugging.openocd.devel/24258
 ~~~
 
 # On mbed LPC1768
+![background](img/blank.png)
 
 ~~~
-$ sudo /usr/local/bin/openocd -f /usr/local/share/openocd/scripts/board/mbed-lpc1768.cfg
+$ sudo ./src/openocd -f tcl/board/mbed-lpc1768.cfg
 ~~~
 
 ~~~
@@ -188,10 +190,11 @@ $ arm-none-eabi-gdb Blink.elf
 (gdb) target remote localhost:3333
 (gdb) monitor reset halt
 (gdb) load
+(gdb) monitor reset
 (gdb) c
 ~~~
 
-But too slow... and can't trace.
+But too slow...
 
 ~~~
 Transfer rate: 50 bytes/sec, 3818 bytes/write.
@@ -200,6 +203,10 @@ Transfer rate: 50 bytes/sec, 3818 bytes/write.
 :(
 
 # On Seeeduino Arch Pro
+![background](img/blank.png)
+
+Same as mbed LPC1768.
+
 # On FRDM-KL46Z
 # Be a hacker such as ねむいさん
 ![background](img/nemuisan.png)
