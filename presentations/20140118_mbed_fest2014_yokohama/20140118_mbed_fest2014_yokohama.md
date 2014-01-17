@@ -1,4 +1,5 @@
 # Functional MCU programming
+![background](img/AlonzoChurch.png)
 
 Metasepi Project / Kiwamu Okabe
 
@@ -10,9 +11,10 @@ Metasepi Project / Kiwamu Okabe
 * Organizer of Metasepi Project
 * A developer of Ajhc Haskell compiler
 * A Debian Maintainer
-* 10 years' experience in developing OS using NetBSD.
+* 10 years' experience in developing OS using NetBSD
 
-# Kick off workshop at Nagoya
+# Kick off workshop at Nagoya !
+![background](img/workshop_nagoya.png)
 
 Functional MCU programing workshop
 
@@ -23,46 +25,20 @@ Functional MCU programing workshop
 http://metasepi.org/posts/2014-01-05-mbed_fp_0.html
 ~~~
 
+* Now planning the next workshop...
+
 # Why functional lang for MCU?
 ![background](img/iot.png)
 
+* Internet of Things (IoT)
 * We will live in IoT world
-* Can't debug IoT device on field
+* Can't debug IoT device on the field
 * Should avoid runtime error
 * We need strong type !
 
-# Develop enviroment overview
+# Choice of cross compiler
 
-![inline](draw/env_overview.png)
-
-# Which MCU? Of course mbed !
-
-Why?
-
-* Major
-* 32bit
-* Large memory size (> 20kB)
-* Ethernet
-
-# Which Board is good for us...
-
-* mbed LPC1768 (5,200 YEN)
-
-~~~
-https://mbed.org/platforms/mbed-LPC1768/
-~~~
-
-* Seeeduino Arch Pro ($43.41)
-
-~~~
-http://www.seeedstudio.com/depot/arch-pro-p-1677.html
-~~~
-
-* FRDM-KL46Z (1,634 YEN)
-
-~~~
-http://www.freescale.com/webapp/sps/site/prod_summary.jsp?code=FRDM-KL46Z
-~~~
+![inline](draw/env_compiler.png)
 
 # Cross compiler: (A)jhc
 ![background](img/ajhc.png)
@@ -70,7 +46,7 @@ http://www.freescale.com/webapp/sps/site/prod_summary.jsp?code=FRDM-KL46Z
 http://ajhc.metasepi.org/
 
 * Language: Haskell
-* Haskell is major !
+* Haskell language is major !
 * Need GC heap = Need more memory
 * Experience running on MCU
 
@@ -84,11 +60,12 @@ https://github.com/ajhc/demo-cortex-m3
 
 http://www.ats-lang.org/
 
-http://jats-ug.metasepi.org/
-
 * Language: ML
 * Optional GC = Need low memory
 * No experience running on MCU
+* Document translated into Japanese
+
+http://jats-ug.metasepi.org/
 
 # Cross compiler: Rust
 ![background](img/rust.png)
@@ -104,16 +81,54 @@ ARM Cortex-M
 https://github.com/neykov/armboot
 ~~~
 
-* @pirapira knows detail of it
+* Developing by Mozilla
+* @pirapira knows the detail of it
 
-# gdbserver (Debugger)
-![background](img/rms.png)
+# Choice of MCU board
 
-* Gdb is major debugger
-* But gdb is only for the program running on your PC
-* How debug program running on MCU ?
-* Gdbserver is good for the use case
-* There are many implementation
+![inline](draw/env_mcu.png)
+
+# Which MCU? Of course mbed!?
+![background](img/mbed_display.png)
+
+Why?
+
+* Major
+* 32bit
+* Large memory size (> 20kB)
+* Debugger
+* Ethernet
+
+# Which board is good for us...
+![background](img/3_board.png)
+
+* mbed LPC1768 (￥5,200)
+
+~~~
+RAM 32kB+32kB
+Ethernet
+https://mbed.org/platforms/mbed-LPC1768/
+~~~
+
+* Seeeduino Arch Pro ($43.41)
+
+~~~
+RAM 32kB+32kB
+Ethernet
+http://www.seeedstudio.com/depot/arch-pro-p-1677.html
+~~~
+
+* FRDM-KL46Z (￥1,634)
+
+~~~
+RAM 32kB
+No Ethernet
+http://www.freescale.com/webapp/sps/site/prod_summary.jsp?code=FRDM-KL46Z
+~~~
+
+# Choice of debugger
+
+![inline](draw/env_debugger.png)
 
 # gdbserver: pyOCD
 ![background](img/python.png)
@@ -130,9 +145,11 @@ https://github.com/mbedmicro/pyOCD
 http://openocd.sourceforge.net/
 
 * Comming CMSIS-DAP support!
-* Need HIDAPI
+* Need HIDAPI library
 
 http://www.signal11.us/oss/hidapi/
+
+# OpenOCD enabling CMSIS-DAP
 
 ~~~
 $ git clone git://github.com/signal11/hidapi.git
@@ -142,8 +159,6 @@ $ ./configure
 $ make
 $ sudo make install
 ~~~
-
-# OpenOCD enabling CMSIS-DAP
 
 ~~~
 $ git clone git://git.code.sf.net/p/openocd/code openocd
@@ -157,6 +172,42 @@ $ make
 $ sudo make install
 ~~~
 
-# Choose our environment set
+~~~
+Some time the following FRDM-KL46Z patch is useful.
+http://permalink.gmane.org/gmane.comp.debugging.openocd.devel/24258
+~~~
 
-![inline](draw/choose_env.png)
+# On mbed LPC1768
+
+~~~
+$ sudo /usr/local/bin/openocd -f /usr/local/share/openocd/scripts/board/mbed-lpc1768.cfg
+~~~
+
+~~~
+$ arm-none-eabi-gdb Blink.elf
+(gdb) target remote localhost:3333
+(gdb) monitor reset halt
+(gdb) load
+(gdb) c
+~~~
+
+But too slow... and can't trace.
+
+~~~
+Transfer rate: 50 bytes/sec, 3818 bytes/write.
+~~~
+
+:(
+
+# On Seeeduino Arch Pro
+# On FRDM-KL46Z
+# Be a hacker such as ねむいさん
+![background](img/nemuisan.png)
+
+http://nemuisan.blog.bai.ne.jp/
+
+There is his patch at following URL.
+
+~~~
+https://skydrive.live.com/?cid=36f4d1230f8a673c&id=36F4D1230F8A673C%213043
+~~~
