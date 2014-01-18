@@ -208,13 +208,53 @@ Transfer rate: 50 bytes/sec, 3818 bytes/write.
 Same as mbed LPC1768.
 
 # On FRDM-KL46Z
+![background](img/blank.png)
+
+~~~
+Use project at https://github.com/0xc0170/kinetis_klxx_gcc.
+~~~
+
+~~~
+$ sudo ./src/openocd -f tcl/board/frdm-kl46z.cfg
+--snip--
+cortex_m reset_config sysresetreq
+Info : CMSIS-DAP: FW Version = 1.0
+Info : SWCLK/TCK = 0 SWDIO/TMS = 1 TDI = 0 TDO = 0 nTRST = 0 nRESET = 1
+Info : DAP_SWJ Sequence (reset: 50+ '1' followed by 0)
+Info : CMSIS-DAP: Interface ready
+Info : clock speed 100 kHz
+Info : IDCODE 0x0bc11477
+Info : MKL46Z256VLL4.cpu: hardware has 2 breakpoints, 2 watchpoints
+Info : accepting 'gdb' connection from 3333
+Warn : Cannot communicate... target not halted.
+Error: auto_probe failed
+Error: Connect failed. Consider setting up a gdb-attach event for the target to prepare.
+Error: attempted 'gdb' connection rejected
+~~~
+
+X(
+
 # Be a hacker such as ねむいさん
 ![background](img/nemuisan.png)
 
 http://nemuisan.blog.bai.ne.jp/
 
-There is his patch at following URL.
+* OpenOCD hacker
+* There is his patch at following URL
 
 ~~~
 https://skydrive.live.com/?cid=36f4d1230f8a673c&id=36F4D1230F8A673C%213043
+~~~
+
+# Functional programming fanzine
+![background](img/haskell-logo.png)
+
+* http://www.paraiso-lang.org/ikmsm/
+* About Haskell or OCaml or . . .
+* About Ajhc in C84 book
+* About Android app with Haskell in C85 book
+* Call me if you read it!
+
+~~~
+http://www.paraiso-lang.org/ikmsm/books/c85.html
 ~~~
