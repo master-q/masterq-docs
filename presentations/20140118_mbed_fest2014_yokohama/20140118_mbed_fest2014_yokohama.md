@@ -36,6 +36,10 @@ http://metasepi.org/posts/2014-01-05-mbed_fp_0.html
 * Should avoid runtime error
 * We need strong type !
 
+# What is functional app?
+
+![inline](draw/mbed_rss_arch.png)
+
 # Choice of cross compiler
 
 ![inline](draw/env_compiler.png)
@@ -190,7 +194,11 @@ $ arm-none-eabi-gdb Blink.elf
 (gdb) target remote localhost:3333
 (gdb) monitor reset halt
 (gdb) load
-(gdb) monitor reset
+~~~
+
+Push hard rest button.
+
+~~~
 (gdb) c
 ~~~
 
