@@ -1,0 +1,295 @@
+% LaTeX Curriculum Vitae Template
+%
+% Copyright (C) 2004-2009 Jason Blevins <jrblevin@sdf.lonestar.org>
+% http://jblevins.org/projects/cv-template/
+%
+% You may use use this document as a template to create your own CV
+% and you may redistribute the source code freely. No attribution is
+% required in any resulting documents. I do ask that you please leave
+% this notice and the above URL in the source code if you choose to
+% redistribute this file.
+
+\documentclass[letterpaper]{article}
+
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{fancybox}
+\usepackage{longtable}
+\usepackage{fancyvrb}
+\usepackage[dvipdfmx]{hyperref}
+\usepackage{url}
+\usepackage[dvipdfmx]{color}
+\usepackage{nextpage}
+\usepackage{float}
+\usepackage[table,dvipdfmx]{xcolor}
+\usepackage{wrapfig}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{makeidx}
+\usepackage{ascmac} % screen
+\usepackage[dvips]{xy} % for advi workaround. Bug #452044
+
+\usepackage{geometry}
+
+% Comment the following lines to use the default Computer Modern font
+% instead of the Palatino font provided by the mathpazo package.
+% Remove the 'osf' bit if you don't like the old style figures.
+%\usepackage[T1]{fontenc}
+%\usepackage[sc,osf]{mathpazo}
+
+% Set your name here
+\def\name{Kiwamu Okabe (岡部 究)}
+
+% Replace this with a link to your CV if you like, or set it empty
+% (as in \def\footerlink{}) to remove the link in the footer:
+\def\footer{
+  \begin{center}
+    \begin{footnotesize}
+      Last updated: \today
+    \end{footnotesize}
+  \end{center}
+}
+
+% The following metadata will show up in the PDF properties
+\hypersetup{
+  colorlinks = true,
+  urlcolor = black,
+  pdfauthor = {\name},
+  pdfkeywords = {economics, statistics, mathematics},
+  pdftitle = {\name: Curriculum Vitae},
+  pdfsubject = {Curriculum Vitae},
+  pdfpagemode = UseNone
+}
+
+\geometry{
+  body={6.5in, 8.5in},
+  left=1.0in,
+  top=1.25in
+}
+
+% Customize page headers
+\pagestyle{myheadings}
+\markright{\name}
+\thispagestyle{empty}
+
+% Custom section fonts
+\usepackage{sectsty}
+\sectionfont{\rmfamily\mdseries\Large}
+\subsectionfont{\rmfamily\mdseries\itshape\large}
+
+% Other possible font commands include:
+% \ttfamily for teletype,
+% \sffamily for sans serif,
+% \bfseries for bold,
+% \scshape for small caps,
+% \normalsize, \large, \Large, \LARGE sizes.
+
+% Don't indent paragraphs.
+\setlength\parindent{0.2em}
+
+%% Make lists without bullets
+%\renewenvironment{itemize}{
+%  \begin{list}{}{
+%    \setlength{\leftmargin}{1.5em}
+%  }
+%}{
+%  \end{list}
+%}
+
+\begin{document}
+
+% Place name at left
+{\huge \name}
+
+% Alternatively, print name centered and bold:
+%\centerline{\huge \bf \name}
+
+\vspace{0.25in}
+
+\begin{minipage}{0.22\linewidth}
+  226-0025 \\
+  神奈川県横浜市緑区 \\
+  十日市場町1258 \\
+  十日市場ヒルタウン \\
+  5-6-306 \\
+\end{minipage}
+\begin{minipage}{0.3\linewidth}
+  \begin{tabular}{ll}
+    Phone: & +81-90-3524-7064 \\
+    Email: & \href{mailto:kiwamu@debian.or.jp}{\tt kiwamu@debian.or.jp} \\
+    Homepage: & \href{http://www.masterq.net/}{\tt http://www.masterq.net/} \\
+  \end{tabular}
+\end{minipage}
+
+\section*{Interests}
+
+Haskell programming, NetBSD kernel programming, Debian project.
+
+\section*{Work Experience}
+\subsection*{2013年08月 - 現在: フリーランス}
+
+\begin{itemize}
+  \item Ajhc Haskellコンパイラの研究開発
+\end{itemize}
+
+%%%%%%%%%%%%%%%%
+\subsection*{2012年03月 - 2013年07月: ミラクル-リナックス株式会社}
+
+\begin{itemize}
+  \item PowerPC LinuxのSMP排他による検証/修正
+  \item PowerPC版crashコマンド(デバッグツール)の不具合修正
+  \item NSISを使った新しいWindowsアプリケーションインストーラの作成
+  \item 社内gitサーバの新規運用開始
+  \item 新規ハードのデジタルサイネージ性能検証/チューニング
+\end{itemize}
+
+%%%%%%%%%%%%%%%%
+\subsection*{2001年04月 - 2012年02月: 株式会社リコー ソフトウェアエンジニア}
+\subsubsection*{2010年04月: 新規x86アーキティクチャへのOSポーティング (リーダー)}
+古いx86ボードが生産寿命を迎えたため、新規x86ボードへのNetBSD-2.0移植。またBIOSメーカ選定/委託締結。
+
+\begin{itemize}
+  \item BIOSメーカを3者で選定。品質、サポート技術力、起動時間など細かい評価項目を使って得点評価の後選定
+  \item 新人時代に作成したOption BIOSを捨てて、新しいBIOS構成を使った起動方式に仕様変更
+  \item OSポーティング前に起動時間を予測。起動時間改善案を提案+スケジュール
+\end{itemize}
+
+\subsubsection*{2008年04月: NetBSD OS開発/技術サポート (リーダー)}
+既存機種の障害解析と、新規機能開発を行なうチームの技術リーダに就任。機種群全体のプロジェクト管理リーダと二人でOS開発を担い、実作業は完全に外部委託化。
+以下主な成果。
+
+\begin{itemize}
+  \item 仮想メモリでのページ回収コードに不具合があり、修正patchを協議の上作成
+  \item 無線LAN環境でのTCP/IPソケットがcloseできない不具合解析。パケット送信遅延によるソケット切断不能が原因
+  \item 電源ボタンをソフトウェア検知してソフトウェアによって電源を落すしくみをリレーとwatchdogのみのハードを用いてソフトウェア側で対応
+  \item msdosfsの電源断耐性を向上させる検討
+\end{itemize}
+
+\subsubsection*{2006年04月: NetBSD-2.0の組込みポーティング/開発 (メンバー)}
+NetBSD-1.5→2.0への移行に際してあらゆるサポート。
+
+\begin{itemize}
+  \item NetBSD-1.5ベースでのROM化方式/ライブラリ分割の方式を再検討/外部委託
+\end{itemize}
+
+\subsubsection*{2006年04月: スレッドライブラリ開発 (主担当)}
+これまでユーザ空間スレッド(pthread互換)で構築されていたコピー機のシステムをNetBSD-2.0標準のm:nスレッドで再構築した。
+
+m:nスレッドは当然そのままでは製品化できず、以下多くの改修を行なった。
+\begin{itemize}
+  \item kernel,libc,libpthreadの3者におけるスレッドセーフ/キャンセルセーフ調査
+  \item 上記に対してテストコード作成/修正
+  \item 上記に対して社内だけでは改修工数が明確に不足、外部委託+検収 (このスレッドライブラリの検収レビューは検収側が妥当性を判断するのが大変困難)
+  \item m:nライブラリに不足していたposix APIを追加。追加不能部分は移行マニュアル作成
+  \item シグナル周りに大きな問題があることが発覚。修正コード作成。最終的には基本設計的に回避不能なものについてはアプリケーション側でのシグナル取り扱いマニュアルを作成
+  \item それでも生じるシグナル周りの不具合についてチーム共同で数年間メンテナンス
+\end{itemize}
+
+\subsubsection*{2004年06月: コピー機起動時間を10秒に (主担当)}
+それまで30秒程度かかっていたコピー機の起動時間を10秒まで短縮することに成功した。
+まず起動時間を測定するログ収集ツールとログ解析ツールを考案/実装。
+その上で、OS側起動時間とアプリケーション側起動時間を分離。
+OS側起動時間についてはOSチームで独自に高速化を行なった。
+
+アプリケーション群の高速化については部品毎に別部署管理であったため困難であった。
+上記解析ツール測定結果からアプリケーション間IPC接続の順序を調べ、その接続待ち合わせ周辺のソースコードをOS側の視点から分析することでIPC待ち合わせ時間の短縮をおこなった。
+
+また、ストレージからアプリケーション群を読み込むDMA時間自体も問題であった。
+そこで、最終的にはアプリケーション群を初期画面表示関連グループとその他機能グループに分割して、初期画面表示関連グループのみをOS起動直後にストレージから読み込み起動。画面表示を待ってからストレージから読み込むようにして、10秒を達成した。
+
+上記の測定ツールと解析手法は今もimagioシリーズの製品化毎に実施されている。
+
+\subsubsection*{2003年10月: 海外委託先と新規BIOS開発 (主担当)}
+コピー機(imagio)のBIOSについて、他メーカに発注。
+BIOSメーカに日本法人がなかったため、海外にて要求仕様協議。
+前回契約でのBIOSと互換のBIOSを他メーカで実現。imagioシリーズにて製品搭載。
+
+\subsubsection*{2002年12月: 社内製無線LANチップ(MACコア)への内蔵ソフトウェア開発開始 (メンバー)}
+ARMアーキティクチャを使った無線LAN MACチップの開発メンバーに。
+他業務とのかねあいで、途中でチームから抜ける。
+
+\subsubsection*{2002年11月: 組込み機器 認証起動方式の開発 bootloader部分 (主担当)}
+セキュリティ強化のためにコピー機内部ファームウェアを認証しながら起動する方式を検討/実装した。
+
+主な開発項目は以下の通り。
+\begin{itemize}
+  \item bootloaderへの公開鍵アルゴリズム搭載
+  \item SDカード上への鍵情報搭載方式の検討
+  \item SDカードのカスタムフォーマッタの発注とサポート
+\end{itemize}
+
+\subsubsection*{2001年07月: 社内初のx86アーキティクチャコピー機のBIOS/bootloader開発 (主担当)}
+それまでmipsアーキティクチャを採用していたコピー機をx86アーキティクチャを用いて開発するプロジェクトに新人として配属。
+開発した製品はimagioシリーズ \href{http://www.ricoh.co.jp/imagio/}{\tt http://www.ricoh.co.jp/imagio/} として現在も出荷され続けている。
+また現在出荷されているx86 CPUを用いたリコー製のコピー機とプリンタは、新人時代に設計したBIOSとbootloaderの基本設計をそのまま引き継いでいる。
+
+主な開発項目は以下の通り。
+\begin{itemize}
+  \item 一般的なBIOSへのカスタマイズ要求仕様策定
+  \item 自己診断プログラム開発の発注とサポート
+  \item 機種抽象化データ構造の策定
+  \item SDカード起動Option BIOSの設計
+\end{itemize}
+
+\section*{Education}
+
+\begin{itemize}
+  \item 2001年03月: 東京都立大学 修士卒業/工学研究科電気工学専攻 電気・電子工学 \\
+    研究概要: 水晶振動子のマルチモードを使用した気体センサの作成
+  \item 1999年03月: 東京都立大学 大学卒業/工学部電気工学科 電気・電子工学 \\
+    研究概要: 光ファイバの物性モデル計算
+\end{itemize}
+
+\section*{Publications and Reports}
+
+\begin{itemize}
+  \item 2014年01月: 「強い型によるOSの開発手法の提案」, 第55回プログラミング・シンポジウム, \\
+    \href{http://metasepi.org/doc/20140110\_prosym55.pdf}{\tt http://metasepi.org/doc/20140110\_prosym55.pdf}
+\end{itemize}
+
+\section*{Activities}
+
+\subsection*{Open-source projects}
+
+\subsubsection*{Metasepi project}
+\begin{itemize}
+\item \href{http://metasepi.org/}{\tt http://metasepi.org/}
+\item MLやHaskellのような強い型を使ってUNIXライクkernelを書き直すプロジェクト。現在NetBSD kernelのドライバをHaskell化中。 \href{https://github.com/metasepi/netbsd-arafura-s1}{\tt https://github.com/metasepi/netbsd-arafura-s1}
+\end{itemize}
+
+\subsubsection*{Ajhc Haskell compiler}
+\begin{itemize}
+\item \href{http://ajhc.metasepi.org/}{\tt http://ajhc.metasepi.org/}
+\item Jhc Haskell Compiler \href{http://repetae.net/computer/jhc/}{\tt http://repetae.net/computer/jhc/} に組み込み拡張を加えたHaskellコンパイラ。再入可能なプログラムを作成でき、メモリ数十kBでも動作可能なバイナリを吐く。
+\end{itemize}
+
+\subsubsection*{Debian Maintainer}
+\begin{itemize}
+\item \href{http://qa.debian.org/developer.php?login=kiwamu@debian.or.jp}{\tt http://qa.debian.org/developer.php?login=kiwamu@debian.or.jp}
+\item Debian squeezeにてuim、sidにてHaskell関連パッケージメンテナ。
+\end{itemize}
+
+\subsubsection*{Carettah}
+\begin{itemize}
+\item \href{http://carettah.masterq.net/}{\tt http://carettah.masterq.net/}
+\item Haskell製プレゼンテーションツール。2011年08月以降全てのプレゼンテーションをこのツールを使って作成。
+\end{itemize}
+
+\section*{Computer Skills}
+
+\begin{itemize}
+  \item Languages: Haskell, C, Intel assembler, Ruby
+  \item Platforms: Linux, NetBSD
+\end{itemize}
+
+\section*{Reference available upon request}
+
+\begin{itemize}
+  \item 児玉 崇 社長 - ミラクル-リナックス株式会社
+  \item 丸山 輝幸 GL - 株式会社リコー コントローラ開発本部　BP開発センター 第三開発室　開発三グループ
+  \item 関本 仁 教授 - 首都大学東京 工学部電気工学科 電気・電子工学
+\end{itemize}
+
+\bigskip
+\footer
+
+\end{document}
