@@ -37,7 +37,7 @@
 %\usepackage[sc,osf]{mathpazo}
 
 % Set your name here
-\def\name{Kiwamu Okabe (岡部 究)}
+\def\name{Kiwamu Okabe}
 
 % Replace this with a link to your CV if you like, or set it empty
 % (as in \def\footerlink{}) to remove the link in the footer:
@@ -118,14 +118,14 @@
 Haskell programming, NetBSD kernel programming, Debian project.
 
 \section*{Work Experience}
-\subsection*{2013年08月 - 現在: フリーランス}
+\subsection*{July 2013 - present: Freelance}
 
 \begin{itemize}
-  \item Ajhc Haskellコンパイラの研究開発
+  \item Research and develop Ajhc Haskell Compiler
 \end{itemize}
 
 %%%%%%%%%%%%%%%%
-\subsection*{2012年03月 - 2013年07月: ミラクル-リナックス株式会社}
+\subsection*{March 2012 - July 2013: MIRACLE LINUX CORPORATION}
 
 \begin{itemize}
   \item PowerPC LinuxのSMP排他による検証/修正
@@ -226,16 +226,16 @@ ARMアーキティクチャを使った無線LAN MACチップの開発メンバ�
 \section*{Education}
 
 \begin{itemize}
-  \item 2001年03月: 東京都立大学 修士卒業/工学研究科電気工学専攻 電気・電子工学 \\
-    研究概要: 水晶振動子のマルチモードを使用した気体センサの作成
-  \item 1999年03月: 東京都立大学 大学卒業/工学部電気工学科 電気・電子工学 \\
-    研究概要: 光ファイバの物性モデル計算
+  \item March 2001: Master degree in Department of Electrical and Electronic Engineering. \\
+    Tokyo Metropolitan University \\
+    The thesis: ``Multimode Quartz Crystal Microbalance'' \\
+    \href{http://ci.nii.ac.jp/naid/110004076869}{\tt http://ci.nii.ac.jp/naid/110004076869}
 \end{itemize}
 
 \section*{Publications and Reports}
 
 \begin{itemize}
-  \item 2014年01月: 「強い型によるOSの開発手法の提案」, 第55回プログラミング・シンポジウム, \\
+  \item January 2014: 「強い型によるOSの開発手法の提案」, 第55回プログラミング・シンポジウム, \\
     \href{http://metasepi.org/doc/20140110\_prosym55.pdf}{\tt http://metasepi.org/doc/20140110\_prosym55.pdf}
 \end{itemize}
 
@@ -246,25 +246,33 @@ ARMアーキティクチャを使った無線LAN MACチップの開発メンバ�
 \subsubsection*{Metasepi project}
 \begin{itemize}
 \item \href{http://metasepi.org/}{\tt http://metasepi.org/}
-\item MLやHaskellのような強い型を使ってUNIXライクkernelを書き直すプロジェクト。現在NetBSD kernelのドライバをHaskell化中。 \href{https://github.com/metasepi/netbsd-arafura-s1}{\tt https://github.com/metasepi/netbsd-arafura-s1}
+\item Challenge to create an open-source Unix-like operating system designed with strong type such as ML or Haskell.
+\item Rewriting NetBSD kernel using Ajhc Haskell compiler. \href{https://github.com/metasepi/netbsd-arafura-s1}{\tt https://github.com/metasepi/netbsd-arafura-s1}
 \end{itemize}
 
 \subsubsection*{Ajhc Haskell compiler}
 \begin{itemize}
 \item \href{http://ajhc.metasepi.org/}{\tt http://ajhc.metasepi.org/}
-\item Jhc Haskell Compiler \href{http://repetae.net/computer/jhc/}{\tt http://repetae.net/computer/jhc/} に組み込み拡張を加えたHaskellコンパイラ。再入可能なプログラムを作成でき、メモリ数十kBでも動作可能なバイナリを吐く。
+\item Extend and add embedded features to Jhc Haskell Compiler \href{http://repetae.net/computer/jhc/}{\tt http://repetae.net/computer/jhc/}.
+\item Ajhc has thread-safe and reentrant runtime. Also has Erlang style GC. It means Ajhc's Haskell context has own GC heap. GC can run on tiny CPU such as Cortex-M3 with 32kB RAM.
+\end{itemize}
+
+\subsubsection*{Japan ATS User Group}
+\begin{itemize}
+\item \href{http://jats-ug.metasepi.org/}{\tt http://jats-ug.metasepi.org/}
+\item An user group for ATS language \href{http://www.ats-lang.org/}{\tt http://www.ats-lang.org/} promotion of utilization. Translating ATS documents into Japanese.
 \end{itemize}
 
 \subsubsection*{Debian Maintainer}
 \begin{itemize}
 \item \href{http://qa.debian.org/developer.php?login=kiwamu@debian.or.jp}{\tt http://qa.debian.org/developer.php?login=kiwamu@debian.or.jp}
-\item Debian squeezeにてuim、sidにてHaskell関連パッケージメンテナ。
+\item Maintained uim package at Debian squeeze, and packages using Haskell at sid.
 \end{itemize}
 
 \subsubsection*{Carettah}
 \begin{itemize}
 \item \href{http://carettah.masterq.net/}{\tt http://carettah.masterq.net/}
-\item Haskell製プレゼンテーションツール。2011年08月以降全てのプレゼンテーションをこのツールを使って作成。
+\item A presentation tool written with Haskell. My slides \href{http://www.slideshare.net/master\_q/}{\tt http://www.slideshare.net/master\_q/} are created by the tool.
 \end{itemize}
 
 \section*{Computer Skills}
@@ -277,9 +285,9 @@ ARMアーキティクチャを使った無線LAN MACチップの開発メンバ�
 \section*{Reference available upon request}
 
 \begin{itemize}
-  \item 児玉 崇 社長 - ミラクル-リナックス株式会社
-  \item 丸山 輝幸 GL - 株式会社リコー コントローラ開発本部　BP開発センター 第三開発室　開発三グループ
-  \item 関本 仁 教授 - 首都大学東京 工学部電気工学科 電気・電子工学
+  \item Takashi KODAMA CEO - MIRACLE LINUX CORPORATION
+  \item Shigeya SENDA - Ricoh Company, Ltd.
+  \item Hitoshi Sekimoto Professor - Tokyo Metropolitan University, Department of Electrical and Electronic Engineering
 \end{itemize}
 
 \bigskip
