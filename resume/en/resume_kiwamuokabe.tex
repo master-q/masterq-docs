@@ -148,7 +148,6 @@ Port NetBSD-2.0 to new x86 hardware.
 
 \subsubsection*{April 2008: Develop and technical support NetBSD OS}
 Become technical leader to maintain and support Ricoh's multifunction printer.
-
 My efforts are following.
 \begin{itemize}
   \item Debug and fix virtual memory's page daemon.
@@ -157,39 +156,32 @@ My efforts are following.
   \item Get stability against shutdown on msdosfs
 \end{itemize}
 
-\subsubsection*{2006年04月: NetBSD-2.0の組込みポーティング/開発 (メンバー)}
-Technical support to version up NetbSD-1.5 to 2.0.
+\subsubsection*{April 2006: Technical support to version up NetbSD-1.5 to 2.0}
 
 \begin{itemize}
   \item Design NetBSD-1.5 style SD card format for NetBSD-2.0.
 \end{itemize}
 
-\subsubsection*{2006年04月: スレッドライブラリ開発 (主担当)}
-これまでユーザ空間スレッド(pthread互換)で構築されていたコピー機のシステムをNetBSD-2.0標準のm:nスレッドで再構築した。
-
-m:nスレッドは当然そのままでは製品化できず、以下多くの改修を行なった。
+\subsubsection*{April 2006: Develop POSIX thread library}
+Replace user level POSIX thread library with NetBSD-2.0 m:m thread.
+My efforts are following.
 \begin{itemize}
-  \item kernel,libc,libpthreadの3者におけるスレッドセーフ/キャンセルセーフ調査
-  \item 上記に対してテストコード作成/修正
-  \item 上記に対して社内だけでは改修工数が明確に不足、外部委託+検収 (このスレッドライブラリの検収レビューは検収側が妥当性を判断するのが大変困難)
-  \item m:nライブラリに不足していたposix APIを追加。追加不能部分は移行マニュアル作成
-  \item シグナル周りに大きな問題があることが発覚。修正コード作成。最終的には基本設計的に回避不能なものについてはアプリケーション側でのシグナル取り扱いマニュアルを作成
-  \item それでも生じるシグナル周りの不具合についてチーム共同で数年間メンテナンス
+  \item Research the presence of thread-safe and cancel-safe in kernel, libc and libpthread.
+  \item Write test code to get thread-safe and cancel-safe.
+  \item Add API into the m:n thread library. Because printer application depend on the missing API.
+  \item Debug and fix signal BUGs in the m:n thread library.
 \end{itemize}
 
-\subsubsection*{2004年06月: コピー機起動時間を10秒に (主担当)}
-それまで30秒程度かかっていたコピー機の起動時間を10秒まで短縮することに成功した。
-まず起動時間を測定するログ収集ツールとログ解析ツールを考案/実装。
-その上で、OS側起動時間とアプリケーション側起動時間を分離。
-OS側起動時間についてはOSチームで独自に高速化を行なった。
+\subsubsection*{June 2004: Tune multifunction printer boot time as 10 seconds}
+Before my tune, the printer boot time is 30 seconds.
+Ricoh's multifunction printer ``imagio'' \href{http://www.ricoh.co.jp/imagio/}{\tt http://www.ricoh.co.jp/imagio/} use the method and tool, ever now.
+My efforts are following.
 
-アプリケーション群の高速化については部品毎に別部署管理であったため困難であった。
-上記解析ツール測定結果からアプリケーション間IPC接続の順序を調べ、その接続待ち合わせ周辺のソースコードをOS側の視点から分析することでIPC待ち合わせ時間の短縮をおこなった。
-
-また、ストレージからアプリケーション群を読み込むDMA時間自体も問題であった。
-そこで、最終的にはアプリケーション群を初期画面表示関連グループとその他機能グループに分割して、初期画面表示関連グループのみをOS起動直後にストレージから読み込み起動。画面表示を待ってからストレージから読み込むようにして、10秒を達成した。
-
-上記の測定ツールと解析手法は今もimagioシリーズの製品化毎に実施されている。
+\begin{itemize}
+  \item Develop a tool analyze log dumped by bootloader, kernel, init process and application.
+  \item Analyze IPC network, and advice how to get speed to application developer.
+  \item Split application as groups for pre-boot and post-boot.
+\end{itemize}
 
 \subsubsection*{October 2003: Develop new BIOS for multifunction printer}
 Order new BIOS to new company.
@@ -208,8 +200,7 @@ My efforts are following.
 
 \subsubsection*{July 2001: Develop BIOS and bootloader for multifunction printer on x86 architecture}
 My first work at Ricoh.
-Ricoh's Multifunction printer ``imagio'' \href{http://www.ricoh.co.jp/imagio/}{\tt http://www.ricoh.co.jp/imagio/} use my bootloader design, ever now.
-
+Ricoh's multifunction printer ``imagio'' \href{http://www.ricoh.co.jp/imagio/}{\tt http://www.ricoh.co.jp/imagio/} use my bootloader design, ever now.
 My efforts are following.
 \begin{itemize}
   \item Design specification to customize the BIOS for printer
