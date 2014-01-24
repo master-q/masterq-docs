@@ -251,7 +251,7 @@ http://nemuisan.blog.bai.ne.jp/
 * There is his patch at following URL
 
 ~~~
-https://skydrive.live.com/?cid=36f4d1230f8a673c&id=36F4D1230F8A673C%213043
+http://nemuisan.blog.bai.ne.jp/?eid=192848#OPENOCD
 ~~~
 
 # Functional programming fanzine
