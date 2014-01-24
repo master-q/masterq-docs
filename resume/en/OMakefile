@@ -9,8 +9,8 @@ FILENAME = resume_kiwamuokabe
 
 TEXDEPS[] =
 	$(FILENAME).tex
-	../papers/bibtex/reference.bib
-	../papers/bibtex/jreference.bib
+	../../papers/bibtex/reference.bib
+	../../papers/bibtex/jreference.bib
 # 	$(EPS_FILES)
 
 LaTeXDocument($(FILENAME), $(FILENAME))
