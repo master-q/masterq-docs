@@ -37,7 +37,7 @@
 %\usepackage[sc,osf]{mathpazo}
 
 % Set your name here
-\def\name{Kiwamu Okabe}
+\def\name{Kiwamu Okabe - Research and Development Engineer}
 
 % Replace this with a link to your CV if you like, or set it empty
 % (as in \def\footerlink{}) to remove the link in the footer:
@@ -115,7 +115,7 @@
 
 \section*{Interests}
 
-Haskell programming, NetBSD kernel programming, Debian project.
+Haskell programming, ATS programming, NetBSD kernel programming, Debian project.
 
 \section*{Work Experience}
 \subsection*{July 2013 - present: Freelance}
@@ -128,40 +128,40 @@ Haskell programming, NetBSD kernel programming, Debian project.
 \subsection*{March 2012 - July 2013: MIRACLE LINUX CORPORATION}
 
 \begin{itemize}
-  \item PowerPC LinuxのSMP排他による検証/修正
-  \item PowerPC版crashコマンド(デバッグツール)の不具合修正
-  \item NSISを使った新しいWindowsアプリケーションインストーラの作成
-  \item 社内gitサーバの新規運用開始
-  \item 新規ハードのデジタルサイネージ性能検証/チューニング
+  \item Verify PowerPC Linux and debug/fix SMP Race Condition
+  \item Debug and fix PowerPC crash command's virtual memory paging BUG
+  \item Design new Windows installer using NSIS
+  \item Introduce and maintain new git server for internal use
+  \item Verify and tune performance of Digital Signage on new hardware
 \end{itemize}
 
 %%%%%%%%%%%%%%%%
-\subsection*{2001年04月 - 2012年02月: 株式会社リコー ソフトウェアエンジニア}
-\subsubsection*{2010年04月: 新規x86アーキティクチャへのOSポーティング (リーダー)}
-古いx86ボードが生産寿命を迎えたため、新規x86ボードへのNetBSD-2.0移植。またBIOSメーカ選定/委託締結。
+\subsection*{April 2001 - February 2012: Software Development Engineer at Ricoh Company, Ltd.}
+\subsubsection*{April 2010: Port OS to new x86 hardware}
+Port NetBSD-2.0 to new x86 hardware.
 
 \begin{itemize}
-  \item BIOSメーカを3者で選定。品質、サポート技術力、起動時間など細かい評価項目を使って得点評価の後選定
-  \item 新人時代に作成したOption BIOSを捨てて、新しいBIOS構成を使った起動方式に仕様変更
-  \item OSポーティング前に起動時間を予測。起動時間改善案を提案+スケジュール
+  \item Select BIOS product from three companies. Measure the quality, support, boot time and many evaluation items before choosing.
+  \item Deside to change design from old Option BIOS.
+  \item Calculate boot time before porting OS. Suggest and plan to tune boot time.
 \end{itemize}
 
-\subsubsection*{2008年04月: NetBSD OS開発/技術サポート (リーダー)}
-既存機種の障害解析と、新規機能開発を行なうチームの技術リーダに就任。機種群全体のプロジェクト管理リーダと二人でOS開発を担い、実作業は完全に外部委託化。
-以下主な成果。
+\subsubsection*{April 2008: Develop and technical support NetBSD OS}
+Become technical leader to maintain and support Ricoh's multifunction printer.
 
+My efforts are following.
 \begin{itemize}
-  \item 仮想メモリでのページ回収コードに不具合があり、修正patchを協議の上作成
-  \item 無線LAN環境でのTCP/IPソケットがcloseできない不具合解析。パケット送信遅延によるソケット切断不能が原因
-  \item 電源ボタンをソフトウェア検知してソフトウェアによって電源を落すしくみをリレーとwatchdogのみのハードを用いてソフトウェア側で対応
-  \item msdosfsの電源断耐性を向上させる検討
+  \item Debug and fix virtual memory's page daemon.
+  \item Debug and fix the BUG fail close(2) on only wifi network.
+  \item Design power down process by software trigger, using Solid State Relay and watchdog.
+  \item Get stability against shutdown on msdosfs
 \end{itemize}
 
 \subsubsection*{2006年04月: NetBSD-2.0の組込みポーティング/開発 (メンバー)}
-NetBSD-1.5→2.0への移行に際してあらゆるサポート。
+Technical support to version up NetbSD-1.5 to 2.0.
 
 \begin{itemize}
-  \item NetBSD-1.5ベースでのROM化方式/ライブラリ分割の方式を再検討/外部委託
+  \item Design NetBSD-1.5 style SD card format for NetBSD-2.0.
 \end{itemize}
 
 \subsubsection*{2006年04月: スレッドライブラリ開発 (主担当)}
@@ -191,36 +191,31 @@ OS側起動時間についてはOSチームで独自に高速化を行なった�
 
 上記の測定ツールと解析手法は今もimagioシリーズの製品化毎に実施されている。
 
-\subsubsection*{2003年10月: 海外委託先と新規BIOS開発 (主担当)}
-コピー機(imagio)のBIOSについて、他メーカに発注。
-BIOSメーカに日本法人がなかったため、海外にて要求仕様協議。
-前回契約でのBIOSと互換のBIOSを他メーカで実現。imagioシリーズにて製品搭載。
+\subsubsection*{October 2003: Develop new BIOS for multifunction printer}
+Order new BIOS to new company.
+Develop new BIOS together at the United States.
 
-\subsubsection*{2002年12月: 社内製無線LANチップ(MACコア)への内蔵ソフトウェア開発開始 (メンバー)}
-ARMアーキティクチャを使った無線LAN MACチップの開発メンバーに。
-他業務とのかねあいで、途中でチームから抜ける。
+\subsubsection*{December 2002: Develop firmware in wifi chip}
+Join team to develop wifi chip using ARM architecture.
 
-\subsubsection*{2002年11月: 組込み機器 認証起動方式の開発 bootloader部分 (主担当)}
-セキュリティ強化のためにコピー機内部ファームウェアを認証しながら起動する方式を検討/実装した。
-
-主な開発項目は以下の通り。
+\subsubsection*{November 2002: Design secure boot for multifunction printer on x86}
+My efforts are following.
 \begin{itemize}
-  \item bootloaderへの公開鍵アルゴリズム搭載
-  \item SDカード上への鍵情報搭載方式の検討
-  \item SDカードのカスタムフォーマッタの発注とサポート
+  \item Port and design bootloader using public key algorithm authentication
+  \item Design the format include secure key in SD card
+  \item Order application to format SD card with custom partition, and support
 \end{itemize}
 
-\subsubsection*{2001年07月: 社内初のx86アーキティクチャコピー機のBIOS/bootloader開発 (主担当)}
-それまでmipsアーキティクチャを採用していたコピー機をx86アーキティクチャを用いて開発するプロジェクトに新人として配属。
-開発した製品はimagioシリーズ \href{http://www.ricoh.co.jp/imagio/}{\tt http://www.ricoh.co.jp/imagio/} として現在も出荷され続けている。
-また現在出荷されているx86 CPUを用いたリコー製のコピー機とプリンタは、新人時代に設計したBIOSとbootloaderの基本設計をそのまま引き継いでいる。
+\subsubsection*{July 2001: Develop BIOS and bootloader for multifunction printer on x86 architecture}
+My first work at Ricoh.
+Ricoh's Multifunction printer ``imagio'' \href{http://www.ricoh.co.jp/imagio/}{\tt http://www.ricoh.co.jp/imagio/} use my bootloader design, ever now.
 
-主な開発項目は以下の通り。
+My efforts are following.
 \begin{itemize}
-  \item 一般的なBIOSへのカスタマイズ要求仕様策定
-  \item 自己診断プログラム開発の発注とサポート
-  \item 機種抽象化データ構造の策定
-  \item SDカード起動Option BIOSの設計
+  \item Design specification to customize the BIOS for printer
+  \item Order self-diagnostic program and support
+  \item Design hardware dependent data structure to configure bootloader and kernel
+  \item Design Option BIOS to boot on SD card
 \end{itemize}
 
 \section*{Education}
@@ -235,7 +230,7 @@ ARMアーキティクチャを使った無線LAN MACチップの開発メンバ�
 \section*{Publications and Reports}
 
 \begin{itemize}
-  \item January 2014: 「強い型によるOSの開発手法の提案」, 第55回プログラミング・シンポジウム, \\
+  \item January 2014: ``強い型によるOSの開発手法の提案'', 第55回プログラミング・シンポジウム, \\
     \href{http://metasepi.org/doc/20140110\_prosym55.pdf}{\tt http://metasepi.org/doc/20140110\_prosym55.pdf}
 \end{itemize}
 
@@ -279,7 +274,7 @@ ARMアーキティクチャを使った無線LAN MACチップの開発メンバ�
 
 \begin{itemize}
   \item Languages: Haskell, C, Intel assembler, Ruby
-  \item Platforms: Linux, NetBSD
+  \item Platforms: Linux, NetBSD, Android NDK
 \end{itemize}
 
 \section*{Reference available upon request}
