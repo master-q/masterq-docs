@@ -13,6 +13,7 @@ Metasepi Project / Kiwamu Okabe
 * 10 years' experience in developing OS using NetBSD.
 
 # Agenda
+![background](img/bintan_island.png)
 
 * [1] Demo
 * [2] What is Ajhc?
@@ -23,10 +24,11 @@ Metasepi Project / Kiwamu Okabe
 * [7] From Arafura to Bohai
 
 # [1] Demo
+![background](img/demo_mov_netbsd.png)
 
 * NetBSD audio driver play sound
-* The driver's interrupt handler rewrited by Haskell
-* You can watch the movie following
+* The driver's interrupt handler rewrited using Haskell
+* Watch the movie at following
 
 http://bitly.com/netbsdajhc
 
@@ -192,6 +194,7 @@ Let's develop with dogfooding style. (The method is called "Snatch".)
 
 # [5] NetBSD driver using Haskell
 # [6] Ajhc is the best?
+![background](img/best.png)
 
 * Umm... No.
 * Depended on GC
@@ -200,7 +203,7 @@ Let's develop with dogfooding style. (The method is called "Snatch".)
 https://github.com/ajhc/ajhc/issues
 
 * Can't use MonadTrans
-* Debug hard with strong optimization
+* Debug hard for strong optimization
 
 # Before compiling (Haskell)
 
@@ -232,19 +235,27 @@ hdaudioIntr' sc intsts = do
 
 ![inline](img/big_c_source.png)
 
-# Debug programming in kernel
+# Debug in kernel
+![background](img/maze.png)
 
 * Hardware state is sometime buggy
 * Not only debug software
-* But also hardware!
+* but also hardware!
 * Gap between Haskell and C code
-* Can't debug Haskell code
-* Should debug generated C code
+* Can't debug pure Haskell code
+* Need to debug generated C code
 * orz orz orz
 
 # [7] From Arafura to Bohai
+![background](img/bohai.png)
 
-# ATS language
+* We are in Arafura iteration
+* Arafura := Ajhc + Snatch + NetBSD
+* Use ATS compiler on the next
+* Let's start Bohai iteration!
+* Bohai := ATS + Snatch + NetBSD
+
+# What is ATS language?
 ![background](img/ats_hongwei.png)
 
 http://www.ats-lang.org/
@@ -257,6 +268,7 @@ http://www.ats-lang.org/
 * Without any runtime
 
 # Japan ATS User Group
+![background](img/nagoya-yu.png)
 
 http://jats-ug.metasepi.org/
 
