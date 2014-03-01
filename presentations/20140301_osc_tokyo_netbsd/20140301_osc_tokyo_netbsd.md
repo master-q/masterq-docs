@@ -195,6 +195,8 @@ Let's develop with dogfooding style. (The method is called "Snatch".)
 
 # [5] NetBSD driver using Haskell
 
+github.com/metasepi/netbsd-arafura-s1
+
 # Where is Haskell code? (cont.)
 
 ~~~
@@ -264,7 +266,6 @@ netbsd-arafura-s1   # <= based on NetBSD original source tree
 |               |-- Errno.hs
 |               |-- Proc.hs
 |               `-- Types.hs
-|-- regress
 |-- regress
 |-- rescue
 |-- sbin
@@ -350,10 +351,60 @@ type BusSpaceTagT = Ptr BusSpaceTag
 type BusSpaceHandleT = VaddrT
 ~~~
 
+# Trace pointer chain
+
+~~~ {.c}
+/* C code */
+static int
+auich_open(void *addr, int flags)
+{
+	struct auich_softc *sc;
+
+	sc = (struct auich_softc *)addr;
+	mutex_spin_exit(&sc->sc_intr_lock);
+	sc->codec_if->vtbl->lock(sc->codec_if);
+// -- snip --
+~~~
+
+~~~ {.haskell}
+-- Haskell code
+auichOpen :: Ptr AuichSoftc -> Int -> IO Int
+auichOpen sc flags = do
+  mutexp <- p_AuichSoftc_sc_intr_lock sc
+  codecif <- peek =<< p_AuichSoftc_codec_if sc
+  lock <- peek =<< p_Ac97CodecIfVtbl_lock =<< peek =<< p_Ac97CodecIf_vtbl codecif
+  mutexSpinExit mutexp
+  call_Ac97CodecIfVtbl_lock lock codecif
+-- snip --
+~~~
+
+# But need assistant code!
+
+![inline](img/need_pointer_chain.png)
+
+# Tool to generate the code
+
+https://github.com/ajhc/struct2hs
+
+* Generate Haskell code scanning C
+
+~~~
+$ struct2hs $HOME/..../i486--netbsdelf-gcc "-Di386 ... -I$HOME/src/netbsd-arafura-s1/sys/external/bsd/acpica/dist/include" sys/dev/pci/auich_extern_SNATCHED.h | tail
+  offsetOf_Pdevinit_pdev_attach :: Int
+p_Pdevinit_pdev_attach :: Ptr Pdevinit -> IO (Ptr (Ptr (FunPtr (Int -> IO ()))))
+p_Pdevinit_pdev_attach p = return $ plusPtr p $ offsetOf_Pdevinit_pdev_attach
+foreign import ccall "dynamic" call_Pdevinit_pdev_attach ::
+  FunPtr (Int -> IO ()) -> Int -> IO ()
+foreign import primitive "const.offsetof(struct pdevinit, pdev_count)"
+  offsetOf_Pdevinit_pdev_count :: Int
+p_Pdevinit_pdev_count :: Ptr Pdevinit -> IO (Ptr Int)
+p_Pdevinit_pdev_count p = return $ plusPtr p $ offsetOf_Pdevinit_pdev_count
+~~~
+
 # [6] Ajhc is the best?
 ![background](img/best.png)
 
-* Umm... No.
+* No.
 * Depended on GC
 * Too buggy compiler
 
