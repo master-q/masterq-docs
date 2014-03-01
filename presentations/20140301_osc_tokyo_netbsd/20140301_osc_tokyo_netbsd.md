@@ -195,7 +195,35 @@ Let's develop with dogfooding style. (The method is called "Snatch".)
 
 # [5] NetBSD driver using Haskell
 
-github.com/metasepi/netbsd-arafura-s1
+* Snatch target: HD Audio driver
+
+~~~
+sys/dev/pci/hdaudio
+            |-- Makefile
+            |-- ceareg.h
+            |-- eldreg.h
+            |-- files.hdaudio
+            |-- hdafg.c
+            |-- hdafg_dd.c
+            |-- hdafg_dd.h
+            |-- hdaudio.c
+            |-- hdaudio_config.h
+            |-- hdaudio_ids.c
+            |-- hdaudio_ids.h
+            |-- hdaudio_mixer.h
+            |-- hdaudio_pci.c
+            |-- hdaudio_pci.h
+            |-- hdaudioio.h
+            |-- hdaudioreg.h
+            |-- hdaudiovar.h
+            `-- hdmireg.h
+~~~
+
+# Rewrited the driver entirety?
+
+* No, partly
+
+![inline](draw/partly_rewrite_netbsd.png)
 
 # Where is Haskell code? (cont.)
 
@@ -389,7 +417,7 @@ https://github.com/ajhc/struct2hs
 * Generate Haskell code scanning C
 
 ~~~
-$ struct2hs $HOME/..../i486--netbsdelf-gcc "-Di386 ... -I$HOME/src/netbsd-arafura-s1/sys/external/bsd/acpica/dist/include" sys/dev/pci/auich_extern_SNATCHED.h | tail
+$ struct2hs sys/dev/pci/auich_extern_SNATCHED.h | tail
   offsetOf_Pdevinit_pdev_attach :: Int
 p_Pdevinit_pdev_attach :: Ptr Pdevinit -> IO (Ptr (Ptr (FunPtr (Int -> IO ()))))
 p_Pdevinit_pdev_attach p = return $ plusPtr p $ offsetOf_Pdevinit_pdev_attach
@@ -452,14 +480,14 @@ hdaudioIntr' sc intsts = do
 * Gap between Haskell and C code
 * Can't debug pure Haskell code
 * Need to debug generated C code
-* orz orz orz
+* Where is more better compiler?
 
 # [7] From Arafura to Bohai
 ![background](img/bohai.png)
 
 * We are in Arafura iteration
 * Arafura := Ajhc + Snatch + NetBSD
-* Use ATS compiler on the next
+* Use "ATS" compiler on the next
 * Let's start Bohai iteration!
 * Bohai := ATS + Snatch + NetBSD
 
