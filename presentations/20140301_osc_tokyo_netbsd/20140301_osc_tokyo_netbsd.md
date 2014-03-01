@@ -194,6 +194,55 @@ Let's develop with dogfooding style. (The method is called "Snatch".)
 ![inline](draw/2012-12-27-arafura_design.png)
 
 # [5] NetBSD driver using Haskell
+
+# How to build
+
+* Install some packages
+
+~~~
+$ sudo apt-get install ffmpeg qemu gcc
+~~~
+
+* Install Ajhc and git clone
+
+~~~
+$ git clone https://github.com/metasepi/netbsd-arafura-s1.git
+$ cd netbsd-arafura-s1
+~~~
+
+* Build QEMU image
+
+~~~
+$ make bootcd
+~~~
+
+# Run the kernel
+
+Run kernel on qemu
+
+~~~
+$ make qemu
+
+>> NetBSD/x86 BIOS Boot, Revision 5.9 (from NetBSD 6.1.1_PATCH)
+>> Memory: 639/1047544 k
+--snip--
+Created tmpfs /dev (1490944 byte, 2880 inodes)
+erase ^?, werase ^W, kill ^U, intr ^C
+This image contains utilities which may be needed
+to get you out of a pinch.
+#
+~~~
+
+Kick play.sh script to play sound
+
+~~~
+# ./play.sh
+~~~
+
+# Build process
+
+![inline](draw/build_netbsd.png)
+
 # [6] Ajhc is the best?
 ![background](img/best.png)
 
