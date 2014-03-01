@@ -195,6 +195,89 @@ Let's develop with dogfooding style. (The method is called "Snatch".)
 
 # [5] NetBSD driver using Haskell
 
+# Where is Haskell code? (cont.)
+
+~~~
+netbsd-arafura-s1   # <= based on NetBSD original source tree
+|-- BUILDING
+|-- GNUmakefile     # <= Wrapper for building kernel
+|-- Makefile
+|-- Makefile.inc
+-- snip --
+|-- metasepi
+|   |-- sound
+|   |   |-- Epopsan-signal.mp3
+|   |   `-- TheMojitoofFluorescence.mp3
+|   `-- sys
+|       |-- conf
+|       |   `-- files.haskell
+|       |-- hsdummy   # <= C code to support Ajhc runtime
+|       `-- hssrc     # <= Haskell code located
+|           |-- Arch
+|           |   `-- I386
+|           |       |-- I386
+|           |       |   `-- BusDma.hs
+|           |       `-- Include
+|           |           |-- BusDefs.hs
+|           |           |-- Cpu.hs
+|           |           `-- Types.hs
+~~~
+
+# Where is Haskell code? (cont.)
+
+~~~
+|           |-- Dev
+|           |   |-- Auconv.hs
+|           |   |-- AudioIf.hs
+|           |   |-- Ic
+|           |   |   |-- Ac97reg.hs
+|           |   |   `-- Ac97var.hs
+|           |   `-- Pci
+|           |       |-- Auich
+|           |       |   |-- Intr.hs
+|           |       |   `-- Ptr.hs
+|           |       |-- Auich.hs
+|           |       |-- Auichreg.hs
+|           |       `-- Hdaudio
+|           |           |-- Hdaudio.hs
+|           |           |-- Hdaudioreg.hs
+|           |           `-- Hdaudiovar.hs
+|           |-- Kern
+|           |   |-- KernMutex.hs
+|           |   |-- SubrKmem.hs
+|           |   `-- SubrPrf.hs
+|           |-- Lib
+|           |   `-- Libkern
+|           |       `-- Libkern.hs
+~~~
+
+# Where is Haskell code?
+
+~~~
+|           |-- Main.hs
+|           |-- Metasepi
+|           |   `-- EitherIO.hs
+|           `-- Sys
+|               |-- Audioio.hs
+|               |-- Bus.hs
+|               |-- Device.hs
+|               |-- Errno.hs
+|               |-- Proc.hs
+|               `-- Types.hs
+|-- regress
+|-- regress
+|-- rescue
+|-- sbin
+|-- share
+|-- sys
+|-- tests
+|-- tools
+|-- travis-ci
+|-- usr.bin
+|-- usr.sbin
+`-- x11
+~~~
+
 # How to build
 
 * Install some packages
@@ -242,6 +325,30 @@ Kick play.sh script to play sound
 # Build process
 
 ![inline](draw/build_netbsd.png)
+
+# How to call C (figure)
+
+![inline](draw/call_bus_space_write.png)
+
+# How to call C (code)
+
+~~~ {.haskell}
+-- File: metasepi/sys/hssrc/Sys/Bus.hs
+busSpaceRead4 = c_bus_space_read_4
+busSpaceWrite4 = c_bus_space_write_4
+foreign import ccall "hs_extern.h bus_space_read_4" c_bus_space_read_4 ::
+  BusSpaceTagT -> BusSpaceHandleT -> BusSizeT -> IO Word32
+foreign import ccall "hs_extern.h bus_space_write_4" c_bus_space_write_4 ::
+  BusSpaceTagT -> BusSpaceHandleT -> BusSizeT -> Word32 -> IO ()
+~~~
+
+~~~ {.haskell}
+-- File: metasepi/sys/hssrc/Arch/I386/Include/BusDefs.hs
+type BusSizeT = CSize
+newtype {-# CTYPE "struct bus_space_tag" #-} BusSpaceTag = BusSpaceTag ()
+type BusSpaceTagT = Ptr BusSpaceTag
+type BusSpaceHandleT = VaddrT
+~~~
 
 # [6] Ajhc is the best?
 ![background](img/best.png)
