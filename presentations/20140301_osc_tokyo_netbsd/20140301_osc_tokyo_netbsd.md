@@ -1,4 +1,5 @@
 # Metasepi team meeting #13:　NetBSD driver using Haskell
+![background](img/speaker.png)
 
 Metasepi Project / Kiwamu Okabe
 
