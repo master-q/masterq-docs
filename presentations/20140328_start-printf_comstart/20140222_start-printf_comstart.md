@@ -160,7 +160,7 @@ ttypull(struct tty *tp)
 	sc->sc_tx_busy = 1;
 ~~~
 
-# ndqb() #1
+# ndqb()
 
 ~~~ {.c}
 /*
@@ -239,10 +239,15 @@ out:
 }
 ~~~
 
+# clist to serial port (figure)
+
+![inline](draw/clist_act.png)
+
 # CSR_WRITE_*()
 
 ~~~ {.c}
-// arch/i386/compile/GENERIC/opt_com.h:/* option `COM_REGMAP' not defined */
+// arch/i386/compile/GENERIC/opt_com.h:
+// /* option `COM_REGMAP' not defined */
 #define	CSR_WRITE_1(r, o, v)	\
 	bus_space_write_1((r)->cr_iot, (r)->cr_ioh, o, v)
 #define	CSR_WRITE_MULTI(r, o, p, n)	\
@@ -251,6 +256,10 @@ out:
 #define	COM_REG_TXDATA		com_data
 ~~~
 
-# clist to serial port (figure)
-
-![inline](draw/clist_act.png)
+~~~ {.c}
+// com.c
+// = include => dev/ic/comreg.h
+//              = include => dev/ic/ns16550reg.h
+#define	com_data	0	/* data register (R/W) */
+#define	com_ier		1	/* interrupt enable (W) */
+~~~
