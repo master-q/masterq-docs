@@ -263,3 +263,53 @@ out:
 #define	com_data	0	/* data register (R/W) */
 #define	com_ier		1	/* interrupt enable (W) */
 ~~~
+
+The com_data address should be 0x3f8.
+
+# bus_space_map()
+
+~~~ {.c}
+int comcnattach(bus_space_tag_t iot, bus_addr_t iobase, int rate, int frequency, int type, tcflag_t cflag)
+{
+// --snip--
+	regs.cr_iot = iot;
+	regs.cr_iobase = iobase;
+	regs.cr_nports = COM_NPORTS;
+	return comcnattach1(&regs, rate, frequency, type, cflag);
+// --snip--
+int comcnattach1(struct com_regs *regsp, int rate, int frequency, int type, tcflag_t cflag)
+{
+// --snip--
+	comcons_info.regs = *regsp;
+	res = cominit(&comcons_info.regs, rate, frequency, type, cflag);
+// --snip--
+int cominit(struct com_regs *regsp, int rate, int frequency, int type, tcflag_t cflag)
+{
+	if (bus_space_map(regsp->cr_iot, regsp->cr_iobase, regsp->cr_nports, 0, &regsp->cr_ioh))
+~~~
+
+# comcnattach() caller
+
+~~~ {.c}
+void
+consinit(void)
+{
+// --snip--
+#if (NCOM > 0)
+	if (!strcmp(consinfo->devname, "com")) {
+		int addr = consinfo->addr;
+		int speed = consinfo->speed;
+
+		if (addr == 0)
+			addr = CONADDR; // <= 0x3f8
+		if (speed == 0)
+			speed = CONSPEED;
+
+		if (comcnattach(x86_bus_space_io, addr, speed,
+				COM_FREQ, COM_TYPE_NORMAL, comcnmode))
+			panic("can't init serial console @%x", consinfo->addr);
+
+		return;
+	}
+#endif
+~~~
