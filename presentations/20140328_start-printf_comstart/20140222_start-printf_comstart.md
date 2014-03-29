@@ -207,6 +207,10 @@ struct clist {
 };
 ~~~
 
+# struct clist (figure)
+
+![inline](draw/clist.png)
+
 # comstart() #3
 
 ~~~ {.c}
@@ -246,3 +250,7 @@ out:
 #define	COM_REG_IER		com_ier
 #define	COM_REG_TXDATA		com_data
 ~~~
+
+# clist to serial port (figure)
+
+![inline](draw/clist_act.png)
