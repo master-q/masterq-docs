@@ -313,3 +313,7 @@ consinit(void)
 	}
 #endif
 ~~~
+
+# bus_space_map() (figure)
+
+![inline](draw/map.png)
