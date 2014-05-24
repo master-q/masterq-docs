@@ -176,7 +176,7 @@ My efforts are following.
 \end{itemize}
 
 \subsubsection*{April 2006: Develop POSIX thread library}
-Replace user level POSIX thread library with NetBSD-2.0 m:m thread.
+Replace user level POSIX thread library with NetBSD-2.0 m:n thread.
 My efforts are following.
 \begin{itemize}
   \item Research the presence of thread-safe and cancel-safe in kernel, libc and libpthread.
@@ -187,7 +187,9 @@ My efforts are following.
 
 \subsubsection*{June 2004: Tune multifunction printer boot time as 10 seconds}
 Before my tune, the printer boot time is 30 seconds.
-Ricoh's multifunction printer ``imagio'' \href{http://www.ricoh.co.jp/imagio/}{\tt http://www.ricoh.co.jp/imagio/} use the method and tool, ever now.
+Ricoh's multifunction printer ``imagio''
+\footnote{\href{http://www.ricoh.co.jp/imagio/}{\tt http://www.ricoh.co.jp/imagio/}}
+use the method and tool, ever now.
 My efforts are following.
 
 \begin{itemize}
@@ -213,7 +215,9 @@ My efforts are following.
 
 \subsubsection*{July 2001: Develop BIOS and bootloader for multifunction printer on x86 architecture}
 My first work at Ricoh.
-Ricoh's multifunction printer ``imagio'' \href{http://www.ricoh.co.jp/imagio/}{\tt http://www.ricoh.co.jp/imagio/} use my bootloader design, ever now.
+Ricoh's multifunction printer ``imagio''
+\footnote{\href{http://www.ricoh.co.jp/imagio/}{\tt http://www.ricoh.co.jp/imagio/}}
+use my bootloader design, ever now.
 My efforts are following.
 \begin{itemize}
   \item Design specification to customize the BIOS for printer
@@ -227,57 +231,52 @@ My efforts are following.
 \begin{itemize}
   \item March 2001: Master of Engineering from Department of Electrical and Electronic Engineering, Tokyo Metropolitan University. \\
     The thesis: ``Multimode Quartz Crystal Microbalance''
-    \href{http://ci.nii.ac.jp/naid/110004076869}{\tt http://ci.nii.ac.jp/naid/110004076869}
+    \footnote{\href{http://ci.nii.ac.jp/naid/110004076869}{\tt http://ci.nii.ac.jp/naid/110004076869}}
 \end{itemize}
 
 \section*{Publications and Reports}
 
 \begin{itemize}
-  \item January 2014: ``強い型によるOSの開発手法の提案'', 第55回プログラミング・シンポジウム, \\
-    \href{http://metasepi.org/doc/20140110\_prosym55.pdf}{\tt http://metasepi.org/doc/20140110\_prosym55.pdf}
+  \item January 2014: ``強い型によるOSの開発手法の提案'', 第55回プログラミング・シンポジウム
+    \footnote{\href{http://metasepi.org/doc/20140110\_prosym55.pdf}{\tt http://metasepi.org/doc/20140110\_prosym55.pdf}}
 \end{itemize}
 
 \section*{Activities}
 
 \subsection*{Open-source projects}
 
-\subsubsection*{Metasepi project}
+\subsubsection*{Metasepi project \footnote{\href{http://metasepi.org/}{\tt http://metasepi.org/}}}
 \begin{itemize}
-\item \href{http://metasepi.org/}{\tt http://metasepi.org/}
 \item Challenge to create an open-source Unix-like operating system designed with strong type such as ML or Haskell.
 \item Rewriting NetBSD kernel using Ajhc Haskell compiler. \href{https://github.com/metasepi/netbsd-arafura-s1}{\tt https://github.com/metasepi/netbsd-arafura-s1}
 \end{itemize}
 
-\subsubsection*{Ajhc Haskell compiler}
+\subsubsection*{Ajhc Haskell compiler \footnote{\href{http://ajhc.metasepi.org/}{\tt http://ajhc.metasepi.org/}}}
 \begin{itemize}
-\item \href{http://ajhc.metasepi.org/}{\tt http://ajhc.metasepi.org/}
 \item Extend and add embedded features to Jhc Haskell Compiler \href{http://repetae.net/computer/jhc/}{\tt http://repetae.net/computer/jhc/}.
 \item Ajhc has thread-safe and reentrant runtime. Also has Erlang style GC. It means Ajhc's Haskell context has own GC heap. GC can run on tiny CPU such as Cortex-M3 with 32kB RAM.
 \end{itemize}
 
-\subsubsection*{Japan ATS User Group}
+\subsubsection*{Japan ATS User Group \footnote{\href{http://jats-ug.metasepi.org/}{\tt http://jats-ug.metasepi.org/}}}
 \begin{itemize}
-\item \href{http://jats-ug.metasepi.org/}{\tt http://jats-ug.metasepi.org/}
 \item An user group for ATS language \href{http://www.ats-lang.org/}{\tt http://www.ats-lang.org/} promotion of utilization. Translating ATS documents into Japanese.
 \end{itemize}
 
-\subsubsection*{Debian Maintainer}
+\subsubsection*{Debian Maintainer \footnote{\href{http://qa.debian.org/developer.php?login=kiwamu@debian.or.jp}{\tt http://qa.debian.org/developer.php?login=kiwamu@debian.or.jp}}}
 \begin{itemize}
-\item \href{http://qa.debian.org/developer.php?login=kiwamu@debian.or.jp}{\tt http://qa.debian.org/developer.php?login=kiwamu@debian.or.jp}
 \item Maintained uim package at Debian squeeze, and packages using Haskell at sid.
 \end{itemize}
 
-\subsubsection*{Carettah}
+\subsubsection*{Carettah \footnote{\href{http://carettah.masterq.net/}{\tt http://carettah.masterq.net/}}}
 \begin{itemize}
-\item \href{http://carettah.masterq.net/}{\tt http://carettah.masterq.net/}
 \item A presentation tool written with Haskell. My slides \href{http://www.slideshare.net/master\_q/}{\tt http://www.slideshare.net/master\_q/} are created by the tool.
 \end{itemize}
 
 \section*{Computer Skills}
 
 \begin{itemize}
-  \item Languages: Haskell, C, Intel assembler, Ruby
-  \item Platforms: Linux, NetBSD, Android NDK
+  \item Languages: Haskell, C, ATS, Intel assembler, Ruby
+  \item Platforms: Linux, NetBSD, Android NDK, MinGW
 \end{itemize}
 
 \section*{Reference available upon request}
