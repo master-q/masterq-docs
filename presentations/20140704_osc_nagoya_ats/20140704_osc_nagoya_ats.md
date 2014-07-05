@@ -119,6 +119,37 @@ http://www.ats-lang.org/
 
 ![inline](draw/flow.png)
 
+# ATS programming on MCU
+
+You can choose the following 2-way.
+
+On BareMetal hardware
+
+* Arduino (8-bit AVR)
+* Cortex-M (32-bit ARM)
+
+On RTOS
+
+* mbed
+* ChibiOS/RT
+
+# ATS on BareMetal hardware
+
+Read/write memory using pointer.
+
+![inline](draw/ats_rw_pointer.png)
+
+# ATS on RTOS
+
+Interaction with C.
+
+![inline](draw/ats_interaction_c.png)
+
+# Dependent Types
+
+# Linear Views and Types
+
+# xxx
 
 xxx
 
