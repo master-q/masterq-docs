@@ -147,9 +147,13 @@ Interaction with C.
 
 # Dependent Types
 
-# Linear Views and Types
+xxx
 
-# xxx
+# Produce/Consume Linear Type
+
+![inline](draw/linear_consume.png)
+
+# At-view
 
 xxx
 
