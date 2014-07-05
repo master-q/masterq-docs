@@ -1,4 +1,5 @@
 # Metasepi team meeting #14:　ATS programming on MCU
+![background](img/mbed_StarBoard_Orange.png)
 
 Kiwamu Okabe @ Metasepi Project
 
@@ -161,6 +162,23 @@ http://jats-ug.metasepi.org/
 * In a parody of http://jaws-ug.jp/
 * Translate ATS docs into Japanese
 * Push the Facebook like button, now!
+
+# Many translated documents
+
+~~~
+* ATSプログラミング入門
+  http://jats-ug.metasepi.org/doc/ATS2/INT2PROGINATS/index.html
+* ATSプログラミングチュートリアル
+  http://jats-ug.metasepi.org/doc/ATS2/ATS2TUTORIAL/index.html
+* Effective ATS
+  https://github.com/jats-ug/translate/blob/master/Manual/EffectiveATS.md
+* MLプログラマ向けATS言語ガイド
+  https://github.com/jats-ug/translate/blob/master/Web/cs.likai.org/ats/ml-programmers-guide-to-ats.md
+* 安全なプログラミング言語を使って heartbleed を防ぐには
+  https://github.com/jats-ug/translate/blob/master/Web/bluishcoder.co.nz/2014/04/11/preventing-heartbleed-bugs-with-safe-languages.md
+* 状態を持つ観 (view) を通じてポインタを扱う安全なプログラミング
+  https://github.com/jats-ug/translate/blob/master/Paper/SPPSV-padl05/SPPSV-padl05.md
+~~~
 
 # Follow me!
 
