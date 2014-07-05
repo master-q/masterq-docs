@@ -76,6 +76,14 @@ http://itpro.nikkeibp.co.jp/article/COLUMN/20060915/248230/
 
 # How create Metasepi?
 
+![inline](draw/iterative.png)
+
+# Snatch-driven development
+
+Dogfooding style.
+
+![inline](draw/2012-12-27-arafura_design.png)
+
 # Demo: ATS on raw Arduino
 
 ~~~
