@@ -42,7 +42,11 @@ http://ajhc.metasepi.org/
 
 # Agenda
 
-xxx
+* [1] What is Ajhc?
+* [2] What is Metasepi?
+* [3] Demo using ATS language
+* [4] What is ATS?
+* [5] ATS programming on MCU
 
 # What is Metasepi?
 ![background](img/metasepi.png)
@@ -101,6 +105,20 @@ https://github.com/fpiot/mbed-ats
 ![inline](draw/mbed_and_ats.png)
 
 # What is ATS language?
+![background](img/ats_hongwei.png)
+
+http://www.ats-lang.org/
+
+* Syntax like ML
+* Dependent types
+* Linear types
+* Without any runtime
+* Optional GC
+
+# ATS compile flow
+
+![inline](draw/flow.png)
+
 
 xxx
 
