@@ -145,17 +145,13 @@ Interaction with C.
 
 ![inline](draw/ats_interaction_c.png)
 
-# Dependent Types
-
-xxx
-
 # Produce/Consume Linear Type
 
 ![inline](draw/linear_consume.png)
 
 # At-view
 
-xxx
+![inline](draw/at-view.png)
 
 # Japan ATS User Group
 ![background](img/jats-ug_like.png)
