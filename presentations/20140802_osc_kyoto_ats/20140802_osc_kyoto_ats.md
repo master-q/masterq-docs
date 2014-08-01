@@ -150,7 +150,66 @@ http://www.ats-lang.org/
 
 # [5] Why ATS language is safe?
 
-xxx
+* Can enforce invariant in interface
+* Let's see code of the Linear List
+
+# Type of Linear List
+
+~~~
+(* File: prelude/basics_dyn.sats *)
+datavtype
+list_vt0ype_int_vtype (a:vt@ype+, int) =
+  | {n:int | n >= 0}
+    list_vt_cons (a, n+1) of (a, list_vt0ype_int_vtype (a, n))
+  | list_vt_nil (a, 0) of ()
+stadef list_vt = list_vt0ype_int_vtype
+~~~
+
+# make_pair
+
+~~~
+(* File: prelude/SATS/list_vt.sats *)
+fun{x:vt0p}
+list_vt_make_pair (x1: x, x2: x):<!wrt> list_vt (x, 2)
+~~~
+
+# length
+
+~~~
+(* File: prelude/SATS/list_vt.sats *)
+fun{x:vt0p}
+list_vt_length{n:int} (xs: !list_vt (INV(x), n)):<> int n
+~~~
+
+# append
+
+~~~
+(* File: prelude/SATS/list_vt.sats *)
+fun{
+a:vt0p
+} list_vt_append
+  {n1,n2:int} (
+  xs1: list_vt (INV(a), n1), xs2: list_vt (a, n2)
+) :<!wrt> list_vt (a, n1+n2)
+~~~
+
+# reverse
+
+~~~
+(* File: prelude/SATS/list_vt.sats *)
+fun{x:vt0p}
+list_vt_reverse{n:int}
+  (xs: list_vt (INV(x), n)):<!wrt> list_vt (x, n)
+~~~
+
+# free
+
+~~~
+(* File: prelude/SATS/list_vt.sats *)
+fun{x:t0p}
+list_vt_free (xs: List_vt (INV(x))):<!wrt> void
+overload free with list_vt_free
+~~~
 
 # [6] ATS programming on MCU
 
