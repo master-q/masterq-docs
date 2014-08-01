@@ -150,8 +150,9 @@ http://www.ats-lang.org/
 
 # [5] Why ATS language is safe?
 
-* Can enforce invariant in interface
-* Let's see code of the Linear List
+* Line is at between caller and callee
+* ATS applies type to the line
+* Type can enforce invariant in them
 
 # Type of Linear List
 
