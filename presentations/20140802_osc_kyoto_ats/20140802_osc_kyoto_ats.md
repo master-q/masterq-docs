@@ -156,6 +156,51 @@ http://www.ats-lang.org/
 
 ![inline](draw/enforce_invariant.png)
 
+# Usage of Linear List
+
+~~~
+$ vi sample_list.dats
+#include "share/atspre_staload.hats"
+implement main0 () = {
+  val l1 = list_vt_make_pair<int> (1, 2)
+  val l2 = list_vt_make_pair<int> (3, 4)
+  val () = println! ("l1 := [", l1, "] / l2 := [", l2, "]")
+
+  val l3 = list_vt_append (l1, l2)
+  val l4 = list_vt_reverse l3
+  val () = println! ("l4 := [", l4, "]")
+  val () = println! ("length(l4) := ", length l4)
+  val () = free l4
+}
+$ patscc -DATS_MEMALLOC_LIBC -o sample_list sample_list.dats
+$ ./sample_list
+l1 := [1, 2] / l2 := [3, 4]
+l4 := [4, 3, 2, 1]
+length(l4) := 4
+~~~
+
+# Compile error: without free
+
+~~~
+$ vi sample_list.dats
+#include "share/atspre_staload.hats"
+implement main0 () = {
+  val l1 = list_vt_make_pair<int> (1, 2)
+  val l2 = list_vt_make_pair<int> (3, 4)
+  val () = println! ("l1 := [", l1, "] / l2 := [", l2, "]")
+
+  val l3 = list_vt_append (l1, l2)
+  val l4 = list_vt_reverse l3
+  val () = println! ("l4 := [", l4, "]")
+  val () = println! ("length(l4) := ", length l4)
+//  val () = free l4 // <= Changed
+}
+$ patscc -DATS_MEMALLOC_LIBC -o sample_list sample_list.dats
+--snip--
+The 2nd translation (binding) of [sample_list.dats] is successfully completed!
+/home/kiwamu/tmp/sample_list.dats: 59(line=2, offs=22) -- 396(line=12, offs=2): error(3): the linear dynamic variable [l4$3440(-1)] needs to be consumed but it is preserved with the type [S2Eapp(S2Ecst(list_vt0ype_int_vtype); S2Eapp(S2Ecst(INV); S2EVar(4102)), S2EVar(4103))] instead.
+~~~
+
 # Type of Linear List
 
 ~~~
