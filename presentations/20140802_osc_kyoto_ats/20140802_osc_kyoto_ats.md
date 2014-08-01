@@ -1,4 +1,4 @@
-# Metasepi team meeting #15:　Safety on ATS language + MCU
+# Metasepi team meeting #16:　Safety on ATS language + MCU
 
 Kiwamu Okabe @ Metasepi Project
 
@@ -15,10 +15,11 @@ Kiwamu Okabe @ Metasepi Project
 # Agenda
 
 * [1] What is Metasepi?
-* [2] Demo using ATS language
-* [3] What is ATS?
-* [4] Why ATS is safe?
-* [5] ATS programming on MCU
+* [2] How to create Metasepi?
+* [3] Demo using ATS language
+* [4] What is ATS language?
+* [5] Why ATS language is safe?
+* [6] ATS programming on MCU
 
 # [1] What is Metasepi?
 ![background](img/metasepi.png)
@@ -29,8 +30,7 @@ http://metasepi.org/
 * Using ML or more strong type lang.
 
 # Why need Metasepi?
-
-![background](img/mud.png)
+![background](img/obsolete_cds.png)
 
 * We have already Linux or Windows.
 * But the developers are suffering.
@@ -38,8 +38,25 @@ http://metasepi.org/
 * you will get many runtime error.
 * Difficult even to reproduce it.
 
+# Doesn't OSS have good quality?
+![background](img/bazaar.png)
+
+* "The Cathedral and the Bazaar"
+* "Given enough eyeballs, all bugs are shallow."
+
+~~~
+http://cruel.org/freeware/cathedral.html
+~~~
+
+* But if you develop your own product re-using OSS...
+
+# Low quality out of OSS umbrella
+![background](img/umbrellas.png)
+
+![inline](draw/oss_quality.png)
+
 # Type safety
-![background](img/safe.png)
+![background](img/shield.png)
 
 * Less runtime errors.
 * "数理科学的バグ撲滅方法論のすすめ"
@@ -50,17 +67,57 @@ http://itpro.nikkeibp.co.jp/article/COLUMN/20060915/248230/
 
 ![inline](draw/2013-01-18-few_error.png)
 
-# How create Metasepi?
+# Kernel wants type desperately
+![background](img/world_without_trees.png)
 
-![inline](draw/iterative.png)
+* Kernels are developed with C lang.
+* Error on user space => SEGV
+* Error on kernel space => Halt!
+* Should design kernel with the greatest care.
+* C language is safe?
 
-# Snatch-driven development
+# Remember Heartbleed bug?
+![background](img/heartbleed.png)
 
-Dogfooding style.
+Should we use safer language than C?
+
+~~~
+== In English ==
+"Preventing heartbleed bugs with safe programming languages"
+http://bluishcoder.co.nz/2014/04/11/preventing-heartbleed-bugs-with-safe-languages.html
+
+== In Japanease ==
+"安全なプログラミング言語を使って heartbleed を防ぐには"
+https://github.com/jats-ug/translate/blob/master/Web/bluishcoder.co.nz/2014/04/11/preventing-heartbleed-bugs-with-safe-languages.md
+~~~
+
+"A safer systems programming language could have prevented the bug."
+
+# [2] How to create Metasepi?
+![background](img/snatcher_randam.png)
+
+* Language: Strongly typed language
+* Base code: NetBSD kernel
+* Design: Snatch-driven development
+
+# Snatch-driven development #1
+![background](img/snatcher_metal.png)
+
+http://en.wikipedia.org/wiki/Snatcher
+
+![inline](draw/snatch-system.png)
+
+# Snatch-driven development #2
+![background](img/snatcher_head.png)
 
 ![inline](draw/2012-12-27-arafura_design.png)
 
-# [2] Demo: ATS on raw Arduino
+# Iterative development
+![background](img/rocket.png)
+
+![inline](draw/iterative.png)
+
+# [3] Demo: ATS on raw Arduino
 
 ~~~
 https://github.com/fpiot/arduino-mega2560-ats
@@ -76,7 +133,7 @@ https://github.com/fpiot/mbed-ats
 
 ![inline](draw/mbed_and_ats.png)
 
-# [3] What is ATS language?
+# [4] What is ATS language?
 ![background](img/ats_hongwei.png)
 
 http://www.ats-lang.org/
@@ -91,9 +148,9 @@ http://www.ats-lang.org/
 
 ![inline](draw/flow.png)
 
-# [4] Why ATS is safe?
+# [5] Why ATS language is safe?
 
-# [5] ATS programming on MCU
+# [6] ATS programming on MCU
 
 You can choose the following 2-way.
 
