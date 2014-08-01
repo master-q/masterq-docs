@@ -150,6 +150,8 @@ http://www.ats-lang.org/
 
 # [5] Why ATS language is safe?
 
+xxx
+
 # [6] ATS programming on MCU
 
 You can choose the following 2-way.
