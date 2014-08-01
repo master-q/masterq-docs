@@ -154,6 +154,8 @@ http://www.ats-lang.org/
 * ATS applies type to the line
 * Type can enforce invariant in them
 
+![inline](draw/enforce_invariant.png)
+
 # Type of Linear List
 
 ~~~
@@ -165,6 +167,8 @@ list_vt0ype_int_vtype (a:vt@ype+, int) =
   | list_vt_nil (a, 0) of ()
 stadef list_vt = list_vt0ype_int_vtype
 ~~~
+
+![inline](draw/list_vt_type.png)
 
 # make_pair
 
