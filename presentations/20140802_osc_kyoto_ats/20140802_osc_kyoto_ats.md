@@ -29,7 +29,7 @@ Kiwamu Okabe @ Metasepi Project
 http://metasepi.org/
 
 * Unix-like OS designed by strong type.
-* Using ML or more strong type lang.
+* Using ML's or more strong type.
 
 # Why need Metasepi?
 ![background](img/obsolete_cds.png)
@@ -60,7 +60,7 @@ http://cruel.org/freeware/cathedral.html
 # Type safety
 ![background](img/shield.png)
 
-* Less runtime errors.
+* Less runtime errors
 * "数理科学的バグ撲滅方法論のすすめ"
 
 ~~~
@@ -72,7 +72,7 @@ http://itpro.nikkeibp.co.jp/article/COLUMN/20060915/248230/
 # Kernel wants type desperately
 ![background](img/world_without_trees.png)
 
-* Kernels are developed with C lang.
+* Kernels are developed with C.
 * Error on user space => SEGV
 * Error on kernel space => Halt!
 * Should design kernel with the greatest care.
@@ -107,12 +107,18 @@ https://github.com/jats-ug/translate/blob/master/Web/bluishcoder.co.nz/2014/04/1
 
 http://en.wikipedia.org/wiki/Snatcher
 
+~~~
+
+
+
+~~~
+
 ![inline](draw/snatch-system.png)
 
 # Snatch-driven development #2
 ![background](img/snatcher_head.png)
 
-![inline](draw/2012-12-27-arafura_design.png)
+![inline](draw/snatch-design.png)
 
 # Iterative development
 ![background](img/rocket.png)
