@@ -258,14 +258,22 @@ list_vt_reverse{n:int}
   (xs: list_vt (INV(x), n)):<!wrt> list_vt (x, n)
 ~~~
 
+![inline](draw/list_vt_reverse.png)
+
 # free
 
 ~~~
+(* File: prelude/basics_dyn.sats *)
+vtypedef
+List_vt (a:vt0p) = [n:int] list_vt (a, n)
+
 (* File: prelude/SATS/list_vt.sats *)
 fun{x:t0p}
 list_vt_free (xs: List_vt (INV(x))):<!wrt> void
 overload free with list_vt_free
 ~~~
+
+![inline](draw/list_vt_free.png)
 
 # [6] ATS programming on MCU
 
