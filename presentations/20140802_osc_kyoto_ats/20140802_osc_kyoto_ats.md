@@ -223,6 +223,8 @@ fun{x:vt0p}
 list_vt_make_pair (x1: x, x2: x):<!wrt> list_vt (x, 2)
 ~~~
 
+![inline](draw/list_vt_make_pair.png)
+
 # length
 
 ~~~
@@ -230,6 +232,8 @@ list_vt_make_pair (x1: x, x2: x):<!wrt> list_vt (x, 2)
 fun{x:vt0p}
 list_vt_length{n:int} (xs: !list_vt (INV(x), n)):<> int n
 ~~~
+
+![inline](draw/list_vt_length.png)
 
 # append
 
@@ -242,6 +246,8 @@ a:vt0p
   xs1: list_vt (INV(a), n1), xs2: list_vt (a, n2)
 ) :<!wrt> list_vt (a, n1+n2)
 ~~~
+
+![inline](draw/list_vt_append.png)
 
 # reverse
 
