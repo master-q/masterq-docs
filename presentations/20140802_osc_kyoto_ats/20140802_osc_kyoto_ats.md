@@ -109,8 +109,6 @@ http://en.wikipedia.org/wiki/Snatcher
 
 ~~~
 
-
-
 ~~~
 
 ![inline](draw/snatch-system.png)
