@@ -1,4 +1,5 @@
 # Metasepi team meeting #16:　Safety on ATS language + MCU
+![background](img/arduino_mega.png)
 
 Kiwamu Okabe @ Metasepi Project
 
@@ -13,6 +14,7 @@ Kiwamu Okabe @ Metasepi Project
 * 10 years' experience in developing OS using NetBSD
 
 # Agenda
+![background](img/sainsmart.png)
 
 * [1] What is Metasepi?
 * [2] How to create Metasepi?
