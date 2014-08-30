@@ -25,7 +25,6 @@ https://www.youtube.com/watch?v=XEYcR5RG5cA
 ~~~
 
 # Agenda
-![background](img/gothenburg_moonlight.png)
 
 * [1] Demo: NetBSD driver in Haskell
 * xxx
@@ -48,8 +47,22 @@ MLton http://mlton.org/
 . . . and suchlike.
 
 # Scratch or Rewrite
-# Snatch-driven development
-# Compiler for system programing
+# Snatch-driven development #1
+
+http://en.wikipedia.org/wiki/Snatcher
+
+![inline](draw/snatch-system.png)
+
+# Snatch-driven development #2
+
+![inline](draw/2012-12-27-arafura_design.png)
+
+# System programming compiler
+
+Programs to print "hoge" on terminal. The lesser depends on POSIX, the smaller values.
+
+![inline](img/compare_compiler_ats.png)
+
 # Need preemptive multitasking
 
 * There are 2 way for multitasking
@@ -60,6 +73,13 @@ MLton http://mlton.org/
 * Interrupt handler should be reentrant
 
 # What's reentrancy ?
+
+~~~
+Reentrant code can be interrupted in the middle of its execution and then safely called again ("re-entered") before its previous invocations complete execution.
+~~~
+
+![inline](draw/reentrant.png)
+
 # How to get reentrancy in C ?
 # C language Context
 # Problem: Interrupt and GC
