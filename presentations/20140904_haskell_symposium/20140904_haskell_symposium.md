@@ -47,6 +47,9 @@ MLton http://mlton.org/
 . . . and suchlike.
 
 # Scratch or Rewrite
+
+xxx
+
 # Snatch-driven development #1
 
 http://en.wikipedia.org/wiki/Snatcher
@@ -62,6 +65,8 @@ http://en.wikipedia.org/wiki/Snatcher
 Programs to print "hoge" on terminal. The lesser depends on POSIX, the smaller values.
 
 ![inline](img/compare_compiler_ats.png)
+
+Choose jhc for portability and flexibility.
 
 # Need preemptive multitasking
 
