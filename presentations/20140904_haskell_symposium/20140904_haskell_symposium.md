@@ -1,16 +1,6 @@
 # Writing NetBSD Sound Drivers in Haskell
 
-Kiwamu Okabe @ Metasepi & Takayuki Muranushi @ RIKEN
-
-# Who am I?
-![background](img/enjoy.png)
-
-* http://www.masterq.net/
-* Self employed software engineer
-* Trade name := METASEPI DESIGN
-* Founder of Metasepi Project
-* A Debian Maintainer
-* 10 years' experience in developing OS using NetBSD
+Kiwamu Okabe @ Metasepi & Takayuki Muranushi @ RIKEN AICS
 
 # Demo: NetBSD driver in Haskell
 ![background](img/netbsd.png)
@@ -115,7 +105,9 @@ Reentrant code can be interrupted in the middle of its execution and then safely
 
 # Conclusion
 
-xxx
+# Thank's for contributors !
+
+![inline](draw/contributors.png)
 
 # License of used photos #1
 
