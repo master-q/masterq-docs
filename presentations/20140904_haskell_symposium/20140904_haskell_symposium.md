@@ -1,6 +1,6 @@
-# Metasepi team meeting #18:　Reentrant GC for Haskell
+# Writing NetBSD Sound Drivers in Haskell
 
-Kiwamu Okabe @ Metasepi Design
+Kiwamu Okabe @ Metasepi & Takayuki Muranushi @ RIKEN
 
 # Who am I?
 ![background](img/enjoy.png)
