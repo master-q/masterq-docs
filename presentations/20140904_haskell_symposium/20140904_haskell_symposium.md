@@ -1,6 +1,6 @@
 # Metasepi team meeting #18:　Reentrant GC for Haskell
 
-Kiwamu Okabe @ Metasepi Project
+Kiwamu Okabe @ Metasepi Design
 
 # Who am I?
 ![background](img/enjoy.png)
@@ -113,7 +113,9 @@ Reentrant code can be interrupted in the middle of its execution and then safely
 
 ![inline](img/arafura-s1_benchmark.png)
 
-# Stay tuned for Metasepi !
+# Conclusion
+
+xxx
 
 # License of used photos #1
 
