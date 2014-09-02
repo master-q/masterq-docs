@@ -96,9 +96,18 @@ Reentrant code can be interrupted in the middle of its execution and then safely
 
 ![inline](draw/switch_ongc.png)
 
-# There is Haskell Context ?
+# Are there Haskell Contexts ?
+
+xxx
+
 # When Haskell Context is born ?
+
+![inline](draw/define_haskell_context.png)
+
 # What's Haskell Context ?
+
+![inline](draw/context_haskell.png)
+
 # Implementation: CLHs
 # Haskell Context (CLHs)
 # Haskell Context life cycle (CLHs)
