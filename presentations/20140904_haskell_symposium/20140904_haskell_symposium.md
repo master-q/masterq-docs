@@ -5,10 +5,10 @@ Kiwamu Okabe @ Metasepi Design & Takayuki Muranushi @ RIKEN AICS
 # Demo: NetBSD driver in Haskell
 ![background](img/netbsd.png)
 
-* NetBSD audio driver play sound
-* The driver's interrupt handler rewrited using Haskell
-* GC occurs in interrupt handler
-* Watch the movie at following
+* NetBSD audio driver plays sound.
+* The driver's interrupt handler rewrited using Haskell.
+* GC occurs in interrupt handler.
+* Watch the movie at following.
 
 ~~~
 https://www.youtube.com/watch?v=XEYcR5RG5cA
@@ -20,13 +20,13 @@ https://www.youtube.com/watch?v=XEYcR5RG5cA
 
 # Kernel wants type desperately
 
-* Kernels are developed with C
+* Kernels are developed with C.
 * We should design kernel with the greatest care.
 * C language is unsafe!
 
 # Kernel problem: Buffer overrun
 
-* Pointer to array doesn't know the length
+* Pointer to array doesn't know the length.
 
 ![inline](draw/buffer_overrun.png)
 
@@ -56,8 +56,8 @@ $ grep "void \*" `find . -name "*.c"` | wc -l
 http://metasepi.org/
 
 * Unix-like OS designed by strong type.
-* We want to use Metasepi OS for daily usage, for web browser, programming, watching movie, office suite, ... etc.
-* We have surveyed may functional languages, such like Haskell, OCaml, MLton, ... etc.
+* We want to use Metasepi OS for daily desktop usage (e.g. web browser, programming, office suite, ... etc.)
+* We have surveyed may functional languages (e.g. Haskell, OCaml, MLton, ... etc.)
 
 # Scratch or Rewrite
 
@@ -167,7 +167,7 @@ We re-define the Haskell Context.
 * How we realize Reentrant GC?
 * => With Context-Local Heaps (CLHs)!
 * Can we implement CLHs in other compilers?
-* => Yes! Of cause GHC can do it!
+* => Yes! Of cause, GHC can do it!
 
 # License of used photos #1
 
