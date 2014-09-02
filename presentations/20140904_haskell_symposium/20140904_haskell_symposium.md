@@ -100,16 +100,20 @@ Reentrant code can be interrupted in the middle of its execution and then safely
 
 xxx
 
-# When Haskell Context is born ?
+# When is Haskell Context born ?
 
 ![inline](draw/define_haskell_context.png)
 
-# What's Haskell Context ?
+# What's Haskell Context on Ajhc?
 
 ![inline](draw/context_haskell.png)
 
-# Implementation: CLHs
-# Haskell Context (CLHs)
+# Context-Local Heaps (CLHs)
+
+* Idea: Isolate contexts by local heap
+
+![inline](draw/heapstyle.png)
+
 # Haskell Context life cycle (CLHs)
 
 ![inline](draw/arena_lifecycle.png)
