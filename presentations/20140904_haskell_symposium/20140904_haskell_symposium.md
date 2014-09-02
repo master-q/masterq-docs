@@ -56,7 +56,7 @@ $ grep "void \*" `find . -name "*.c"` | wc -l
 http://metasepi.org/
 
 * Unix-like OS designed by strong type.
-* We want to use OS for daily usage, for web browser, programming, watching movie, office suite, ... etc.
+* We want to use Metasepi OS for daily usage, for web browser, programming, watching movie, office suite, ... etc.
 * We have surveyed may functional languages, such like Haskell, OCaml, MLton, ... etc.
 
 # Scratch or Rewrite
@@ -98,7 +98,7 @@ Reentrant code can be interrupted in the middle of its execution and then safely
 
 ![inline](draw/reentrant.png)
 
-# How to get reentrancy in C ?
+# How do we get reentrancy in C ?
 
 * C language contexts are isolated.
 
@@ -112,13 +112,16 @@ Reentrant code can be interrupted in the middle of its execution and then safely
 
 ![inline](draw/switch_ongc.png)
 
-# Is there Haskell Context ?
+# Root of the problem
 
-* We can define it.
+* GHC's Haskell context is global and single.
+* There is only one GC heap on GHC.
+* If interrupt occurs while GC is running, the interrupt context can't use GC heap, because the running GC is paused!
+* Therefore GHC's binary isn't reentrant.
 
-xxx
+# How we can fix this problem
 
-# When is Haskell Context born ?
+We re-define the Haskell Context.
 
 ![inline](draw/define_haskell_context.png)
 
@@ -159,12 +162,12 @@ xxx
 
 # Conclusion
 
-* Can Haskell write Unix-like kernel?
+* Can we write Unix in Haskell?
 * => Yes!
 * How we realize Reentrant GC?
 * => With Context-Local Heaps (CLHs)!
 * Can we implement CLHs in other compilers?
-* => Yes!
+* => Yes! Of cause GHC can do it!
 
 # License of used photos #1
 
