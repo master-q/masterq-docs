@@ -105,6 +105,13 @@ Reentrant code can be interrupted in the middle of its execution and then safely
 
 # Conclusion
 
+* Can Haskell write Unix-like kernel?
+* => Yes!
+* How we realize Reentrant GC?
+* => With Context-Local Heaps (CLHs)!
+* Can we implement CLHs in other compilers?
+* => Yes!
+
 # Thank's for contributors !
 
 ![inline](draw/contributors.png)
