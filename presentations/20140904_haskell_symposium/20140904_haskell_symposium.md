@@ -1,6 +1,6 @@
 # Writing NetBSD Sound Drivers in Haskell
 
-Kiwamu Okabe @ Metasepi & Takayuki Muranushi @ RIKEN AICS
+Kiwamu Okabe @ Metasepi Design & Takayuki Muranushi @ RIKEN AICS
 
 # Demo: NetBSD driver in Haskell
 ![background](img/netbsd.png)
@@ -18,15 +18,34 @@ https://www.youtube.com/watch?v=XEYcR5RG5cA
 
 ![inline](draw/demo_arch_netbsd.png)
 
-# Agenda
+# Kernel problem: Buffer overrun
 
-* [1] Demo: NetBSD driver in Haskell
-* [2] Metasepi Project
-* xxx
+* Pointer to array doesn't know the length
 
-# xxx Motivation
+![inline](draw/buffer_overrun.png)
 
-# [2] Metasepi Project
+# Kernel problem: Page fault
+
+* Page fault in user space => SEGV
+* Page fault in kernel space => Halt!
+
+![inline](draw/page_fault.png)
+
+# Kernel problem: Weak type
+
+* Great use of (void *) type
+* NetBSD kernel uses 45130 times!
+
+~~~
+$ pwd
+/home/kiwamu/src/netbsd/sys
+$ grep "void \*" `find . -name "*.c"` | wc -l
+45130
+~~~
+
+* No choice but to use weak type for flexibility
+
+# Metasepi Project
 
 ![background](img/metasepi.png)
 
@@ -63,7 +82,7 @@ Programs to print "hoge" on terminal. The lesser depends on POSIX, the smaller v
 
 ![inline](img/compare_compiler_ats.png)
 
-We use jhc for portability & flexibility.
+I chose jhc for portability & flexibility.
 
 # Need preemptive multitasking
 
@@ -96,7 +115,9 @@ Reentrant code can be interrupted in the middle of its execution and then safely
 
 ![inline](draw/switch_ongc.png)
 
-# Are there Haskell Contexts ?
+# Is there Haskell Context ?
+
+* We can define it.
 
 xxx
 
@@ -117,6 +138,10 @@ xxx
 # Haskell Context life cycle (CLHs)
 
 ![inline](draw/arena_lifecycle.png)
+
+# Isolated contexts are reentrant?
+
+![inline](draw/isolated_contexts_reentrant.png)
 
 # Benchmark
 
