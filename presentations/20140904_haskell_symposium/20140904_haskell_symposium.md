@@ -18,6 +18,12 @@ https://www.youtube.com/watch?v=XEYcR5RG5cA
 
 ![inline](draw/demo_arch_netbsd.png)
 
+# Kernel wants type desperately
+
+* Kernels are developed with C
+* We should design kernel with the greatest care.
+* C language is unsafe!
+
 # Kernel problem: Buffer overrun
 
 * Pointer to array doesn't know the length
@@ -33,8 +39,8 @@ https://www.youtube.com/watch?v=XEYcR5RG5cA
 
 # Kernel problem: Weak type
 
-* Great use of (void *) type
-* NetBSD kernel uses 45130 times!
+* Lots of (void *) type
+* NetBSD kernel uses it 45130 times!
 
 ~~~
 $ pwd
@@ -43,24 +49,15 @@ $ grep "void \*" `find . -name "*.c"` | wc -l
 45130
 ~~~
 
-* No choice but to use weak type for flexibility
+* Kernel developers frequently use (void *) for flexibility. It's realy BAD, but there is no other option.
 
 # Metasepi Project
-
-![background](img/metasepi.png)
 
 http://metasepi.org/
 
 * Unix-like OS designed by strong type
-* Using ML or more strong type lang
-
-Haskell http://www.haskell.org/
-
-OCaml http://caml.inria.fr/
-
-MLton http://mlton.org/
-
-. . . and suchlike.
+* We want to use OS for daily usage
+* We have surveyed may functional languages, such like Haskell, OCaml, MLton, ... etc.
 
 # Scratch or Rewrite
 
@@ -76,22 +73,22 @@ http://en.wikipedia.org/wiki/Snatcher
 
 ![inline](draw/2012-12-27-arafura_design.png)
 
-# System programming compiler
+# Why we use jhc ?
 
-Programs to print "hoge" on terminal. The lesser depends on POSIX, the smaller values.
+Comparison of programs to print "hoge" on terminal.
+The smaller the values, the lesser is the dependency on POSIX,
+the more suitable for system programming.
 
 ![inline](img/compare_compiler_ats.png)
 
-I chose jhc for portability & flexibility.
+# Unix-like OS needs reentrancy
 
-# Need preemptive multitasking
-
-* There are 2 way for multitasking
-* [A] Nonpreemptive multitasking
-* [B] Preemptive multitasking
-* Unix-like OS needs [B]
-* [B] needs the hardware interrupts
-* Interrupt handler should be reentrant
+* Why we need reentrancy?
+* Because interrupt handler should be reentrant.
+* Why we need interrupt handler?
+* Because preemptive multitasking uses it.
+* Why we need the multitasking?
+* Because Unix-like OS depends on it.
 
 # What's reentrancy ?
 
