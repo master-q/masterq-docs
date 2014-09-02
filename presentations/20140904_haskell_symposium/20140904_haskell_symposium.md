@@ -14,10 +14,17 @@ Kiwamu Okabe @ Metasepi & Takayuki Muranushi @ RIKEN AICS
 https://www.youtube.com/watch?v=XEYcR5RG5cA
 ~~~
 
+# Demo architecture
+
+![inline](draw/demo_arch_netbsd.png)
+
 # Agenda
 
 * [1] Demo: NetBSD driver in Haskell
+* [2] Metasepi Project
 * xxx
+
+# xxx Motivation
 
 # [2] Metasepi Project
 
@@ -25,8 +32,8 @@ https://www.youtube.com/watch?v=XEYcR5RG5cA
 
 http://metasepi.org/
 
-* Unix-like OS designed by strong type.
-* Using ML or more strong type lang.
+* Unix-like OS designed by strong type
+* Using ML or more strong type lang
 
 Haskell http://www.haskell.org/
 
@@ -38,7 +45,7 @@ MLton http://mlton.org/
 
 # Scratch or Rewrite
 
-xxx
+![inline](draw/need_unixlike_kern.png)
 
 # Snatch-driven development #1
 
@@ -56,7 +63,7 @@ Programs to print "hoge" on terminal. The lesser depends on POSIX, the smaller v
 
 ![inline](img/compare_compiler_ats.png)
 
-Choose jhc for portability and flexibility.
+We use jhc for portability & flexibility.
 
 # Need preemptive multitasking
 
@@ -76,7 +83,15 @@ Reentrant code can be interrupted in the middle of its execution and then safely
 ![inline](draw/reentrant.png)
 
 # How to get reentrancy in C ?
-# C language Context
+
+* C language contexts are isolated.
+
+![inline](draw/context_switch.png)
+
+# What's C language Context ?
+
+![inline](draw/context_c.png)
+
 # Problem: Interrupt and GC
 
 ![inline](draw/switch_ongc.png)
@@ -103,6 +118,10 @@ Reentrant code can be interrupted in the middle of its execution and then safely
 
 ![inline](img/arafura-s1_benchmark.png)
 
+# Thank's for contributors !
+
+![inline](draw/contributors.png)
+
 # Conclusion
 
 * Can Haskell write Unix-like kernel?
@@ -111,10 +130,6 @@ Reentrant code can be interrupted in the middle of its execution and then safely
 * => With Context-Local Heaps (CLHs)!
 * Can we implement CLHs in other compilers?
 * => Yes!
-
-# Thank's for contributors !
-
-![inline](draw/contributors.png)
 
 # License of used photos #1
 
