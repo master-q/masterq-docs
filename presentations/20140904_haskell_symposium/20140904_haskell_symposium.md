@@ -14,6 +14,8 @@ Kiwamu Okabe @ Metasepi Design & Takayuki Muranushi @ RIKEN AICS
 https://www.youtube.com/watch?v=XEYcR5RG5cA
 ~~~
 
+* This slide: http://bit.ly/ajhc-icfp2014
+
 # Demo architecture
 
 ![inline](draw/demo_arch_netbsd.png)
