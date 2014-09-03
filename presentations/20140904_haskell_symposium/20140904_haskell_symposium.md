@@ -93,6 +93,7 @@ the more suitable for system programming.
 ![inline](img/compare_compiler_ats.png)
 
 # Unix-like OS needs reentrancy
+![background](img/re-entry.png)
 
 * Why we need reentrancy?
 * Because interrupt handler should be reentrant.
@@ -102,6 +103,7 @@ the more suitable for system programming.
 * Because Unix-like OS depends on it.
 
 # What's reentrancy ?
+![background](img/block_diagram.png)
 
 ~~~
 Reentrant code can be interrupted in the middle of its execution and then safely called again ("re-entered") before its previous invocations complete execution.
