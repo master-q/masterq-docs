@@ -17,31 +17,32 @@ https://www.youtube.com/watch?v=XEYcR5RG5cA
 * This slide: http://bit.ly/ajhc-icfp2014
 
 # Demo architecture
+![background](img/netbsd.png)
 
 ![inline](draw/demo_arch_netbsd.png)
 
-# Kernel wants type desperately
+# Kernel developers type seriously
 
 * Kernels are developed with C.
 * We should design kernel with the greatest care.
 * C language is unsafe!
 
-# Kernel problem: Buffer overrun
+# Kernel Bug #1: Buffer overrun
 
 * Pointer to array doesn't know the length.
 
 ![inline](draw/buffer_overrun.png)
 
-# Kernel problem: Page fault
+# Kernel Bug #2: Page fault
 
 * Page fault in user space => SEGV
 * Page fault in kernel space => Halt!
 
 ![inline](draw/page_fault.png)
 
-# Kernel problem: Weak type
+# Kernel Bug #3: Weak type
 
-* Lots of (void *) type
+* Lots of (void *) and unsafe coercion.
 * NetBSD kernel uses it 45130 times!
 
 ~~~
@@ -169,7 +170,7 @@ We re-define the Haskell Context.
 * How we realize Reentrant GC?
 * => With Context-Local Heaps (CLHs)!
 * Can we implement CLHs in other compilers?
-* => Yes! Of cause, GHC can do it!
+* => Yes! Of course, GHC can do it!
 
 # License of used photos #1
 

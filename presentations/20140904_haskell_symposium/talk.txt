@@ -1,0 +1,14 @@
+# Writing NetBSD Sound Drivers in Haskell
+
+Hi all.
+My name is Kiwamu Okabe.
+I'm a Self employed software engineer at METASEPI DESIGN.
+Today, I talk about kernel programming in Haskell.
+However, I don't touch detail of kernel programming,
+and focus our Reentrant GC for real kernel programming.
+
+# Demo: NetBSD driver in Haskell
+
+The proof of the pudding is in the eating.
+Let's see the demo!
+
