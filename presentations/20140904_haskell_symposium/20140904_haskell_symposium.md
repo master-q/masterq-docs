@@ -1,4 +1,5 @@
 # Writing NetBSD Sound Drivers in Haskell
+![background](img/super_sonico.png)
 
 Kiwamu Okabe @ Metasepi Design & Takayuki Muranushi @ RIKEN AICS
 
@@ -125,11 +126,12 @@ Reentrant code can be interrupted in the middle of its execution and then safely
 ![inline](draw/context_c.png)
 
 # Problem: Interrupt and GC
-![background](img/supernova.png)
+![background](img/tree.png)
 
 ![inline](draw/switch_ongc.png)
 
 # Root of the problem
+![background](img/root.png)
 
 * GHC's Haskell context is global and single.
 * There is only one GC heap on GHC.
@@ -192,6 +194,7 @@ We re-define the Haskell Context.
 ![inline](draw/contributors.png)
 
 # Conclusion
+![background](img/haskell.png)
 
 * Can we write Unix in Haskell?
 * => Yes!
