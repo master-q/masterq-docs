@@ -22,6 +22,7 @@ https://www.youtube.com/watch?v=XEYcR5RG5cA
 ![inline](draw/demo_arch_netbsd.png)
 
 # Kernel developers want type
+![background](img/world_without_trees.png)
 
 * Kernels are developed with C.
 * We should design kernel with the greatest care.
@@ -112,16 +113,19 @@ Reentrant code can be interrupted in the middle of its execution and then safely
 ![inline](draw/reentrant.png)
 
 # How do we get reentrancy in C ?
+![background](img/pdp11.png)
 
 * C language contexts are isolated.
 
 ![inline](draw/context_switch.png)
 
 # What's C language Context ?
+![background](img/pdp11.png)
 
 ![inline](draw/context_c.png)
 
 # Problem: Interrupt and GC
+![background](img/supernova.png)
 
 ![inline](draw/switch_ongc.png)
 
@@ -133,30 +137,36 @@ Reentrant code can be interrupted in the middle of its execution and then safely
 * Therefore GHC's binary isn't reentrant.
 
 # How we can fix this problem
+![background](img/headshift_business_card_discussion.png)
 
 We re-define the Haskell Context.
 
 ![inline](draw/define_haskell_context.png)
 
-# What's Haskell Context on Ajhc?
-
-![inline](draw/context_haskell.png)
-
 # Context-Local Heaps (CLHs)
+![background](img/great_wall_china.png)
 
 * Idea: Isolate contexts by local heap
 
 ![inline](draw/heapstyle.png)
 
+# What's Haskell Context on CLHs?
+![background](img/great_wall_china.png)
+
+![inline](draw/context_haskell.png)
+
 # Haskell Context life cycle (CLHs)
+![background](img/great_wall_china.png)
 
 ![inline](draw/arena_lifecycle.png)
 
 # Isolated contexts are reentrant?
+![background](img/great_wall_china.png)
 
 ![inline](draw/isolated_contexts_reentrant.png)
 
 # Benchmark
+![background](img/paper_airplane.png)
 
 ~~~
 (O)  Original NetBSD 6.1.2 kernel
