@@ -21,19 +21,21 @@ https://www.youtube.com/watch?v=XEYcR5RG5cA
 
 ![inline](draw/demo_arch_netbsd.png)
 
-# Kernel developers type seriously
+# Kernel developers want type
 
 * Kernels are developed with C.
 * We should design kernel with the greatest care.
 * C language is unsafe!
 
 # Kernel Bug #1: Buffer overrun
+![background](img/panic.png)
 
 * Pointer to array doesn't know the length.
 
 ![inline](draw/buffer_overrun.png)
 
 # Kernel Bug #2: Page fault
+![background](img/panic.png)
 
 * Page fault in user space => SEGV
 * Page fault in kernel space => Halt!
@@ -41,6 +43,7 @@ https://www.youtube.com/watch?v=XEYcR5RG5cA
 ![inline](draw/page_fault.png)
 
 # Kernel Bug #3: Weak type
+![background](img/panic.png)
 
 * Lots of (void *) and unsafe coercion.
 * NetBSD kernel uses it 45130 times!
@@ -55,6 +58,7 @@ $ grep "void \*" `find . -name "*.c"` | wc -l
 * Kernel developers frequently use (void *) for flexibility. It's realy BAD, but there is no other option.
 
 # Metasepi Project
+![background](img/thinkpad.png)
 
 http://metasepi.org/
 
@@ -63,20 +67,24 @@ http://metasepi.org/
 * We have surveyed may functional languages (e.g. Haskell, OCaml, MLton, ... etc.)
 
 # Scratch or Rewrite
+![background](img/climbing.png)
 
 ![inline](draw/need_unixlike_kern.png)
 
 # Snatch-driven development #1
+![background](img/konami.png)
 
 http://en.wikipedia.org/wiki/Snatcher
 
 ![inline](draw/snatch-system.png)
 
 # Snatch-driven development #2
+![background](img/konami.png)
 
 ![inline](draw/2012-12-27-arafura_design.png)
 
 # Why we use jhc ?
+![background](img/john_nevada.png)
 
 Comparison of programs to print "hoge" on terminal.
 The smaller the values, the lesser is the dependency on POSIX,
@@ -160,6 +168,14 @@ We re-define the Haskell Context.
 ![inline](img/arafura-s1_benchmark.png)
 
 # Thank's for contributors !
+![background](img/metasepi.png)
+
+~~~
+
+
+
+
+~~~
 
 ![inline](draw/contributors.png)
 
@@ -171,8 +187,3 @@ We re-define the Haskell Context.
 * => With Context-Local Heaps (CLHs)!
 * Can we implement CLHs in other compilers?
 * => Yes! Of course, GHC can do it!
-
-# License of used photos #1
-
-~~~
-~~~
