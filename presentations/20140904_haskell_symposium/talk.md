@@ -53,14 +53,27 @@ And the other is C is unsafe language.
 
 First one of many kernel bugs is buffer overrun.
 Fundamentally, C language pointer to array doesn't know length of the array.
-Also, C programmer sometimes use the 伸縮可能な struct that isn't known by the pointer.
+Also, C programmer sometimes use an extensible struct that isn't known by the pointer.
 
 # Kernel Bug #2: Page fault
 
-Second,
+Second is page fault in kernel space.
+You can debug page fault as segmentation fault in user space.
+However you will see halt when page fault occurs in kernel space!
+It's hard to debug.
 
 # Kernel Bug #3: Weak type
+
+Third is frequently using (void *) type in kernel.
+For example, NetBSD kernel uses (void *) forty five thousand times!
+Why kernel developers use it?
+Simple reason is C language limitation, that have no flexibility.
+
 # Metasepi Project
+
+Now, I would like to talk about our project named Metasepi.
+
+
 # Scratch or Rewrite
 # Snatch-driven development #1
 # Snatch-driven development #2
@@ -78,4 +91,10 @@ Second,
 # Isolated contexts are reentrant?
 # Benchmark
 # Thank's for contributors !
+
+Metasepi Project is supported by many people.
+Thank's a lot!
+
 # Conclusion
+
+Thank's for your attention!
