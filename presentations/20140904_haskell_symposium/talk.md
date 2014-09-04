@@ -97,17 +97,68 @@ It's called "Snatch" on the game.
 # Snatch-driven development #2
 
 How about OS society?
-
-
+Existing OS is developed in C language, such like human society.
+We would like to fully rewrite the OS with safer strong type, such like android society.
+Our rewriting strategy is:
+first focus a module in existing OS;
+second rewrite it with strongly typed language;
+finally connect every modules with FFI.
 Therefore, we call it as "Snatch-driven development".
 
 # Why we use jhc ?
+
+I think this meeting is Haskell Symposium.
+Of course, we choose Haskell language, however use jhc Haskell compiler.
+Why?
+Please see the table,
+that is explain Hello world executable binary's size, number of undefined symbols and number of dependent libraries.
+Lesser value means the compiler is potable for out of POSIX and good for system programming.
+We choose jhc for the feature and flexible type system.
+
 # Unix-like OS needs reentrancy
+
+O.K. We decided the design method and language implementation.
+What's next?
+Actually, Unix-like OS is hard to rewrite or snatch.
+Unix-like OS needs reentrancy, but many language implementations don't have it.
+And reentrancy is needed to implement hardware interrupt handler.
+The handler is used by preemptive multitasking.
+So, the multitasking is depends on by Unix-like OS.
+
 # What's reentrancy ?
+
+So, what is reentrancy?
+For example, context A and B share lock Y.
+First, context A call subroutine X that acquire lock Y.
+Second, some context switch occurs and switch to context B, while X is locking Y.
+Third, context B also call subroutine X that try to acquire lock Y, however Y isn't unlock forever!
+In this case, subroutine X is not reentrant.
+
 # How do we get reentrancy in C ?
+
+How C language shape reentrant code?
+It's simple.
+C language contexts are isolated.
+If programmers develop code carefully, the codes are isolated.
+
 # What's C language Context ?
+
+And what is C language context?
+They are registers in CPU and call stack in memory.
+The C language context switch replaces them with the other.
+
 # Problem: Interrupt and GC
+
+So, this is the problem between reentrancy and GC.
+We can't permit that hardware interrupt occurs while GC is running,
+because the GC isn't reentrant.
+With such like language implementation, you can't write interrupt handler using the language.
+
 # Root of the problem
+
+Let's think the problem in GHC's case.
+
+
 # How we can fix this problem
 # Context-Local Heaps (CLHs)
 # What's Haskell Context on CLHs?
