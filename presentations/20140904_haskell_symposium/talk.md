@@ -157,10 +157,27 @@ With such like language implementation, you can't write interrupt handler using 
 # Root of the problem
 
 Let's think the problem in GHC's case.
-
+GHC's GC code is not reentrant, because GHC has only one Haskell context and onlye one GC heap region.
 
 # How we can fix this problem
+
+To fix the problem, we re-defined the Haskell context policy on jhc Haskell compiler.
+According to the policy, Haskell context is born at entry point C to Haskell,
+and the context dies at return point Haskell to C.
+Also, new context is born when Haskell language calls C function that call the other Haskell function.
+In GHC case, there Haskell contexts are equal.
+With this policy, we can realize that Haskell contexts become to be isolated.
+
 # Context-Local Heaps (CLHs)
+
+So, let's implementation the Haskell context policy.
+We assigned own Haskell heap to Haskell context.
+GHC manages GC heap as global.
+Our customized jhc manage GC heap as context local.
+
+
+We call the GC implementation technique as "Context-Local Heaps".
+
 # What's Haskell Context on CLHs?
 # Haskell Context life cycle (CLHs)
 # Isolated contexts are reentrant?
@@ -172,9 +189,14 @@ Thank's a lot!
 
 # Conclusion
 
+Conclusion.
+First, we can write Unix-like kernel in Haskell.
+Second, with Context-Local Heaps technique, we can realize reentrant GC on jhc Haskell compiler.
+Finally, we can use Context-Local Heaps technique on the other language implementation, such like OCaml, MLton, SML/NJ and GHC!
+During next break, we will show this NetBSD demonstration and the others at the corner.
 Thank's for your attention!
 
 Ah, one more thing...
 $ carettan +RTS -rtsopts
 This presentation is also developed in Haskell language.
-Thank's.
+Thank's a lot!
