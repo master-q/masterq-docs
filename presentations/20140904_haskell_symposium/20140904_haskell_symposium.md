@@ -184,12 +184,7 @@ We re-define the Haskell Context.
 # Thank's for contributors !
 ![background](img/metasepi.png)
 
-~~~
-
-
-
-
-~~~
+Music is "signal". Copyright (c) 2011 Epopsan. (CC BY-SA 3.0)
 
 ![inline](draw/contributors.png)
 
