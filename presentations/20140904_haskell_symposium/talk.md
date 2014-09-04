@@ -72,11 +72,35 @@ Simple reason is C language limitation, that have no flexibility.
 # Metasepi Project
 
 Now, I would like to talk about our project named Metasepi.
-
+We challenge to create an open-source Unix-like operating system designed with strong type, on Metasepi Project.
+The Metasepi aims to be desktop OS for daily usage.
 
 # Scratch or Rewrite
+
+Why does Metasepi focus Unix-like OS?
+Because it's caused by design strategy.
+It can be chosen from two way, that are building from scratch or rewriting existing OS.
+If you choose the scratch way, you should develop everything such like kernel, system call, own compiler and own web browser.
+On the other hand, if you choose the rewrite way, you can focus to develop your kernel.
+Because the other modules can be re-used.
+Therefore, we chosen the rewrite way to develop Metasepi.
+
 # Snatch-driven development #1
+
+By the way, do you know Konami's old video game named "Snatcher"?
+The game is rendering of war between human society and android society.
+The android kills a human secretly, takes skin of the human as interface and acts like the human using the skin.
+Androids replace humans little by little.
+Finally, the android society perfectly rewrite the human society keeping same structure.
+It's called "Snatch" on the game.
+
 # Snatch-driven development #2
+
+How about OS society?
+
+
+Therefore, we call it as "Snatch-driven development".
+
 # Why we use jhc ?
 # Unix-like OS needs reentrancy
 # What's reentrancy ?
@@ -98,3 +122,8 @@ Thank's a lot!
 # Conclusion
 
 Thank's for your attention!
+
+Ah, one more thing...
+$ carettan +RTS -rtsopts
+This presentation is also developed in Haskell language.
+Thank's.
