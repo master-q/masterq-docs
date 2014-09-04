@@ -172,16 +172,57 @@ With this policy, we can realize that Haskell contexts become to be isolated.
 
 So, let's implementation the Haskell context policy.
 We assigned own Haskell heap to Haskell context.
-GHC manages GC heap as global.
-Our customized jhc manage GC heap as context local.
-
-
+GHC manages GC heap as global one.
+Our customized jhc manage GC heap as context local one.
+This local heap make Haskell context becomes isolated one.
 We call the GC implementation technique as "Context-Local Heaps".
+However Context-Local Heaps contexts can't use type for connection of contexts.
+They only use binary interface, such like raw pointer.
 
 # What's Haskell Context on CLHs?
+
+What's Haskell context on Context-Local Heaps?
+Again, C language context includes registers in CPU and call stack in memory.
+The Haskell context includes the C language's ones
+and GC infomations that are arena for GC structure, GC heap, GC stack as GC root.
+From another perspective, Context-Local Heaps add add GC infomation to C language ABI while Haskell context is running.
+It's simple idea.
+
 # Haskell Context life cycle (CLHs)
+
+Finally, I explain life cycle of the Haskell context.
+First, jhc runtime function jgc\_alloc\_init() is called, when C language call Haskell function exported.
+The function assigns arena and GC stack as GC root to new Haskell context,
+that keeps them as 1st and 2nd argument in C language.
+Second, the context initialize arena and GC stack.
+Third, sometimes the context try to allocate new thunk on GC heap.
+However virgin arena does not have any GC heap.
+Therefore in the first place, the context gets new GC heap from jhc runtime's pool.
+Also, if the context eats all of GC heap, then more GC heap will be assigned.
+Finally, arena, GC stack and GC heap are return to runtime's pool, when the Haskell context return to C language.
+
 # Isolated contexts are reentrant?
+
+Let's see a result of our effort.
+Now jhc Haskell compiler GC is isolated and reentrant.
+Thread A and thread B are thread-safe.
+Thread B can run own GC while thread B is running own GC.
+Also if hardware interrupt occurs while thread A is running own GC, interrupt handler A can run own GC.
+Haskell code obtains reentrancy with Context-Local Heaps!
+
 # Benchmark
+
+This is benchmark while Haskell code is running in NetBSD kernel.
+(O) means original NetBSD kernel.
+And (S) means the kernel partly rewriten using jhc Haskell compiler.
+(N) means (S) with naive GC parameter that occurs GC mostly frequently.
+Memory size and CPU load stay constant between them.
+On (N) kernel, many GC occurs.
+However no GC occurs on (N) kernel.
+What's this?
+In kernel, most context is event driven and short-lived.
+For the context, GC heap chunk size is enough to run no GC.
+
 # Thank's for contributors !
 
 Metasepi Project is supported by many people.
@@ -197,6 +238,6 @@ During next break, we will show this NetBSD demonstration and the others at the 
 Thank's for your attention!
 
 Ah, one more thing...
-$ carettan +RTS -rtsopts
+$ carettah +RTS -rtsopts
 This presentation is also developed in Haskell language.
 Thank's a lot!
