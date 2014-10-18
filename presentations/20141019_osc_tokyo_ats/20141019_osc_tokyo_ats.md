@@ -115,17 +115,12 @@ $ grep "void \*" `find . -name "*.c"` | wc -l
 
 ![inline](draw/need_unixlike_kern.png)
 
-# Snatch-driven development #1
+# Snatch-driven development
 ![background](img/konami.png)
 
 http://en.wikipedia.org/wiki/Snatcher
 
 ![inline](draw/snatch-system.png)
-
-# Snatch-driven development #2
-![background](img/konami.png)
-
-![inline](draw/2012-12-27-arafura_design.png)
 
 
 # Follow me!
