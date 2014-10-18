@@ -57,9 +57,8 @@ xxx Add figure
 * [1] What is Metasepi?
 * [2] How to create Metasepi?
 * [3] What is ATS language?
-* [4] Why ATS language is safe?
-* [5] Let's read the demo code
-* [6] Japan ATS User Group
+* [4] Let's read the demo code
+* [5] Japan ATS User Group
 
 # [1] What is Metasepi?
 
@@ -69,7 +68,7 @@ http://metasepi.org/
 * We want to use Metasepi OS for daily desktop usage (e.g. web browser, programming, office suite, ... etc.)
 * We have surveyed may functional languages (e.g. Haskell, OCaml, MLton, ... etc.)
 
-# Kernel developers want type
+# Kernel developer wants type
 ![background](img/world_without_trees.png)
 
 * Kernels are developed with C.
@@ -128,11 +127,10 @@ http://en.wikipedia.org/wiki/Snatcher
 ![inline](img/ATS_logo.png)
 
 # [3] What is ATS language?
-# [4] Why ATS language is safe?
-# [5] Let's read the demo code
-# [6] Japan ATS User Group
+# [4] Let's read the demo code
+# [5] Japan ATS User Group
 
-* http://jats-ug.metasepi.org/
+http://jats-ug.metasepi.org/
 
 ![inline](img/webpage_jats-ug.png)
 
