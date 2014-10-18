@@ -37,21 +37,17 @@ http://store.linksprite.com/linksprite-16x2-lcd-keypad-shield-for-arduino-versio
 
 xxx Add figure
 
-# Demo: Source Code #1
-
-* main.dats
+# Demo code: main.dats
 
 ![inline](img/src_main_dats.png)
 
-# Demo: Source Code #2
-
-* lcs.sats
+# Demo code: lcs.sats
 
 ![inline](img/src_lcd_sats.png)
 
-# Demo: Source Code #3
+# Demo code: lcs.dats
 
-* lcs.dats # <= We don't read it, today.
+* We don't read it, today.
 
 ![inline](img/src_lcd_dats.png)
 
@@ -110,7 +106,10 @@ $ grep "void \*" `find . -name "*.c"` | wc -l
 
 * Kernel developers frequently use (void *) for flexibility. It's realy BAD, but there is no other option.
 
-# Scratch or Rewrite
+# [2] How to create Metasepi?
+
+* Scratch or Rewrite
+
 ![background](img/climbing.png)
 
 ![inline](draw/need_unixlike_kern.png)
@@ -122,6 +121,16 @@ http://en.wikipedia.org/wiki/Snatcher
 
 ![inline](draw/snatch-system.png)
 
+# Which language should we use?
+
+* ATS http://www.ats-lang.org/
+
+![inline](img/ATS_logo.png)
+
+# [3] What is ATS language?
+# [4] Why ATS language is safe?
+# [5] Let's read the demo code
+# [6] Japan ATS User Group
 
 # Follow me!
 
