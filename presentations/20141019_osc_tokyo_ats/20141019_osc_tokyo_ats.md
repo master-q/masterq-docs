@@ -132,6 +132,42 @@ http://en.wikipedia.org/wiki/Snatcher
 # [5] Let's read the demo code
 # [6] Japan ATS User Group
 
+* http://jats-ug.metasepi.org/
+
+![inline](img/webpage_jats-ug.png)
+
+# Doc: ATSプログラミング入門
+
+```
+http://jats-ug.metasepi.org/doc/ATS2/INT2PROGINATS/
+```
+
+![inline](img/webpage_int2ats.png)
+
+# Doc: チュートリアル
+
+```
+http://jats-ug.metasepi.org/doc/ATS2/ATS2TUTORIAL/
+```
+
+![inline](img/webpage_ats2tut.png)
+
+# Doc: MLプログラマ向けガイド
+
+```
+https://github.com/jats-ug/translate/blob/master/Web/cs.likai.org/ats/ml-programmers-guide-to-ats.md
+```
+
+![inline](img/webpage_ml2ats.png)
+
+# Doc: ATS2 wiki
+
+```
+https://github.com/githwxi/ATS-Postiats/wiki
+```
+
+![inline](img/webpage_ml2ats.png)
+
 # Follow me!
 
 https://twitter.com/jats_ug
