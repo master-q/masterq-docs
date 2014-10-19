@@ -35,7 +35,7 @@ http://store.linksprite.com/linksprite-16x2-lcd-keypad-shield-for-arduino-versio
 
 # Demo: Software Architecture
 
-xxx Add figure
+![inline](draw/demo_arch.png)
 
 # Demo code: main.dats
 
