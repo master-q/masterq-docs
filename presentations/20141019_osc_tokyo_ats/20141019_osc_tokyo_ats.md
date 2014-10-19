@@ -1,4 +1,5 @@
 # Metasepi team meeting #19:　ATS application on Arduino
+![background](img/arduino_box.png)
 
 Kiwamu Okabe @ Metasepi Project
 
@@ -53,6 +54,7 @@ http://store.linksprite.com/linksprite-16x2-lcd-keypad-shield-for-arduino-versio
 ![inline](img/src_lcd_dats.png)
 
 # Agenda
+![background](img/arduino_boards.png)
 
 * [0] ATS application demo
 * [1] What is Metasepi?
@@ -62,6 +64,7 @@ http://store.linksprite.com/linksprite-16x2-lcd-keypad-shield-for-arduino-versio
 * [5] Japan ATS User Group
 
 # [1] What is Metasepi?
+![background](img/metasepi.png)
 
 http://metasepi.org/
 
@@ -122,6 +125,7 @@ http://en.wikipedia.org/wiki/Snatcher
 ![inline](draw/snatch-system.png)
 
 # Which language should we use?
+![background](img/JourneytotheWest.png)
 
 * ATS http://www.ats-lang.org/
 
