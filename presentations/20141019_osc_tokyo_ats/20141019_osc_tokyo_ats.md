@@ -128,6 +128,20 @@ http://en.wikipedia.org/wiki/Snatcher
 ![inline](img/ATS_logo.png)
 
 # [3] What is ATS language?
+![background](img/ats_hongwei.png)
+
+http://www.ats-lang.org/
+
+* Syntax like ML
+* Dependent types
+* Linear types
+* Without any runtime
+* Optional GC
+* Developed at Boston University
+
+# ATS compile flow
+
+![inline](draw/flow.png)
 
 xxx
 
@@ -197,6 +211,8 @@ typechecking has failed: there are some unsolved constraints: please inspect the
 ```
 
 * ATS2 finds issue at compile time!
+* Constraint "i + j <= n" is at lcd.sats
+* main.dats violates the constraint
 
 # Power of Linear Type #1
 
@@ -230,6 +246,8 @@ patsopt -o DATS/main_dats.c -d DATS/main.dats
 ```
 
 * ATS2 finds issue at compile time!
+* Linear value "lcd" is consumed
+* However "lcd" is used by "forever"
 
 
 # [5] Japan ATS User Group
@@ -269,6 +287,14 @@ https://github.com/githwxi/ATS-Postiats/wiki
 ```
 
 ![inline](img/webpage_ats2wiki.png)
+
+# Functional IoT
+
+```
+http://fpiot.metasepi.org/
+```
+
+![inline](img/webpage_fpiot.png)
 
 # Follow me!
 
