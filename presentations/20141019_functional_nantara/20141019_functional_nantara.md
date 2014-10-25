@@ -1,4 +1,4 @@
-# Metasepi team meeting #20:　Start! ATS programming
+# Metasepi team meeting #20:　Start! ATS programming on MCU
 
 Kiwamu Okabe @ Metasepi Project
 
@@ -6,7 +6,7 @@ Kiwamu Okabe @ Metasepi Project
 
 * http://nico.ms/sm24680530
 * https://github.com/fpiot/arduino-ats
-* Without any GC, and any malloc
+* Without any GC and any malloc
 
 ![inline](img/niconico_ats_on_avr.png)
 
@@ -26,7 +26,7 @@ http://arduino.cc/en/Main/ArduinoBoardUno
 
 * LinkSprite 16X2 LCD Keypad Shield
 * 16x2 LCD
-* HD44780 compatible
+* Controled by some GPIOs
 
 ```
 http://store.linksprite.com/linksprite-16x2-lcd-keypad-shield-for-arduino-version-b/
@@ -88,10 +88,10 @@ http://en.wikipedia.org/wiki/Snatcher
 http://www.ats-lang.org/
 
 * Syntax like ML
-* Dependent types
-* Linear types
+* Dependent types and Linear types
 * Without any runtime
 * Optional GC
+* Designed by Hongwei Xi
 * Developed at Boston University
 
 # ATS compile flow
