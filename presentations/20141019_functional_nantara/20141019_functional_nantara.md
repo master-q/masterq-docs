@@ -1,4 +1,5 @@
 # Metasepi team meeting #20:　Start! ATS programming on MCU
+![background](img/metasepi_cookie.png)
 
 Kiwamu Okabe @ Metasepi Project
 
