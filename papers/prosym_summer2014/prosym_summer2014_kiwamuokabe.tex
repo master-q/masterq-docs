@@ -9,13 +9,11 @@
 \begin{document}
 
 % Title, Author %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title{タイトルをここに}
+\title{ATS言語を使って不変条件をAPIに強制する}
 
-\affiliate{IPSJ}{情報処理学会}
-\affiliate{PROSYM}{プログラミング・シンポジウム幹事団}
+\affiliate{METASEPI}{METASEPI DESIGN}
 
-\author{情報 太郎}{Joho Taro}{IPSJ}[taro@ipsj.or.jp]
-\author{プロシン 花子}{Hiroki MIZUNO}{PROSYM}[hanako@prosym.ipsj.or.jp]
+\author{岡部 究}{Kiwamu Okabe}{METASEPI}[kiwamu@debian.or.jp]
 
 \begin{abstract}
 概要（400字程度）○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○
@@ -31,7 +29,7 @@
 \end{abstract}
 
 \begin{jkeyword}
-プログラミング・シンポジウム，夏，報告
+ATS, 依存型, 線形型, 組み込みシステム
 \end{jkeyword}
 
 \maketitle
@@ -97,10 +95,36 @@ B5版で製本される．本クラスファイルを用いることで，その
 \end{thebibliography}
 
 \begin{QandA}
-\item[丸山（夏プロ幹事）] 夏のプログラミング・シンポジウムの報告集のスタイルファイルなどありますでしょうか？
-\item[松崎] 私が準備します．
-\item[松崎] 形式は通常の論文の形式でしょうか？
-\item[丸山（夏プロ幹事）] はい，発表者には質疑・応答をメモしておくよう依頼しています．
+\item[A] 線形型にvalで別名を作るとどうなるのか？
+\item[岡部] 消費される。以下の例を付記する。
+
+\begin{verbatim}
+(* コンパイルNG: let valでも線形型が消費されてしまう *)
+#include "share/atspre_staload.hats"
+implement main0 () = {
+  val l1 = list_vt_make_pair<int> (1, 2)
+  val l2 = l1
+  val () = let val l3 = l2
+           in println! l3 end
+  val () = free l2
+}
+
+(* コンパイルOK: valで線形型が消費される *)
+#include "share/atspre_staload.hats"
+implement main0 () = {
+  val l1 = list_vt_make_pair<int> (1, 2)
+  val l2 = l1
+  val () = println! l2
+  val () = free l2
+}
+\end{verbatim}
+
+\item[B] リングバッファをATSで書くのは難しいのか？
+\item[岡部] 公式ドキュメントに例があるぐらいなので、リングバッファ自体は簡単。しかし、スレッドセーフ化や再入可能にするのはそれなりに難しい。
+\item[C] マルチスレッドを生かしたプログラミングをするにはどうすれば良いか？
+\item[岡部] セッションのようなものを作る。例えばmutexのロックと開放では、その間にセッションが存在すると考えることができる。セッションの間は静的な型を効果的に使うことができる。
+\item[D] ATSに辿りつくまでのMetasepiプロジェクトの歴史について
+\item[岡部] ATSを使ったイテレーションは2番目。1番目ではHaskell言語とjhcコンパイラを使っていた。Haskellの欠点は、メモリ領域の扱いがルーズ、マシン表現と言語表現にギャップがあること。ATSの欠点は、抽象化の機能が弱いこと。
 \end{QandA}
 
 \end{document}
