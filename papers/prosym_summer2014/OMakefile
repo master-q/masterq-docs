@@ -10,7 +10,7 @@ TEXDEPS[] =
 	prosym_summer2014_kiwamuokabe.tex
 	../bibtex/reference.bib
 	../bibtex/jreference.bib
-#	$(EPS_FILES)
+	$(EPS_FILES)
 
 LaTeXDocument(prosym_summer2014_kiwamuokabe, prosym_summer2014_kiwamuokabe)
 
