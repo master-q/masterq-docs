@@ -1,0 +1,106 @@
+% withpage: ページ番号をつける (著者確認用)
+% english: 英語原稿用フォーマット
+\documentclass{ipsjprosym}
+%\documentclass[withpage,english]{ipsjprosym}
+
+\usepackage[dvips]{graphicx}
+\usepackage{latexsym}
+
+\begin{document}
+
+% Title, Author %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{タイトルをここに}
+
+\affiliate{IPSJ}{情報処理学会}
+\affiliate{PROSYM}{プログラミング・シンポジウム幹事団}
+
+\author{情報 太郎}{Joho Taro}{IPSJ}[taro@ipsj.or.jp]
+\author{プロシン 花子}{Hiroki MIZUNO}{PROSYM}[hanako@prosym.ipsj.or.jp]
+
+\begin{abstract}
+概要（400字程度）○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○
+○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○
+○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○
+○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○
+○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○
+○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○
+○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○
+○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○
+○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○
+○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○
+\end{abstract}
+
+\begin{jkeyword}
+プログラミング・シンポジウム，夏，報告
+\end{jkeyword}
+
+\maketitle
+
+% Body %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{はじめに}
+
+本テンプレートは「夏のプログラミング・シンポジウム報告集」に掲載される原
+稿のためのクラスファイル（\verb|ipsjprosym.cls|）の使い方について説明するものである．
+
+夏のプログラミング・シンポジウム報告集の原稿は，印刷前にまとめてページ番号が振られ，
+B5版で製本される．本クラスファイルを用いることで，そのような原稿を作成できるはずである．
+
+\section{オプション}
+
+\verb|ipsjprosym.cls| では以下の二つのオプションを提供している．
+\begin{itemize}
+ \item \verb|withpage|: 著者が執筆上必要な場合のため，ページ番号をつける
+ \item \verb|english|: 英語で執筆される場合にフォーマットを調整する．
+\end{itemize}
+
+\section{論文1ページ目の情報}
+
+論文の1ページ目には，タイトル，著者名，著者所属，概要，キーワードが配置される．
+それぞれ，
+\begin{itemize}
+\item \verb|\title| 
+\item \verb|\author|
+\item \verb|affiliate|
+\item \verb|\begin{abstract}|〜\verb|\end{abstract}|
+\item \verb|\begin{jkeyword}|〜\verb|\end{jkeyword}|
+\end{itemize}
+によって記述する．
+その後，\verb|\maketitle| コマンドによってそれらの情報が配置される．
+
+以下，通常の論文と同様の形式で記述して下さい．
+
+\section{論文の最後}
+
+論文の最後に，参考文献，質疑応答の情報を置いて下さい．
+本テンプレートにそれぞれの記述のサンプルを付けていますので参考にして下さい．
+
+\section{まとめ}
+
+本テンプレートでは，夏のプログラミング・シンポジウム向けの原稿を，\LaTeX
+を用いて準備する方法についてごく簡単に示した．
+
+本テンプレートに関する質問・バグ報告は，
+第56回プログラミングシンポジウム予稿集担当（松崎公紀）\verb|matsuzaki.kiminori@kochi-tech.ac.jp|
+まで連絡下さい．
+
+\begin{acknowledgment}
+謝辞が必要であれば，ここに書く．
+\end{acknowledgment}
+
+% BibTeX を使用する場合 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \bibliographystyle{ipsjsort}
+% \bibliography{ref}
+
+% BibTeX を使用しない場合
+\begin{thebibliography}{9}
+ \bibitem{latex} 奥村晴彦, 黒木裕介: \textbf{LaTeX2e美文書作成入門}. 技術評論社, 2013.
+\end{thebibliography}
+
+\begin{QandA}
+\item[丸山（夏プロ幹事）] 夏のプログラミング・シンポジウムの報告集のスタイルファイルなどありますでしょうか？
+\item[松崎] 私が準備します．
+\item[松崎] 形式は通常の論文の形式でしょうか？
+\item[丸山（夏プロ幹事）] はい，発表者には質疑・応答をメモしておくよう依頼しています．
+\end{QandA}
+
+\end{document}
