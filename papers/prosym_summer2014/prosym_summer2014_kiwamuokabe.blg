@@ -1,0 +1,48 @@
+This is pBibTeX, Version 0.99d-j0.33 (utf8.euc) (TeX Live 2015/dev/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: prosym_summer2014_kiwamuokabe.aux
+The style file: ipsjsort.bst
+Database file #1: ../bibtex/reference.bib
+Database file #2: ../bibtex/jreference.bib
+You've used 6 entries,
+            2669 wiz_defined-function locations,
+            653 strings with 5733 characters,
+and the built_in function-call counts, 1696 in all, are:
+= -- 139
+> -- 61
+< -- 1
++ -- 28
+- -- 18
+* -- 111
+:= -- 272
+add.period$ -- 6
+call.type$ -- 6
+change.case$ -- 19
+chr.to.int$ -- 0
+cite$ -- 6
+duplicate$ -- 93
+empty$ -- 138
+format.name$ -- 28
+if$ -- 375
+int.to.chr$ -- 0
+int.to.str$ -- 6
+missing$ -- 2
+newline$ -- 21
+num.names$ -- 14
+pop$ -- 30
+preamble$ -- 1
+purify$ -- 19
+quote$ -- 0
+skip$ -- 77
+stack$ -- 0
+substring$ -- 62
+swap$ -- 11
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 22
+warning$ -- 0
+while$ -- 15
+width$ -- 7
+write$ -- 53
+is.kanji.str$ -- 53

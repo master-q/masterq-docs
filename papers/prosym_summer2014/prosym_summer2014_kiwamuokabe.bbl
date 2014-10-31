@@ -1,0 +1,31 @@
+\begin{thebibliography}{1}
+
+\bibitem{vdm}
+Agerholm, S. and Larsen, P.~G.: The IFAD VDM Tools: Lightweight Formal
+  Methods., {\em FM-Trends} (Hutter, D., Stephan, W., Traverso, P. and Ullmann,
+  M., eds.), Lecture Notes in Computer Science, Vol.~1641, Springer, pp.\
+  326--329 (1998).
+
+\bibitem{arduino-mega}
+Arduino: Arduino Mega 2560, (online),
+  \urle{http://arduino.cc/en/Main/arduinoBoardMega2560} \refdatee{2014-10-31}.
+
+\bibitem{Coq_manual}
+development team, T.~C.: The Coq proof assistant reference manual, LogiCal
+  Project (online), \urle{http://coq.inria.fr} \refdatee{2014-10-31}.
+
+\bibitem{z_notation}
+Spivey, J.~M.: {\em The Z Notation: A Reference Manual}, Prentice-Hall, Inc.,
+  Upper Saddle River, NJ, USA (1989).
+
+\bibitem{ats}
+Xi, H.: The ATS Programming Language, Boston University (online),
+  \urle{http://www.ats-lang.org/} \refdatee{2013-11-18}.
+
+\bibitem{iot_monoist}
+三島一孝\：製造ITニュース：「モノのインターネット」製造業への経済効果は2850億ドル――ガートナー
+  -
+  MONOist(モノイスト)，アイティメディア株式会社（オンライン），\urlj{http://monoist.atmarkit.co.jp/mn/articles/1310/15/news009.html}
+  \refdatej{2014-10-31}.
+
+\end{thebibliography}
