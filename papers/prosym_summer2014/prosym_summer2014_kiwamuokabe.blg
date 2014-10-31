@@ -4,45 +4,47 @@ The top-level auxiliary file: prosym_summer2014_kiwamuokabe.aux
 The style file: ipsjsort.bst
 Database file #1: ../bibtex/reference.bib
 Database file #2: ../bibtex/jreference.bib
-You've used 13 entries,
+Warning--there's a series but neither volume nor number in Dependent-ML-Thesis
+You've used 14 entries,
             2669 wiz_defined-function locations,
-            682 strings with 6312 characters,
-and the built_in function-call counts, 3402 in all, are:
-= -- 296
-> -- 110
-< -- 2
-+ -- 50
-- -- 32
-* -- 219
-:= -- 549
-add.period$ -- 13
-call.type$ -- 13
-change.case$ -- 40
+            694 strings with 6613 characters,
+and the built_in function-call counts, 3916 in all, are:
+= -- 345
+> -- 122
+< -- 3
++ -- 55
+- -- 36
+* -- 254
+:= -- 611
+add.period$ -- 14
+call.type$ -- 14
+change.case$ -- 44
 chr.to.int$ -- 0
-cite$ -- 13
-duplicate$ -- 184
-empty$ -- 276
-format.name$ -- 49
-if$ -- 750
+cite$ -- 15
+duplicate$ -- 216
+empty$ -- 322
+format.name$ -- 55
+if$ -- 875
 int.to.chr$ -- 0
-int.to.str$ -- 13
-missing$ -- 3
-newline$ -- 42
-num.names$ -- 28
-pop$ -- 59
+int.to.str$ -- 14
+missing$ -- 4
+newline$ -- 45
+num.names$ -- 30
+pop$ -- 66
 preamble$ -- 1
-purify$ -- 40
+purify$ -- 44
 quote$ -- 0
-skip$ -- 158
+skip$ -- 185
 stack$ -- 0
-substring$ -- 130
-swap$ -- 21
-text.length$ -- 3
+substring$ -- 167
+swap$ -- 31
+text.length$ -- 4
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 50
-warning$ -- 0
-while$ -- 32
-width$ -- 15
-write$ -- 110
-is.kanji.str$ -- 101
+type$ -- 54
+warning$ -- 1
+while$ -- 37
+width$ -- 16
+write$ -- 122
+is.kanji.str$ -- 114
+(There was 1 warning)

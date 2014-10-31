@@ -51,6 +51,12 @@ Xi, H.: ATSプログラミング入門，Metasepi
 Xi, H.: {Applied Type System (extended abstract)}, {\em post-workshop
   Proceedings of TYPES 2003}, Springer-Verlag LNCS 3085, pp.\ 394--408 (2004).
 
+\bibitem{Dependent-ML-Thesis}
+Xi, H. and Pfenning, F.: Dependent Types in Practical Programming, {\em
+  Proceedings of the 26th ACM SIGPLAN-SIGACT Symposium on Principles of
+  Programming Languages}, POPL '99, New York, NY, USA, ACM, pp.\ 214--227
+  (online), \doi{10.1145/292540.292560} (1999).
+
 \bibitem{iot_monoist}
 三島一孝\：製造ITニュース：「モノのインターネット」製造業への経済効果は2850億ドル――ガートナー
   -

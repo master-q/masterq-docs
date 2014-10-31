@@ -53,47 +53,111 @@ ATS, 関数型言語, 依存型, 線形型, 組込開発
 
 これら慎重な開発はPOSIX API上でのアプリケーション開発と比較にならないほどの工数を必要とします。にもかかわず、IoTデバイスはそのような開発者にPOSIX上のアプリケーションレベルの機能を要求します。このC言語を中心とした開発プロセスは今後持続可能なものなのでしょうか？ソフトウェア理学/工学はこの問題に対して、有効な手を打てないのでしょうか？
 
-本論文ではこの問題に対する1つの解決策としてATS言語 \cite{ats} を紹介します。このATS言語はMLのような関数型言語で、静的な強い型を持ちます。またこの言語は依存型とを持ち、Coq \cite{Coq_manual} のような証明器としても機能します。さらにこの言語の線形型を使うことで、メモリやロックのようなリソースの制御を安全に行なうことができます。ATS言語はC言語を経由して実行バイナリを生成するため、強い型による不変条件の強制は常にソースコードと同期しています。そのため製品のバージョンを数年にわたって更新する場合でも型とソースコードは機械的に同期します。最後にわずか8kBのメモリしか持たないArduino Mega 2560ボード \cite{arduino-mega} 上でATS言語を使って設計したアプリケーションを動作させ、組み込み領域にATS言語を適用可能であることを示します。
-
-\section{既存の組込開発手法の問題}
-
-xxx
+本論文ではこの問題に対する1つの解決策としてATS言語 \cite{ats} を紹介します。このATS言語はMLのような関数型言語で、静的な強い型を持ちます。またこの言語は依存型を持ち、Coq \cite{Coq_manual} のような証明器としても機能します。さらにこの言語の線形型を使うことで、メモリやロックのようなリソースの制御を安全に行なうことができます。ATS言語はC言語を経由して実行バイナリを生成するため、強い型による不変条件の強制は常にソースコードと同期しています。そのため製品のバージョンを数年にわたって更新する場合でも型とソースコードは機械的に同期します。最後にわずか8kBのメモリしか持たないArduino Mega 2560ボード \cite{arduino-mega} 上でATS言語を使って設計したアプリケーションを動作させ、組み込み領域にATS言語を適用可能であることを示します。
 
 \section{ATS言語とは}
 
-xxx
+ATS言語は依存型を持つ関数型言語であるDependent ML \cite{Dependent-ML-Thesis} の後継にあたり、ボストン大学のHongwei Xiによって開発されています。
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=75mm]{draw/flow.eps}
-\caption{xxx}
+\caption{ATS言語の構成要素とコンパイルフロー}
 \label{fig:flow}
 \end{figure}
+
+ATS言語のプログラムは大きく3つの要素から成り立っています (図\ref{fig:flow})。 動的な世界(Dynamics)、静的な世界(Statics)、証明の世界(Proofs)です。 動的な世界は通常のプログラミング言語と同じ実際に実行されるロジックです。動的な世界はATSコンパイラによってC言語に変換され、GCCによって実行バイナリになります。 静的な世界はHaskellやOCamlのような型推論を持つ言語における型のことです。 静的な世界はは実行時エラーを防ぐ目的で、型の力で動的な世界を制約します。 証明の世界は依存型と線形型に分類できます。 依存型はCoqのような証明器として使うことができ、動的な世界のロジックに証明を与えることができます。 線形型はリソースを取り扱うことができ、例えばGCに頼らない動的な世界によるメモリ領域の管理を安全に行なうことができます。 動的な世界はコンパイルされて実行バイナリになりましたが、静的な世界と証明の世界はATSによるコンパイル時に評価(型検査)され、実行バイナリにはなりません。 しかし、静的な世界と証明の世界の検査に失敗すると、動的な世界のコンパイルも中止されます。
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=75mm]{draw/enforce_invariant.eps}
-\caption{xxx}
+\caption{型による制約の強制}
 \label{fig:enforce_invariant}
 \end{figure}
 
+ATS言語ではインターフェイス宣言に依存型と線形型による強い制約をつけることができます (図\ref{fig:enforce_invariant})。通常の言語ではこのような制約はAPIの呼び出し元にのみ強制されますが、ATS言語では型推論によって、関数の呼び出し元と呼び出し先の双方に型による制約を与えることができます。
+
 \section{ATSの型について}
 
-xxx
+ATS言語の型は依存型と線形型をそなえています。しかし、実行可能な言語においてこれら強力な型を用いるイメージが想像しにくいかもしれません。そこで、本章では線形型を使ったリスト(線形リスト)を例にして、ATS言語の型の実例を解説します。
+
+図\ref{fig:list_vt_type}に線形リストの型と構造を図示します。線形リストの動的なデータ構造はLISPのような通常のリストそのものです。しかし静的な型表現についてがこの動的なデータ構造に強制されています。ATS言語の基盤ライブラリであるpreludeでは以下のように線形リストの型を宣言しています。
+
+\vspace{3mm}
+\begin{verbatim}
+(* ファイル: prelude/SATS/list_vt.sats *)
+datavtype
+list_vt0ype_int_vtype (a:vt@ype+, int) =
+  | {n:int | n >= 0}
+    list_vt_cons (a, n+1) of
+      (a, list_vt0ype_int_vtype (a, n))
+  | list_vt_nil (a, 0) of ()
+stadef list_vt = list_vt0ype_int_vtype
+vtypedef
+List_vt (a:vt0p) = [n:int] list_vt (a, n)
+\end{verbatim}
+\vspace{3mm}
+
+このdatavtype宣言は線形型のデータ宣言です。そのため、このリスト構造は生産と消費という概念を持っています。生産しないかぎり、そのデータ構造をさわることはできません。また生産されたデータは静的な文脈が終了するまでの間で消費されなければなりません。これらの制約をプログラムが破った場合にはコンパイル時エラーとなります。
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=50mm]{draw/list_vt_type.eps}
-\caption{xxx}
-\label{fig:xxx}
+\caption{線形リストの型と構造}
+\label{fig:list_vt_type}
 \end{figure}
+
+この線形リストを使った関数群をいくつか見てみましょう。list\_vt\_make\_pair関数(図\ref{fig:list_vt_make_pair})は2つの要素x1とx2を引数に取り、線形リストの型list\_vtを返します。この関数はlist\_vt型を生産することが型宣言からわかります。このlist\_vt型はこれ以降のコードのどこかで消費しなければなりません。消費し忘れた場合にはコンパイル時エラーとなります。
+
+\vspace{3mm}
+\begin{verbatim}
+fun{x:vt0p}
+list_vt_make_pair (x1: x, x2: x):
+                     <!wrt> list_vt (x, 2)
+\end{verbatim}
+\vspace{3mm}
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=75mm]{draw/list_vt_make_pair.eps}
-\caption{xxx}
-\label{fig:xxx}
+\caption{2つの要素をペアにして線形リストを作る}
+\label{fig:list_vt_make_pair}
 \end{figure}
+
+では生成された線形リストはどのように消費(すなわちそのメモリ領域を解放)すれば良いのでしょうか？それは単にfree関数を呼び出すだけです。このfree関数は多種の関数実体によってオーバロードされており、線形リストの場合にはlist\_vt\_free関数(図\ref{fig:list_vt_free})が呼び出されます。ソースコードに付けられた型からもList\_vt型を受けとりvoid型を返す、つまりList\_vt型を消費していることがわかります。このList\_vt型が保持していたはずのメモリリソースを安全に解放することはATS言語の動的な部分の実装の責務です。つまりこのインターフェイスでは「線形リスト型の消費」は線形型による静的な検査の対象であり、「線形リストが保持していたメモリ領域の解放」は動的なコードの責務です。プログラマはこの2つが同じ意味になるように設計を行なうことで、動的なコードの挙動を静的な意味論に持ち上げることが可能になります。静的な意味論はコンパイル時検査によってコンパイル時エラーとして扱うことができるのです。
+
+\vspace{3mm}
+\begin{verbatim}
+fun{x:t0p}
+list_vt_free (xs: List_vt (INV(x))):
+                            <!wrt> void
+\end{verbatim}
+\vspace{3mm}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=75mm]{draw/list_vt_free.eps}
+\caption{線形リストを解放する}
+\label{fig:list_vt_free}
+\end{figure}
+
+
+次に線形リストをappendする関数であるlist\_vt\_append関数を見てみましょう
+
+xxx
+
+\vspace{3mm}
+\begin{verbatim}
+fun{
+a:vt0p
+} list_vt_append
+  {n1,n2:int} (
+  xs1: list_vt (INV(a), n1),
+  xs2: list_vt (a, n2)
+) :<!wrt> list_vt (a, n1+n2)
+\end{verbatim}
+\vspace{3mm}
+
 
 \begin{figure}[h]
 \centering
@@ -112,13 +176,6 @@ xxx
 \begin{figure}[h]
 \centering
 \includegraphics[width=75mm]{draw/list_vt_reverse.eps}
-\caption{xxx}
-\label{fig:xxx}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=75mm]{draw/list_vt_free.eps}
 \caption{xxx}
 \label{fig:xxx}
 \end{figure}
