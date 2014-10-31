@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{vdm}
 Agerholm, S. and Larsen, P.~G.: The IFAD VDM Tools: Lightweight Formal
@@ -18,9 +18,21 @@ Arduino: Arduino Uno, (online),
 development team, T.~C.: The Coq proof assistant reference manual, LogiCal
   Project (online), \urle{http://coq.inria.fr} \refdatee{2014-10-31}.
 
+\bibitem{rust}
+Hoare, G.: The Rust Programming Language, Rust Project (online),
+  \urle{http://www.rust-lang.org/} \refdatee{2014-10-31}.
+
 \bibitem{arduino-ats}
 Okabe, K.: ATS programing on Arduino, Metasepi project (online),
   \urle{https://github.com/fpiot/arduino-ats} \refdatee{2014-10-31}.
+
+\bibitem{fpiot}
+Okabe, K.: Functional IoT, Metasepi project (online),
+  \urle{http://fpiot.metasepi.org/} \refdatee{2014-10-31}.
+
+\bibitem{jats-ug}
+Okabe, K.: Japan ATS User Group, Metasepi project (online),
+  \urle{http://jats-ug.metasepi.org/} \refdatee{2014-10-31}.
 
 \bibitem{z_notation}
 Spivey, J.~M.: {\em The Z Notation: A Reference Manual}, Prentice-Hall, Inc.,
@@ -30,10 +42,19 @@ Spivey, J.~M.: {\em The Z Notation: A Reference Manual}, Prentice-Hall, Inc.,
 Xi, H.: The ATS Programming Language, Boston University (online),
   \urle{http://www.ats-lang.org/} \refdatee{2013-11-18}.
 
+\bibitem{INT2PROGINATS-J}
+Xi, H.: ATSプログラミング入門，Metasepi
+  project（オンライン），\urlj{http://jats-ug.metasepi.org/doc/ATS2/INT2PROGINATS/index.html}
+  \refdatej{2014-10-31}.
+
+\bibitem{ATStypes03}
+Xi, H.: {Applied Type System (extended abstract)}, {\em post-workshop
+  Proceedings of TYPES 2003}, Springer-Verlag LNCS 3085, pp.\ 394--408 (2004).
+
 \bibitem{iot_monoist}
 三島一孝\：製造ITニュース：「モノのインターネット」製造業への経済効果は2850億ドル――ガートナー
   -
-  MONOist(モノイスト)，アイティメディア株式会社（オンライン），\urlj{http://monoist.atmarkit.co.jp/mn/articles/1310/15/news009.html}
+  MONOist，アイティメディア株式会社（オンライン），\urlj{http://monoist.atmarkit.co.jp/mn/articles/1310/15/news009.html}
   \refdatej{2014-10-31}.
 
 \end{thebibliography}
