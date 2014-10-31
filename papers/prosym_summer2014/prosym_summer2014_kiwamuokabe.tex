@@ -36,6 +36,19 @@ ATS, 関数型言語, 依存型, 線形型, 組込開発
 
 % Body %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{はじめに}
+
+「モノのインターネット (IoT：Internet of Things)」という概念が提唱されています。バスケットボールのような、なんの変哲もないモノがマイクロチップを内蔵してインターネットに接続されるような世界を予想した概念がIoTです。そのIoTによる製造業への経済効果は2850億ドルと試算されています (ガートナー調べ \cite{iot_monoist})。このようなIoTデバイスに対する要件は以下のようなものになるでしょう。
+
+\begin{itemize}
+\item インターネットに接続可能なネットワークプロトコルを内蔵
+\item 短時間/少工数による設計
+\item 個人情報を保管/送信する機能
+\item セキュリティへの配慮
+\item ネットワーク非対応な機器よりもさらにインテリジェントな機能
+\item 安価な価格を実現するため非力なハードウェアの使用
+\end{itemize}
+
+
 \section{既存の組込開発手法の問題}
 \section{ATS言語とは}
 
@@ -112,15 +125,6 @@ ATS, 関数型言語, 依存型, 線形型, 組込開発
 ATS言語に関して助言をくれたボストン大学の准教授であるHongwei XiとATSコミュニティに感謝する。
 \end{acknowledgment}
 
-% BibTeX を使用する場合 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \bibliographystyle{ipsjsort}
-% \bibliography{ref}
-
-% BibTeX を使用しない場合
-\begin{thebibliography}{9}
- \bibitem{latex} 奥村晴彦, 黒木裕介: \textbf{LaTeX2e美文書作成入門}. 技術評論社, 2013.
-\end{thebibliography}
-
 \begin{QandA}
 \item[A] 線形型にvalで別名を作るとどうなるのか？
 \item[岡部] 消費される。以下の例を付記する。
@@ -153,5 +157,9 @@ implement main0 () = {
 \item[D] ATSに辿りつくまでのMetasepiプロジェクトの歴史について
 \item[岡部] ATSを使ったイテレーションは2番目。1番目ではHaskell言語とjhcコンパイラを使っていた。Haskellの欠点は、メモリ領域の扱いがルーズ、マシン表現と言語表現にギャップがあること。ATSの欠点は、抽象化の機能が弱いこと。
 \end{QandA}
+
+% BibTeX を使用する場合 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliographystyle{ipsjsort}
+\bibliography{../bibtex/reference,../bibtex/jreference}
 
 \end{document}
