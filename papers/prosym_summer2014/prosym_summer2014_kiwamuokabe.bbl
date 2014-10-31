@@ -10,9 +10,17 @@ Agerholm, S. and Larsen, P.~G.: The IFAD VDM Tools: Lightweight Formal
 Arduino: Arduino Mega 2560, (online),
   \urle{http://arduino.cc/en/Main/arduinoBoardMega2560} \refdatee{2014-10-31}.
 
+\bibitem{arduino-uno}
+Arduino: Arduino Uno, (online),
+  \urle{http://arduino.cc/en/Main/ArduinoBoardUno} \refdatee{2014-10-31}.
+
 \bibitem{Coq_manual}
 development team, T.~C.: The Coq proof assistant reference manual, LogiCal
   Project (online), \urle{http://coq.inria.fr} \refdatee{2014-10-31}.
+
+\bibitem{arduino-ats}
+Okabe, K.: ATS programing on Arduino, Metasepi project (online),
+  \urle{https://github.com/fpiot/arduino-ats} \refdatee{2014-10-31}.
 
 \bibitem{z_notation}
 Spivey, J.~M.: {\em The Z Notation: A Reference Manual}, Prentice-Hall, Inc.,

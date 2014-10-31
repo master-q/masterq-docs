@@ -16,7 +16,8 @@
 \author{岡部 究}{Kiwamu Okabe}{METASEPI}[kiwamu@debian.or.jp]
 
 \begin{abstract}
-概要（400字程度）○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○
+概要（400字程度） xxx
+○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○
 ○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○
 ○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○
 ○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○
@@ -55,7 +56,12 @@ ATS, 関数型言語, 依存型, 線形型, 組込開発
 本論文ではこの問題に対する1つの解決策としてATS言語 \cite{ats} を紹介します。このATS言語はMLのような関数型言語で、静的な強い型を持ちます。またこの言語は依存型とを持ち、Coq \cite{Coq_manual} のような証明器としても機能します。さらにこの言語の線形型を使うことで、メモリやロックのようなリソースの制御を安全に行なうことができます。ATS言語はC言語を経由して実行バイナリを生成するため、強い型による不変条件の強制は常にソースコードと同期しています。そのため製品のバージョンを数年にわたって更新する場合でも型とソースコードは機械的に同期します。最後にわずか8kBのメモリしか持たないArduino Mega 2560ボード \cite{arduino-mega} 上でATS言語を使って設計したアプリケーションを動作させ、組み込み領域にATS言語を適用可能であることを示します。
 
 \section{既存の組込開発手法の問題}
+
+xxx
+
 \section{ATS言語とは}
+
+xxx
 
 \begin{figure}[h]
 \centering
@@ -72,6 +78,8 @@ ATS, 関数型言語, 依存型, 線形型, 組込開発
 \end{figure}
 
 \section{ATSの型について}
+
+xxx
 
 \begin{figure}[h]
 \centering
@@ -115,16 +123,38 @@ ATS, 関数型言語, 依存型, 線形型, 組込開発
 \label{fig:xxx}
 \end{figure}
 
-\section{ATSによる組込開発手法と考察}
+\section{ArduinoにおけるATSプログラミング}
+
+ATS言語による組み込み開発の適正を評価するために、Arduino Mega 2560ボード上で動作するアプリケーションをATS言語で試作した。このボードは以下のような仕様である。
+
+\begin{description}
+  \item[Architecture] 8-bit Harvard architecture
+  \item[Microcontroller] ATmega2560
+  \item[Flash Memory] 256kB
+  \item[SRAM] 8kB
+  \item[Clock Speed] 16MHz
+\end{description}
+
+本稿を執筆している段階では、さらにメモリの少ないArduino Unoボード \cite{arduino-uno} 上でも同様のアプリケーションの動作に成功している。このアプリケーションのソースコードは \cite{arduino-ats} から入手可能である。
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=75mm]{draw/demo_ats_arduino.eps}
-\caption{xxx}
+\caption{Arduino上におけるATSアプリケーション例}
 \label{fig:demo_ats_arduino}
 \end{figure}
 
+本アプリケーションのアーキティクチャは図\ref{fig:demo_ats_arduino}のようなものである。
+
+xxx
+
+\section{ATSによる組込開発手法の考察}
+
+xxx
+
 \section{結論と今後の課題}
+
+xxx
 
 \begin{acknowledgment}
 ATS言語に関して助言をくれたボストン大学の准教授であるHongwei XiとATSコミュニティに感謝する。
@@ -132,7 +162,7 @@ ATS言語に関して助言をくれたボストン大学の准教授であるHo
 
 \begin{QandA}
 \item[A] 線形型にvalで別名を作るとどうなるのか？
-\item[岡部] 消費される。以下の例を付記する。
+\item[岡部] 消費される。以下に例を付記する。
 
 \begin{verbatim}
 (* コンパイルNG: let valでも線形型が消費されてしまう *)

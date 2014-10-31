@@ -4,45 +4,45 @@ The top-level auxiliary file: prosym_summer2014_kiwamuokabe.aux
 The style file: ipsjsort.bst
 Database file #1: ../bibtex/reference.bib
 Database file #2: ../bibtex/jreference.bib
-You've used 6 entries,
+You've used 8 entries,
             2669 wiz_defined-function locations,
-            653 strings with 5733 characters,
-and the built_in function-call counts, 1696 in all, are:
-= -- 139
-> -- 61
+            661 strings with 5896 characters,
+and the built_in function-call counts, 2120 in all, are:
+= -- 177
+> -- 75
 < -- 1
-+ -- 28
-- -- 18
-* -- 111
-:= -- 272
-add.period$ -- 6
-call.type$ -- 6
-change.case$ -- 19
++ -- 34
+- -- 22
+* -- 139
+:= -- 346
+add.period$ -- 8
+call.type$ -- 8
+change.case$ -- 25
 chr.to.int$ -- 0
-cite$ -- 6
-duplicate$ -- 93
-empty$ -- 138
-format.name$ -- 28
-if$ -- 375
+cite$ -- 8
+duplicate$ -- 115
+empty$ -- 170
+format.name$ -- 34
+if$ -- 465
 int.to.chr$ -- 0
-int.to.str$ -- 6
+int.to.str$ -- 8
 missing$ -- 2
-newline$ -- 21
-num.names$ -- 14
-pop$ -- 30
+newline$ -- 27
+num.names$ -- 18
+pop$ -- 38
 preamble$ -- 1
-purify$ -- 19
+purify$ -- 25
 quote$ -- 0
-skip$ -- 77
+skip$ -- 95
 stack$ -- 0
-substring$ -- 62
+substring$ -- 72
 swap$ -- 11
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 22
+type$ -- 30
 warning$ -- 0
-while$ -- 15
-width$ -- 7
-write$ -- 53
-is.kanji.str$ -- 53
+while$ -- 19
+width$ -- 9
+write$ -- 69
+is.kanji.str$ -- 67
