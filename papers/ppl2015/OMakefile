@@ -1,0 +1,27 @@
+FILENAME = ppl2015_kiwamuokabe
+LATEX = platex
+BIBTEX = pbibtex
+DVIPDFM = dvipdfmx
+DVIPDFMFLAGS = -p a4 -f ipa.map
+
+#ODG_FILES = $(glob draw/*.odg)
+#EPS_FILES = $(replacesuffixes .odg, .eps, $(ODG_FILES))
+
+TEXDEPS[] =
+	$(FILENAME).tex
+	../bibtex/reference.bib
+	../bibtex/jreference.bib
+#	$(EPS_FILES)
+
+LaTeXDocument($(FILENAME), $(FILENAME))
+
+.SUBDIRS: draw
+	%.eps: %.odg
+		unoconv -f eps -o $@ $< || unoconv -n -f eps -o $@ $< \
+		|| unoconv -f eps -o $@ $< || unoconv -n -f eps -o $@ $<
+
+.PHONY: clean
+.DEFAULT: $(FILENAME).pdf $(FILENAME).dvi
+
+clean:
+	rm -f *.aux *.dvi *.log *.fls *.out *.bbl *.blg *~ $(FILENAME).pdf
