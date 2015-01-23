@@ -1,10 +1,10 @@
-\documentclass[japanese]{jssst_ppl} %% $BF|K\8l(B (default)
+\documentclass[japanese]{jssst_ppl} %% 日本語 (default)
 % \documentclass[english]{jssst_ppl} %% English
 % \documentclass[japanese,draft]{jssst_ppl} %% You can use the draft option
 \usepackage{url}
 
-\title{ATS$B%W%m%0%i%_%s%0%A%e!<%H%j%"%k(B}
-\author{$B2,It(B $B5f(B$^1$}
+\title{ATSプログラミングチュートリアル}
+\author{岡部 究$^1$}
 \inst{%
 $^1$ METASEPI DESIGN\\
 \texttt{kiwamu@debian.or.jp}
@@ -12,41 +12,41 @@ $^1$ METASEPI DESIGN\\
 \begin{document}
 \maketitle
 \begin{abstract}
-$B%W%m%0%i%_%s%08@8l(BATS$B$O0MB87?$H@~7A7?$r$=$J$($k4X?t7?8@8l$G!"$J$*$+$D(BOS$B$N$J$$4D6-2<$G$b8=<BE*$J%W%m%0%i%_%s%0$r9T$J$&$3$H$,$G$-$^$9!#:rG/!"I.<T$,<g:E$9$k(BJapan ATS User Group$B$K$h$C$F(BATS$B8@8l$K4X$9$kB?$/$N%I%-%e%a%s%H$,K]Lu$5$l$^$7$?!#$7$+$7!"$3$l$i$N%I%-%e%a%s%H$O=i?4<T8~$1$H$O8@$$$,$?$/!"$3$l$^$G(BATS$B8@8l$NIa5Z$N(B1$B$D$N>c32$G$7$?!#$=$3$G!"$3$l$i$NK]Lu%I%-%e%a%s%H$NFI2r$rMF0W$K$9$k$3$H$rL\E*$H$7$F!"(BJapan ATS User Group$B$G$O?7$?$J(BATS$B8@8l$NF~Lg%I%-%e%a%s%H(B``ATS Programming Foundations''$B$N:n@.$r3+;O$7$^$7$?!#K\%A%e!<%H%j%"%k$G$O!":G=i$K(BATS$B8@8l$NFCD'$K$D$$$F4JC1$K2r@b$7$?8e!"(B``ATS Programming Foundations''$B$NA0H>ItJ,$K$D$$$F%O%s%:%*%s7A<0$G@bL@$7$^$9!#(B
+プログラミング言語ATSは依存型と線形型をそなえる関数型言語で、なおかつOSのない環境下でも現実的なプログラミングを行なうことができます。昨年、筆者が主催するJapan ATS User GroupによってATS言語に関する多くのドキュメントが翻訳されました。しかし、これらのドキュメントは初心者向けとは言いがたく、これまでATS言語の普及の1つの障害でした。そこで、これらの翻訳ドキュメントの読解を容易にすることを目的として、Japan ATS User Groupでは新たなATS言語の入門ドキュメント``ATS Programming Foundations''の作成を開始しました。本チュートリアルでは、最初にATS言語の特徴について簡単に解説した後、``ATS Programming Foundations''の前半部分についてハンズオン形式で説明します。
 \end{abstract}
 
-\section{$BL\E*(B}
+\section{目的}
 
-$B%W%m%0%i%_%s%08@8l(BATS\cite{ats}$B$O0MB87?$H@~7A7?$r$=$J$($k4X?t7?8@8l$G!"$J$*$+$D(BOS$B$N$J$$4D6-2<$G$b8=<BE*$J%W%m%0%i%_%s%0(B\cite{fpiot}$B$r9T$J$&$3$H$,$G$-$^$9!#:rG/!"I.<T$,<g:E$9$k(BJapan ATS User Group\cite{jats-ug}$B$K$h$C$F(BATS$B8@8l$K4X$9$kB?$/$N%I%-%e%a%s%H$,K]Lu(B\cite{INT2PROGINATS-J}\cite{ATS2TUTORIAL-J}\cite{EFFECTIVATS-J}$B$5$l$^$7$?!#$7$+$7!"$3$l$i$N%I%-%e%a%s%H$O=i?4<T8~$1$H$O8@$$$,$?$/!"$3$l$^$G(BATS$B8@8l$NIa5Z$N(B1$B$D$N>c32$G$7$?!#(B
+プログラミング言語ATS\cite{ats}は依存型と線形型をそなえる関数型言語で、なおかつOSのない環境下でも現実的なプログラミング\cite{fpiot}を行なうことができます。昨年、筆者が主催するJapan ATS User Group\cite{jats-ug}によってATS言語に関する多くのドキュメントが翻訳\cite{INT2PROGINATS-J}\cite{ATS2TUTORIAL-J}\cite{EFFECTIVATS-J}されました。しかし、これらのドキュメントは初心者向けとは言いがたく、これまでATS言語の普及の1つの障害でした。
 
-$B$=$3$G!"$3$l$i$NK]Lu%I%-%e%a%s%H$NFI2r$rMF0W$K$9$k$3$H$rL\E*$H$7$F!"(BJapan ATS User Group$B$G$O?7$?$J(BATS$B8@8l$NF~Lg%I%-%e%a%s%H(B``ATS Programming Foundations''\cite{ats-foundations}$B$N:n@.$r3+;O$7$^$7$?!#(B
+そこで、これらの翻訳ドキュメントの読解を容易にすることを目的として、Japan ATS User Groupでは新たなATS言語の入門ドキュメント``ATS Programming Foundations''\cite{ats-foundations}の作成を開始しました。
 
-$BK\%A%e!<%H%j%"%k$O!":G=i$K(BATS$B8@8l$NFCD'$K$D$$$F4JC1$K2r@b$7$?8e!"(B``ATS Programming Foundations''$B$NA0H>ItJ,$K$D$$$F%O%s%:%*%s7A<0$G@bL@$9$k$3$H$G!"(BOCaml$B$d(BHaskell$B$N$h$&$J4X?t7?%W%m%0%i%_%s%08@8l$K?F$7$s$@%W%m%0%i%^$J$iC/$G$b4JC1$K(BATS$B8@8l$r;H$C$?%W%m%0%i%_%s%0$r2DG=$K$7$^$9!#(B
+本チュートリアルは、最初にATS言語の特徴について簡単に解説した後、``ATS Programming Foundations''の前半部分についてハンズオン形式で説明することで、OCamlやHaskellのような関数型プログラミング言語に親しんだプログラマなら誰でも簡単にATS言語を使ったプログラミングを可能にします。
 
-\section{$B%+%P!<$9$kOCBj(B}
+\section{カバーする話題}
 
-$BK\%A%e!<%H%j%"%k$O(B3$B$D$NItJ,$+$i@.$jN)$A$^$9!#FC$K(B3$B$DL\$N%O%s%:%*%s$KB?$/$N;~4V$r3d$/M=Dj$G$9!#(B
+本チュートリアルは3つの部分から成り立ちます。特に3つ目のハンズオンに多くの時間を割く予定です。
 
-1$B$DL\$O!"(BATS$B8@8l$NFCD'$K$D$$$F2r@b$7$^$9!#(BATS$B$N;}$D@EE*$J7?$K$D$$$F!"0MB87?$H@~7A7?$K$D$$$F!"(BATS$B%3%s%Q%$%i$,(BC$B8@8l%=!<%9%3!<%I$rEG$-=P$9$3$H!"(BATS$B8@8l$OK\<AE*$K%i%s%?%$%`$,ITMW$G$"$k$3$H!"(BJavaScript$B$J$I$N(BC$B8@8l0J30$N8@8l$K$bJQ49$G$-$k$3$H!"$J$I$rC;$+$/2r@b$7$^$9!#(B
+1つ目は、ATS言語の特徴について解説します。ATSの持つ静的な型について、依存型と線形型について、ATSコンパイラがC言語ソースコードを吐き出すこと、ATS言語は本質的にランタイムが不要であること、JavaScriptなどのC言語以外の言語にも変換できること、などを短かく解説します。
 
-2$B$DL\$O!"(BATS$B8@8l$N<BMQNc$K$D$$$F$G$9!#:rG/$N(BICFP 2014$B$G%G%b$7$F$$$?(B8-bit AVR$B%^%$%3%s(B\cite{arduino-uno}$B$N>e$GF0$/(BATS$B%W%m%0%i%`$N%G%b(B\cite{arduino-ats}$B$K$D$$$F4JC1$K2r@b(B\cite{20141019-osc-tokyoats}$B$7$^$9!#(B
+2つ目は、ATS言語の実用例についてです。昨年のICFP 2014でデモしていた8-bit AVRマイコン\cite{arduino-uno}の上で動くATSプログラムのデモ\cite{arduino-ats}について簡単に解説\cite{20141019-osc-tokyoats}します。
 
-3$B$DL\$O!"(BATS$B8@8l$N%O%s%:%*%s$G$9!#(BLinux,Windows,Mac OS X$B$X$N(BATS$B%3%s%Q%$%i$N%$%s%9%H!<%kJ}K!!"(B``Hello, world!''$B%W%m%0%i%`$N:n@.!"4pACE*$J7?!"L>A0B+G{!"4X?tDj5A!"(Bif$B<0!"%=!<%9%3!<%ICf$N7?$N4Q;!<j=g$H$=$N7?$NM}2r!"%3%s%Q%$%k%(%i!<%a%C%;!<%8$NFI$_J}!"%?%W%k!"%l%3!<%I!"%Q%?!<%s%^%C%A!"%j%9%H!":F5"4X?t$J$I$K$D$$$F;~4V$N5v$9$+$.$j2r@b$7$^$9!#(B
+3つ目は、ATS言語のハンズオンです。Linux,Windows,Mac OS XへのATSコンパイラのインストール方法、``Hello, world!''プログラムの作成、基礎的な型、名前束縛、関数定義、if式、ソースコード中の型の観察手順とその型の理解、コンパイルエラーメッセージの読み方、タプル、レコード、パターンマッチ、リスト、再帰関数などについて時間の許すかぎり解説します。
 
-\section{$BA[Dj$9$kD0=0(B}
+\section{想定する聴衆}
 
 \begin{itemize}
-\item $B0MB87?$r;H$C$?<B:]$N%W%m%0%i%_%s%0$K6=L#$,$"$kJ}(B
-\item $B@~7A7?$N<B:]$N;HMQNc$K6=L#$N$"$kJ}(B
-\item OS$B$NL5$$4D6-2<$K$*$1$k4X?t7?%W%m%0%i%_%s%0$K6=L#$N$"$kJ}(B
-\item Applied Type System$B$NO@J8(B\cite{ATStypes03}$B$OFI$s$@$1$l$I!"<B:]$N(BATS$B8@8l$r$^$@?($C$F$$$J$$J}(B
+\item 依存型を使った実際のプログラミングに興味がある方
+\item 線形型の実際の使用例に興味のある方
+\item OSの無い環境下における関数型プログラミングに興味のある方
+\item Applied Type Systemの論文\cite{ATStypes03}は読んだけれど、実際のATS言語をまだ触っていない方
 \end{itemize}
 
-$B$b$72DG=$G$"$l$P!"(BATS$B%3%s%Q%$%i$N%$%s%9%H!<%k<j=g$K$D$$$F$"$i$+$8$a9pCN$7$F$*$/$3$H$G!"D0=0$,<B:]$K<j$rF0$+$7$J$,$i%A%e!<%H%j%"%k$rJ9$/$3$H$,$G$-$?$i!"$H;W$$$^$9!#(B
+もし可能であれば、ATSコンパイラのインストール手順についてあらかじめ告知しておくことで、聴衆が実際に手を動かしながらチュートリアルを聞くことができたら、と思います。
 
-\section{$BI,MW$JCN<1(B}
+\section{必要な知識}
 
-OCaml$B$d(BHaskell$B$J$I$N4X?t7?%W%m%0%i%_%s%08@8l$N;HMQ7P83!#0MB87?$d@~7A7?$K4X$9$kCN<1$OITMW$G$9!#(B
+OCamlやHaskellなどの関数型プログラミング言語の使用経験。依存型や線形型に関する知識は不要です。
 
 % BibTeX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliographystyle{unsrt}
