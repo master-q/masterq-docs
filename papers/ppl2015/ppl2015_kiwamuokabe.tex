@@ -3,7 +3,7 @@
 % \documentclass[japanese,draft]{jssst_ppl} %% You can use the draft option
 \usepackage{url}
 
-\title{ATSプログラミングの基礎}
+\title{ATSプログラミングチュートリアル}
 \author{岡部 究$^1$}
 \inst{%
 $^1$ METASEPI DESIGN\\
@@ -12,20 +12,41 @@ $^1$ METASEPI DESIGN\\
 \begin{document}
 \maketitle
 \begin{abstract}
-プログラミング言語ATS\cite{ats}は依存型と線形型をそなえる関数型言語で、なおかつ現実的なプログラミング\cite{fpiot}を行なうことができます。昨年、筆者が主催するJapan ATS User Group\cite{jats-ug}によってATS言語に関する多くのドキュメントが翻訳\cite{INT2PROGINATS-J}\cite{ATS2TUTORIAL-J}\cite{EFFECTIVATS-J}されました。しかし、これらのドキュメントは初心者向けとは言いがたく、これまでATS言語の普及の1つの障害でした。
+プログラミング言語ATSは依存型と線形型をそなえる関数型言語で、なおかつOSのない環境下でも現実的なプログラミングを行なうことができます。昨年、筆者が主催するJapan ATS User GroupによってATS言語に関する多くのドキュメントが翻訳されました。しかし、これらのドキュメントは初心者向けとは言いがたく、これまでATS言語の普及の1つの障害でした。そこで、これらの翻訳ドキュメントの読解を容易にすることを目的として、Japan ATS User Groupでは新たなATS言語の入門ドキュメント``ATS Programming Foundations''の作成を開始しました。本チュートリアルでは、最初にATS言語の特徴について簡単に解説した後、``ATS Programming Foundations''の前半部分についてハンズオン形式で説明します。
 \end{abstract}
 
 \section{目的}
 
+プログラミング言語ATS\cite{ats}は依存型と線形型をそなえる関数型言語で、なおかつOSのない環境下でも現実的なプログラミング\cite{fpiot}を行なうことができます。昨年、筆者が主催するJapan ATS User Group\cite{jats-ug}によってATS言語に関する多くのドキュメントが翻訳\cite{INT2PROGINATS-J}\cite{ATS2TUTORIAL-J}\cite{EFFECTIVATS-J}されました。しかし、これらのドキュメントは初心者向けとは言いがたく、これまでATS言語の普及の1つの障害でした。
+
+そこで、これらの翻訳ドキュメントの読解を容易にすることを目的として、Japan ATS User Groupでは新たなATS言語の入門ドキュメント``ATS Programming Foundations''\cite{ats-foundations}の作成を開始しました。
+
+本チュートリアルは、最初にATS言語の特徴について簡単に解説した後、``ATS Programming Foundations''の前半部分についてハンズオン形式で説明することで、OCamlやHaskellのような関数型プログラミング言語に親しんだプログラマなら誰でも簡単にATS言語を使ったプログラミングを可能にします。
+
 \section{カバーする話題}
+
+本チュートリアルは3つの部分から成り立ちます。特に3つ目のハンズオンに多くの時間を割く予定です。
+
+1つ目は、ATS言語の特徴について解説します。ATSの持つ静的な型について、依存型と線形型について、ATSコンパイラがC言語ソースコードを吐き出すこと、ATS言語は本質的にランタイムが不要であること、JavaScriptなどのC言語以外の言語にも変換できること、などを短かく解説します。
+
+2つ目は、ATS言語の実用例についてです。昨年のICFP 2014でデモしていた8-bit AVRマイコン\cite{arduino-uno}の上で動くATSプログラムのデモ\cite{arduino-ats}について簡単に解説\cite{20141019-osc-tokyoats}します。
+
+3つ目は、ATS言語のハンズオンです。Linux,Windows,Mac OS XへのATSコンパイラのインストール方法、``Hello, world!''プログラムの作成、基礎的な型、名前束縛、関数定義、if式、ソースコード中の型の観察手順とその型の理解、コンパイルエラーメッセージの読み方、タプル、レコード、パターンマッチ、リスト、再帰関数などについて時間の許すかぎり解説します。
 
 \section{想定する聴衆}
 
-依存型を用いた
+\begin{itemize}
+\item 依存型を使った実際のプログラミングに興味がある方
+\item 線形型の実際の使用例に興味のある方
+\item OSの無い環境下における関数型プログラミングに興味のある方
+\item Applied Type Systemの論文\cite{ATStypes03}は読んだけれど、実際のATS言語をまだ触っていない方
+\end{itemize}
+
+もし可能であれば、ATSコンパイラのインストール手順についてあらかじめ告知しておくことで、聴衆が実際に手を動かしながらチュートリアルを聞くことができたら、と思います。
 
 \section{必要な知識}
 
-OCamlやHaskellなどの関数型プログラミング言語を使った経験。
+OCamlやHaskellなどの関数型プログラミング言語の使用経験。依存型や線形型に関する知識は不要です。
 
 % BibTeX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliographystyle{unsrt}
