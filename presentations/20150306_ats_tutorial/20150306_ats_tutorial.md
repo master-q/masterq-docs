@@ -1,8 +1,12 @@
 # ATS Programming Tutorial
 
+![background](img/ats_t_shirts.png)
+
 Kiwamu Okabe @ RIKEN AICS
 
 # Are you ready to go?
+
+![background](img/ats_logo_on_display.png)
 
 Before anything, have you installed ATS2 compiler?
 If not, please install the ATS2 into your PC on following manual:
