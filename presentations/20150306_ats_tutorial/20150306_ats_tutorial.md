@@ -43,15 +43,32 @@ ATS has some good documents.
   http://ats-lang.sourceforge.net/DOCUMENT/INT2PROGINATS/HTML/
 * A Tutorial on Programming Features in ATS
   http://ats-lang.sourceforge.net/DOCUMENT/ATS2TUTORIAL/HTML/
-* 
+* Effective ATS
   http://ats-lang.sourceforge.net/EXAMPLE/EFFECTIVATS/
 * Wiki for ATS2
   https://github.com/githwxi/ATS-Postiats/wiki
 ~~~
 
 However they are somtimes hard for beginner.
+Goal of today is to learn to read "Introduction to Programming in ATS" by yourself.
+
+# Hello World
+
+xxx
 
 # Join Japan ATS User Group!
 
 http://jats-ug.metasepi.org/
 
+We translate following documents about ATS into Japanese.
+
+~~~
+* ATSプログラミング入門
+  http://jats-ug.metasepi.org/doc/ATS2/INT2PROGINATS/
+* ATSプログラミングチュートリアル
+  http://jats-ug.metasepi.org/doc/ATS2/ATS2TUTORIAL/
+* Effective ATS
+  https://github.com/jats-ug/translate/blob/master/Manual/EffectiveATS.md
+~~~
+
+Join us and review it!
