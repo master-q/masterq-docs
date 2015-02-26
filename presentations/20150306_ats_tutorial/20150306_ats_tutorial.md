@@ -12,6 +12,8 @@ If not, please install the ATS2 into your PC on following manual:
 
 Also, you can get a code of this slide at following:
 
+* http://bit.ly/ats20150306
+
 # What is ATS?
 
 http://www.ats-lang.org/
