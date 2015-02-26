@@ -305,6 +305,28 @@ It's true.
 
 ![inline](draw/println_expr.png)
 
+# Showing types
+
+~~~
+$ vi showtype_int.dats
+val () = println! 3
+val _ = $showtype 3
+
+implement main0 () = ()
+$ patscc showtype_int.dats
+**SHOWTYPE[UP]**(/home/kiwamu/tmp/tmp/showtype_int.dats: 39(line=2, offs=19) -- 40(line=2, offs=20)): S2Eapp(S2Ecst(g1int_int_t0ype); S2Ecst(int_kind), S2Eintinf(3)): S2RTbas(S2RTBASimp(1; t@ype))
+$ ./a.out
+3
+~~~
+
+Wiki for ATS2 explains "$showtype".
+
+~~~
+"$showtype" prints out the type of a value or variable in ATS's internal type representation. Very helpful for understanding type errors, but the exact meaning of the output can still be cryptic for more complicated cases.
+~~~
+
+# xxx
+
 # Join "Japan ATS User Group" !
 
 http://jats-ug.metasepi.org/
