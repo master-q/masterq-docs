@@ -216,7 +216,96 @@ true
 true
 ~~~
 
-# Join Japan ATS User Group!
+# Constant definition
+
+~~~
+$ vi val_overwrite.dats
+#include "share/atspre_staload.hats"
+
+implement main0 () = {
+  val a = 1
+  val b = a
+  val () = println! a
+  val () = println! b
+  val a = 2
+  val () = println! a
+  val () = println! b
+}
+$ patscc val_overwrite.dats
+$ ./a.out
+1
+1
+2
+1
+~~~
+
+# Function definition
+
+~~~
+$ vi two_arguments.dats
+#include "share/atspre_staload.hats"
+
+fun g (x:int, y:int): int = x * x + y * y - 4
+
+implement main0 () = println! (g (3, 2))
+$ patscc two_arguments.dats
+$ ./a.out
+9
+~~~
+
+![inline](draw/two_arguments.png)
+
+# Typechecking
+
+~~~
+$ vi f_takes_double.dats
+#include "share/atspre_staload.hats"
+
+fun f (x:int): int = 3 * x
+
+implement main0 () = {
+  val r  = f 4.0
+  val () = println! r
+}
+$ patscc f_takes_double.dats
+/home/kiwamu/tmp/tmp/f_takes_double.dats: 103(line=6, offs=14) -- 106(line=6, offs=17): error(3): the dynamic expression cannot be assigned the type [S2Eapp(S2Ecst(g0int_t0ype); S2Ecst(int_kind))].
+/home/kiwamu/tmp/tmp/f_takes_double.dats: 103(line=6, offs=14) -- 106(line=6, offs=17): error(3): mismatch of static terms (tyleq):
+The actual term is: S2Eapp(S2Ecst(g0float_t0ype); S2Ecst(double_kind))
+The needed term is: S2Eapp(S2Ecst(g0int_t0ype); S2Ecst(int_kind))
+~~~
+
+# Conditional branch
+
+~~~
+$ vi if_then_else.dats
+#include "share/atspre_staload.hats"
+
+implement main0 () = {
+  val a  = if 1 < 2  then 3 else 4
+  val () = println! (a:int)
+}
+$ patscc if_then_else.dats
+$ ./a.out
+3
+~~~
+
+![inline](draw/if_then_else2.png)
+
+# Dropping else clause
+
+~~~
+$ vi println_expr.dats
+#include "share/atspre_staload.hats"
+
+implement main0 () = if 7 > 5 then println! "It's true." else ()
+$ patscc println_expr.dats
+$ ./a.out
+It's true.
+~~~
+
+![inline](draw/println_expr.png)
+
+# Join "Japan ATS User Group" !
 
 http://jats-ug.metasepi.org/
 
