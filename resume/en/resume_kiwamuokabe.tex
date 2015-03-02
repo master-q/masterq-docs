@@ -115,7 +115,7 @@
 
 \section*{Interests}
 
-ATS programming, NetBSD kernel programming, Debian project, Haskell programming.
+ATS programming, Kernel programming, Debian project, Strongly typed language, Haskell programming.
 
 % xxx 強みアピールをもっと
 % Interests の項目も、言語とOSの列挙になっているので、lowlevelなレイヤー(NetBSD kernel programming)、ハイレベルな抽象化(Haskell/ATS)、そしてそらをつなぐ未来(metasepi)、とか何とかかいとくとどのような理由/ストーリーでこれらに興味があるのかが見えてくるかと
@@ -123,13 +123,19 @@ ATS programming, NetBSD kernel programming, Debian project, Haskell programming.
 % たぶん文面上はmetasepiではなく広い文脈で「低レイヤーと抽象レイヤーをつなげたい」くらいにしとくと可能性が広がってよいのでは
 
 \section*{Work Experience}
+\subsection*{March 2015 - Present: System Enginner at Centillion Japan Co., Ltd.}
+
+\begin{itemize}
+  \item Software engineering for cloud computing
+\end{itemize}
+
 \subsection*{August 2014 - Present: Part-time researcher at RIKEN Advanced Institute for Computational Science}
 
 \begin{itemize}
-  \item Research embedded Haskell
+  \item Research embedded functional programming
 \end{itemize}
 
-\subsection*{February 2014 - Present: Self employed software engineer at METASEPI DESIGN}
+\subsection*{February 2014 - Present: Self-employed Software Engineer at METASEPI DESIGN}
 
 \begin{itemize}
   \item Support to develop any embedded software
@@ -163,32 +169,15 @@ ATS programming, NetBSD kernel programming, Debian project, Haskell programming.
 %%%%%%%%%%%%%%%%
 \subsection*{April 2001 - February 2012: Software Development Engineer at Ricoh Company, Ltd.}
 \subsubsection*{April 2010: Port OS to new x86 hardware}
-Port NetBSD-2.0 to new x86 hardware.
-
-\begin{itemize}
-  \item Select BIOS product from three companies. Measure the quality, support, boot time and many evaluation items before choosing.
-  \item Deside to change design from old Option BIOS.
-  \item Calculate boot time before porting OS. Suggest and plan to tune boot time.
-\end{itemize}
+I ported NetBSD-2.0 to new x86 hardware, and calculated boot time before porting OS.
 
 \subsubsection*{April 2008: Develop and technical support NetBSD OS}
-Become technical leader to maintain and support Ricoh's multifunction printer.
-My efforts are following.
-\begin{itemize}
-  \item Debug and fix virtual memory's page daemon.
-  \item Debug and fix the BUG fail close(2) on only Wi-Fi network.
-  \item Design power down process by software trigger, using Solid State Relay and watchdog.
-  \item Get stability against shutdown on msdosfs
-\end{itemize}
-
-\subsubsection*{April 2006: Technical support to version up NetbSD-1.5 to 2.0}
-
-\begin{itemize}
-  \item Design NetBSD-1.5 style SD card format for NetBSD-2.0.
-\end{itemize}
+I became technical leader to maintain and support Ricoh's multifunction printer.
+Also I debuged and fix many kernel level BUGs.
+I designed power down process by software trigger.
 
 \subsubsection*{April 2006: Develop POSIX thread library}
-Replace user level POSIX thread library with NetBSD-2.0 m:n thread.
+I replaced user level POSIX thread library with NetBSD-2.0 m:n thread.
 My efforts are following.
 \begin{itemize}
   \item Research the presence of thread-safe and cancel-safe in kernel, libc and libpthread.
@@ -202,41 +191,23 @@ Before my tune, the printer boot time is 30 seconds.
 Ricoh's multifunction printer ``imagio''
 \footnote{\href{http://www.ricoh.co.jp/imagio/}{\tt http://www.ricoh.co.jp/imagio/}}
 use the method and tool, ever now.
-My efforts are following.
-
-\begin{itemize}
-  \item Develop a tool analyze log dumped by bootloader, kernel, init process and application.
-  \item Analyze IPC network, and advice how to get speed to application developer.
-  \item Split application as groups for pre-boot and post-boot.
-\end{itemize}
+Develop a tool analyze log dumped by bootloader, kernel, init process and application.
+Analyze IPC network, and advice how to get speed to application developer.
+Split application as groups for pre-boot and post-boot.
 
 \subsubsection*{October 2003: Develop new BIOS for multifunction printer}
-Order new BIOS to new company.
-Develop new BIOS together at the United States.
-
-\subsubsection*{December 2002: Develop firmware in Wi-Fi chip}
-Join team to develop Wi-Fi chip using ARM architecture.
+Develop new custom BIOS together at the United States.
 
 \subsubsection*{November 2002: Design secure boot for multifunction printer on x86}
-My efforts are following.
-\begin{itemize}
-  \item Port and design bootloader using public key algorithm authentication
-  \item Design the format include secure key in SD card
-  \item Order application to format SD card with custom partition, and support
-\end{itemize}
+I re-designed bootloader to support public key algorithm authentication,
+and designed the format include secure key in SD card
 
 \subsubsection*{July 2001: Develop BIOS and bootloader for multifunction printer on x86 architecture}
-My first work at Ricoh.
-Ricoh's multifunction printer ``imagio''
-\footnote{\href{http://www.ricoh.co.jp/imagio/}{\tt http://www.ricoh.co.jp/imagio/}}
+My first work at Ricoh. Ricoh's multifunction printer
+``imagio''\footnote{\href{http://www.ricoh.co.jp/imagio/}{\tt http://www.ricoh.co.jp/imagio/}}
 use my bootloader design, ever now.
-My efforts are following.
-\begin{itemize}
-  \item Design specification to customize the BIOS for printer
-  \item Order self-diagnostic program and support
-  \item Design hardware dependent data structure to configure bootloader and kernel
-  \item Design Option BIOS to boot on SD card
-\end{itemize}
+Also I designed hardware dependent data structure to configure bootloader and kernel,
+and Option BIOS to boot on SD card
 
 \section*{Education}
 
@@ -258,7 +229,7 @@ My efforts are following.
 
 \subsection*{Open-source projects}
 
-\subsubsection*{Metasepi project \footnote{\href{http://metasepi.org/}{\tt http://metasepi.org/}}}
+\subsubsection*{Metasepi Project \footnote{\href{http://metasepi.org/}{\tt http://metasepi.org/}}}
 \begin{itemize}
 \item Challenge to create an open-source Unix-like operating system designed with strong type such as ML or Haskell.
 \item Rewriting NetBSD kernel using Ajhc Haskell compiler. \href{https://github.com/metasepi/netbsd-arafura-s1}{\tt https://github.com/metasepi/netbsd-arafura-s1}
@@ -295,7 +266,8 @@ My efforts are following.
 \section*{Reference available upon request}
 
 \begin{itemize}
-  \item Yasuhiro Yamazaki CEO - Axsh co., LTD.
+  \item Kentaro Kuroiwa Research Chief - Centillion Japan Co., Ltd.
+  \item Yasuhiro Yamazaki CEO - Axsh Co., Ltd.
   \item Takayuki Muranushi - RIKEN Advanced Institute for Computational Science
   \item Takashi KODAMA CEO - MIRACLE LINUX CORPORATION
   \item Shigeya SENDA - Ricoh Company, Ltd.
