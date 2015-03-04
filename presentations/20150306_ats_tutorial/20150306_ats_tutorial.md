@@ -4,11 +4,11 @@
 
 Kiwamu Okabe @ RIKEN AICS
 
-# Are you ready to go?
+# Are you ready?
 
-![background](img/ats_logo_on_display.png)
+![background](img/cheetah.png)
 
-Before anything, have you installed ATS2 compiler?
+Have you installed ATS2 compiler?
 If not, please install the ATS2 into your PC on following manual:
 
 * In English: http://bit.ly/instats
@@ -19,6 +19,8 @@ Also, you can get a code of this slide at following:
 * http://bit.ly/ats20150306
 
 # What is ATS?
+
+![background](img/ats_logo_on_display.png)
 
 http://www.ats-lang.org/
 
@@ -31,6 +33,8 @@ http://www.ats-lang.org/
 
 # What can ATS do?
 
+![background](img/lilypad.png)
+
 * Proof code using dependent types
 * Safely use malloc using linear types
 * Safely use pointer using linear types
@@ -39,6 +43,8 @@ http://www.ats-lang.org/
 * Write code in Linux kernel
 
 # The goal of today
+
+![background](img/goal.png)
 
 ATS has some good documents.
 
@@ -332,6 +338,8 @@ Wiki for ATS2 explains "$showtype".
 # xxx
 
 # Join "Japan ATS User Group" !
+
+![background](img/jats-ug_logo_v1.png)
 
 http://jats-ug.metasepi.org/
 
