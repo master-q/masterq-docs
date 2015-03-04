@@ -420,7 +420,27 @@ $ ./a.out
 
 ![inline](draw/list_vt_make_pair.png)
 
-# xxx
+# Append list
+
+~~~
+$ vi append_list.dats
+#include "share/atspre_staload.hats"
+
+implement main0 () = {
+  val l1 = list_vt_make_pair (1, 2)
+  val l2 = list_vt_make_sing 3
+  val l3 = list_vt_append (l2, l1)
+  val () = print_list_vt<int> l3
+  val () = list_vt_free<int> l3
+}
+$ patscc append_list.dats -DATS_MEMALLOC_LIBC
+$ ./a.out
+3, 1, 2
+~~~
+
+# Append list as figure
+
+![inline](draw/list_vt_append.png)
 
 # Join "Japan ATS User Group" !
 
