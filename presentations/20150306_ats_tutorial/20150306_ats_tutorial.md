@@ -396,6 +396,10 @@ How ATS2 compiler can know it?
 
 ![inline](draw/string_append.png)
 
+# Type of List
+
+![inline](draw/list_vt_type.png)
+
 # xxx
 
 # Join "Japan ATS User Group" !
