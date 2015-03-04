@@ -400,6 +400,26 @@ How ATS2 compiler can know it?
 
 ![inline](draw/list_vt_type.png)
 
+# Create list
+
+~~~
+$ vi make_pair.dats
+#include "share/atspre_staload.hats"
+
+implement main0 () = {
+  val l = list_vt_make_pair (1, 2)
+  val () = print_list_vt<int> l
+  val () = list_vt_free<int> l
+}
+$ patscc make_pair.dats -DATS_MEMALLOC_LIBC
+$ ./a.out
+1, 2
+~~~
+
+# Create list as figure
+
+![inline](draw/list_vt_make_pair.png)
+
 # xxx
 
 # Join "Japan ATS User Group" !
