@@ -18,6 +18,47 @@ Also, you can get a code of this slide at following:
 
 * http://bit.ly/ats20150306
 
+# Install ATS2 into Debian #1
+
+![background](img/debian.png)
+
+* Get source code of ATS2
+
+~~~
+$ wget http://downloads.sourceforge.net/project/ats2-lang/ats2-lang/ats2-postiats-0.1.9/ATS2-Postiats-0.1.9.tgz
+$ wget http://downloads.sourceforge.net/project/ats2-lang-contrib/ats2-lang-contrib/ATS2-Postiats-contrib-0.1.6.tgz
+~~~
+
+* Install packages needed by ATS2
+
+~~~
+$ sudo apt-get install gcc libgc-dev libgmp-dev make
+~~~
+
+# Install ATS2 into Debian #2
+
+![background](img/debian.png)
+
+* Compile ATS2
+
+~~~
+$ tar xf ATS2-Postiats-0.1.9.tgz
+$ export PATSHOME=`pwd`/ATS2-Postiats-0.1.9
+$ export PATH=${PATSHOME}/bin:${PATH}
+$ tar xf ATS2-Postiats-contrib-0.1.6.tgz
+$ export PATSHOMERELOC=`pwd`/ATS2-Postiats-contrib-0.1.6
+$ cd ${PATSHOME}
+$ ./configure
+$ make
+~~~
+
+* Ready to compile!
+
+~~~
+$ patsopt --version
+ATS/Postiats version 0.1.9 with Copyright (c) 2011-2015 Hongwei Xi
+~~~
+
 # What is ATS?
 
 ![background](img/ats_logo_on_display.png)
