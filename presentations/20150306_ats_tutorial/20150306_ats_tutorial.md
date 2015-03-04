@@ -337,6 +337,65 @@ $ ./a.out
 "$showtype" prints out the type of a value or variable in ATS's internal type representation. Very helpful for understanding type errors, but the exact meaning of the output can still be cryptic for more complicated cases.
 ~~~
 
+# Immutable string
+
+~~~
+$ vi print_foo.dats
+#include "share/atspre_staload.hats"
+
+val () = println! "foo"
+
+implement main0 () = ()
+$ patscc print_foo.dats
+$ ./a.out
+foo
+~~~
+
+However, immutable string can't do following:
+
+* append
+* replace
+
+# Try to use mutable string
+
+~~~
+$ vi try_string_append.dats
+#include "share/atspre_staload.hats"
+
+implement main0 () = {
+  val s3 = string_append ("Yokohama", "Station")
+  val () = println! s3
+}
+$ patscc try_string_append.dats
+/home/kiwamu/tmp/try_string_append.dats: 60(line=3, offs=22) -- 135(line=6, offs=2): error(3): the linear dynamic variable [s3$3509(-1)] needs to be consumed but it is preserved with the type [S2Eapp(S2Ecst(strptr_addr_vtype); S2EVar(4175))] instead.
+patsopt(TRANS3): there are [1] errors in total.
+exit(ATS): uncaught exception: _2home_2kiwamu_2src_2ATS_2dPostiats_2src_2pats_error_2esats__FatalErrorExn(1025)
+~~~
+
+Why does error occur?
+
+# Need to free mutable string
+
+~~~
+$ vi string_append.dats
+#include "share/atspre_staload.hats"
+
+implement main0 () = {
+  val s3 = string_append ("Yokohama", "Station")
+  val () = println! s3
+  val () = free s3
+}
+$ patscc string_append.dats -DATS_MEMALLOC_LIBC
+$ ./a.out
+YokohamaStation
+~~~
+
+How ATS2 compiler can know it?
+
+# Linear type watches resource
+
+![inline](draw/string_append.png)
+
 # xxx
 
 # Join "Japan ATS User Group" !
