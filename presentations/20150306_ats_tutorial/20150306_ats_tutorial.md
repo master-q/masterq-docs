@@ -116,7 +116,7 @@ $ ./a.out
 
 # Zero Division
 
-However, zero-division is compile error!
+But, zero-division causes compile error!
 
 ~~~
 $ vi divmod.dats
@@ -154,11 +154,11 @@ https://github.com/githwxi/ATS-Postiats/wiki/Internal-types
 
 ~~~
 unsolved constraint: C3NSTRprop(main; S2Eapp(S2Ecst(!=); S2EVar(4177->S2Eapp(S2Ecst(sub_int_int); S2EVar(4173->S2Eintinf(2)), S2EVar(4174->S2Eintinf(2)))), S2Eintinf(0)))
-  ↓
+  ↓ meaning
 The proposition "2 - 2 != 0" is not solved.
 ~~~
 
-It's powered by dependent types that are used at language prelude.
+It's powered by dependent types that are used at ATS language's prelude.
 
 ~~~
 $ vi ATS-Postiats/prelude/SATS/integer.sats
@@ -188,7 +188,7 @@ $ ./a.out
 21.333333
 ~~~
 
-Operators are overloaded.
+The operators are overloaded.
 
 ~~~
 $ vi double_int_op.dats
@@ -284,6 +284,8 @@ The actual term is: S2Eapp(S2Ecst(g0float_t0ype); S2Ecst(double_kind))
 The needed term is: S2Eapp(S2Ecst(g0int_t0ype); S2Ecst(int_kind))
 ~~~
 
+Function "f" should take value of int.
+
 # Conditional branch
 
 ~~~
@@ -301,7 +303,7 @@ $ ./a.out
 
 ![inline](draw/if_then_else2.png)
 
-# Dropping else clause
+# Able to drop else clause
 
 ~~~
 $ vi println_expr.dats
@@ -329,7 +331,7 @@ $ ./a.out
 3
 ~~~
 
-Wiki for ATS2 explains "$showtype".
+"Wiki for ATS2" explains "$showtype".
 
 ~~~
 "$showtype" prints out the type of a value or variable in ATS's internal type representation. Very helpful for understanding type errors, but the exact meaning of the output can still be cryptic for more complicated cases.
