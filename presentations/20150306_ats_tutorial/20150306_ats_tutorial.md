@@ -101,7 +101,7 @@ ATS has some good documents.
 ~~~
 
 However they are somtimes hard for beginner.
-Goal of today is to learn to read "Introduction to Programming in ATS" by yourself.
+The goal of today is to learn to read "Introduction to Programming in ATS" by yourself.
 
 # Hello World
 
@@ -334,7 +334,7 @@ $ vi if_then_else.dats
 #include "share/atspre_staload.hats"
 
 implement main0 () = {
-  val a  = if 1 < 2  then 3 else 4
+  val a  = if 1 < 2 then 3 else 4
   val () = println! (a:int)
 }
 $ patscc if_then_else.dats
@@ -350,7 +350,7 @@ $ ./a.out
 $ vi println_expr.dats
 #include "share/atspre_staload.hats"
 
-implement main0 () = if 7 > 5 then println! "It's true." else ()
+implement main0 () = if 7 > 5 then println! "It's true."
 $ patscc println_expr.dats
 $ ./a.out
 It's true.
@@ -392,10 +392,10 @@ $ ./a.out
 foo
 ~~~
 
-However, immutable string can't do following:
+However, immutable string can't do such like following:
 
 * append
-* replace
+* reverse
 
 # Try to use mutable string
 
@@ -431,7 +431,7 @@ $ ./a.out
 YokohamaStation
 ~~~
 
-How ATS2 compiler can know it?
+How can ATS2 compiler know it?
 
 # Linear type watches resource
 
