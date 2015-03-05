@@ -22,14 +22,14 @@ Also, you can get a code of this slide at following:
 
 ![background](img/debian.png)
 
-* Get source code of ATS2
+* Get source code of ATS2 compiler
 
 ~~~
 $ wget http://downloads.sourceforge.net/project/ats2-lang/ats2-lang/ats2-postiats-0.1.9/ATS2-Postiats-0.1.9.tgz
 $ wget http://downloads.sourceforge.net/project/ats2-lang-contrib/ats2-lang-contrib/ATS2-Postiats-contrib-0.1.6.tgz
 ~~~
 
-* Install packages needed by ATS2
+* Install packages needed by the ATS2
 
 ~~~
 $ sudo apt-get install gcc libgc-dev libgmp-dev make
@@ -39,7 +39,7 @@ $ sudo apt-get install gcc libgc-dev libgmp-dev make
 
 ![background](img/debian.png)
 
-* Compile ATS2
+* Compile the ATS2 compiler
 
 ~~~
 $ tar xf ATS2-Postiats-0.1.9.tgz
@@ -87,7 +87,7 @@ http://www.ats-lang.org/
 
 ![background](img/goal.png)
 
-ATS has some good documents.
+Already, ATS has some good documents.
 
 ~~~
 * Introduction to Programming in ATS
@@ -100,7 +100,7 @@ ATS has some good documents.
   https://github.com/githwxi/ATS-Postiats/wiki
 ~~~
 
-However they are somtimes hard for beginner.
+However, they are somtimes hard for beginner.
 The goal of today is to learn to read "Introduction to Programming in ATS" by yourself.
 
 # Hello World
