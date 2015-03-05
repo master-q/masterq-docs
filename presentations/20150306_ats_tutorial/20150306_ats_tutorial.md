@@ -431,7 +431,9 @@ $ ./a.out
 YokohamaStation
 ~~~
 
-How can ATS2 compiler know it?
+The "ATS_MEMALLOC_LIBC" flag is needed to use malloc on libc.
+
+How can ATS2 know failure of free?
 
 # Linear type watches resource
 
@@ -456,6 +458,8 @@ $ patscc make_pair.dats -DATS_MEMALLOC_LIBC
 $ ./a.out
 1, 2
 ~~~
+
+The "\<int\>" is needed to use template function.
 
 # Create list as figure
 
