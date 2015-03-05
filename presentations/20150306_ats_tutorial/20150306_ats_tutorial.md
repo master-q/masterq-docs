@@ -100,7 +100,7 @@ Already, ATS has some good documents.
   https://github.com/githwxi/ATS-Postiats/wiki
 ~~~
 
-However, they are somtimes hard for beginner.
+However, they are sometimes hard for beginner.
 The goal of today is to learn to read "Introduction to Programming in ATS" by yourself.
 
 # Hello World
