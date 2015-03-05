@@ -52,7 +52,7 @@ $ ./configure
 $ make
 ~~~
 
-* Ready to compile!
+* Ready to compile ATS code!
 
 ~~~
 $ patsopt --version
