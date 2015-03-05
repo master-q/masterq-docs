@@ -489,7 +489,7 @@ $ ./a.out
 
 http://jats-ug.metasepi.org/
 
-We translate following documents about ATS into Japanese.
+We translate following ATS documents into Japanese.
 
 ~~~
 * ATSプログラミング入門
