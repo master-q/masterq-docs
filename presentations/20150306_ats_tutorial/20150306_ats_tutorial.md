@@ -172,9 +172,11 @@ typechecking has failed: there are some unsolved constraints: please inspect the
 exit(ATS): uncaught exception: _2home_2kiwamu_2src_2ATS_2dPostiats_2src_2pats_error_2esats__FatalErrorExn(1025)
 ~~~
 
-... hard to read it ...
+The error message is  hard to be read ...
 
-# Let's understand internal types
+# Understanding internal types
+
+Let's decode the error message that is represented on following internal types:
 
 ~~~
 https://github.com/githwxi/ATS-Postiats/wiki/Internal-types
