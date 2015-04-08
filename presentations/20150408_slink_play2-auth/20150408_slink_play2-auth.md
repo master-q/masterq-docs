@@ -217,14 +217,29 @@ object Application extends Controller with LoginLogout with AuthConfigImpl {
 }
 ```
 
+# さっそく起動してみる
+
+```
+$ ./activator run
+$ firefox localhost:9000
+```
+
+# データベース初期化
+
+![inline](img/screen_evolution.png)
+
+# ログイン画面
+
+![inline](img/screen_login.png)
+
 # でもこれ認証してなくね？
 
-* app/Global.scalaで作った100001ユーザしかログインできない
+* app/Global.scalaで作った100001ユーザですらログインできない
 * Slickに全くさわってない
 * play2-authのバックエンドにSlickを使うことは可能？
 * もしくは1つのアプリケーションで複数のデータベースラッパーが混じるのはアリ？
 * 実はSlick使わない方が楽？
 
-# \@gakuzzzzさんの発言ワカラナイ
+# \@gakuzzzzさんのアドバイス
 
 ![inline](img/play2-auth-chat.png)
