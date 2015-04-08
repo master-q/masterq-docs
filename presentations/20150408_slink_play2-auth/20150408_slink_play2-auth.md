@@ -54,15 +54,6 @@ libraryDependencies ++= Seq(
 )
 ```
 
-# conf/routes
-
-```
-# Home page
-GET     /          controllers.Application.login
-POST    /login     controllers.Application.authenticate
-GET     /logout    controllers.Application.logout
-```
-
 # conf/application.conf
 
 ```
@@ -72,6 +63,15 @@ db.default.user=sa
 db.default.password=""
 
 slick.default="models.*"
+```
+
+# conf/routes
+
+```
+# Home page
+GET     /          controllers.Application.login
+POST    /login     controllers.Application.authenticate
+GET     /logout    controllers.Application.logout
 ```
 
 # app/models/Account.scala #1
@@ -219,7 +219,12 @@ object Application extends Controller with LoginLogout with AuthConfigImpl {
 
 # でもこれ認証してなくね？
 
-# 振り返り
-
-* みんな認証まわりはどーしてるんだろう？
+* app/Global.scalaで作った100001ユーザしかログインできない
+* Slickに全くさわってない
+* play2-authのバックエンドにSlickを使うことは可能？
+* もしくは1つのアプリケーションで複数のデータベースラッパーが混じるのはアリ？
 * 実はSlick使わない方が楽？
+
+# \@gakuzzzzさんの発言ワカラナイ
+
+![inline](img/play2-auth-chat.png)
