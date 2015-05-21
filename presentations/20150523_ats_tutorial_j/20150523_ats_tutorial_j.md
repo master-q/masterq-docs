@@ -41,7 +41,7 @@ http://www.ats-lang.org/
 
 ![background](img/goal.png)
 
-ATSには既に良いドキュメントがあります。
+ATSには既に良いドキュメントがあります。日本語訳もあります。
 
 ~~~
 * ATSプログラミング入門
@@ -208,6 +208,8 @@ $ ./a.out
 # 真偽値
 ![background](img/memopad.png)
 
+trueとfalseが真偽値です。
+
 ~~~
 $ vi bool_op.dats
 #include "share/atspre_staload.hats"
@@ -233,6 +235,8 @@ true
 # 定数定義
 ![background](img/memopad.png)
 
+valキーワードを使って定数を定義できます。
+
 ~~~
 $ vi val_overwrite.dats
 #include "share/atspre_staload.hats"
@@ -256,6 +260,8 @@ $ ./a.out
 
 # 関数定義
 ![background](img/memopad.png)
+
+funキーワードを使って関数を定義できます。
 
 ~~~
 $ vi two_arguments.dats
@@ -296,6 +302,8 @@ The needed term is: S2Eapp(S2Ecst(g0int_t0ype); S2Ecst(int_kind))
 # 条件分岐
 ![background](img/memopad.png)
 
+if then elseキーワードが使えます。
+
 ~~~
 $ vi if_then_else.dats
 #include "share/atspre_staload.hats"
@@ -314,6 +322,8 @@ $ ./a.out
 # else節は省略できます
 ![background](img/memopad.png)
 
+else節の型がvoidであれば省略できます。
+
 ~~~
 $ vi println_expr.dats
 #include "share/atspre_staload.hats"
@@ -328,6 +338,8 @@ It's true.
 
 # 型を表示するには$showtype
 ![background](img/memopad.png)
+
+$showtypeキーワードに任意の値を渡すと、コンパイル時にその型を表示してくれます。
 
 ~~~
 $ vi showtype_int.dats
@@ -344,6 +356,8 @@ $ ./a.out
 # 不変の文字列
 ![background](img/memopad.png)
 
+"foo"は不変の文字列のリテラルです。
+
 ~~~
 $ vi print_foo.dats
 #include "share/atspre_staload.hats"
@@ -356,13 +370,12 @@ $ ./a.out
 foo
 ~~~
 
-けれども、不変の文字列では次のような関数を使えません:
-
-* 連結
-* 逆順
+けれども、不変の文字列では連結や逆順のような操作を使えません。
 
 # 可変の文字列を使ってみよう
 ![background](img/memopad.png)
+
+2つの不変の文字列を連結してみましょう。
 
 ~~~
 $ vi try_string_append.dats
@@ -383,6 +396,8 @@ exit(ATS): uncaught exception: _2home_2kiwamu_2src_2ATS_2dPostiats_2src_2pats_er
 # 可変の文字列はfreeする必要がある
 ![background](img/memopad.png)
 
+連結で生成した可変の文字列をfreeし忘れていました。
+
 ~~~
 $ vi string_append.dats
 #include "share/atspre_staload.hats"
@@ -398,21 +413,26 @@ YokohamaStation
 ~~~
 
 "ATS_MEMALLOC_LIBC"フラグはlibcのmallocを使うために必要です。
-
 どうやってATS2はfree忘れを検出したのでしょうか？
 
 # 線形型はリソースを監視する
 ![background](img/memopad.png)
+
+可変の文字列(strptr)を消費し忘れるとコンパイルエラーです。
 
 ![inline](draw/string_append.png)
 
 # リストの型
 ![background](img/memopad.png)
 
+リスト型(list_vt)は下図のような構造です。
+
 ![inline](draw/list_vt_type.png)
 
 # リストの生成
 ![background](img/memopad.png)
+
+list_vt_make_pair (A, B)はAとBを要素に持つリストを生成します。
 
 ~~~
 $ vi make_pair.dats
@@ -437,6 +457,8 @@ $ ./a.out
 
 # リストの連結
 ![background](img/memopad.png)
+
+list_vt_append (L1, L2)はリストL1とL2を消費して、それらを連結した新しいリストを生成します。
 
 ~~~
 $ vi append_list.dats
