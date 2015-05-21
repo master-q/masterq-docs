@@ -1,109 +1,64 @@
-# ATS Programming Tutorial
+# ATSプログラミングチュートリアル
 
 ![background](img/ats_t_shirts.png)
 
-Kiwamu Okabe @ RIKEN AICS
+Kiwamu Okabe
 
-# Are you ready?
+# 準備はできましたか？
 
 ![background](img/cheetah.png)
 
-Have you installed ATS2 compiler?
-If not, please install the ATS2 into your PC on following manual:
+ATS2コンパイラはインストール済みですか？
+もし未だなら、次のマニュアルを参考にATS2をインストールしてください:
 
-* In English: http://bit.ly/instats
-* In Japanese: http://bit.ly/instatsj
+* http://bit.ly/instatsj
 
-Also, you can get a code of this slide at following:
-
-* http://bit.ly/ats20150306
-
-# Install ATS2 into Debian #1
-
-![background](img/debian.png)
-
-* Get source code of ATS2 compiler
-
-~~~
-$ wget http://downloads.sourceforge.net/project/ats2-lang/ats2-lang/ats2-postiats-0.1.9/ATS2-Postiats-0.1.9.tgz
-$ wget http://downloads.sourceforge.net/project/ats2-lang-contrib/ats2-lang-contrib/ATS2-Postiats-contrib-0.1.6.tgz
-~~~
-
-* Install packages needed by the ATS2
-
-~~~
-$ sudo apt-get install gcc libgc-dev libgmp-dev make
-~~~
-
-# Install ATS2 into Debian #2
-
-![background](img/debian.png)
-
-* Compile the ATS2 compiler
-
-~~~
-$ tar xf ATS2-Postiats-0.1.9.tgz
-$ export PATSHOME=`pwd`/ATS2-Postiats-0.1.9
-$ export PATH=${PATSHOME}/bin:${PATH}
-$ tar xf ATS2-Postiats-contrib-0.1.6.tgz
-$ export PATSHOMERELOC=`pwd`/ATS2-Postiats-contrib-0.1.6
-$ cd ${PATSHOME}
-$ ./configure
-$ make
-~~~
-
-* Ready to compile ATS code!
-
-~~~
-$ patsopt --version
-ATS/Postiats version 0.1.9 with Copyright (c) 2011-2015 Hongwei Xi
-~~~
-
-# What is ATS?
+# ATSって何でしょう?
 
 ![background](img/ats_logo_on_display.png)
 
 http://www.ats-lang.org/
 
-* Syntax like ML
-* Dependent types
-* Linear types
-* Optional GC
-* Without any runtime
-* Successor of Dependent ML
+* MLのような文法
+* 依存型
+* 線形型
+* GCなしでも動作
+* ランタイムを持たない
+* Dependent MLの後継
 
-# What can ATS do?
+# ATSを使うと何ができるの？
 
 ![background](img/lilypad.png)
 
-* Proof code using dependent types
-* Safely use malloc using linear types
-* Safely use pointer using linear types
-* Use strong type without any OS
-* Write code on bare metal hardware
-* Write code in Linux kernel
+* 依存型を使ってコードに証明を与えられる
+* 線形型を使ってmallocを安全に扱える
+* 線形型を使ってポインタを安全に扱える
+* 強い型をOSなしに使える
+* ベアメタルの上でコードを書ける
+* Linux kernel内のコードを書ける
 
-# The goal of today
+# 今日のゴール
 
 ![background](img/goal.png)
 
-Already, ATS has some good documents.
+ATSには既に良いドキュメントがあります。
 
 ~~~
-* Introduction to Programming in ATS
-  http://ats-lang.sourceforge.net/DOCUMENT/INT2PROGINATS/HTML/
-* A Tutorial on Programming Features in ATS
-  http://ats-lang.sourceforge.net/DOCUMENT/ATS2TUTORIAL/HTML/
+* ATSプログラミング入門
+  http://jats-ug.metasepi.org/doc/ATS2/INT2PROGINATS/
+* ATSプログラミングチュートリアル
+  http://jats-ug.metasepi.org/doc/ATS2/ATS2TUTORIAL/
 * Effective ATS
-  http://ats-lang.sourceforge.net/EXAMPLE/EFFECTIVATS/
+  https://github.com/jats-ug/translate/blob/master/Manual/EffectiveATS.md
 * Wiki for ATS2
   https://github.com/githwxi/ATS-Postiats/wiki
 ~~~
 
-However, they are sometimes hard for beginner.
-The goal of today is to learn to read "Introduction to Programming in ATS" by yourself.
+けれどもこれらは初心者に難しい面があります。
+今日のゴールは自分自身で"ATSプログラミング入門"を読めるようになることです。
 
-# Hello World
+# Hello Worldから始めよう
+![background](img/memopad.png)
 
 ~~~
 $ vi helloworld.dats
@@ -115,7 +70,7 @@ $ ./a.out
 Hello, world!
 ~~~
 
-You can call println! directly.
+直接 println! を呼び出すこともできます。
 
 ~~~
 $ vi helloworld2.dats
@@ -124,16 +79,17 @@ implement main0 () = () where {
 }
 ~~~
 
-Or more simply...
+もしくはもっとシンプルに...
 
 ~~~
 $ vi helloworld3.dats
 implement main0 () = println! "Hello, world!"
 ~~~
 
-# Integer
+# 整数型
+![background](img/memopad.png)
 
-The "share/atspre_staload.hats" is needed by overloaded operators.
+"share/atspre_staload.hats" はオーバロードされた演算子のために必要です。
 
 ~~~
 $ vi int_op.dats
@@ -155,9 +111,10 @@ $ ./a.out
 1
 ~~~
 
-# Zero Division
+# ゼロ除算の検出
+![background](img/memopad.png)
 
-But, zero-division causes compile error!
+ゼロ除算はコンパイルエラーになります。
 
 ~~~
 $ vi divmod.dats
@@ -172,36 +129,38 @@ typechecking has failed: there are some unsolved constraints: please inspect the
 exit(ATS): uncaught exception: _2home_2kiwamu_2src_2ATS_2dPostiats_2src_2pats_error_2esats__FatalErrorExn(1025)
 ~~~
 
-The error message is  hard to be read ...
+でもこのエラー、すごく読み難い...
 
-# Understanding internal types
+# 内部の型表現を理解しよう
+![background](img/memopad.png)
 
-Let's decode the error message that is represented on following internal types:
+次の内部型で表わされたエラーメッセージを解釈しましょう:
 
 ~~~
 https://github.com/githwxi/ATS-Postiats/wiki/Internal-types
 
-* S2Eapp - an application term.
-* S2Ecst - a type constant (for instance, int, bool, list, etc.)
-* S2Eeff - function effects.
-* S2Eexi - an existentially quantified type.
-* S2Eint - machine precision integer.
-* S2Eintinf - infinite precision integer; commonly used for integer sorts in most compiled versions of atsopt (patsopt).
-* S2Evar - a (typically universally quantified) variable.
-* S2Etop (0; T) means T?
-* S2Etop (1; T) means T?!
-* S2EVar - an (existentially quantified) unification variable introduced by the typechecker.
+* S2Eapp - 関数適用の項
+* S2Ecst - (例えば int, bool, list などのような) 型定数
+* S2Eeff - 関数の作用
+* S2Eexi - 存在量化型
+* S2Eint - マシン精度整数
+* S2Eintinf - 任意精度整数; 殆どのpatsoptで整数種として使われます
+* S2Evar - (通常、全称量化の)変数
+* S2Etop (0; T) - T? を意味する
+* S2Etop (1; T) - T?! を意味する
+* S2EVar - 型検査器によって導入された(存在量化の)変数
 ~~~
 
-# The zero division error means...
+# ゼロ除算の意味は...
+![background](img/memopad.png)
 
 ~~~
 unsolved constraint: C3NSTRprop(main; S2Eapp(S2Ecst(!=); S2EVar(4177->S2Eapp(S2Ecst(sub_int_int); S2EVar(4173->S2Eintinf(2)), S2EVar(4174->S2Eintinf(2)))), S2Eintinf(0)))
-  ↓ meaning
-The proposition "2 - 2 != 0" is not solved.
+  ↓ つまり...
+命題 "2 - 2 != 0" が解決できない、と言っている
 ~~~
 
-It's powered by dependent types that are used at ATS language's prelude.
+これは依存型の力によっていて、ATS言語のpreludeライブラリで使われています。
 
 ~~~
 $ vi ATS-Postiats/prelude/SATS/integer.sats
@@ -217,7 +176,8 @@ fun g1int_div_llint : g1int_div_type (llintknd) = "mac#%"
 fun g1int_div_ssize : g1int_div_type (ssizeknd) = "mac#%"
 ~~~
 
-# Real Number
+# 実数型
+![background](img/memopad.png)
 
 ~~~
 $ vi double_op.dats
@@ -231,7 +191,7 @@ $ ./a.out
 21.333333
 ~~~
 
-The operators are overloaded.
+演算子はオーバーロードされています。
 
 ~~~
 $ vi double_int_op.dats
@@ -245,7 +205,8 @@ $ ./a.out
 21.333333
 ~~~
 
-# Boolean value
+# 真偽値
+![background](img/memopad.png)
 
 ~~~
 $ vi bool_op.dats
@@ -269,7 +230,8 @@ true
 true
 ~~~
 
-# Constant definition
+# 定数定義
+![background](img/memopad.png)
 
 ~~~
 $ vi val_overwrite.dats
@@ -292,7 +254,8 @@ $ ./a.out
 1
 ~~~
 
-# Function definition
+# 関数定義
+![background](img/memopad.png)
 
 ~~~
 $ vi two_arguments.dats
@@ -308,7 +271,8 @@ $ ./a.out
 
 ![inline](draw/two_arguments.png)
 
-# Typechecking
+# 型検査
+![background](img/memopad.png)
 
 ~~~
 $ vi f_takes_double.dats
@@ -327,9 +291,10 @@ The actual term is: S2Eapp(S2Ecst(g0float_t0ype); S2Ecst(double_kind))
 The needed term is: S2Eapp(S2Ecst(g0int_t0ype); S2Ecst(int_kind))
 ~~~
 
-Function "f" should take value of int.
+関数 "f" はint型の値を取るべきでした。
 
-# Conditional branch
+# 条件分岐
+![background](img/memopad.png)
 
 ~~~
 $ vi if_then_else.dats
@@ -346,7 +311,8 @@ $ ./a.out
 
 ![inline](draw/if_then_else2.png)
 
-# Able to drop else clause
+# else節は省略できます
+![background](img/memopad.png)
 
 ~~~
 $ vi println_expr.dats
@@ -360,7 +326,8 @@ It's true.
 
 ![inline](draw/println_expr.png)
 
-# Showing types
+# 型を表示するには$showtype
+![background](img/memopad.png)
 
 ~~~
 $ vi showtype_int.dats
@@ -374,13 +341,8 @@ $ ./a.out
 3
 ~~~
 
-"Wiki for ATS2" explains "$showtype".
-
-~~~
-"$showtype" prints out the type of a value or variable in ATS's internal type representation. Very helpful for understanding type errors, but the exact meaning of the output can still be cryptic for more complicated cases.
-~~~
-
-# Immutable string
+# 不変の文字列
+![background](img/memopad.png)
 
 ~~~
 $ vi print_foo.dats
@@ -394,12 +356,13 @@ $ ./a.out
 foo
 ~~~
 
-However, immutable string can't do such like following:
+けれども、不変の文字列では次のような関数を使えません:
 
-* append
-* reverse
+* 連結
+* 逆順
 
-# Try to use mutable string
+# 可変の文字列を使ってみよう
+![background](img/memopad.png)
 
 ~~~
 $ vi try_string_append.dats
@@ -415,9 +378,10 @@ patsopt(TRANS3): there are [1] errors in total.
 exit(ATS): uncaught exception: _2home_2kiwamu_2src_2ATS_2dPostiats_2src_2pats_error_2esats__FatalErrorExn(1025)
 ~~~
 
-Why does error occur?
+なぜエラーになったのでしょうか？
 
-# Need to free mutable string
+# 可変の文字列はfreeする必要がある
+![background](img/memopad.png)
 
 ~~~
 $ vi string_append.dats
@@ -433,19 +397,22 @@ $ ./a.out
 YokohamaStation
 ~~~
 
-The "ATS_MEMALLOC_LIBC" flag is needed to use malloc on libc.
+"ATS_MEMALLOC_LIBC"フラグはlibcのmallocを使うために必要です。
 
-How can ATS2 know failure of free?
+どうやってATS2はfree忘れを検出したのでしょうか？
 
-# Linear type watches resource
+# 線形型はリソースを監視する
+![background](img/memopad.png)
 
 ![inline](draw/string_append.png)
 
-# Type of List
+# リストの型
+![background](img/memopad.png)
 
 ![inline](draw/list_vt_type.png)
 
-# Create list
+# リストの生成
+![background](img/memopad.png)
 
 ~~~
 $ vi make_pair.dats
@@ -461,13 +428,15 @@ $ ./a.out
 1, 2
 ~~~
 
-The "\<int\>" is needed to use template function.
+テンプレート関数を使うために "\<int\>" が必要です。
 
-# Create list as figure
+# リストの生成を図で
+![background](img/memopad.png)
 
 ![inline](draw/list_vt_make_pair.png)
 
-# Append list
+# リストの連結
+![background](img/memopad.png)
 
 ~~~
 $ vi append_list.dats
@@ -485,25 +454,12 @@ $ ./a.out
 3, 1, 2
 ~~~
 
-# Append list as figure
+# リストの連結を図で
+![background](img/memopad.png)
 
 ![inline](draw/list_vt_append.png)
 
-# Join "Japan ATS User Group" !
-
+# Japan ATS User Groupどうですか
 ![background](img/jats-ug_logo_v1.png)
 
 http://jats-ug.metasepi.org/
-
-We translate following ATS documents into Japanese.
-
-~~~
-* ATSプログラミング入門
-  http://jats-ug.metasepi.org/doc/ATS2/INT2PROGINATS/
-* ATSプログラミングチュートリアル
-  http://jats-ug.metasepi.org/doc/ATS2/ATS2TUTORIAL/
-* Effective ATS
-  https://github.com/jats-ug/translate/blob/master/Manual/EffectiveATS.md
-~~~
-
-Join us and review it!
