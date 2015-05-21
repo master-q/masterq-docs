@@ -13,6 +13,10 @@ ATS2コンパイラはインストール済みですか？
 
 * http://bit.ly/instatsj
 
+またこのスライドのソースコードも入手できます:
+
+* http://bit.ly/ats20150523
+
 # ATSって何でしょう?
 
 ![background](img/ats_logo_on_display.png)
@@ -23,7 +27,7 @@ http://www.ats-lang.org/
 * 依存型
 * 線形型
 * GCなしでも動作
-* ランタイムを持たない
+* ランタイムシステムを持たない
 * Dependent MLの後継
 
 # ATSを使うと何ができるの？
@@ -418,14 +422,14 @@ YokohamaStation
 # 線形型はリソースを監視する
 ![background](img/memopad.png)
 
-可変の文字列(strptr)を消費し忘れるとコンパイルエラーです。
+可変の文字列(strptr型)を消費し忘れるとコンパイルエラーです。
 
 ![inline](draw/string_append.png)
 
 # リストの型
 ![background](img/memopad.png)
 
-リスト型(list_vt)は下図のような構造です。
+リスト(list_vt型)は下図のような構造です。
 
 ![inline](draw/list_vt_type.png)
 
@@ -484,4 +488,11 @@ $ ./a.out
 # Japan ATS User Groupどうですか
 ![background](img/jats-ug_logo_v1.png)
 
+日本語でATSに関する情報交換をするグループJapan ATS User Group (JATS-UG)があります。
+現在の主な活動はATS関連ドキュメントの日本語翻訳です。
+
 http://jats-ug.metasepi.org/
+
+入会にあたって特に規則などはありません。
+「オレはJATS-UGメンバーだぜ」
+と言ったその日からあなたもメンバーです!
