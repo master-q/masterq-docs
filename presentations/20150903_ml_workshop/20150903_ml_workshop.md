@@ -51,6 +51,7 @@ We choose the 3rd approach.
 ![inline](draw/comparison.png)
 
 # ATS language
+![background](img/ats_logo_on_display.png)
 
 * http://www.ats-lang.org/
 * Dependent types
