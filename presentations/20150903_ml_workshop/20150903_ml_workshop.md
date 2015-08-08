@@ -4,11 +4,13 @@ Kiwamu Okabe @ METASEPI DESIGN / Hongwei Xi @ Boston University
 
 # Demo: xxx
 
-* LCD greeting
+* http://youtu.be/5uPue0Jo1nc
 * LCD sort
 * LED fadein
 
 # Demo: Software Architecture
+
+https://github.com/fpiot/arduino-ats
 
 ![inline](draw/demo_arch.png)
 
@@ -31,13 +33,16 @@ Many people use C language on the hardware.
 We need functional language on embedded system!
 
 # Approach 1: Virtual machine
+
+![inline](draw/vm.png)
+
 # Approach 2: DSL
 
-Copilot
+![inline](draw/dsl.png)
 
-# Approach 3: G.P.P language
+# Approach 3: Direct language
 
-Use general-purpose programming language.
+![inline](draw/direct.png)
 
 # Pros/Cons
 # ATS language
