@@ -44,7 +44,12 @@ We need functional language on embedded system!
 
 ![inline](draw/direct.png)
 
-# Pros/Cons
+# Comparison of the approaches
+
+We choose the 3rd approach.
+
+![inline](draw/comparison.png)
+
 # ATS language
 
 * http://www.ats-lang.org/
