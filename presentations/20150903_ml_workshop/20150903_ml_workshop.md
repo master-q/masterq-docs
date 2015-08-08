@@ -8,7 +8,13 @@ Kiwamu Okabe @ METASEPI DESIGN / Hongwei Xi @ Boston University
 * LCD sort
 * LED fadein
 
-# Arduino hardware
+# Demo: Software Architecture
+
+![inline](draw/demo_arch.png)
+
+# Arduino Uno hardware
+
+It's poor.
 
 * 8-bit Harvard architecture
 * Flash Memory: 32 KB
@@ -26,6 +32,9 @@ We need functional language on embedded system!
 
 # Approach 1: Virtual machine
 # Approach 2: DSL
+
+Copilot
+
 # Approach 3: G.P.P language
 
 Use general-purpose programming language.
