@@ -71,7 +71,7 @@ fun{} int_foreach_clo{n:nat}
 (n: int(n), fwork: &natLt(n) -<clo1> void): void =
   loop(0, fwork) where {
   fun loop{i:nat | i <= n} .<n-i>.
-    (i: int(i), fwork: &natLt(n) -<clo1> void):void =
+    (i: int(i), fwork: &natLt(n) -<clo1> void): void =
     if i < n then (fwork(i); loop (i+1, fwork))
 }
 
@@ -82,13 +82,12 @@ implement main () = {
   in
     int_foreach_clo(256, fwork)
   end // end of [fadein]
-  (* val () = init () *)
   val () = pinMode (LED, OUTPUT)
   val () = (fix f(): void => (fadein(); f()))()
 }
 ```
 
-# Demo code: LCD greeting
+# Demo code: LCD greeting (cont.)
 
 ```
 #define MY_DELAY_MS 400.0
@@ -101,14 +100,23 @@ implement main () = {
   fun loop {n:int}{i:nat | i < n}
            (lcd: !lcd_t, str: string (n), pos: size_t (i)): void = {
     val () = if pos + i2sz LCD_WIDTH <= length str then {
-      val () = (lcd_setCursor (lcd, 1, 0); lcd_print (lcd, g_str_atsrun, i2sz 0, length g_str_atsrun))
-      val () = (lcd_setCursor (lcd, 0, 1); lcd_print (lcd, str, pos, i2sz LCD_WIDTH))
+      val () = lcd_setCursor (lcd, 1, 0)
+      val () = lcd_print (lcd, g_str_atsrun, i2sz 0,
+                          length g_str_atsrun)
+      val () = lcd_setCursor (lcd, 0, 1)
+      val () = lcd_print (lcd, str, pos, i2sz LCD_WIDTH)
       val () = delay_ms (MY_DELAY_MS)
       val () = loop (lcd, str, pos + 1)
     }
   }
+```
+
+# Demo code: LCD greeting
+
+```
   fun forever {n:int}{i:nat | i < n}
-              (lcd: !lcd_t, str: string (n), pos: size_t (i)): void = {
+              (lcd: !lcd_t, str: string (n), pos: size_t (i)):
+              void = {
     val () = loop (lcd, str, pos)
     val () = forever (lcd, str, pos)
   }
