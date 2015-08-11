@@ -30,7 +30,7 @@ Many people use C language on the hardware.
 * Out of bounds
 * Weak type
 
-We need functional language on embedded system!
+We need functional language for embedded system!
 
 # Approach 1: Virtual machine
 
@@ -128,15 +128,46 @@ implement main () = {
 
 # Functional style programming
 
-* Envless function
-* Unbind closure
-* Stack closure
-* Template function
+* We use functional style programming with ATS on embedded system?
+* Yes.
+* Let's see some examples.
 
+# Style 1. Envless function
+
+* Environment less function.
+* Not closure.
+* C language function is an envless function.
+
+```
+%{^ // C language code
+int cfunc(int a, int b) {
+        return (a + b);
+}
+%}
+// ATS language code
+extern fun cfunc (a: int, b: int): int = "mac#"
+
+implement main0 () = println! (cfunc (1, 2)) // => 3
+```
+
+# Style 2. Unbind closure
+
+xxx
+
+```
+implement main0 () = {
+  val () = (fix f(): void => (println! "Hello!"; f()))()
+}
+```
+
+# Style 3. Stack closure
+# Style 4. Template function
 # Safety shaped by ATS
 
 * Termination metrics
 * At-view
 * View
 
+# Binary size efficiency
 # Conclusion
+# License of photos used
