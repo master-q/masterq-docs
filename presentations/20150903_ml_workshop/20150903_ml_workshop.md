@@ -97,8 +97,8 @@ val g_str_atsrun = "<ATS running!>"
 val g_str_message = "...Greeting message..."
 
 implement main () = {
-  fun loop {n:int}{i:nat | i < n}
-           (lcd: !lcd_t, str: string (n), pos: size_t (i)): void = {
+  fun loop {n:int}{i:nat | i < n} .<n-i>.
+         (lcd: !lcd_t, str: string (n), pos: size_t (i)): void = {
     val () = if pos + i2sz LCD_WIDTH <= length str then {
       val () = lcd_setCursor (lcd, 1, 0)
       val () = lcd_print (lcd, g_str_atsrun, i2sz 0,
@@ -178,6 +178,8 @@ implement main0 () = {
 
 # Style 4. Template function
 
+The template is functorial style that has lexical scoping.
+
 ```
 extern fun{} base (): int
 
@@ -191,11 +193,14 @@ implement main0 () = {
 
 # Safety shaped by ATS
 
-* Termination metrics
-* At-view
-* View
-* Dependent types
-* Proof
+xxx
+
+* Let's see some examples.
+
+# Safety 1. Termination metrics
+# Safety 2. Dependent types
+# Safety 3. At-view
+# Safety 4. View
 
 # Binary size efficiency
 
