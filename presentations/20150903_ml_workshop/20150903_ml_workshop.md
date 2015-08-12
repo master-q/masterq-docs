@@ -128,8 +128,9 @@ implement main () = {
 
 # Functional style programming
 
-* We use functional style programming with ATS on embedded system?
+* Functional style programming can be used with ATS on embedded system?
 * Yes.
+* But only use some of functional style technique in ATS without GC and malloc/free.
 * Let's see some examples.
 
 # Style 1. Envless function
