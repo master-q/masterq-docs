@@ -161,13 +161,46 @@ implement main0 () = {
 ```
 
 # Style 3. Stack closure
+
+Stack closure is allocated on stack.
+It can use free variable.
+
+```
+fun run (f: &int -<clo1> int): int = f 1
+
+implement main0 () = {
+  val b = 2
+  var plus = lam@ (a: int):int => a + b
+  val () = println! (run plus) // => 3
+}
+```
+
 # Style 4. Template function
+
+```
+extern fun{} base (): int
+
+fun{} plus (a: int): int = a + base ()
+
+implement main0 () = {
+  implement{} base () = 2
+  val () = println! (plus 1) // => 3
+}
+```
+
 # Safety shaped by ATS
 
 * Termination metrics
 * At-view
 * View
+* Dependent types
+* Proof
 
 # Binary size efficiency
+
+For examples on "Getting Started with Arduino", ATS has good binary size efficiency as well as C.
+
+![inline](img/space_efficiency.png)
+
 # Conclusion
 # License of photos used
