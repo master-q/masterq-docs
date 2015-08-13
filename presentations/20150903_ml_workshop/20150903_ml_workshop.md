@@ -4,10 +4,10 @@ Kiwamu Okabe @ METASEPI DESIGN / Hongwei Xi @ Boston University
 
 # Demo: Video
 
-* LCD greeting
-* http://youtu.be/5uPue0Jo1nc
 * LED fadein
-* xxx
+* => xxx
+* LCD greeting
+* => http://youtu.be/5uPue0Jo1nc
 
 # Demo: Software Architecture
 
@@ -60,6 +60,122 @@ We choose the 3rd approach.
 * Optional GC
 * Optional malloc/free
 * Optional run-time
+
+# Functional style programming
+
+* Functional style programming can be used with ATS on embedded system?
+* Yes.
+* But only use some of functional style technique in ATS without GC and malloc/free.
+* Let's see some examples.
+
+# Style 1. Envless function
+
+* Environment less function.
+* Not closure.
+* C language function is also envless function.
+
+```
+%{^ // C language code
+int cfunc(int a, int b) {
+        return (a + b);
+}
+%}
+// ATS language code
+extern fun cfunc (a: int, b: int): int = "mac#"
+
+implement main0 () = println! (cfunc (1, 2)) // => 3
+```
+
+# Style 2. Stack closure
+
+Stack closure is allocated on stack.
+It can use free variable.
+
+```
+fun run (f: &int -<clo1> int): int = f 1
+
+implement main0 () = {
+  val b = 2
+  var plus = lam@ (a: int):int => a + b
+  val () = println! (run plus) // => 3
+}
+```
+
+# Style 3. Template function
+
+The template is functorial style that has lexical scoping.
+
+```
+extern fun{} base (): int
+
+fun{} plus (a: int): int = a + base ()
+
+implement main0 () = {
+  implement{} base () = 2
+  val () = println! (plus 1) // => 3
+}
+```
+
+# Safety shaped by ATS
+
+* ATS is a better C language.
+* "Better" is meaning "more safe".
+* Let's see some examples.
+
+# Safety 1. Termination metrics
+
+".<255 - n>." is termination metric that grows smaller on each recursive call, for termination-checking.
+
+```
+fun loop_fadein {n:nat | n <= 255} .<255 - n>. (i: int n): void = {
+  val () = analogWrite (LED, i)
+  val () = delay_ms (BLINK_DELAY_MS)
+  val () = if i < 255 then loop_fadein (i + 1)
+}
+...
+val () = loop_fadein 0
+```
+
+# Safety 2. Dependent types
+
+"size_t (i)" is a type that depends on static value "i".
+"i" has constraint "i < n".
+If the constraint is not solved, it causes compile error.
+
+```
+fun lcd_print {n:int}{i:nat | i < n}{j:nat | i + j <= n}
+      (lcd: !lcd_t, str: string (n), start: size_t (i),
+       len: size_t (j)): void
+```
+
+![inline](draw/lcd_sats_type.png)
+
+# Safety 3. View
+
+View is Prop that should be produced and consumed.
+
+If produced View was not consumed, it causes compile error.
+
+```
+// lcd.sats - Library interface
+absvtype lcd_t = ptr
+fun lcd_open (rs: int, rw: int, enable: int, d0: int, d1: int,
+              d2: int, d3: int): lcd_t // Produce view
+fun lcd_close (lcd: lcd_t): void // Consume view
+
+// main.dats - Application code
+implement main () = {
+  val lcd = lcd_open (8, 13, 9, 4, 5, 6, 7)
+  // ...Do something...
+  val () = lcd_close lcd // <= If not, compile error occurs.
+}
+```
+
+# Safety 4. At-view
+
+At-view is a ticket to grant accessing memory address.
+
+xxx Figure
 
 # Demo code: LED fadein
 
@@ -126,112 +242,6 @@ implement main () = {
   val () = lcd_close lcd
 }
 ```
-
-# Functional style programming
-
-* Functional style programming can be used with ATS on embedded system?
-* Yes.
-* But only use some of functional style technique in ATS without GC and malloc/free.
-* Let's see some examples.
-
-# Style 1. Envless function
-
-* Environment less function.
-* Not closure.
-* C language function is also envless function.
-
-```
-%{^ // C language code
-int cfunc(int a, int b) {
-        return (a + b);
-}
-%}
-// ATS language code
-extern fun cfunc (a: int, b: int): int = "mac#"
-
-implement main0 () = println! (cfunc (1, 2)) // => 3
-```
-
-# Style 2. Stack closure
-
-Stack closure is allocated on stack.
-It can use free variable.
-
-```
-fun run (f: &int -<clo1> int): int = f 1
-
-implement main0 () = {
-  val b = 2
-  var plus = lam@ (a: int):int => a + b
-  val () = println! (run plus) // => 3
-}
-```
-
-# Style 3. Template function
-
-The template is functorial style that has lexical scoping.
-
-```
-extern fun{} base (): int
-
-fun{} plus (a: int): int = a + base ()
-
-implement main0 () = {
-  implement{} base () = 2
-  val () = println! (plus 1) // => 3
-}
-```
-
-# Safety shaped by ATS
-
-xxx
-
-* Let's see some examples.
-
-# Safety 1. Termination metrics
-
-xxx
-
-# Safety 2. Dependent types
-
-"size_t (i)" is a type that depends on static value "i".
-"i" has constraint "i < n".
-If the constraint is not solved, it causes compile error.
-
-```
-fun lcd_print {n:int}{i:nat | i < n}{j:nat | i + j <= n}
-      (lcd: !lcd_t, str: string (n), start: size_t (i),
-       len: size_t (j)): void
-```
-
-![inline](draw/lcd_sats_type.png)
-
-# Safety 3. View
-
-View is Prop that should be produced and consumed.
-
-If produced View was not consumed, it causes compile error.
-
-```
-// lcd.sats - Library interface
-absvtype lcd_t = ptr
-fun lcd_open (rs: int, rw: int, enable: int, d0: int, d1: int,
-              d2: int, d3: int): lcd_t // Produce view
-fun lcd_close (lcd: lcd_t): void // Consume view
-
-// main.dats - Application code
-implement main () = {
-  val lcd = lcd_open (8, 13, 9, 4, 5, 6, 7)
-  // ...Do something...
-  val () = lcd_close lcd // <= If not, compile error occurs.
-}
-```
-
-# Safety 4. At-view
-
-At-view is a ticket to grant accessing memory address.
-
-xxx Figure
 
 # Binary size efficiency
 
