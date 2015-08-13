@@ -2,11 +2,12 @@
 
 Kiwamu Okabe @ METASEPI DESIGN / Hongwei Xi @ Boston University
 
-# Demo: xxx
+# Demo: Video
 
+* LCD greeting
 * http://youtu.be/5uPue0Jo1nc
-* LCD sort
 * LED fadein
+* xxx
 
 # Demo: Software Architecture
 
@@ -137,7 +138,7 @@ implement main () = {
 
 * Environment less function.
 * Not closure.
-* C language function is an envless function.
+* C language function is also envless function.
 
 ```
 %{^ // C language code
@@ -188,9 +189,49 @@ xxx
 * Let's see some examples.
 
 # Safety 1. Termination metrics
+
+xxx
+
 # Safety 2. Dependent types
-# Safety 3. At-view
-# Safety 4. View
+
+"size_t (i)" is a type that depends on static value "i".
+"i" has constraint "i < n".
+If the constraint is not solved, it causes compile error.
+
+```
+fun lcd_print {n:int}{i:nat | i < n}{j:nat | i + j <= n}
+      (lcd: !lcd_t, str: string (n), start: size_t (i),
+       len: size_t (j)): void
+```
+
+![inline](draw/lcd_sats_type.png)
+
+# Safety 3. View
+
+View is Prop that should be produced and consumed.
+
+If produced View was not consumed, it causes compile error.
+
+```
+// lcd.sats - Library interface
+absvtype lcd_t = ptr
+fun lcd_open (rs: int, rw: int, enable: int, d0: int, d1: int,
+              d2: int, d3: int): lcd_t // Produce view
+fun lcd_close (lcd: lcd_t): void // Consume view
+
+// main.dats - Application code
+implement main () = {
+  val lcd = lcd_open (8, 13, 9, 4, 5, 6, 7)
+  // ...Do something...
+  val () = lcd_close lcd // <= If not, compile error occurs.
+}
+```
+
+# Safety 4. At-view
+
+At-view is a ticket to grant accessing memory address.
+
+xxx Figure
 
 # Binary size efficiency
 
