@@ -151,17 +151,7 @@ extern fun cfunc (a: int, b: int): int = "mac#"
 implement main0 () = println! (cfunc (1, 2)) // => 3
 ```
 
-# Style 2. Unbind closure
-
-xxx
-
-```
-implement main0 () = {
-  val () = (fix f(): void => (println! "Hello!"; f()))()
-}
-```
-
-# Style 3. Stack closure
+# Style 2. Stack closure
 
 Stack closure is allocated on stack.
 It can use free variable.
@@ -176,7 +166,7 @@ implement main0 () = {
 }
 ```
 
-# Style 4. Template function
+# Style 3. Template function
 
 The template is functorial style that has lexical scoping.
 
