@@ -5,9 +5,9 @@ Kiwamu Okabe @ METASEPI DESIGN / Hongwei Xi @ Boston University
 # Demo: Video
 
 * LED fadein
-* => xxx
+* ⇒ xxx
 * LCD greeting
-* => http://youtu.be/5uPue0Jo1nc
+* ⇒ http://youtu.be/5uPue0Jo1nc
 
 # Demo: Software Architecture
 
@@ -173,9 +173,14 @@ implement main () = {
 
 # Safety 4. At-view
 
-At-view is a ticket to grant accessing memory address.
+```
+dataview array_v (a:t@ype+, addr, int) =
+  | {l:addr} array_v_nil (a, l, 0)
+  | {l:addr}{n:nat} array_v_cons (a, l, n+1) of
+                    (a @ l, array_v (a, l+sizeof(a), n))
+```
 
-xxx Figure
+![inline](draw/at-view.png)
 
 # Demo code: LED fadein
 
