@@ -69,6 +69,7 @@ We choose the 3rd approach.
 * Let's see some examples.
 
 # Style 1. Envless function
+![background](img/memopad.png)
 
 * Environment less function.
 * Not closure.
@@ -87,6 +88,7 @@ implement main0 () = println! (cfunc (1, 2)) // => 3
 ```
 
 # Style 2. Stack closure
+![background](img/memopad.png)
 
 Stack closure is allocated on stack.
 It can use free variable.
@@ -102,6 +104,7 @@ implement main0 () = {
 ```
 
 # Style 3. Template function
+![background](img/memopad.png)
 
 The template is functorial style that has lexical scoping.
 
@@ -123,6 +126,7 @@ implement main0 () = {
 * Let's see some examples.
 
 # Safety 1. Termination metrics
+![background](img/memopad.png)
 
 ".<255 - n>." is termination metric that grows smaller on each recursive call, for termination-checking.
 
@@ -137,6 +141,7 @@ val () = loop_fadein 0
 ```
 
 # Safety 2. Dependent types
+![background](img/memopad.png)
 
 "size_t (i)" is a type that depends on static value "i".
 "i" has constraint "i < n".
@@ -151,6 +156,7 @@ fun lcd_print {n:int}{i:nat | i < n}{j:nat | i + j <= n}
 ![inline](draw/lcd_sats_type.png)
 
 # Safety 3. View
+![background](img/memopad.png)
 
 View is Prop that should be produced and consumed.
 
@@ -172,6 +178,7 @@ implement main () = {
 ```
 
 # Safety 4. At-view
+![background](img/memopad.png)
 
 ```
 dataview array_v (a:t@ype+, addr, int) =
@@ -183,6 +190,7 @@ dataview array_v (a:t@ype+, addr, int) =
 ![inline](draw/at-view.png)
 
 # Demo code: LED fadein
+![background](img/memopad.png)
 
 ```
 #define LED 9
@@ -210,6 +218,7 @@ implement main () = {
 ```
 
 # Demo code: LCD greeting (cont.)
+![background](img/memopad.png)
 
 ```
 #define MY_DELAY_MS 400.0
@@ -234,6 +243,7 @@ implement main () = {
 ```
 
 # Demo code: LCD greeting
+![background](img/memopad.png)
 
 ```
   fun forever {n:int}{i:nat | i < n}
@@ -255,4 +265,13 @@ For examples on "Getting Started with Arduino", ATS has good binary size efficie
 ![inline](img/space_efficiency.png)
 
 # Conclusion
-# License of photos used
+
+xxx
+
+# License of photos
+
+```
+* Title xxx
+  https://xxx
+  Copyright: 20xx Name / License: CC
+```
