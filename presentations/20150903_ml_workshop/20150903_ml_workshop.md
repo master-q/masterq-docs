@@ -128,6 +128,7 @@ implement main0 () = {
 ```
 
 # Safety shaped by ATS
+![background](img/simulator.png)
 
 * ATS is a better C language.
 * "Better" is meaning "more safe".
@@ -267,19 +268,22 @@ implement main () = {
 ```
 
 # Binary size efficiency
+![background](img/bird_flock.png)
 
 For examples on "Getting Started with Arduino", ATS has good binary size efficiency as well as C.
 
 ![inline](img/space_efficiency.png)
 
 # Conclusion
+![background](img/arduino_unboxing.png)
 
 * Can we directly use functional style programming on embedded system?
 * ⇒ Yes, with ATS language.
 * Can we make more safety than C language on embedded system?
 * ⇒ Yes, with ATS language.
 
-# License of photos
+# License of photos #1
+![background](img/creative_commons.png)
 
 ```
 * Minecraft toys | Flickr - Photo Sharing!
@@ -297,4 +301,22 @@ For examples on "Getting Started with Arduino", ATS has good binary size efficie
 * Recycling Grunge Sign | Flickr - Photo Sharing!
   https://www.flickr.com/photos/80497449@N04/8677649972/
   Copyright: Nicolas Raymond / License: CC BY 2.0
+* IMG_4097 | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/matthewpiatt/1562708158/
+  Copyright: Matthew Piatt / License: CC BY-SA 2.0
+* Seagulls in Flight | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/87007001@N04/13513835453/
+  Copyright: Shaun Fisher / License: CC BY 2.0
+```
+
+# License of photos #2
+![background](img/creative_commons.png)
+
+```
+* Arduino Uno unboxing | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/mightyohm/5052594028/
+  Copyright: Jeff Keyzer / License: CC BY-SA 2.0
+* Creative Commons BBB | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/steren/2732488224/
+  Copyright: Steren Giannini / License: CC BY 2.0
 ```
