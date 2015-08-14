@@ -10,12 +10,14 @@ Kiwamu Okabe @ METASEPI DESIGN / Hongwei Xi @ Boston University
 * ⇒ http://youtu.be/5uPue0Jo1nc
 
 # Demo: Software Architecture
+![background](img/minecraft.png)
 
 https://github.com/fpiot/arduino-ats
 
 ![inline](draw/demo_arch.png)
 
 # Arduino Uno hardware
+![background](img/arduino_uno.png)
 
 It's poor.
 
@@ -26,6 +28,7 @@ It's poor.
 Many people use C language on the hardware.
 
 # Problem of C language
+![background](img/Dennis_Ritchie.png)
 
 * Memory/Resource leak
 * Out of bounds
@@ -34,18 +37,22 @@ Many people use C language on the hardware.
 We need functional language for embedded system!
 
 # Approach 1: Virtual machine
+![background](img/climbing.png)
 
 ![inline](draw/vm.png)
 
 # Approach 2: DSL
+![background](img/climbing.png)
 
 ![inline](draw/dsl.png)
 
 # Approach 3: Direct language
+![background](img/climbing.png)
 
 ![inline](draw/direct.png)
 
 # Comparison of the approaches
+![background](img/climbing.png)
 
 We choose the 3rd approach.
 
@@ -62,6 +69,7 @@ We choose the 3rd approach.
 * Optional run-time
 
 # Functional style programming
+![background](img/recycle.png)
 
 * Functional style programming can be used with ATS on embedded system?
 * Yes.
@@ -266,12 +274,27 @@ For examples on "Getting Started with Arduino", ATS has good binary size efficie
 
 # Conclusion
 
-xxx
+* Can we directly use functional style programming on embedded system?
+* ⇒ Yes, with ATS language.
+* Can we make more safety than C language on embedded system?
+* ⇒ Yes, with ATS language.
 
 # License of photos
 
 ```
-* Title xxx
-  https://xxx
-  Copyright: 20xx Name / License: CC
+* Minecraft toys | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/sergesegal/15976451410/
+  Copyright: 2015 Sergey Galyonkin / License: CC BY-SA 2.0
+* Arduino Uno | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/snootlab/6052455554/
+  Copyright: Snootlab / License: CC BY 2.0
+* Thank You Dennis Ritchie | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/vincentpants/6239875256/
+  Copyright: Vincent van Haaff / License: CC BY-SA 2.0
+* Climbing Journal Mount Rinjani package | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/trekkingrinjani/4930552641/
+  Copyright: Trekking Rinjani / License: CC BY 2.0
+* Recycling Grunge Sign | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/80497449@N04/8677649972/
+  Copyright: Nicolas Raymond / License: CC BY 2.0
 ```
