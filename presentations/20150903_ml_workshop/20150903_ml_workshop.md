@@ -1,8 +1,10 @@
 # Arduino programming of ML-style in ATS
+![background](img/led.png)
 
 Kiwamu Okabe @ METASEPI DESIGN / Hongwei Xi @ Boston University
 
 # Demo: Video
+![background](img/demo_icfp2014.png)
 
 * LED fadein
 * ⇒ xxx
@@ -319,4 +321,7 @@ For examples on "Getting Started with Arduino", ATS has good binary size efficie
 * Creative Commons BBB | Flickr - Photo Sharing!
   https://www.flickr.com/photos/steren/2732488224/
   Copyright: Steren Giannini / License: CC BY 2.0
+* LED | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/nao904/6084536885/
+  Copyright: Nao. Fujita / License: CC BY 2.0
 ```
