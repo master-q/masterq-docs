@@ -64,7 +64,7 @@ We choose the 3rd approach.
 ![background](img/ats_logo_on_display.png)
 
 * http://www.ats-lang.org/
-* Dependent types
+* DML-style dependent types
 * Linear types
 * Optional GC
 * Optional malloc/free
@@ -81,7 +81,7 @@ We choose the 3rd approach.
 # Style 1. Envless function
 ![background](img/memopad.png)
 
-* Environment less function.
+* Environment-less function.
 * Not closure.
 * C language function is also envless function.
 
@@ -97,10 +97,10 @@ extern fun cfunc (a: int, b: int): int = "mac#"
 implement main0 () = println! (cfunc (1, 2)) // => 3
 ```
 
-# Style 2. Stack closure
+# Style 2. Stack allocated closure
 ![background](img/memopad.png)
 
-Stack closure is allocated on stack.
+Stack allocated closure is allocated on stack.
 It can use free variable.
 
 ```
@@ -133,7 +133,7 @@ implement main0 () = {
 ![background](img/simulator.png)
 
 * ATS is a better C language.
-* "Better" is meaning "more safe".
+* "Better" is meaning "Safer".
 * Let's see some examples.
 
 # Safety 1. Termination metrics
@@ -151,7 +151,7 @@ fun loop_fadein {n:nat | n <= 255} .<255 - n>. (i: int n): void = {
 val () = loop_fadein 0
 ```
 
-# Safety 2. Dependent types
+# Safety 2. DML-style dependent types
 ![background](img/memopad.png)
 
 "size_t (i)" is a type that depends on static value "i".
@@ -169,16 +169,16 @@ fun lcd_print {n:int}{i:nat | i < n}{j:nat | i + j <= n}
 # Safety 3. View
 ![background](img/memopad.png)
 
-View is Prop that should be produced and consumed.
+Linear proofs should be produced and consumed.
 
-If produced View was not consumed, it causes compile error.
+If a produced linear proof is not consumed, it causes type error at compile time.
 
 ```
 // lcd.sats - Library interface
 absvtype lcd_t = ptr
 fun lcd_open (rs: int, rw: int, enable: int, d0: int, d1: int,
-              d2: int, d3: int): lcd_t // Produce view
-fun lcd_close (lcd: lcd_t): void // Consume view
+              d2: int, d3: int): lcd_t // Produce linear value
+fun lcd_close (lcd: lcd_t): void // Consume linear value
 
 // main.dats - Application code
 implement main () = {
