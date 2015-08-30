@@ -70,6 +70,11 @@ We choose the 3rd approach.
 * Optional malloc/free
 * Optional run-time
 
+# Author: Hongwei Xi
+![background](img/with_hongwei.png)
+
+![inline](img/with_hongwei.png)
+
 # Functional style programming
 ![background](img/recycle.png)
 
