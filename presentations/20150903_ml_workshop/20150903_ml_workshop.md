@@ -75,6 +75,13 @@ We choose the 3rd approach.
 
 ![inline](img/with_hongwei.png)
 
+# ATS programming level
+![background](img/steps.png)
+
+![inline](draw/ats_level.png)
+
+Today, we focus on the level "c", because Arduino hardware is poor.
+
 # Functional style programming
 ![background](img/recycle.png)
 
@@ -329,4 +336,7 @@ For examples on "Getting Started with Arduino", ATS has good binary size efficie
 * LED | Flickr - Photo Sharing!
   https://www.flickr.com/photos/nao904/6084536885/
   Copyright: Nao. Fujita / License: CC BY 2.0
+* Pagoda's curly steps | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/kewl/6834141860/
+  Copyright: Tristan Schmurr / License: CC BY 2.0
 ```
