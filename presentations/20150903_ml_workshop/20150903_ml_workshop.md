@@ -6,10 +6,10 @@ Kiwamu Okabe @ METASEPI DESIGN / Hongwei Xi @ Boston University
 # Demo: Video
 ![background](img/demo_icfp2014.png)
 
-* LED fadein
-* ⇒ xxx
 * LCD greeting
 * ⇒ http://youtu.be/5uPue0Jo1nc
+* LED fadein
+* ⇒ http://youtu.be/_Sx6GzuTm9k
 
 # Demo: Software Architecture
 ![background](img/minecraft.png)
