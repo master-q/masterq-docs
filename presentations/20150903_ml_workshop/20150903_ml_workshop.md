@@ -191,7 +191,6 @@ absvtype lcd_t = ptr
 fun lcd_open (rs: int, rw: int, enable: int, d0: int, d1: int,
               d2: int, d3: int): lcd_t // Produce linear value
 fun lcd_close (lcd: lcd_t): void // Consume linear value
-
 // main.dats - Application code
 implement main () = {
   val lcd = lcd_open (8, 13, 9, 4, 5, 6, 7)
