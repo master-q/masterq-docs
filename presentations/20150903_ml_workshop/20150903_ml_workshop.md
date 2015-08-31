@@ -163,7 +163,7 @@ fun loop_fadein {n:nat | n <= 255} .<255 - n>. (i: int n): void = {
 val () = loop_fadein 0
 ```
 
-# Safety 2. DML-style dependent types
+# Safety 2. DML dependent types
 ![background](img/memopad.png)
 
 "size_t (i)" is a type that depends on static value "i".
