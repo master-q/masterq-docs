@@ -14,8 +14,6 @@ Kiwamu Okabe @ METASEPI DESIGN / Hongwei Xi @ Boston University
 # Demo: Software Architecture
 ![background](img/minecraft.png)
 
-https://github.com/fpiot/arduino-ats
-
 ![inline](draw/demo_arch.png)
 
 # Arduino Uno hardware
@@ -294,6 +292,8 @@ For examples on "Getting Started with Arduino", ATS has good binary size efficie
 * ⇒ Yes, with ATS language.
 * Can we make more safety than C language on embedded system?
 * ⇒ Yes, with ATS language.
+
+https://github.com/fpiot/arduino-ats
 
 # License of photos #1
 ![background](img/creative_commons.png)
