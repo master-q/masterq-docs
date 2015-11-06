@@ -1,4 +1,4 @@
-# Static typing and proof on ATS language
+# Static typing and proof in ATS language
 ![background](img/rps.png)
 
 Kiwamu Okabe
@@ -117,7 +117,7 @@ rps_t rps_even_d(rps_t x, rps_t y) {
 * Introduce specification using static typing.
 * You will get more compile-time errors.
 * You will get less run-time errors.
-* You can do that on ATS language.
+* You can do that in ATS language.
 
 # ATS language
 ![background](img/ats_logo_on_display.png)
@@ -131,12 +131,12 @@ rps_t rps_even_d(rps_t x, rps_t y) {
 
 More strong type can be used on the ATS.
 
-# DML-style dependent types on ATS
+# DML-style dependent types in ATS
 ![background](img/cuddle.png)
 
 ![inline](draw/dynamics_statics_proofs.png)
 
-# Type of R-P-S on ATS
+# Type of R-P-S in ATS
 ![background](img/memopad.png)
 
 ```ats
