@@ -20,7 +20,7 @@ https://github.com/jats-ug/translate/blob/master/Web/bluishcoder.co.nz/2014/04/1
 
 "A safer systems programming language could have prevented the bug."
 
-# What is ATS?
+# Want the safer language... It's ATS!
 ![background](img/ats_logo_on_display.png)
 
 * http://www.ats-lang.org/
@@ -156,6 +156,7 @@ Buzz
 ```
 
 # ATS binary is portable
+![background](img/memopad.png)
 
 * File size is 13 kB
 
@@ -184,8 +185,6 @@ $ ldd fizzbuzz
         libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fc3c363f000)
         /lib64/ld-linux-x86-64.so.2 (0x000055d77ccd1000)
 ```
-
-
 
 # ATS compile flow
 ![background](img/umbrellas.png)
@@ -220,6 +219,66 @@ Arduino Uno hardware:
 https://github.com/fpiot/arduino-ats
 
 ![inline](draw/demo_arch.png)
+
+# The world of ATS
+
+![inline](draw/dynamics_statics_proofs.png)
+
+# ML-style programming on ATS
+
+* Dynamics of ATS is similar to Standard ML.
+* You should represent type signature of function, because ATS can't inference everything.
+* You should introduce main function, because ATS code is compiled into C language.
+
+# Fizzbuzz on Standard ML
+![background](img/memopad.png)
+
+```ocaml
+
+(* http://rosettacode.org/wiki/FizzBuzz#Standard_ML *)
+
+local
+  fun fbstr i =
+    case (i mod 3 = 0, i mod 5 = 0) of
+        (true , true ) => "FizzBuzz"
+      | (true , false) => "Fizz"
+      | (false, true ) => "Buzz"
+      | (false, false) => Int.toString i
+
+  fun fizzbuzz' (n, j) =
+    if n = j then ()
+      else (print (fbstr j ^ "\n"); fizzbuzz' (n, j+1))
+in
+  fun fizzbuzz n = fizzbuzz' (n, 1)
+  val _ = fizzbuzz 100
+end
+```
+
+# Fizzbuzz on ATS
+![background](img/memopad.png)
+
+```ats
+#include "share/atspre_define.hats"
+#include "share/atspre_staload.hats"
+
+local
+  fun fbstr (i:int): string =
+    case (i mod 3 = 0, i mod 5 = 0) of
+        (true , true ) => "FizzBuzz"
+      | (true , false) => "Fizz"
+      | (false, true ) => "Buzz"
+      | (false, false) => tostring_int i
+
+  fun fizzbuzz' (n:int, j:int): void =
+    if n = j then ()
+      else (println! (fbstr j); fizzbuzz' (n, j+1))
+in
+  fun fizzbuzz (n:int): void = fizzbuzz' (n, 1)
+  val _ = fizzbuzz 100
+end
+
+implement main0 () = ()
+```
 
 # Proof: Curry–Howard in ATS
 ![background](img/curry.png)
