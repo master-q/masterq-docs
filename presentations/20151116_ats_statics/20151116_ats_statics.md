@@ -128,24 +128,27 @@ implement{} rps_even_d (x, y) =
   | (_, _) => $raise GenerallyExn("The x should win the y.")
 ```
 
-# However you can make an error
+# However you can make run-time error
 
 ```ats
 implement{} rps_win_d (x) =
   case+ x of
-  | r_rps_t() => r_rps_t() (* Error! *)
+  | r_rps_t() => r_rps_t() (* Run-time error! *)
   | p_rps_t() => s_rps_t()
   | s_rps_t() => r_rps_t()
 
 implement{} rps_even_d (x, y) =
   case+ (x, y) of
   | (p_rps_t(), r_rps_t()) => rps_win_d (x)
-  | (s_rps_t(), p_rps_t()) => rps_win_d (y) (* Error! *)
+  | (s_rps_t(), p_rps_t()) => rps_win_d (y) (* Run-time error! *)
   | (r_rps_t(), s_rps_t()) => rps_win_d (x)
-  | (_, _) => $raise GenerallyExn("The x should win the y.") (* And we would like to avoid exception *)
+  | (_, _) => $raise GenerallyExn("The x should win the y.") (* We would like to avoid exception. *)
 ```
 
-# RPS using Statics of ATS #1
+It's caused by having no specification in the implementation.
+ATS language can have specification as Statics or Proofs.
+
+# Specification using Statics of ATS
 
 ```ats
 stacst rps_win_sta: (rps_s, rps_s) -> bool
@@ -157,12 +160,12 @@ fun{} rps_win_s
 
 ![inline](draw/statics_rps.png)
 
-# RPS using Statics of ATS #2
+# Implementation using Statics of ATS
 
 ```ats
-extern praxi rps_win_r_s_pf (): [rps_win_sta(r_rps_s, s_rps_s)] void
-extern praxi rps_win_p_r_pf (): [rps_win_sta(p_rps_s, r_rps_s)] void
-extern praxi rps_win_s_p_pf (): [rps_win_sta(s_rps_s, p_rps_s)] void
+extern praxi rps_win_r_s_pf (): [rps_win_sta(r_rps_s, s_rps_s)] void (* Spec: Paper wins Rock *)
+extern praxi rps_win_p_r_pf (): [rps_win_sta(p_rps_s, r_rps_s)] void (* Spec: Scissors win Paper *)
+extern praxi rps_win_s_p_pf (): [rps_win_sta(s_rps_s, p_rps_s)] void (* Spec: Rock wins Scissors *)
 
 implement{} rps_win_s (x) = let
   prval () = rps_win_r_s_pf() (* Introduce specification *)
@@ -176,13 +179,39 @@ in
 end
 ```
 
-# RPS using Proofs of ATS #1
+# Statics can catch error at compile-time
+
+```ats
+
+
+
+
+
+
+implement{} rps_win_s (x) = let
+  prval () = rps_win_r_s_pf() (* Introduce specification *)
+  prval () = rps_win_p_r_pf()
+  prval () = rps_win_s_p_pf()
+in
+  case+ x of
+  | r_rps_t() => r_rps_t() (* Compile-time error! *)
+  | p_rps_t() => s_rps_t()
+  | s_rps_t() => r_rps_t()
+end
+```
+
+```
+$ patscc main.dats -DATS_MEMALLOC_LIBC
+/home/kiwamu/src/practice-ats/static_rps/rps.dats: 933(line=36, offs=18) -- 942(line=36, offs=27): error(3): unsolved constraint: C3NSTRprop(C3TKmain(); S2Eapp(S2Ecst(rps_win_sta); S2EVar(4434->S2Eapp(S2Ecst(r_rps_s); )), S2Evar(r1$2870(7929))))
+```
+
+# Specification using Proofs of ATS
 
 ```ats
 dataprop RPS_WIN (rps_s, rps_s) =
-  | RPS_P_WIN_R (p_rps_s, r_rps_s) (* Paper wins Rock *)
-  | RPS_S_WIN_P (s_rps_s, p_rps_s) (* Scissors win Paper *)
-  | RPS_R_WIN_S (r_rps_s, s_rps_s) (* Rock wins Scissors *)
+  | RPS_P_WIN_R (p_rps_s, r_rps_s) (* Spec: Paper wins Rock *)
+  | RPS_S_WIN_P (s_rps_s, p_rps_s) (* Spec: Scissors win Paper *)
+  | RPS_R_WIN_S (r_rps_s, s_rps_s) (* Spec: Rock wins Scissors *)
 
 fun{} rps_win_p
   {r1:rps_s} (x: rps_t (r1)):
@@ -191,13 +220,27 @@ fun{} rps_win_p
 
 ![inline](draw/proofs_rps.png)
 
-# RPS using Proofs of ATS #2
+# Implementation using Proofs of ATS
 
 ```ats
 implement{} rps_win_p (x) = case+ x of
   | r_rps_t() => (RPS_P_WIN_R() | p_rps_t())
   | p_rps_t() => (RPS_S_WIN_P() | s_rps_t())
   | s_rps_t() => (RPS_R_WIN_S() | r_rps_t())
+```
+
+# Proofs can catch error at compile-time
+
+```ats
+implement{} rps_win_p (x) = case+ x of
+  | r_rps_t() => (RPS_R_WIN_S() | r_rps_t()) (* Compile-time error! *)
+  | p_rps_t() => (RPS_S_WIN_P() | s_rps_t())
+  | s_rps_t() => (RPS_R_WIN_S() | r_rps_t())
+```
+
+```
+$ patscc main.dats -DATS_MEMALLOC_LIBC
+/home/kiwamu/src/practice-ats/static_rps/rps.dats: 1199(line=45, offs=18) -- 1226(line=45, offs=45): error(3): the dynamic expression cannot be assigned the type [S2Eexi(r2$2876(7935); ; S2Etyrec(flt0; npf=1; 0=S2Eapp(S2Ecst(RPS_WIN); S2Evar(r2$2876(7935)), S2Evar(r1$2875(7934))), 1=S2Eapp(S2Ecst(rps_t); S2Evar(r2$2876(7935)))))].
 ```
 
 # The code is found at GitHub
