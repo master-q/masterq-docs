@@ -9,6 +9,7 @@ Kiwamu Okabe
 ![inline](img/Rock-paper-scissors.png)
 
 # RPS in C language #1
+![background](img/memopad.png)
 
 ```c
 #include <stdio.h>
@@ -33,6 +34,7 @@ void print_rps(rps_t x) {
 ```
 
 # RPS in C language #2
+![background](img/memopad.png)
 
 ```c
 rps_t rps_win_d(rps_t x) {
@@ -63,6 +65,7 @@ rps_t rps_even_d(rps_t x, rps_t y) {
 ```
 
 # RPS in C language #3
+![background](img/memopad.png)
 
 ```c
 int main() {
@@ -77,7 +80,37 @@ int main() {
 }
 ```
 
+# However you can make run-time error
+![background](img/memopad.png)
+
+```c
+rps_t rps_win_d(rps_t x) {
+	switch (x) {
+	case R_RPS_T:
+		return R_RPS_T; /* Run-time error! */
+	case P_RPS_T:
+		return S_RPS_T;
+	case S_RPS_T:
+		return R_RPS_T;
+	default:
+		abort();
+	}
+}
+
+rps_t rps_even_d(rps_t x, rps_t y) {
+	switch (PACK(x, y)) {
+	case PACK(P_RPS_T, R_RPS_T):
+	case PACK(S_RPS_T, P_RPS_T):
+	case PACK(R_RPS_T, S_RPS_T):
+		return rps_win_d(y); /* Run-time error! */
+	default:
+		abort(); /* We would like to avoid exception. */
+	}
+}
+```
+
 # ATS language
+![background](img/ats_logo_on_display.png)
 
 * http://www.ats-lang.org/
 * DML-style dependent types
@@ -93,6 +126,7 @@ More strong type can be used on the ATS.
 ![inline](draw/dynamics_statics_proofs.png)
 
 # Type of RPS on ATS
+![background](img/memopad.png)
 
 ```ats
 datasort rps_s =
@@ -109,6 +143,7 @@ typedef rps_t_any = [x:rps_s] rps_t (x)
 ![inline](draw/type_rps.png)
 
 # Only use Dynamics of ATS
+![background](img/memopad.png)
 
 ```ats
 fun{} rps_win_d (x: rps_t_any): rps_t_any
@@ -128,7 +163,8 @@ implement{} rps_even_d (x, y) =
   | (_, _) => $raise GenerallyExn("The x should win the y.")
 ```
 
-# However you can make run-time error
+# Also you can make run-time error
+![background](img/memopad.png)
 
 ```ats
 implement{} rps_win_d (x) =
@@ -149,6 +185,7 @@ It's caused by having no specification in the implementation.
 ATS language can have specification as Statics or Proofs.
 
 # Specification using Statics of ATS
+![background](img/memopad.png)
 
 ```ats
 stacst rps_win_sta: (rps_s, rps_s) -> bool
@@ -161,6 +198,7 @@ fun{} rps_win_s
 ![inline](draw/statics_rps.png)
 
 # Implementation using Statics of ATS
+![background](img/memopad.png)
 
 ```ats
 extern praxi rps_win_r_s_pf (): [rps_win_sta(r_rps_s, s_rps_s)] void (* Spec: Paper wins Rock *)
@@ -180,6 +218,7 @@ end
 ```
 
 # Statics can catch error at compile-time
+![background](img/memopad.png)
 
 ```ats
 
@@ -206,6 +245,7 @@ $ patscc main.dats -DATS_MEMALLOC_LIBC
 ```
 
 # Specification using Proofs of ATS
+![background](img/memopad.png)
 
 ```ats
 dataprop RPS_WIN (rps_s, rps_s) =
@@ -221,6 +261,7 @@ fun{} rps_win_p
 ![inline](draw/proofs_rps.png)
 
 # Implementation using Proofs of ATS
+![background](img/memopad.png)
 
 ```ats
 implement{} rps_win_p (x) = case+ x of
@@ -230,6 +271,7 @@ implement{} rps_win_p (x) = case+ x of
 ```
 
 # Proofs can catch error at compile-time
+![background](img/memopad.png)
 
 ```ats
 implement{} rps_win_p (x) = case+ x of
