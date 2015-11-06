@@ -1,14 +1,16 @@
 # Static typing and proof on ATS language
+![background](img/rps.png)
 
 Kiwamu Okabe
 
 # Let's make Rock-paper-scissors library
+![background](img/akb48.png)
 
 * "じゃんけん" in Japanese.
 
 ![inline](img/Rock-paper-scissors.png)
 
-# RPS in C language #1
+# R-P-S in C language #1
 ![background](img/memopad.png)
 
 ```c
@@ -33,7 +35,23 @@ void print_rps(rps_t x) {
 }
 ```
 
-# RPS in C language #2
+# R-P-S in C language #2
+![background](img/memopad.png)
+
+```c
+int main() {
+	rps_t paper_d = P_RPS_T;
+	rps_t win_d = rps_win_d (paper_d);
+	print_rps(win_d); printf(" win "); print_rps(paper_d); printf(".\n");
+	/* => Scissors win Paper. */
+	rps_t even_d = rps_even_d(win_d, paper_d);
+	print_rps(even_d); printf(" is even between "); print_rps(win_d);
+	printf(" and "); print_rps(paper_d); printf(".\n");
+	/* => Rock is even between Scissors and Paper. */
+}
+```
+
+# R-P-S in C language #3
 ![background](img/memopad.png)
 
 ```c
@@ -51,7 +69,6 @@ rps_t rps_win_d(rps_t x) {
 }
 
 #define PACK(X,Y) ((X)<<4 | (Y))
-
 rps_t rps_even_d(rps_t x, rps_t y) {
 	switch (PACK(x, y)) {
 	case PACK(P_RPS_T, R_RPS_T):
@@ -61,22 +78,6 @@ rps_t rps_even_d(rps_t x, rps_t y) {
 	default:
 		abort();
 	}
-}
-```
-
-# RPS in C language #3
-![background](img/memopad.png)
-
-```c
-int main() {
-	rps_t paper_d = P_RPS_T;
-	rps_t win_d = rps_win_d (paper_d);
-	print_rps(win_d); printf(" win "); print_rps(paper_d); printf(".\n");
-	/* => Scissors win Paper. */
-	rps_t even_d = rps_even_d(win_d, paper_d);
-	print_rps(even_d); printf(" is even between "); print_rps(win_d);
-	printf(" and "); print_rps(paper_d); printf(".\n");
-	/* => Rock is even between Scissors and Paper. */
 }
 ```
 
@@ -90,13 +91,14 @@ rps_t rps_win_d(rps_t x) {
 		return R_RPS_T; /* Run-time error! */
 	case P_RPS_T:
 		return S_RPS_T;
-	case S_RPS_T:
-		return R_RPS_T;
+/*	case S_RPS_T:
+		return R_RPS_T; */ /* Not exhaustive! */
 	default:
-		abort();
+		abort(); /* Abort occurs! */
 	}
 }
 
+#define PACK(X,Y) ((X)<<4 | (Y))
 rps_t rps_even_d(rps_t x, rps_t y) {
 	switch (PACK(x, y)) {
 	case PACK(P_RPS_T, R_RPS_T):
@@ -104,10 +106,18 @@ rps_t rps_even_d(rps_t x, rps_t y) {
 	case PACK(R_RPS_T, S_RPS_T):
 		return rps_win_d(y); /* Run-time error! */
 	default:
-		abort(); /* We would like to avoid exception. */
+		abort(); /* Abort occurs! */
 	}
 }
 ```
+
+# Please imagine specification on code
+![background](img/imagine.png)
+
+* Introduce specification using static typing.
+* You will get more compile-time errors.
+* You will get less run-time errors.
+* You can do that on ATS language.
 
 # ATS language
 ![background](img/ats_logo_on_display.png)
@@ -122,10 +132,11 @@ rps_t rps_even_d(rps_t x, rps_t y) {
 More strong type can be used on the ATS.
 
 # DML-style dependent types on ATS
+![background](img/cuddle.png)
 
 ![inline](draw/dynamics_statics_proofs.png)
 
-# Type of RPS on ATS
+# Type of R-P-S on ATS
 ![background](img/memopad.png)
 
 ```ats
@@ -171,14 +182,14 @@ implement{} rps_win_d (x) =
   case+ x of
   | r_rps_t() => r_rps_t() (* Run-time error! *)
   | p_rps_t() => s_rps_t()
-  | s_rps_t() => r_rps_t()
+(*| s_rps_t() => r_rps_t() *) (* Compile-time error! *)
 
 implement{} rps_even_d (x, y) =
   case+ (x, y) of
   | (p_rps_t(), r_rps_t()) => rps_win_d (x)
   | (s_rps_t(), p_rps_t()) => rps_win_d (y) (* Run-time error! *)
   | (r_rps_t(), s_rps_t()) => rps_win_d (x)
-  | (_, _) => $raise GenerallyExn("The x should win the y.") (* We would like to avoid exception. *)
+  | (_, _) => $raise GenerallyExn("The x should win the y.") (* Exception occurs! *)
 ```
 
 It's caused by having no specification in the implementation.
@@ -286,6 +297,7 @@ $ patscc main.dats -DATS_MEMALLOC_LIBC
 ```
 
 # The code is found at GitHub
+![background](img/github.png)
 
 ```
 https://github.com/jats-ug/practice-ats/tree/master/static_rps
@@ -294,9 +306,28 @@ https://github.com/jats-ug/practice-ats/tree/master/static_rps
 ![inline](img/github_static_rps.png)
 
 # License of photos
+![background](img/creative_commons.png)
 
 ```
 * A chart showing how the three game elements of "Rock-paper-scissors" interact.
   https://en.wikipedia.org/wiki/Rock-paper-scissors#/media/File:Rock-paper-scissors.svg
   Copyright: Antonsusi / License: CC BY-SA 3.0
+* Scissors Rock Paper | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/zombiesquirrels/3477986919/
+  Copyright: Mike Souza / License: CC BY-SA 2.0
+* AKB48 34th Single Selection Rock, Paper, Scissors Tournament: Advertisement at Shibuya Station | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/31029865@N06/15018892358/
+  Copyright: Dick Thomas Johnson / License: CC BY 2.0
+* Cuddle | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/peptravassos/14206994372/
+  Copyright: Pedro Travassos / License: CC BY 2.0
+* Corey Donohoe (GitHub): Metrics Driven | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/stevelacey/5820920545/
+  Copyright: Steve Lacey / License: CC BY 2.0
+* Imagine | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/tonythemisfit/4773974792/
+  Copyright: Tony Fischer / License: CC BY 2.0
+* Creative Commons BBB | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/steren/2732488224/
+  Copyright: Steren Giannini / License: CC BY 2.0
 ```
