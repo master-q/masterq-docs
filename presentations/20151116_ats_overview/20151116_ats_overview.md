@@ -32,6 +32,7 @@ https://github.com/jats-ug/translate/blob/master/Web/bluishcoder.co.nz/2014/04/1
 * Optional run-time
 
 # How to install ATS compiler
+![background](img/cookiing.png)
 
 * In English: http://bit.ly/instats
 * In Japanese: http://bit.ly/instatsj
@@ -221,10 +222,12 @@ https://github.com/fpiot/arduino-ats
 ![inline](draw/demo_arch.png)
 
 # The world of ATS programming
+![background](img/worldmap.png)
 
 ![inline](draw/dynamics_statics_proofs.png)
 
 # Dynamics: ML-style programming
+![background](img/robin_milner.png)
 
 * Dynamics of ATS is similar to Standard ML.
 * You should represent type signature of function, because ATS can't inference everything.
@@ -326,9 +329,12 @@ You can write following application:
 Good news for low-level programming!
 
 # Prop is similar to Coq
+![background](img/chicken.png)
 
 * Coq is an interactive theorem prover.
-* ATS also has subsystem for therorem-proving.
+* ATS also has subsystem for theorem-proving.
+* But ATS doesn't have tactics.
+* ATS constructs proofs as total functions.
 
 # Prop: Coq code
 ![background](img/memopad.png)
@@ -377,6 +383,7 @@ primplement gds = Gd_Sun ()
 Coq and ATS have same structure.
 
 # View is linear type
+![background](img/craters.png)
 
 * View is linear type in ATS
 * View manages producing and consuming resource
@@ -429,6 +436,7 @@ implement main0 () = {
 ```
 
 # At-view: figure of using pointer
+![background](img/arrow.png)
 
 ![inline](draw/at-view.png)
 
