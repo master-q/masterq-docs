@@ -220,11 +220,11 @@ https://github.com/fpiot/arduino-ats
 
 ![inline](draw/demo_arch.png)
 
-# The world of ATS
+# The world of ATS programming
 
 ![inline](draw/dynamics_statics_proofs.png)
 
-# ML-style programming on ATS
+# Dynamics: ML-style programming
 
 * Dynamics of ATS is similar to Standard ML.
 * You should represent type signature of function, because ATS can't inference everything.
@@ -325,24 +325,75 @@ You can write following application:
 
 Good news for low-level programming!
 
-# Linear type: type of list
+# View: Linear type
+
+* View is Linear type in ATS
+* View manages producing and consuming resource
+* Example of resource: memory chunk, array, list, queue, lock/unlock, session, ...
+* At-view is a ticket to permit dereferencing pointer
+
+# View: type of list
 ![background](img/haribo.png)
 
 List defined with linear type.
 
 ![inline](draw/list_vt_type.png)
 
-# Linear type: create list
+# View: figure of create list
 ![background](img/haribo.png)
-
-Compile error occurs, if consuming is forgotten.
 
 ![inline](draw/list_vt_make_pair.png)
 
-# Linear type: append list
+# View: code of create list
+![background](img/memopad.png)
+
+```ats
+#include "share/atspre_staload.hats"
+
+implement main0 () = {
+  val l = list_vt_make_pair (1, 2)
+  val () = print_list_vt<int> l
+(*val () = list_vt_free<int> l *) (* Compile-time error! *)
+}
+```
+
+# View: figure of append list
 ![background](img/haribo.png)
 
 ![inline](draw/list_vt_append.png)
+
+# View: code of append list
+![background](img/memopad.png)
+
+```ats
+#include "share/atspre_staload.hats"
+
+implement main0 () = {
+  val l1 = list_vt_make_pair (1, 2)
+  val l2 = list_vt_make_sing 3
+  val l3 = list_vt_append (l2, l1)
+  val () = print_list_vt<int> l3 (* => 3, 1, 2 *)
+(*val () = list_vt_free<int> l3 *) (* Compile-time error! *)
+}
+```
+
+# At-view: figure of using pointer
+
+![inline](draw/at-view.png)
+
+# At-view: code of using pointer
+
+```ats
+#include "share/atspre_staload.hats"
+
+implement main0 () = {
+  val (pfat, pfgc | p) = ptr_alloc<int> () (* The pfat is an at-view *)
+  val () = !p := 9                         (* Store value into pointer *)
+  val () = println! !p                     (* Show value in the pointer *)
+  val () = ptr_free (pfgc, pfat | p)
+  val () = println! !p                     (* Compile-time error! *)
+}
+```
 
 # Join "Japan ATS User Group" !
 
