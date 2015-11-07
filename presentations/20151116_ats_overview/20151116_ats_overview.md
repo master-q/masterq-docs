@@ -291,34 +291,34 @@ implement main0 () = ()
 * Proposition: Proof function signature introduced by keyword "prfun"
 * Proof: Proof function body introduced by keyword "primplement"
 
-# Proof: style of functions
+# Proof: Style of functions
 ![background](img/wardrobe.png)
 
 ![inline](draw/style_of_function.png)
 
-# Proof: function signature
+# Proof: Function signature
 ![background](img/dictionary.png)
 
 ![inline](draw/grammar_sig.png)
 
-# Proof: function body
+# Proof: Function body
 ![background](img/dictionary.png)
 
 ![inline](draw/grammar_fun_body.png)
 
-# Proof: before compiling
+# Proof: Before compiling
 ![background](img/puyo.png)
 
 ![inline](draw/application_before_compiling.png)
 
-# Proof: after compiling
+# Proof: After compiling
 ![background](img/puyo.png)
 
 Proof is erased at compile time.
 
 ![inline](draw/application_after_compiling.png)
 
-# Proof: pros of mixed function
+# Proof: Pros of mixed function
 ![background](img/icecream.png)
 
 You can write following application:
@@ -382,6 +382,126 @@ primplement gds = Gd_Sun ()
 
 Coq and ATS have same structure.
 
+# Prop: Design palindrome library
+![background](img/blueprint.png)
+
+```
+https://github.com/jats-ug/practice-ats/tree/master/atslf_palindrome
+```
+
+![inline](draw/design_pal.png)
+
+# Prop: Structure of palindrome
+![background](img/memopad.png)
+
+```ats
+dataprop PAL (ilist) =
+  | PALnil (ilist_nil) of ()
+  | {x:int} PALone (ilist_sing (x)) of ()
+  | {x:int}{l,ll:ilist}
+    PALcons (ilist_cons (x, ll)) of (PAL (l), SNOC (l, x, ll))
+```
+
+![inline](draw/pal.png)
+
+# Prop: Proposition on palindrome
+![background](img/memopad.png)
+
+```ats
+dataprop PAPPEND (ilist, ilist, ilist) =
+  | {pxs:ilist} PAPPENDnil (pxs, ilist_nil, pxs) of PAL (pxs)
+  | {pxs,pxsx,ys,pzs:ilist}{x:int}
+    PAPPENDcons (pxs, ilist_cons (x, ys), pzs)
+      of (SNOC (pxs, x, pxsx),
+        PAPPEND (ilist_cons (x, pxsx), ys, pzs))
+
+prfun pal_app {l,lr,m:ilist}
+  (pf1: REVERSE (l, lr), pf2: APPEND (l, lr, m)): PAL (m)
+```
+
+# Prop: Some lemma
+![background](img/memopad.png)
+
+```ats
+extern prfun
+lemma2_reverse_scons {x:int}{xs:ilist}{ys1:ilist}
+  (REVERSE(ilist_cons(x,xs), ys1)):
+  [ys:ilist] (REVERSE(xs, ys), SNOC(ys, x, ys1))
+
+extern prfun
+lemma2_append_scons {x:int}{xs,ys:ilist}{ys1,zs1:ilist}
+  (APPEND(xs, ys1, zs1), SNOC(ys, x, ys1)):
+  [zs:ilist] (APPEND(xs, ys, zs), SNOC(zs, x, zs1))
+```
+
+# Prop: Prove palindrome append
+![background](img/memopad.png)
+
+```ats
+primplement
+pal_app {l,lr,m} (pf1, pf2) = let
+  prfun lemma  {l,lr,m:ilist} .<l>.
+      (pf1: REVERSE (l, lr), pf2: APPEND (l, lr, m)): PAL (m) =
+    case+ pf2 of
+    | APPENDnil () => let prval REVAPPnil () = pf1 in PALnil () end
+    | APPENDcons(pf2) => let
+        prval (pfrev, pfsnoc) = lemma2_reverse_scons (pf1)
+        prval (pfapp, pfsnoc2) = lemma2_append_scons (pf2, pfsnoc)
+        prval pfpal = lemma (pfrev, pfapp)
+      in
+        PALcons (pfpal, pfsnoc2)
+      end
+in
+  lemma (pf1, pf2)
+end
+```
+
+# Prop: Function signature using PAL
+![background](img/memopad.png)
+
+```ats
+fun{a:t@ype} pal_empty
+  (): (PAL (ilist_nil) | gflist (a, ilist_nil ()))
+fun{a:t@ype} pal_sing
+  {x:int} (x: stamped_t (a, x)):
+  (PAL (ilist_sing(x)) | gflist (a, ilist_sing(x)))
+fun{a:t@ype} pal_pappend
+  {pxs,xs:ilist}
+  (pf: PAL (pxs) | pxs: gflist (INV(a), pxs), xs: gflist (a, xs)):
+  [pxsx:ilist] (PAL (pxsx), PAPPEND (pxs, xs, pxsx) |
+    gflist (a, pxsx))
+fun{a:t@ype} print_pal
+  {xs:ilist} (pf: PAL (xs) | xs: gflist (INV(a), xs)): void
+```
+
+# Prop: Application using PAL
+![background](img/memopad.png)
+
+```ats
+implement main0 () = {
+  // Pullup
+  val (pfpal | lpal) = pal_empty ()
+  val (_ | l) = list2gflist $list{char}('L', 'U', 'P')
+  val (pfpal, _ | lpal) = pal_pappend (pfpal | lpal, l)
+  val () = print_pal<char> (pfpal | lpal)
+  val () = print "\n"
+  // Devil never even lived.
+  val (pfpal | lpal) = pal_sing<char> (stamp_t 'R')
+  val (_ | l) = list2gflist
+    $list{char}('E', 'V', 'E', 'N', 'L', 'I', 'V', 'E', 'D')
+  val (pfpal, _ | lpal) = pal_pappend (pfpal | lpal, l)
+  val () = print_pal<char> (pfpal | lpal)
+  val () = print "\n"
+}
+```
+
+```
+$ patscc main.dats -DATS_MEMALLOC_LIBC
+$ ./a.out
+P, U, L, L, U, P
+D, E, V, I, L, N, E, V, E, R, E, V, E, N, L, I, V, E, D
+```
+
 # View is linear type
 ![background](img/craters.png)
 
@@ -390,19 +510,19 @@ Coq and ATS have same structure.
 * Example of resource: memory chunk, array, list, queue, lock/unlock, session, ...
 * At-view is a ticket to permit dereferencing pointer
 
-# View: type of list
+# View: Type of list
 ![background](img/haribo.png)
 
 List defined with linear type.
 
 ![inline](draw/list_vt_type.png)
 
-# View: figure of create list
+# View: Figure of create list
 ![background](img/haribo.png)
 
 ![inline](draw/list_vt_make_pair.png)
 
-# View: code of create list
+# View: Code of create list
 ![background](img/memopad.png)
 
 ```ats
@@ -415,12 +535,12 @@ implement main0 () = {
 }
 ```
 
-# View: figure of append list
+# View: Figure of append list
 ![background](img/haribo.png)
 
 ![inline](draw/list_vt_append.png)
 
-# View: code of append list
+# View: Code of append list
 ![background](img/memopad.png)
 
 ```ats
@@ -435,12 +555,12 @@ implement main0 () = {
 }
 ```
 
-# At-view: figure of using pointer
+# At-view: Figure of using pointer
 ![background](img/arrow.png)
 
 ![inline](draw/at-view.png)
 
-# At-view: code of using pointer
+# At-view: Code of using pointer
 ![background](img/memopad.png)
 
 ```ats
