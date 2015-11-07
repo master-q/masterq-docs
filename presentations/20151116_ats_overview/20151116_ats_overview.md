@@ -325,9 +325,60 @@ You can write following application:
 
 Good news for low-level programming!
 
-# View: Linear type
+# Prop is similar to Coq
 
-* View is Linear type in ATS
+* Coq is an interactive theorem prover.
+* ATS also has subsystem for therorem-proving.
+
+# Prop: Coq code
+![background](img/memopad.png)
+
+```ocaml
+(* Coq *)
+Inductive day : Type :=
+  | monday : day
+  | tuesday : day
+  | wednesday : day
+  | thursday : day
+  | friday : day
+  | saturday : day
+  | sunday : day.
+
+Inductive good_day : day -> Prop :=
+  | gd_sat : good_day saturday
+  | gd_sun : good_day sunday.
+
+Theorem gds : good_day sunday.
+Proof. apply gd_sun. Qed.
+```
+
+# Prop: ATS code
+![background](img/memopad.png)
+
+```ats
+(* ATS *)
+datasort Day =
+  | Monday
+  | Tuesday
+  | Wednesday
+  | Thursday
+  | Friday
+  | Saturday
+  | Sunday
+
+dataprop Good_Day (Day) =
+  | Gd_Sat (Saturday) of ()
+  | Gd_Sun (Sunday) of ()
+
+extern prfun gds: Good_Day Sunday
+primplement gds = Gd_Sun ()
+```
+
+Coq and ATS have same structure.
+
+# View is linear type
+
+* View is linear type in ATS
 * View manages producing and consuming resource
 * Example of resource: memory chunk, array, list, queue, lock/unlock, session, ...
 * At-view is a ticket to permit dereferencing pointer
@@ -382,6 +433,7 @@ implement main0 () = {
 ![inline](draw/at-view.png)
 
 # At-view: code of using pointer
+![background](img/memopad.png)
 
 ```ats
 #include "share/atspre_staload.hats"
