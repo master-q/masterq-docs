@@ -2,7 +2,7 @@ LATEX = platex
 BIBTEX = pbibtex
 DVIPDFM = dvipdfmx
 DVIPDFMFLAGS = -p a4 -f ipa.map
-FILENAME = resume_kiwamuokabe
+FILENAME = resume_kiwamuokabe_ja
 
 # ODG_FILES = $(glob draw/*.odg)
 # EPS_FILES = $(replacesuffixes .odg, .eps, $(ODG_FILES))
