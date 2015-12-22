@@ -2,6 +2,8 @@
 
 Kiwamu Okabe
 
+# Trend
+
 # ATS language
 
 * http://www.ats-lang.org/
