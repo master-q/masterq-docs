@@ -4,21 +4,39 @@ Kiwamu Okabe
 
 # Trend
 
-# ATS language
+# Language
+
+# ATS
 
 * http://www.ats-lang.org/
 
-# Jhc Haskell compiler
+# Jhc
 
 * http://repetae.net/computer/jhc/
 
-# Rust language
+# Rust
 
 * https://www.rust-lang.org/
 
-# Ivory language
+# Ada
+
+* https://www.gnu.org/software/gnat/
+
+# VeriFast
+
+* http://people.cs.kuleuven.be/~bart.jacobs/verifast/
+
+# Ivory
 
 * http://ivorylang.org/
+
+# V7
+# Idris
+# Alloy
+# Coq
+# Isabelle/HOL
+
+# OS
 
 # seL4 microkernel
 
