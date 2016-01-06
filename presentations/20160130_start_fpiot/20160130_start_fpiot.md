@@ -22,6 +22,10 @@ Kiwamu Okabe
 
 * https://www.gnu.org/software/gnat/
 
+# Hexe
+
+* http://haxe.org/
+
 # VeriFast
 
 * http://people.cs.kuleuven.be/~bart.jacobs/verifast/
