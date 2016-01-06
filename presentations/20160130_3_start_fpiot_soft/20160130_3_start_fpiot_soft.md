@@ -1,8 +1,6 @@
-# Introduction of Functional IoT programming
+# Functional IoT: Software Stack
 
 Kiwamu Okabe
-
-# Trend
 
 # Language
 
