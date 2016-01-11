@@ -51,3 +51,7 @@ Kiwamu Okabe
 # Redox
 
 * http://www.redox-os.org/
+
+# AOS
+
+* https://github.com/xlq/aos
