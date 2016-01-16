@@ -23,18 +23,18 @@ C language can easily design the IoT devices?
 # What's Functional IoT?
 
 * http://fpiot.metasepi.org/
-* is a wrestling mat that strong typed languages fight on, to become the champion of system programming language.
-* tries to write demo code running on MCU using the languages.
+* is a wrestling mat that strongly typed languages fight on, to become the champion of system programming language.
+* tries to write demo code running on tiny MCU using the languages.
 * summarizes knowledge of the languages as catalog.
 
 # Why do Functional IoT?
 
 * Today, we have many methodologies for system design.
-* They are static typing, theorem proving, formal method, design by contract, model checking, static verification, SMT solver, etc.
+* For example, they are static typing, theorem proving, formal method, design by contract, model checking, static verification, SMT solver, etc.
 * However, nobody have the exhaustive catalog of them.
 * Let's make the catalog!
 
-# Why need such languages?
+# Why need such methodologies?
 
 Many people choose C/C++ languages to design IoT device.
 However the languages lack following:
@@ -59,13 +59,13 @@ Some methodologies can avoid these errors.
 # Specification to be verified
 
 * Many people maintain specification as natural language.
-* Some methodologies can formally maintain specification and verify it in computer.
+* Some methodologies can formally maintain specification which is verified in computer.
 
 ![inline](draw/spec_verified.png)
 
 # Keeping good quality
 
-* Original author can keep quality of the code, however the other is hard to do it without verify-able specification. Sometimes, the original author will become "the other" in future.
+* Original author can keep quality of the code, however the other is hard to do it by lack of verify-able specification. Sometimes, the original author will become "the other" in future.
 
 ![inline](draw/keeping_quality.png)
 
@@ -88,9 +88,13 @@ C language can't use following feature:
 
 # How to do Functional IoT?
 
-xxx
+* Survey existing the methodologies as you like.
+* Write some demo code running on tiny MCU.
+* Monthly have meetup at Tokyo, Japan.
+* Share your knowledge and demo at the meetup.
+* Update our exhaustive catalog of the methodologies.
 
-# Let's join and share at the meetup!
+# Let's join the Functional IoT meetup!
 
 https://fpiot.doorkeeper.jp/
 
