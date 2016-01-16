@@ -62,4 +62,21 @@ Some methodologies can avoid these errors.
 ![inline](draw/keeping_quality.png)
 
 # Getting less man-hour
+
+* Easy to estimate compile time error, however hard to do run time error, because finding latter needs some testing.
+
+![inline](draw/less_mon-hour.png)
+
 # Fun
+
+C language can't use following feature:
+
+* Algebraic data type
+* Higher-order function
+* Namespace
+* Pattern matching
+* Type inference
+* Garbage collection
+
+# How to do Functional IoT?
+# Let's share it!
