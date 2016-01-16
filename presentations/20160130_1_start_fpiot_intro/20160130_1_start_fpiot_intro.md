@@ -26,19 +26,40 @@ Kiwamu Okabe
 * However, nobody have the exhaustive catalog of them.
 * Let's make the catalog!
 
-# Why need such language?
+# Why need such languages?
 
 Many people choose C/C++ languages to design IoT device.
 However the languages lack following:
 
 * Avoiding vulnerability
-* Soundness
 * Specification to be verified
-* Calculated man-hour
-* Keeping quality
+* Keeping good quality
+* Getting less man-hour
+* Fun
 
 # Avoiding vulnerability
-# Soundness
+
+Vulnerability is caused by following errors:
+
+* Array index out of range (Buffer overflow)
+* Type range violation
+* Division by zero
+* Numerical overflow
+
+Some methodologies can avoid these errors.
+
 # Specification to be verified
-# Calculated man-hour
-# Keeping quality
+
+* Many people maintain specification as natural language.
+* Some methodologies can formally maintain specification and verify it in computer.
+
+![inline](draw/spec_verified.png)
+
+# Keeping good quality
+
+* Original author can keep quality of the code, however the other is hard to do it without verify-able specification. Sometimes, the original author will become "the other" in future.
+
+![inline](draw/keeping_quality.png)
+
+# Getting less man-hour
+# Fun
