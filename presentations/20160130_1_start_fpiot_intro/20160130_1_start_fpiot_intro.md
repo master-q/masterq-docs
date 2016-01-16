@@ -12,6 +12,14 @@ Kiwamu Okabe
 * Self-employed at METASEPI DESIGN
 * A Debian Maintainer
 
+# What's IoT?
+
+The Internet of Things (or IoT for short) refers to uniquely identifiable objects and their virtual representations in an Internet-like structure. Imagine IoT devices are:
+
+* connected to the internet / developed in a short time / storing personal data / secure / more intelligence / inexpensive
+
+C language can easily design the IoT devices?
+
 # What's Functional IoT?
 
 * http://fpiot.metasepi.org/
@@ -79,4 +87,11 @@ C language can't use following feature:
 * Garbage collection
 
 # How to do Functional IoT?
-# Let's share it!
+
+xxx
+
+# Let's join and share at the meetup!
+
+https://fpiot.doorkeeper.jp/
+
+![inline](img/fpiot_meetup.png)
