@@ -16,7 +16,7 @@ Kiwamu Okabe
 
 The Internet of Things (or IoT for short) refers to uniquely identifiable objects and their virtual representations in an Internet-like structure. Imagine IoT devices are:
 
-* connected to the internet / developed in a short time / storing personal data / secure / more intelligence / inexpensive
+connected to the internet / developed in a short time / storing personal data / secure / more intelligence / inexpensive.
 
 C language can easily design the IoT devices?
 
