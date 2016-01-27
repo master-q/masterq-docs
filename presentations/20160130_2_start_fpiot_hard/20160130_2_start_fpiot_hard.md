@@ -11,7 +11,7 @@ Kiwamu Okabe
 
 # Trends
 
-xxx
+![inline](img/trends.png)
 
 # Hardware: ARM Cortex-A
 
