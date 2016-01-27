@@ -9,6 +9,10 @@ Kiwamu Okabe
 * Example of open platform is GCC, Arduino and etc.
 * Let's take a look such open platform.
 
+# Trends
+
+xxx
+
 # Hardware: ARM Cortex-A
 
 * CPU: 32/64-bit / with MMU / 1 - 4 cores
