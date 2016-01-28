@@ -132,21 +132,20 @@ DATS/main.dats:20:26: unsolved constraint: [1]
 # Idris on Arduino
 
 * https://github.com/stepcut/idris-blink
-* But eat many memory. Following crash.
+* Eat much memory. Following crash.
 
 ```
-main =
-  do pinMode 13 1
-     digitalWrite 13 1
-     delay 100
-     digitalWrite 13 0
-     delay 100
-     digitalWrite 13 1
-     delay 100
-     digitalWrite 13 0
-     delay 100
-     digitalWrite 13 1
-     delay 100
+main = do pinMode 13 1
+          digitalWrite 13 1
+          delay 100
+          digitalWrite 13 0
+          delay 100
+          digitalWrite 13 1
+          delay 100
+          digitalWrite 13 0
+          delay 100
+          digitalWrite 13 1
+          delay 100
 ```
 
 # Ada
@@ -207,3 +206,9 @@ main =
 # AOS
 
 * https://github.com/xlq/aos
+
+# License of photos #1
+![background](img/creative_commons.png)
+
+```
+```
