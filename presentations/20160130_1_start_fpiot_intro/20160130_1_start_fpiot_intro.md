@@ -46,6 +46,7 @@ However the languages lack following:
 * Fun
 
 # Avoiding vulnerability
+![background](img/crash.png)
 
 Vulnerability is caused by following errors:
 
@@ -57,6 +58,7 @@ Vulnerability is caused by following errors:
 Some methodologies can avoid these errors.
 
 # Specification to be verified
+![background](img/Physical_Inventory_of_Fuel_Assemblies.png)
 
 * Many people maintain specification as natural language.
 * Some methodologies can formally maintain specification which is verified in computer.
@@ -64,18 +66,21 @@ Some methodologies can avoid these errors.
 ![inline](draw/spec_verified.png)
 
 # Keeping good quality
+![background](img/old_car.png)
 
 * Original author can keep quality of the code, however the other is hard to do it by lack of verify-able specification. Sometimes, the original author will become "the other" in future.
 
 ![inline](draw/keeping_quality.png)
 
 # Getting less man-hour
+![background](img/Iceberg.png)
 
 * Easy to estimate compile time error, however hard to do run time error, because finding latter needs some testing.
 
 ![inline](draw/less_mon-hour.png)
 
 # Fun
+![background](img/kouki_jump.png)
 
 C language can't use following feature:
 
@@ -87,6 +92,7 @@ C language can't use following feature:
 * Garbage collection
 
 # How to do Functional IoT?
+![background](img/pdca.png)
 
 * Survey existing the methodologies as you like.
 * Write some demo code running on tiny MCU.
@@ -95,7 +101,32 @@ C language can't use following feature:
 * Update our exhaustive catalog of the methodologies.
 
 # Let's join the Functional IoT meetup!
+![background](img/beer.png)
 
 https://fpiot.doorkeeper.jp/
 
 ![inline](img/fpiot_meetup.png)
+
+# License of photos
+![background](img/creative_commons.png)
+
+```
+* Volkswagen Beetle crashed through a brick wall | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/simpleinsomnia/23882140795/
+  Copyright: simpleinsomnia / License: CC BY 2.0
+* Physical Inventory of Fuel Assemblies (03210024) | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/iaea_imagebank/8366285569/
+  Copyright: IAEA Imagebank / License: CC BY-SA 2.0
+* Old Car Festival, 2015 | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/50697352@N00/21210898408/
+  Copyright: F. D. Richards / License: CC BY-SA 2.0
+* Iceberg | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/usoceangov/8290528771/
+  Copyright: NOAA's National Ocean Service / License: CC BY 2.0
+* PDCA-Do | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/jurgenappelo/6797304300/
+  Copyright: Jurgen Appelo / License: CC BY 2.0
+* Creative Commons BBB | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/steren/2732488224/
+  Copyright: Steren Giannini / License: CC BY 2.0
+```

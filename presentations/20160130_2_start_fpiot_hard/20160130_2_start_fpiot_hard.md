@@ -176,4 +176,7 @@ http://akizukidenshi.com/catalog/g/gM-08718/
 * 尾州不二見原
   https://commons.wikimedia.org/wiki/File:Fujimi_Fuji_view_field_in_the_Owari_province.jpg
   Copyright: 葛飾北斎 / License: public domain
+* Creative Commons BBB | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/steren/2732488224/
+  Copyright: Steren Giannini / License: CC BY 2.0
 ```
