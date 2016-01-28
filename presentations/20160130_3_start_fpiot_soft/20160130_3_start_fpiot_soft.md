@@ -105,6 +105,8 @@ DATS/main.dats:20:26: unsolved constraint: [1]
 
 * https://github.com/ajhc/demo-cortex-m3
 
+![inline](draw/jhc_mbed.png)
+
 # Ivory
 
 * http://ivorylang.org/
@@ -115,22 +117,52 @@ DATS/main.dats:20:26: unsolved constraint: [1]
 
 # Ivory on Arduino
 
+* https://github.com/fpiot/arduino-ivory
+
+![inline](draw/ivory_arduino.png)
+
 # Idris
 
 * http://www.idris-lang.org/
 * With GC
+* Theorem proving
+* Syntax is similar to Haskell
+* Compiled into C language code
 
 # Idris on Arduino
 
-# Hexe
+* https://github.com/stepcut/idris-blink
+* But eat many memory. Following crash.
 
-* http://haxe.org/
+```
+main =
+  do pinMode 13 1
+     digitalWrite 13 1
+     delay 100
+     digitalWrite 13 0
+     delay 100
+     digitalWrite 13 1
+     delay 100
+     digitalWrite 13 0
+     delay 100
+     digitalWrite 13 1
+     delay 100
+```
 
 # Ada
 
 * http://www.adacore.com/
 * Without GC
-* SPARK
+* Verification with SPARK
+
+# Ada on Arduino
+
+* http://playground.arduino.cc/Code/AVR-Ada
+
+# Hexe
+
+* http://haxe.org/
+* Can run on bare metal hardware?
 
 # - Verification -
 
