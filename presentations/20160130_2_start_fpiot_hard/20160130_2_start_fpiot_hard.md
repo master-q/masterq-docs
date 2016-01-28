@@ -9,17 +9,6 @@ Kiwamu Okabe
 * Example of open platform is GCC, Arduino and etc.
 * Let's take a look such open platform.
 
-# Trends
-
-![inline](img/trends.png)
-
-# Hardware: ARM Cortex-A
-
-* CPU: 32/64-bit / with MMU / 1 - 4 cores
-* RAM: External memory
-* Compiler: GCC, LLVM
-* Widely known as Raspberry Pi and BeagleBoard.
-
 # Hardware and Platform
 
 Which layer do you write using your language?
@@ -42,9 +31,12 @@ http://www.aliexpress.com/item/UNO-Shield-Ethernet-Shield-W5100-R3-UNO-Mega-2560
 # MSP430
 
 * CPU: MSP430 (16-bit)
-* Compiler: GCC
+* Compiler: GCC / Middleware: open source
+* No network support
+* Development board: US $9.99
 
 ```
+http://ti.com/launchpad
 https://github.com/pabigot/bsp430
 ```
 
@@ -52,8 +44,15 @@ https://github.com/pabigot/bsp430
 
 * CPU: PIC18 (8-bit) / PIC32 (32-bit)
 * Compiler: SDCC
+* No network support
+* Development board: 950 + 4500 = ￥5450
 
-xxx
+```
+http://pinguino.cc/
+http://sdcc.sourceforge.net/
+http://akizukidenshi.com/catalog/g/gK-08010/
+http://akizukidenshi.com/catalog/g/gM-03608/
+```
 
 # mbed
 
@@ -65,31 +64,6 @@ xxx
 ```
 https://developer.mbed.org/
 http://www.seeedstudio.com/depot/Arch-Max-CortexM4-based-Mbed-enable-development-board-p-2201.html
-```
-
-# ChibiOS/RT
-
-* CPU: AVR (8-bit), Cortex-M (32-bit)
-* Compiler: GCC / RTOS: open source
-* Network: Ethernet / Tiny RTOS supports HAL
-* Development board: ￥7500
-
-```
-http://www.chibios.org/
-http://akizukidenshi.com/catalog/g/gM-09880/
-```
-
-# Chopstx
-
-* CPU: Cortex-M (32-bit / No MMU)
-* Compiler: GCC / RTOS: open source
-* No network support / Tiny thread library
-* Development board: 10 + 2.74 + 6.90 = US $19.64
-
-```
-http://git.gniibe.org/gitweb/?p=chopstx/chopstx.git
-http://www.seeedstudio.com/depot/FSM55-LED-Matrix-Display-p-2121.html
-http://www.aliexpress.com/item/Free-Shipping-1SET-ST-Link-st-link-V2-for-STM8S-STM8L-STM32-Cortex-M0-Cortex-M3/1619197946.html
 ```
 
 # FreeRTOS
@@ -104,6 +78,31 @@ http://www.aliexpress.com/item/Free-Shipping-1SET-ST-Link-st-link-V2-for-STM8S-S
 http://www.freertos.org/
 https://github.com/sorrowed/STM32-F7-Ethernet-emWin
 http://akizukidenshi.com/catalog/g/gM-09880/
+```
+
+# ChibiOS/RT
+
+* CPU: AVR (8-bit), Cortex-M (32-bit)
+* Compiler: GCC / RTOS: open source
+* Network: Ethernet / Tiny RTOS supports HAL
+* Development board: ￥7500
+
+```
+http://www.chibios.org/
+http://akizukidenshi.com/catalog/g/gM-09880/
+```
+
+# chopstx
+
+* CPU: Cortex-M (32-bit / No MMU)
+* Compiler: GCC / RTOS: open source
+* No network support / Tiny thread library
+* Development board: 10 + 2.74 + 6.90 = US $19.64
+
+```
+http://git.gniibe.org/gitweb/?p=chopstx/chopstx.git
+http://www.seeedstudio.com/depot/FSM55-LED-Matrix-Display-p-2121.html
+http://www.aliexpress.com/item/Free-Shipping-1SET-ST-Link-st-link-V2-for-STM8S-STM8L-STM32-Cortex-M0-Cortex-M3/1619197946.html
 ```
 
 # ESP8266
@@ -131,3 +130,17 @@ http://akizukidenshi.com/catalog/g/gK-06759/
 http://akizukidenshi.com/catalog/g/gM-08264/
 ```
 
+# Raspberry Pi
+
+* CPU: ARM11 or Cortex-A (32-bit / with MMU)
+* Compiler: GCC, LLVM, etc
+* Network: Ethernet / Wi-Fi (USB dongle)
+* Development board: US $25 (1 Model B+)
+
+```
+https://www.raspberrypi.org/
+```
+
+# Trends
+
+![inline](img/trends.png)
