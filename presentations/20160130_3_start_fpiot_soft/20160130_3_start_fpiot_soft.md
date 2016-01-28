@@ -165,14 +165,14 @@ main = do pinMode 13 1
 
 # - Verification -
 
+![inline](draw/verification.png)
+
 # VeriFast
 
 * http://people.cs.kuleuven.be/~bart.jacobs/verifast/
 
 # VeriFast on Arduino
 
-# VDM
-# Z
 # Coq
 # Isabelle/HOL
 # Alloy
@@ -211,4 +211,7 @@ main = do pinMode 13 1
 ![background](img/creative_commons.png)
 
 ```
+* Creative Commons BBB | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/steren/2732488224/
+  Copyright: Steren Giannini / License: CC BY 2.0
 ```
