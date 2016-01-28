@@ -1,8 +1,10 @@
 # Functional IoT: Hardware and Platform
+![background](img/The_Fuji_from_the_mountains_of_Totomi.png)
 
 Kiwamu Okabe
 
 # Hardware for hobby programmer
+![background](img/Fujimi_Fuji_view_field_in_the_Owari_province.png)
 
 * Industrial programmer chooses closed platform.
 * But we are hobby programmer who loves open platform.
@@ -10,12 +12,14 @@ Kiwamu Okabe
 * Let's take a look such open platform.
 
 # Hardware and Platform
+![background](img/Fuji_seen_through_the_Mannen_bridge_at_Fukagawa.png)
 
 Which layer do you write using your language?
 
 ![inline](draw/layer.png)
 
 # Arduino (compatible board)
+![background](img/arduino_uno.png)
 
 * CPU: AVR (8-bit)
 * Compiler: GCC / Middleware: open source
@@ -29,6 +33,7 @@ http://www.aliexpress.com/item/UNO-Shield-Ethernet-Shield-W5100-R3-UNO-Mega-2560
 ```
 
 # MSP430
+![background](img/launchpad-mspexp430g2-01.png)
 
 * CPU: MSP430 (16-bit)
 * Compiler: GCC / Middleware: open source
@@ -41,6 +46,7 @@ https://github.com/pabigot/bsp430
 ```
 
 # Pinguino
+![background](img/pinguino-K-08010.png)
 
 * CPU: PIC18 (8-bit) / PIC32 (32-bit)
 * Compiler: SDCC
@@ -55,6 +61,7 @@ http://akizukidenshi.com/catalog/g/gM-03608/
 ```
 
 # mbed
+![background](img/mbed-Arch-Max.png)
 
 * CPU: Cortex-M (32-bit)
 * Compiler: GCC / RTOS: open source
@@ -67,6 +74,7 @@ http://www.seeedstudio.com/depot/Arch-Max-CortexM4-based-Mbed-enable-development
 ```
 
 # FreeRTOS
+![background](img/stm32f7-discovery-freertos.png)
 
 * CPU: MSP430, Cortex-M, ARM7, RX, PowerPC, etc.
 * Compiler: GCC / RTOS: open source
@@ -81,6 +89,7 @@ http://akizukidenshi.com/catalog/g/gM-09880/
 ```
 
 # ChibiOS/RT
+![background](img/stm32f7-discovery-chibios.png)
 
 * CPU: AVR (8-bit), Cortex-M (32-bit)
 * Compiler: GCC / RTOS: open source
@@ -93,6 +102,7 @@ http://akizukidenshi.com/catalog/g/gM-09880/
 ```
 
 # chopstx
+![background](img/fsm-55.png)
 
 * CPU: Cortex-M (32-bit / No MMU)
 * Compiler: GCC / RTOS: open source
@@ -106,6 +116,7 @@ http://www.aliexpress.com/item/Free-Shipping-1SET-ST-Link-st-link-V2-for-STM8S-S
 ```
 
 # ESP8266
+![background](img/ESP-WROOM-02-dev.png)
 
 * CPU: Xtensa lx106 (32-bit / No MMU)
 * Compiler: GCC / RTOS: closed source
@@ -118,6 +129,7 @@ https://www.switch-science.com/catalog/2500/
 ```
 
 # ToCoNet (Jennic)
+![background](img/twe-lite.png)
 
 * CPU: OpenRISC 1200 (32-bit / No MMU)
 * Compiler: GCC / RTOS: open source?
@@ -131,16 +143,37 @@ http://akizukidenshi.com/catalog/g/gM-08264/
 ```
 
 # Raspberry Pi
+![background](img/Raspberry-Pi.png)
 
 * CPU: ARM11 or Cortex-A (32-bit / with MMU)
 * Compiler: GCC, LLVM, etc
 * Network: Ethernet / Wi-Fi (USB dongle)
-* Development board: US $25 (1 Model B+)
+* Development board: ￥5000 (1 Model B+)
 
 ```
 https://www.raspberrypi.org/
+http://akizukidenshi.com/catalog/g/gM-08718/
 ```
 
 # Trends
+![background](img/The_Great_Wave_off_Kanagawa.png)
 
 ![inline](img/trends.png)
+
+# License of photos
+![background](img/creative_commons.png)
+
+```
+* 神奈川沖浪裏
+  https://commons.wikimedia.org/wiki/File:The_Great_Wave_off_Kanagawa.jpg
+  Copyright: 葛飾北斎 / License: public domain
+* 深川万年橋下
+  https://commons.wikimedia.org/wiki/File:Fuji_seen_through_the_Mannen_bridge_at_Fukagawa.jpg
+  Copyright: 葛飾北斎 / License: public domain
+* 遠江山中
+  https://commons.wikimedia.org/wiki/File:The_Fuji_from_the_mountains_of_Totomi.jpg
+  Copyright: 葛飾北斎 / License: public domain
+* 尾州不二見原
+  https://commons.wikimedia.org/wiki/File:Fujimi_Fuji_view_field_in_the_Owari_province.jpg
+  Copyright: 葛飾北斎 / License: public domain
+```
