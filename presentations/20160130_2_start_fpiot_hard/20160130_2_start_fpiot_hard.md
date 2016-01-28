@@ -160,7 +160,7 @@ http://akizukidenshi.com/catalog/g/gM-08718/
 
 ![inline](img/trends.png)
 
-# License of photos
+# License of photos #1
 ![background](img/creative_commons.png)
 
 ```
@@ -176,6 +176,12 @@ http://akizukidenshi.com/catalog/g/gM-08718/
 * 尾州不二見原
   https://commons.wikimedia.org/wiki/File:Fujimi_Fuji_view_field_in_the_Owari_province.jpg
   Copyright: 葛飾北斎 / License: public domain
+```
+
+# License of photos #2
+![background](img/creative_commons.png)
+
+```
 * Creative Commons BBB | Flickr - Photo Sharing!
   https://www.flickr.com/photos/steren/2732488224/
   Copyright: Steren Giannini / License: CC BY 2.0
