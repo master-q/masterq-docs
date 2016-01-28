@@ -2,46 +2,70 @@
 
 Kiwamu Okabe
 
-# Language
+# We drown in MANY MANY languages!
+
+* There are many many languages in the world.
+* Nobody have the exhaustive catalog of them.
+* However, let's try to get first overview today.
+
+# What the purpose of language?
+
+I think that there are three major classes of the languages:
+
+* Implementation
+* Verification
+* OS
+
+# - Implementation -
 
 # ATS
 
 * http://www.ats-lang.org/
 
-# Jhc
-
-* http://repetae.net/computer/jhc/
-
 # Rust
 
 * https://www.rust-lang.org/
 
-# Ada
+# Jhc
 
-* https://www.gnu.org/software/gnat/
-
-# Hexe
-
-* http://haxe.org/
-
-# VeriFast
-
-* http://people.cs.kuleuven.be/~bart.jacobs/verifast/
+* http://repetae.net/computer/jhc/
 
 # Ivory
 
 * http://ivorylang.org/
 
+# Idris
+
+# Ada
+
+* http://www.adacore.com/
+* SPARK
+
+# Hexe
+
+* http://haxe.org/
+
+# - Verification -
+
+# VDM
+# Z
+# Coq
+# Isabelle/HOL
+# Alloy
+# VeriFast
+
+* http://people.cs.kuleuven.be/~bart.jacobs/verifast/
+
+# ACSL
 # CPAchecker
 
 * http://cpachecker.sosy-lab.org/
 
-# Idris
-# Alloy
-# Coq
-# Isabelle/HOL
+# CBMC
 
-# OS
+* http://www.cprover.org/cbmc/
+
+# - OS -
 
 # seL4 microkernel
 
