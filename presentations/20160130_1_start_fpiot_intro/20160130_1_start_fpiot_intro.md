@@ -1,4 +1,5 @@
 # Functional IoT: Introduction
+![background](img/nagoya_port.png)
 
 Kiwamu Okabe
 
@@ -13,6 +14,7 @@ Kiwamu Okabe
 * A Debian Maintainer
 
 # What's IoT?
+![background](img/iot.png)
 
 The Internet of Things (or IoT for short) refers to uniquely identifiable objects and their virtual representations in an Internet-like structure. Imagine IoT devices are:
 
@@ -21,6 +23,7 @@ connected to the internet / developed in a short time / storing personal data / 
 C language can easily design the IoT devices?
 
 # What's Functional IoT?
+![background](img/meeting.png)
 
 * http://fpiot.metasepi.org/
 * is a wrestling mat that strongly typed languages fight on, to become the champion of system programming language.
@@ -28,6 +31,7 @@ C language can easily design the IoT devices?
 * summarizes knowledge of the languages as catalog.
 
 # Why do Functional IoT?
+![background](img/catalog.png)
 
 * Today, we have many methodologies for system design.
 * For example, they are static typing, theorem proving, formal method, design by contract, model checking, static verification, SMT solver, etc.
@@ -35,6 +39,7 @@ C language can easily design the IoT devices?
 * Let's make the catalog!
 
 # Why need such methodologies?
+![background](img/BjarneStroustrup.png)
 
 Many people choose C/C++ languages to design IoT device.
 However the languages lack following:
@@ -107,7 +112,28 @@ https://fpiot.doorkeeper.jp/
 
 ![inline](img/fpiot_meetup.png)
 
-# License of photos
+# License of photos #1
+![background](img/creative_commons.png)
+
+```
+* Nagoya Port panorama | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/emrank/3074491752/
+  Copyright: Emran Kassim / License: CC BY 2.0
+* bPart industrial IoT device. | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/138891539@N03/23908928999/
+  Copyright: KIT TECO / License: CC BY 2.0
+* CEO - Tiare - Board Meeting - Franklin Canyon | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/tiarescott/69821764/
+  Copyright: tiarescott / License: CC BY 2.0
+* Bergere de France catalogue | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/breibeest/404587519/
+  Copyright: Breibeest / License: CC BY 2.0
+* File:BjarneStroustrup.jpg - Wikimedia Commons
+  https://commons.wikimedia.org/wiki/File:BjarneStroustrup.jpg
+  Copyright: --- / License: GNU Free Documentation License
+```
+
+# License of photos #2
 ![background](img/creative_commons.png)
 
 ```
@@ -126,6 +152,12 @@ https://fpiot.doorkeeper.jp/
 * PDCA-Do | Flickr - Photo Sharing!
   https://www.flickr.com/photos/jurgenappelo/6797304300/
   Copyright: Jurgen Appelo / License: CC BY 2.0
+```
+
+# License of photos #3
+![background](img/creative_commons.png)
+
+```
 * Creative Commons BBB | Flickr - Photo Sharing!
   https://www.flickr.com/photos/steren/2732488224/
   Copyright: Steren Giannini / License: CC BY 2.0
