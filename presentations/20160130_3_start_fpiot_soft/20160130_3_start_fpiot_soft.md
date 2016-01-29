@@ -1,4 +1,4 @@
-# Functional IoT: Software Stack
+# Functional IoT: Programming Language and OS
 
 Kiwamu Okabe
 
@@ -181,16 +181,38 @@ main = do pinMode 13 1
 ![inline](draw/verifast_arduino.png)
 
 # Coq
-# Isabelle/HOL
-# Alloy
-# ACSL
-# CPAchecker
 
-* http://cpachecker.sosy-lab.org/
+* https://coq.inria.fr/
+* Theorem prover
+* Semi-automatic proving with tactics
+* Extract code into implementation with GC
+* Good document: http://proofcafe.org/sf-beta/
+
+# Isabelle/HOL
+
+* https://isabelle.in.tum.de/
+* Theorem prover
+
+# Alloy
+
+* http://alloy.mit.edu/
+* A tool to analyze specifications
+* Write specification as first-order predicate logic
+* Find example instance on specification
+* Find counter-example on specification
+* Support abductive reasoning
+
+# ACSL (Frama-C)
+
+* http://frama-c.com/acsl.html
+* Specification language for C programs
+* Design by contract (DbC) in C language comment
 
 # CBMC
 
 * http://www.cprover.org/cbmc/
+* Bounded Model Checker for C and C++
+* Verify array bounds (buffer overflows), pointer safety, ex­cep­tions and user-specified assertions
 
 # - OS -
 
