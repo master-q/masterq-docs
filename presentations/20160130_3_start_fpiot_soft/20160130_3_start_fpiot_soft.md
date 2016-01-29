@@ -170,8 +170,15 @@ main = do pinMode 13 1
 # VeriFast
 
 * http://people.cs.kuleuven.be/~bart.jacobs/verifast/
+* Design by contract (DbC) in C language comment
+* preconditions, postconditions, invariants
+* Can prove code with lemma function?
 
 # VeriFast on Arduino
+
+* https://github.com/fpiot/arduino-verifast
+
+![inline](draw/verifast_arduino.png)
 
 # Coq
 # Isabelle/HOL
@@ -187,13 +194,99 @@ main = do pinMode 13 1
 
 # - OS -
 
+![inline](draw/os.png)
+
 # seL4 microkernel
 
 * https://sel4.systems/
+* L4 microkernel verified by Isabelle/HOL
+* CPU: ARM11, Cortex-A, x86
+* Support multicore
+* Can't safely use DMA
+* Binary code level verification!
+
+# Structure of seL4
+
+![inline](draw/seL4.png)
+
+# How to verify seL4? #1
+
+```
+# Detail: https://github.com/seL4/l4v
+$ sudo apt-get install python-pip python-dev libxml2-utils python-tempita python-psutil openjfx openjdk-8-jdk
+$ export ISABELLE_JDK_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
+$ mkdir seL4_verify
+$ cd seL4_verify
+$ repo init -u https://github.com/seL4/verification-manifest.git
+$ repo sync
+$ ls
+HOL4/  graph-refine/  isabelle/  l4v/  seL4/
+$ cd l4v
+$ mkdir -p ~/.isabelle/etc
+$ cp -i misc/etc/settings ~/.isabelle/etc/settings
+$ ./isabelle/bin/isabelle components -a
+$ ./isabelle/bin/isabelle jedit -bf
+$ ./isabelle/bin/isabelle build -bv HOL-Word
+```
+
+# How to verify seL4? #2
+
+```
+$ ./run_tests
+Running 40 test(s)...
+
+  running isabelle ...              pass      ( 0:00:05,  0.62GB)
+  running CamkesAdlSpec ...         pass      ( 0:00:48,  3.52GB)
+--snip--
+  running AutoCorresTest ...        pass      ( 0:20:49,  6.93GB)
+  running AutoCorresSEL4 ...        FAILED *  ( 2:00:59,  6.36GB)
+
+------------------------------------------------------------------------
+TEST FAILURE: AutoCorresSEL4
+--snip--
+AutoCorresSEL4: theory TestSEL4
+*** Timeout
+AutoCorresSEL4 FAILED
+```
+
+
+# How to compile and run seL4? #1
+
+```
+# Detail: http://sel4.systems/Info/GettingStarted/
+$ sudo apt-get install git python build-essential realpath libxml2-utils python-tempita gcc-multilib ccache ncurses-dev cabal-install ghc libghc-missingh-dev libghc-split-dev python-pip python-jinja2 python-ply python-pyelftools libghc-data-ordlist-dev gcc-arm-none-eabi qemu
+$ mkdir seL4_repo
+$ cd seL4_repo
+$ repo init -u https://github.com/seL4/sel4test-manifest.git
+$ repo sync
+$ ls -F
+Kbuild@  Kconfig@  Makefile@  apps@  configs@  kernel/  libs/  projects/  tools/
+$ make ia32_simulation_release_xml_defconfig
+$ make
+```
+
+# How to compile and run seL4? #2
+
+```
+$ ls images
+kernel-ia32-pc99*  sel4test-driver-image-ia32-pc99*
+$ make simulate-ia32
+qemu-system-i386 -m 512 -nographic -kernel images/kernel-ia32-pc99 -initrd images/sel4test-driver-image-ia32-pc99
+--snip--
+136/136 tests passed.
+Ignoring call to sys_exit_group
+Ignoring call to sys_rt_sigprocmask
+Ignoring call to sys_gettid
+Ignoring call to sys_getpid
+sys_tgkill assuming self kill
+```
 
 # eChronos RTOS
 
 * http://ssrg.nicta.com.au/projects/TS/echronos/
+* Embedded version of seL4
+* Run without MMU
+* not yet publish verification
 
 # Redox
 
