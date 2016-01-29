@@ -1,14 +1,17 @@
 # Functional IoT: Programming Language and OS
+![background](img/japanese_house_4.png)
 
 Kiwamu Okabe
 
 # We drown in MANY MANY languages!
+![background](img/drown_in_lego.png)
 
 * There are many many languages in the world.
 * Nobody have the exhaustive catalog of them.
 * However, let's try to get first overview today.
 
 # What the purpose of language?
+![background](img/japanese_house.png)
 
 I think that there are three major purpose of the languages:
 
@@ -17,10 +20,12 @@ I think that there are three major purpose of the languages:
 * OS
 
 # - Implementation -
+![background](img/japanese_house_2.png)
 
 ![inline](draw/implementation.png)
 
 # ATS
+![background](img/ats_logo_on_display.png)
 
 * http://www.ats-lang.org/
 * Without GC / Without runtime
@@ -30,12 +35,14 @@ I think that there are three major purpose of the languages:
 * Able to import C define macro
 
 # ATS on ESP8266
+![background](img/ats_logo_on_display.png)
 
 * https://github.com/fpiot/esp8266-ats
 
 ![inline](draw/ats_esp8266.png)
 
 # What error can be captured by ATS?
+![background](img/memopad.png)
 
 ```
 $ vi user/user_main.dats
@@ -53,12 +60,14 @@ ds to be consumed but it is preserved with the type [S2Eapp(S2Ecst(strptr_addr_v
 ```
 
 # ATS on Arduino
+![background](img/ats_logo_on_display.png)
 
 * https://github.com/fpiot/arduino-ats
 
 ![inline](draw/ats_arduino.png)
 
 # What error can be captured by ATS?
+![background](img/memopad.png)
 
 ```
 $ vi ../../SATS/lcd.sats
@@ -79,6 +88,7 @@ DATS/main.dats:20:26: unsolved constraint: [1]
 ```
 
 # Rust
+![background](img/rust.png)
 
 * https://www.rust-lang.org/
 * Without GC
@@ -87,12 +97,14 @@ DATS/main.dats:20:26: unsolved constraint: [1]
 * Depends on LLVM
 
 # Rust on mbed
+![background](img/rust.png)
 
 * https://github.com/0xc0170/mbed-rust-frdm-k64f-blinky
 
 ![inline](draw/rust_mbed.png)
 
 # Jhc
+![background](img/fphaskell.png)
 
 * http://repetae.net/computer/jhc/
 * A Haskell compiler
@@ -102,12 +114,14 @@ DATS/main.dats:20:26: unsolved constraint: [1]
 * Compiled into C language code
 
 # Jhc on mbed
+![background](img/fphaskell.png)
 
 * https://github.com/ajhc/demo-cortex-m3
 
 ![inline](draw/jhc_mbed.png)
 
 # Ivory
+![background](img/galoislogo.png)
 
 * http://ivorylang.org/
 * EDSL on Haskell
@@ -116,12 +130,14 @@ DATS/main.dats:20:26: unsolved constraint: [1]
 * Compiled into C language code
 
 # Ivory on Arduino
+![background](img/galoislogo.png)
 
 * https://github.com/fpiot/arduino-ivory
 
 ![inline](draw/ivory_arduino.png)
 
 # Idris
+![background](img/idris-logo.png)
 
 * http://www.idris-lang.org/
 * With GC
@@ -130,6 +146,7 @@ DATS/main.dats:20:26: unsolved constraint: [1]
 * Compiled into C language code
 
 # Idris on Arduino
+![background](img/idris-logo.png)
 
 * https://github.com/stepcut/idris-blink
 * Eat much memory. Following crash.
@@ -149,25 +166,27 @@ main = do pinMode 13 1
 ```
 
 # Ada
+![background](img/adacore.png)
 
 * http://www.adacore.com/
 * Without GC
 * Verification with SPARK
-
-# Ada on Arduino
-
+* Ada on Arduino
 * http://playground.arduino.cc/Code/AVR-Ada
 
 # Hexe
+![background](img/haxe-logo.png)
 
 * http://haxe.org/
 * Can run on bare metal hardware?
 
 # - Verification -
+![background](img/japanese_house_1.png)
 
 ![inline](draw/verification.png)
 
 # VeriFast
+![background](img/kuleuven.png)
 
 * http://people.cs.kuleuven.be/~bart.jacobs/verifast/
 * Design by contract (DbC) in C language comment
@@ -175,12 +194,14 @@ main = do pinMode 13 1
 * Can prove code with lemma function?
 
 # VeriFast on Arduino
+![background](img/kuleuven.png)
 
 * https://github.com/fpiot/arduino-verifast
 
 ![inline](draw/verifast_arduino.png)
 
 # Coq
+![background](img/logo-inria.png)
 
 * https://coq.inria.fr/
 * Theorem prover
@@ -189,11 +210,13 @@ main = do pinMode 13 1
 * Good document: http://proofcafe.org/sf-beta/
 
 # Isabelle/HOL
+![background](img/isabelle.png)
 
 * https://isabelle.in.tum.de/
 * Theorem prover
 
 # Alloy
+![background](img/alloy.png)
 
 * http://alloy.mit.edu/
 * A tool to analyze specifications
@@ -203,22 +226,26 @@ main = do pinMode 13 1
 * Support abductive reasoning
 
 # ACSL (Frama-C)
+![background](img/frama-c.png)
 
 * http://frama-c.com/acsl.html
 * Specification language for C programs
 * Design by contract (DbC) in C language comment
 
 # CBMC
+![background](img/bug_anim_small.png)
 
 * http://www.cprover.org/cbmc/
 * Bounded Model Checker for C and C++
 * Verify array bounds (buffer overflows), pointer safety, ex­cep­tions and user-specified assertions
 
 # - OS -
+![background](img/japanese_house_3.png)
 
 ![inline](draw/os.png)
 
 # seL4 microkernel
+![background](img/logo-sel4.png)
 
 * https://sel4.systems/
 * L4 microkernel verified by Isabelle/HOL
@@ -228,10 +255,12 @@ main = do pinMode 13 1
 * Binary code level verification!
 
 # Structure of seL4
+![background](img/logo-sel4.png)
 
 ![inline](draw/seL4.png)
 
 # How to verify seL4? #1
+![background](img/memopad.png)
 
 ```
 # Detail: https://github.com/seL4/l4v
@@ -252,6 +281,7 @@ $ ./isabelle/bin/isabelle build -bv HOL-Word
 ```
 
 # How to verify seL4? #2
+![background](img/memopad.png)
 
 ```
 $ ./run_tests
@@ -272,6 +302,7 @@ AutoCorresSEL4 FAILED
 ```
 
 # How to compile and run seL4? #1
+![background](img/memopad.png)
 
 ```
 # Detail: http://sel4.systems/Info/GettingStarted/
@@ -287,6 +318,7 @@ $ make
 ```
 
 # How to compile and run seL4? #2
+![background](img/memopad.png)
 
 ```
 $ ls images
@@ -303,6 +335,7 @@ sys_tgkill assuming self kill
 ```
 
 # eChronos RTOS
+![background](img/nicta_quadcopter.png)
 
 * http://ssrg.nicta.com.au/projects/TS/echronos/
 * Embedded version of seL4
@@ -310,6 +343,7 @@ sys_tgkill assuming self kill
 * not yet publish verification
 
 # Redox
+![background](img/logo-redox.png)
 
 * http://www.redox-os.org/
 * Desktop OS developed by Rust
@@ -319,6 +353,7 @@ sys_tgkill assuming self kill
 * Support GUI and window system
 
 # Mirage OS
+![background](img/XenDirections_Logo.png)
 
 * http://www.xenproject.org/developers/teams/mirage-os.html
 * Cloud Operating System developed by OCaml
@@ -327,16 +362,56 @@ sys_tgkill assuming self kill
 ![inline](draw/mirage_os.png)
 
 # AOS
+![background](img/xlq_aos.png)
 
 * https://github.com/xlq/aos
 * Tiny OS developed by ATS
 * CPU: x86
 * Using own stream library
 
+# What are you interested in?
+![background](img/japanese_house_5.png)
+
+I'm personally interested in following:
+
+* ATS
+* Rust
+* Ada
+* VeriFast
+* ACSL
+* seL4
+
 # License of photos #1
 ![background](img/creative_commons.png)
 
 ```
+* Japanese traditional style SAMURAI house / 旧細川刑部邸(きゅうほそかわぎょうぶてい) | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/tanaka_juuyoh/3441295930/
+  Copyright: TANAKA Juuyoh (田中十洋) / License: CC BY 2.0
+* My son. My Lego. | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/38446022@N00/3912785418/
+  Copyright: Josh Wedin / License: CC BY 2.0
+* Japanese traditional style house / 大内宿(おおうちじゅく) | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/tanaka_juuyoh/3908054520/
+  Copyright: TANAKA Juuyoh (田中十洋) / License: CC BY 2.0
+* Japanese traditional style house interior design / 和風建築(わふうけんちく) | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/tanaka_juuyoh/5889056842/
+  Copyright: TANAKA Juuyoh (田中十洋) / License: CC BY 2.0
+```
+
+# License of photos #2
+![background](img/creative_commons.png)
+
+```
+* Japanese traditional style farm house / 古民家(こみんか) | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/tanaka_juuyoh/3633358136/
+  Copyright: TANAKA Juuyoh (田中十洋) / License: CC BY 2.0
+* Japanese traditional style house interior design / 和風建築(わふうけんちく) | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/tanaka_juuyoh/5420658494/
+  Copyright: TANAKA Juuyoh (田中十洋) / License: CC BY 2.0
+* Japanese old style house interior design / 和室(わしつ)の内装(ないそう) | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/tanaka_juuyoh/2092875176/
+  Copyright: TANAKA Juuyoh (田中十洋) / License: CC BY 2.0
 * Creative Commons BBB | Flickr - Photo Sharing!
   https://www.flickr.com/photos/steren/2732488224/
   Copyright: Steren Giannini / License: CC BY 2.0
