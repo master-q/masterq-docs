@@ -66,10 +66,11 @@ http://akizukidenshi.com/catalog/g/gM-03608/
 * CPU: Cortex-M (32-bit)
 * Compiler: GCC / RTOS: open source
 * Network: Ethernet / Big C++ middleware
+* Debugger: pyOCD
 * Development board: US $39.95
 
 ```
-https://developer.mbed.org/
+https://developer.mbed.org/ https://github.com/mbedmicro/pyOCD
 http://www.seeedstudio.com/depot/Arch-Max-CortexM4-based-Mbed-enable-development-board-p-2201.html
 ```
 
@@ -79,11 +80,11 @@ http://www.seeedstudio.com/depot/Arch-Max-CortexM4-based-Mbed-enable-development
 * CPU: MSP430, Cortex-M, ARM7, RX, PowerPC, etc.
 * Compiler: GCC / RTOS: open source
 * Network: Ethernet / Doesn't have gool HAL?
-* There are many forks.
+* Debugger: OpenOCD, stlink
 * Development board: ￥7500
 
 ```
-http://www.freertos.org/
+http://www.freertos.org/ http://openocd.org/ https://github.com/texane/stlink
 https://github.com/sorrowed/STM32-F7-Ethernet-emWin
 http://akizukidenshi.com/catalog/g/gM-09880/
 ```
@@ -94,6 +95,7 @@ http://akizukidenshi.com/catalog/g/gM-09880/
 * CPU: AVR (8-bit), Cortex-M (32-bit)
 * Compiler: GCC / RTOS: open source
 * Network: Ethernet / Tiny RTOS supports HAL
+* Debugger: OpenOCD, stlink
 * Development board: ￥7500
 
 ```
@@ -107,6 +109,7 @@ http://akizukidenshi.com/catalog/g/gM-09880/
 * CPU: Cortex-M (32-bit / No MMU)
 * Compiler: GCC / RTOS: open source
 * No network support / Tiny thread library
+* Debugger: OpenOCD
 * Development board: 10 + 2.74 + 6.90 = US $19.64
 
 ```
@@ -121,11 +124,13 @@ http://www.aliexpress.com/item/Free-Shipping-1SET-ST-Link-st-link-V2-for-STM8S-S
 * CPU: Xtensa lx106 (32-bit / No MMU)
 * Compiler: GCC / RTOS: closed source
 * Network: Wi-Fi
+* Debugger: GDB stub
 * Development board: ￥2160
 
 ```
 http://www.esp8266.com/
 https://www.switch-science.com/catalog/2500/
+https://github.com/espressif/esp-gdbstub
 ```
 
 # ToCoNet (Jennic)
@@ -148,11 +153,13 @@ http://akizukidenshi.com/catalog/g/gM-08264/
 * CPU: ARM11 or Cortex-A (32-bit / with MMU)
 * Compiler: GCC, LLVM, etc
 * Network: Ethernet / Wi-Fi (USB dongle)
+* Debugger: OpenOCD
 * Development board: ￥5000 (1 Model B+)
 
 ```
 https://www.raspberrypi.org/
 http://akizukidenshi.com/catalog/g/gM-08718/
+http://asmichi.hatenablog.com/entry/2014/08/15/203057
 ```
 
 # Trends
