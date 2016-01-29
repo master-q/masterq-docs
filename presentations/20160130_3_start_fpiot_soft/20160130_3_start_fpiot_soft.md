@@ -249,7 +249,6 @@ AutoCorresSEL4: theory TestSEL4
 AutoCorresSEL4 FAILED
 ```
 
-
 # How to compile and run seL4? #1
 
 ```
@@ -291,14 +290,26 @@ sys_tgkill assuming self kill
 # Redox
 
 * http://www.redox-os.org/
+* Desktop OS developed by Rust
+* CPU: x86
+* Support file system
+* Support Ethernet (RTL8139)
+* Support GUI and window system
 
 # Mirage OS
 
 * http://www.xenproject.org/developers/teams/mirage-os.html
+* Cloud Operating System developed by OCaml
+* Platform: Xen
+
+![inline](draw/mirage_os.png)
 
 # AOS
 
 * https://github.com/xlq/aos
+* Tiny OS developed by ATS
+* CPU: x86
+* Using own stream library
 
 # License of photos #1
 ![background](img/creative_commons.png)
