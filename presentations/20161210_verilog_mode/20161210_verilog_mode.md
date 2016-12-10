@@ -21,15 +21,29 @@ Kiwamu Okabe
 
 # Flow to design C application
 
+* GNU Project created everything:
+
+```
+* Editor (Emacs)
+* Compiler (gcc)
+* Assembler and Linker (binutils)
+```
+
 * Everything is debianized.
 
-xxx figure
+![inline](draw/flow_gcc.png)
 
 # Flow to design FPGA application
 
-* Emacs verilog-mode is not yet debianized.
+* Following tools is created by IceStorm Project:
 
-xxx figure
+```
+yosys, arachne-pnr, icepack, iceprog
+```
+
+* But Emacs verilog-mode is not yet debianized.
+
+![inline](draw/flow_icestrom.png)
 
 # In the past, there is it...
 

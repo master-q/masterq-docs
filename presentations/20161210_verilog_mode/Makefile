@@ -1,7 +1,14 @@
-ODGS := $(wildcard draw/*.dia)
-PNGS := $(patsubst %.dia,%.png,${ODGS})
+ODGS := $(wildcard draw/*.odg)
+PNGS := $(patsubst %.odg,%.png,${ODGS})
 
 all: ${PNGS}
 
-%.png: %.dia
-	dia -e $@ $<
+%.png: %.odg
+	unoconv -n -f png -o unoconv_tmp $< 2> /dev/null   || \
+          unoconv -f png -o unoconv_tmp $<                 || \
+	  unoconv -n -f png -o unoconv_tmp $< 2> /dev/null || \
+          unoconv -f png -o unoconv_tmp $<
+	convert -resize 800x unoconv_tmp.png $@
+	rm -f unoconv_tmp.png
+
+.PHONY: distclean
