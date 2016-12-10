@@ -1,4 +1,5 @@
 # Emacs verilog-mode is coming to Debian, again
+![background](img/icestudio.png)
 
 Kiwamu Okabe
 
@@ -13,6 +14,7 @@ Kiwamu Okabe
 * http://www.clifford.at/icestorm/
 
 # Coming OSS wave to FPGA world
+![background](img/icestick-reva-computer-2400.png)
 
 * Xilinx and Altera only support proprietary tool for own FPGA.
 * IceStorm is an Open Source tool for Lattice FPGA.
@@ -20,6 +22,7 @@ Kiwamu Okabe
 * I hope IceStorm change FPGA world with the Open Source wave!
 
 # Flow to design C application
+![background](img/flow.png)
 
 * GNU Project created everything:
 
@@ -34,6 +37,7 @@ Kiwamu Okabe
 ![inline](draw/flow_gcc.png)
 
 # Flow to design FPGA application
+![background](img/flow.png)
 
 * Following tools is created by IceStorm Project:
 
@@ -46,12 +50,14 @@ yosys, arachne-pnr, icepack, iceprog
 ![inline](draw/flow_icestrom.png)
 
 # In the past, there is it...
+![background](img/past.png)
 
 * https://tracker.debian.org/pkg/verilog-mode
 
 ![inline](img/verilog-mode-debian-log.png)
 
 # Let's debianize verilog-mode, again!
+![background](img/memopad.png)
 
 ```
 Subject: ITP: verilog-mode -- emacs mode for Verilog code
@@ -74,6 +80,7 @@ Owner: Kiwamu Okabe <kiwamu@debian.or.jp>
 ```
 
 # Where is the verilog-mode?
+![background](img/single.png)
 
 * http://www.veripool.org/projects/verilog-mode/wiki/Installing
 * But it only publishes single el file...
@@ -81,12 +88,14 @@ Owner: Kiwamu Okabe <kiwamu@debian.or.jp>
 ![inline](img/only-elgz.png)
 
 # Where is full source code?
+![background](img/github.png)
 
 * https://github.com/veripool/verilog-mode
 * It has own test code for verilog-mode.el
 * and also info file.
 
 # Use git-buildpackage
+![background](img/memopad.png)
 
 * The "upstream" branch tracks upsteam repo.
 * The "master" branch keeps Debian own changing.
@@ -100,6 +109,7 @@ upstream/20161124.fd230e6
 ```
 
 # Create debian/rules
+![background](img/memopad.png)
 
 ```makefile
 #!/usr/bin/make -f
@@ -115,6 +125,7 @@ clean::
 ```
 
 # Create debian/control
+![background](img/memopad.png)
 
 ```
 Priority: optional
@@ -136,6 +147,7 @@ Description: emacs mode for Verilog code
 ```
 
 # Create special files for Elisp package
+![background](img/memopad.png)
 
 ```
 $ ls verilog-mode/debian/verilog-mode.emacsen-*
@@ -161,6 +173,7 @@ https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=840424
 ```
 
 # Review: join pkg-emacsen alioth group
+![background](img/alioth.png)
 
 * http://pkg-emacsen.alioth.debian.org/
 * They focus to maintain elisp using ELPA.
@@ -169,6 +182,7 @@ https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=840424
 * and not in /git/collab-maint.
 
 # Review: use secure URIs for Vcs-* fields
+![background](img/memopad.png)
 
 * He said following is correct:
 
@@ -185,6 +199,7 @@ Vcs-Browser: https://anonscm.debian.org/git/pkg-emacsen/pkg/verilog-mode.git
 ```
 
 # Review: should include info file
+![background](img/memopad.png)
 
 * Original texinfo has "info-document-missing-dir-section" lintian error that is fixed by upstream side.
 
@@ -208,6 +223,7 @@ $ cat verilog-mode/debian/patches/texinfo-for-Debian.patch
 ```
 
 # Review: should have DEP-3 header
+![background](img/memopad.png)
 
 * Patch Tagging Guidelines
 
@@ -222,6 +238,7 @@ https://ddumont.wordpress.com/2014/06/15/edit-your-debian-patch-header-for-dep-3
 ```
 
 # Review: how about using dh-elpa
+![background](img/elpa.png)
 
 * ELPA (Emacs Lisp Package Archive)
 * http://elpa.gnu.org/
@@ -231,6 +248,7 @@ https://ddumont.wordpress.com/2014/06/15/edit-your-debian-patch-header-for-dep-3
 * Debian pkg-emacsen team are converting all existing Emacs Lisp addon packages using dh-elpa.
 
 # dh-elpa is easy to use
+![background](img/memopad.png)
 
 ```
 $ apt-get source elpa-vala-mode
@@ -251,6 +269,7 @@ override_dh_auto_test:
 ```
 
 # Verilog-mode test fails on XEmacs
+![background](img/xemacs.png)
 
 ```
 On Sat, Oct 15, 2016 at 7:44 PM, Wilson Snyder <wsnyder@wsnyder.org> wrote:
@@ -268,6 +287,7 @@ On Sat, Oct 15, 2016 at 7:44 PM, Wilson Snyder <wsnyder@wsnyder.org> wrote:
 ```
 
 # Who is using XEmacs?
+![background](img/xemacs.png)
 
 * ftp://ftp.xemacs.org/ is shutdown?
 
@@ -282,6 +302,7 @@ xemacs21 (21.4.24-1) unstable; urgency=low
 ```
 
 # We should forget emacsen!
+![background](img/mule.png)
 
 * Mule was dead.
 * XEmacs will be dead.
@@ -289,15 +310,35 @@ xemacs21 (21.4.24-1) unstable; urgency=low
 * Should we focus Emacs without XEmacs?
 
 # Conclusion
+![background](img/cliffordwolf.png)
 
 * Verilog-mode for Emacs is coming to Debian, soon.
 * IceStorm is rewriting game rule as OSS style on FPGA.
 * Use IceStorm. No more Vivado and Quartus!
 
 # PR: Join SELTECH CORPORATION!
+![background](img/foxvisor-en.png)
 
 * http://seltech.co.jp/en/
 * Developing a Hypervisor for embedded system
 * We are hiring embedded software engineer!
 
 ![inline](img/foxvisor_contents01_illsut.png)
+
+# License of photos
+![background](img/creative_commons.png)
+
+```
+* Creative Commons BBB | Flickr
+  https://www.flickr.com/photos/steren/2732488224/
+  Copyright: Steren Giannini / License: CC BY 2.0
+* TACC Visualization: Blood Flow in the Aorta | electric8sheep | Flickr
+  https://www.flickr.com/photos/28285401@N05/4318538779/
+  Copyright: electric8sheep / License: CC BY 2.0
+* Corey Donohoe (GitHub): Metrics Driven | Flickr - Photo Sharing!
+  https://www.flickr.com/photos/stevelacey/5820920545/
+  Copyright: Steve Lacey / License: CC BY 2.0
+* Single plant | Sarah | Flickr
+  https://www.flickr.com/photos/dm-set/22008748572/
+  Copyright: Sarah / License: CC BY 2.0
+```
