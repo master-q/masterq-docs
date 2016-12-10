@@ -301,7 +301,7 @@ xemacs21 (21.4.24-1) unstable; urgency=low
  -- Mark Brown <broonie@debian.org>  Thu, 13 Aug 2015 13:14:35 +0100
 ```
 
-# We should forget emacsen!
+# We should drop emacsen!
 ![background](img/mule.png)
 
 * Mule was dead.
