@@ -1,0 +1,53 @@
+\documentclass{jarticle}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[top=30truemm,bottom=30truemm,left=25truemm,right=25truemm]{geometry}
+\newcommand{\todayd}{\the\year 年 \the\month 月 \the\day 日}
+\makeatletter
+\def\thickhrulefill{\leavevmode \leaders \hrule height 1pt\hfill \kern \z@}
+\renewcommand{\maketitle}{\begin{titlepage}%
+    \let\footnotesize\small
+    \let\footnoterule\relax
+    \parindent \z@
+    \reset@font
+    \null
+    \vskip 100\p@
+    \begin{center}
+      \hrule height 5pt
+      \vskip 5pt
+      {\huge \bfseries \strut \@title \strut}\par
+      \vskip 5pt
+      \hrule height 5pt
+      \vskip 10pt
+      \includegraphics[width=15cm]{img/fox.eps}
+    \end{center}
+    \vskip 50\p@
+    \null
+    \begin{flushright}
+      {\Large \@date \par}%
+    \end{flushright}
+    \begin{flushright}
+      {\bf \Large \@author}
+    \end{flushright}
+  \end{titlepage}%
+  \setcounter{footnote}{0}%
+}
+\makeatother
+
+\author{株式会社YYY}
+\date{\todayd}
+\title{XXX概要}
+
+%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%
+\input{history}
+\input{introduction}
+\input{term_definition}
+
+\end{document}
