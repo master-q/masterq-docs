@@ -2,7 +2,11 @@
 .omakedb.lock
 OMakefile.omc
 OMakeroot.omc
+books/snatcher_ac0097/snatcher_ac0097-pdf/
+books/snatcher_ac0097/snatcher_ac0097.pdf
 papers/*/*.aux
+papers/*/*.bbl
+papers/*/*.blg
 papers/*/*.dvi
 papers/*/*.fls
 papers/*/*.log
@@ -12,5 +16,3 @@ resume/*/*.dvi
 resume/*/*.fls
 resume/*/*.log
 resume/*/*.out
-books/snatcher_ac0097/snatcher_ac0097-pdf/
-books/snatcher_ac0097/snatcher_ac0097.pdf
