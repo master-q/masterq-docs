@@ -60,8 +60,12 @@ xxx 静的な変数について説明
 xxx 証明引数と実引数について説明
 xxx 駐観について説明
 xxx addr sortについて説明
+xxx 証明関数について説明
 
 \section{ATS言語からのC言語関数呼び出し}
+
+xxx ``mac\#'' について
+
 \section{c2ats概要}
 
 前章でC言語関数をATS言語から呼び出せることがわかりましたが、そのためのインポートは手動で行なわれました。この手作業でのインポートにおいて人為的なミスがあった場合、どんなにATSコンパイラが正しく型検査したとしても、インポート元のC言語関数とインポートされたATS関数シグニチャの型が合わないために不具合が混入してしまいます。
@@ -134,11 +138,73 @@ fun fun_c2ats_printf: (string) -> int = "mac#printf"
 
 \section{c2atsによる自動生成ルール}
 
+xxx プリミティブ型の変換
 xxx \verb|ptr_v_1| について説明
 
 \section{現実的なアプリケーション: 自動生成された危険な関数の使用}
+
+より現実的なアプリケーションとして「自分自身のソースコードを標準出力に印字するアプリケーション」を考えます。やはり以下のようなexample.hファイルがあるとします。
+
+\lstinputlisting{example/fileread/example.h}
+
+このとき、example.satsファイルを自動生成すると、その中には以下の関数がインポートされています。
+
+\begin{lstlisting}
+$ cd example/fileread
+$ c2ats gen example.h > example.sats
+$ vi example.sats
+--snip--
+abst@ype struct_c2ats__IO_FILE // FIXME! Forward declaration.
+typedef type_c2ats_FILE = struct_c2ats__IO_FILE
+fun fun_c2ats_fclose: {l1:addr} (!ptr_v_1(type_c2ats_FILE, l1) | ptr l1) -> int = "mac#fclose"
+fun fun_c2ats_fopen: {l1,l2:addr} (!ptr_v_1(char, l1), !ptr_v_1(char, l2) | ptr l1, ptr l2) -> [l3:addr] (ptr_v_1(type_c2ats_FILE, l3) | ptr l3) = "mac#fopen"
+fun fun_c2ats_fread: {l1:addr} (!ptr_v_1(type_c2ats_FILE, l1) | ptr, type_c2ats_size_t, type_c2ats_size_t, ptr l1) -> type_c2ats_size_t = "mac#fread"
+--snip--
+\end{lstlisting}
+
+これら3つの関数 \verb|fun_c2ats_fopen|, \verb|fun_c2ats_fread|, \verb|fun_c2ats_fclose| を使うことで、このアプリケーションを以下のように構築することができます。
+
+\lstinputlisting{example/fileread/main.dats}
+
+このmain.datsファイルは自動生成したexample.satsファイルと共にコンパイルできますが、以下の点で危険なコードです。
+
+\begin{itemize}
+\item 危険性1: 危険なAPIの入ったunsafe.satsをインポートしている
+\item 危険性2: 任意の駐観を消費できる \verb|__consume_view| という証明関数を定義して使っている
+\item 危険性3: 何の証明もない単なるポインタから任意の駐観を取り出せる \verb|ptr_vtake| を使っている
+\item 危険性4: 任意の型を任意の型にキャストできる \verb|cast| という関数を使っている
+\item 危険性5: \verb|my_fread| 関数の返り値は静的な変数 \verb|m| に依存しているがその値の範囲は \verb|m <= n| であるべき
+\end{itemize}
+
+次の章では上記の危険性を取り除くことで、段階的に安全なATSコードが手に入る様子を観察します。
+
 \section{現実的なアプリケーション: 段階的な線形型の導入}
-\section{現時点での制限}
+\section{現実的なアプリケーション: 安全になったシグニチャ}
+
+前章による段階的なコード修正によって、以下のようなアプリケーションが構築できました。
+
+\lstinputlisting{example/welltyped_fileread/main.dats}
+
+また、上記のアプリケーションは以下のsatsファイル中の関数シグニチャを使います。
+
+\begin{lstlisting}
+$ cd example/welltyped_fileread
+$ vi example_welltyped.sats
+--snip--
+abst@ype struct_c2ats__IO_FILE // FIXME! Forward declaration.
+typedef type_c2ats_FILE = struct_c2ats__IO_FILE
+fun fun_c2ats_fclose: {l1:agz} (ptr_v_1(type_c2ats_FILE, l1) | ptr l1) -> int = "mac#fclose"
+fun fun_c2ats_fopen: (string, string) -> [l3:addr] (ptr_v_1(type_c2ats_FILE, l3) | ptr l3) = "mac#fopen"
+fun fun_c2ats_fread: {l1:agz}{n,m:nat} (!ptr_v_1(type_c2ats_FILE, l1) | !strnptr(n*m)>>strnptr(o), size_t(n), size_t(m), ptr l1) -> #[o:nat | o <= n*m] size_t(o) = "mac#fread"
+--snip--
+\end{lstlisting}
+
+このコードからは先の危険性1-5の全てを排除されています。
+
+\section{制限}
+
+xxx 前方宣言について
+
 \section{関連研究}
 
 xxx c2hsとcorrodeについて簡単に紹介
