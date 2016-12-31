@@ -1,0 +1,10 @@
+*.gch
+*_dats.c
+.stack-work/
+a.out
+c2ats.prof
+dist/
+example.sats
+out/
+test_prog
+config.hats
