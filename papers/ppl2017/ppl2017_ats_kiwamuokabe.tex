@@ -28,7 +28,6 @@ $^1$ 理化学研究所 計算科学研究機構\\
   showstringspaces=false,          % underline spaces within strings only
   showtabs=false,                  % show tabs within strings adding particular underscores
   tabsize=2,	                   % sets default tabsize to 2 spaces
-  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
 }
 \maketitle
 \begin{abstract}
@@ -57,10 +56,13 @@ xxx 静的な変数について説明
 
 \section{線形型による安全なメモリ使用とリソースの追跡}
 
-xxx 証明引数と実引数について説明
-xxx 駐観について説明
-xxx addr sortについて説明
-xxx 証明関数について説明
+xxx 証明引数と実引数について
+xxx 駐観について
+xxx addr sortについて
+xxx 証明関数について
+xxx 生成と消費について
+xxx 観変化について
+xxx 文字列型string,strptr,strnptrについて
 
 \section{ATS言語からのC言語関数呼び出し}
 
@@ -83,7 +85,7 @@ $ cd example/hello
 $ c2ats gen example.h > example.sats
 \end{lstlisting}
 
-この生成されたexample.satsファイルにはexample.hがインクルードしていたstdio.hで宣言されている全ての関数がインポートされています。例えば \verb|printf| 関数は以下のように自動的にexample.satsファイルにインポートされます。
+上記の生成されたexample.satsファイルには先のexample.hからインクルードしていたstdio.hで宣言されている全ての関数がインポートされています。例えばC言語の \verb|printf| 関数は以下のように自動的にexample.satsファイルにインポートされます。
 
 \begin{lstlisting}
 $ vi example.sats
@@ -130,27 +132,27 @@ fun fun_c2ats_printf: (string) -> int = "mac#printf"
 
 \lstinputlisting{example/welltyped_hello/main.dats}
 
-新しいコードには先のような危険な問題はありません。このように、C言語とATS言語を協調させたプログラミングにおいて、c2atsがインポートした関数シグニチャはATSプログラマが真に欲しい型表現ではありません。これはc2atsがまだ開発途上であることにも原因がありますが、より大きな課題はC言語の関数定義がATS言語で使いたいレベルの不変条件を表明していないことに起因しています。このC言語における表明の不足については後の章で具体的に解説します。
+上記の新しいコードには先のような危険な問題はありません。このように、C言語とATS言語を協調させたプログラミングにおいて、c2atsが直接インポートした関数シグニチャはATSプログラマが真に欲しい型表現ではありません。これはc2atsがまだ開発途上であることにも原因がありますが、より大きな課題はC言語の関数定義がATS言語で使いたいレベルの不変条件を表明していないことに起因しています。このC言語における表明の不足については後の章で具体的に解説します。
 
-現時点においてはc2atsの作るsatsファイルはRuby on Rails\cite{rails}のScaffoldのようなものだと考えることができます。c2atsで自動生成されたsatsファイルは手っ取り早くATSアプリケーションを作るための足場にすぎません。当該satsファイル内の関数シグニチャに問題があれば、手動で強化すべきです。当該satsファイルは、決っして製品コードにそのまま無変更で採用されるべきではありません。そのsatsファイルは多くの危険な関数シグニチャを含んでいるからです。しかしその危険性は元のC言語関数定義と同等のものです。
+現時点においてはc2atsの作るsatsファイルはRuby on Rails\cite{rails}のScaffoldのようなものだと考えることができます。c2atsで自動生成されたsatsファイルは手っ取り早くATSアプリケーションを作るための足場にすぎません。当該satsファイル内の関数シグニチャに問題があれば、手動で強化すべきです。当該satsファイルは、決っして製品コードにそのまま無変更で採用されるべきではありません。そのsatsファイルは多くの危険な関数シグニチャを含んでいるからです。しかしその危険性は元のC言語関数定義と同等のレベルです。
 
-別の言い方をすると、元々危険であったC言語関数インターフェイスがc2atsによってATS言語に写像されることで、ATSプログラマはその危険性をunsafe.satsなどの含む危険なキャストの使用という形で明確に知覚できるようになります。一旦知覚された危険性はその危険なコードを手動除去する過程で自然に安全になります。結果自動生成されたsatsファイルは段階的に安全性を高めることが可能になります。
+別の言い方をすると、元々危険であったC言語関数インターフェイスをc2atsによってATS言語に写像することで、ATSプログラマはその危険性をunsafe.satsなどの含む危険なキャストの使用という形で明確に知覚できるようになります。一旦知覚された危険性はその危険なコードを手動除去する過程で自然に安全になります。結果自動生成されたsatsファイルの安全性を段階的に高めることが可能になります。
 
 \section{c2atsによる自動生成ルール}
 
 xxx プリミティブ型の変換
 xxx \verb|ptr_v_1| について説明
+xxx C言語における表明の不足
 
 \section{現実的なアプリケーション: 自動生成された危険な関数の使用}
 
-より現実的なアプリケーションとして「自分自身のソースコードを標準出力に印字するアプリケーション」を考えます。やはり以下のようなexample.hファイルがあるとします。
+より現実的なアプリケーション例として「自分自身のソースコードを標準出力に印字するアプリケーション」を考えます。やはり以下のようなexample.hファイルがあるとします。
 
 \lstinputlisting{example/fileread/example.h}
 
 このとき、example.satsファイルを自動生成すると、その中には以下の関数がインポートされています。
 
 \begin{lstlisting}
-$ cd example/fileread
 $ c2ats gen example.h > example.sats
 $ vi example.sats
 --snip--
@@ -162,24 +164,149 @@ fun fun_c2ats_fread: {l1:addr} (!ptr_v_1(type_c2ats_FILE, l1) | ptr, type_c2ats_
 --snip--
 \end{lstlisting}
 
-これら3つの関数 \verb|fun_c2ats_fopen|, \verb|fun_c2ats_fread|, \verb|fun_c2ats_fclose| を使うことで、このアプリケーションを以下のように構築することができます。
+上記の3つの関数 \verb|fun_c2ats_fopen|, \verb|fun_c2ats_fread|, \verb|fun_c2ats_fclose| を使うことで、このアプリケーションを以下のように構築することができます。
 
 \lstinputlisting{example/fileread/main.dats}
 
-このmain.datsファイルは自動生成したexample.satsファイルと共にコンパイルできますが、以下の点で危険なコードです。
+上記のmain.datsファイルは自動生成したexample.satsファイルと共にコンパイルできますが、以下の点で危険なコードです。
 
 \begin{itemize}
 \item 危険性1: 危険なAPIの入ったunsafe.satsをインポートしている
 \item 危険性2: 任意の駐観を消費できる \verb|__consume_view| という証明関数を定義して使っている
 \item 危険性3: 何の証明もない単なるポインタから任意の駐観を取り出せる \verb|ptr_vtake| を使っている
-\item 危険性4: 任意の型を任意の型にキャストできる \verb|cast| という関数を使っている
-\item 危険性5: \verb|my_fread| 関数の返り値は静的な変数 \verb|m| に依存しているがその値の範囲は \verb|m <= n| であるべき
+\item 危険性4: \verb|fun_c2ats_fread| 関数が駐観も長さ情報も持たない生のポインタ \verb|buf_ptr| を取っている
+\item 危険性5: 任意の型を任意の型にキャストできる \verb|cast| という関数を使っている
+\item 危険性6: \verb|my_fread| 関数の返り値は静的な変数 \verb|m| に依存しているがその値の範囲は \verb|m <= n| であるべき
 \end{itemize}
 
 次の章では上記の危険性を取り除くことで、段階的に安全なATSコードが手に入る様子を観察します。
 
 \section{現実的なアプリケーション: 段階的な線形型の導入}
-\section{現実的なアプリケーション: 安全になったシグニチャ}
+
+前章でのmain.datsとexample.satsを少しずつ修正して危険なコードを除去します。
+
+\subsection{fun\_c2ats\_fopenがstring型を取るように}
+
+危険性3は \verb|fun_c2ats_fopen| 関数が \verb|char| ポインタを引数に取るために当該ポインタのための駐観を作る必要性から生じたものです。そこで、以下のように関数シグニチャを変更します。
+
+\begin{lstlisting}
+$ vi example.sats
+--snip--
+fun fun_c2ats_fopen: (string, string) -> [l3:addr] (ptr_v_1(type_c2ats_FILE, l3) | ptr l3) = "mac#fopen"
+--snip--
+\end{lstlisting}
+
+これで \verb|fun_c2ats_fopen| 関数は引数を \verb|string| 型で取るようになりました。結果main.datsを下記のように書き換えて、\verb|ptr_vtake| の使用を除去することができます。
+
+\begin{lstlisting}
+$ vi main.dats
+--snip--
+fun my_fopen (file: string, mode: string):
+    [l:agz] (type_c2ats_FILE@l | ptr(l)) = ret where {
+  val (pffp | fp) = fun_c2ats_fopen(file, mode)
+  val () = assertloc(fp > 0)
+  val ret = (pffp | fp)
+}
+--snip--
+\end{lstlisting}
+
+\subsection{fun\_c2ats\_fcloseで線形型を消費}
+
+危険性2は \verb|fun_c2ats_fclose| 関数が返った後でもファイルポインタの駐観 \verb|pffp| が消費されないために発生していました。C言語の関数定義からは直接解釈することはできませんが、\verb|fclose| の定義では一度クローズしたファイルポインタは使用不能になるはずです。そのため \verb|fun_c2ats_fclose| は当該の駐観を消費すべきです。そこで関数シグニチャを以下のように修正します。
+
+\begin{lstlisting}
+$ vi example.sats
+--snip--
+fun fun_c2ats_fclose: {l1:agz} (ptr_v_1(type_c2ats_FILE, l1) | ptr l1) -> int = "mac#fclose"
+--snip--
+\end{lstlisting}
+
+また同時に上記修正では、\verb|fclose| するファイルポインタは非NULLであることが望ましいので、当該ファイルポインタが依存している静的なアドレスを非NULLである \verb|agz| に設定しています。
+
+すると、以下のように \verb|__consume_view| の使用が不要になり、\verb|main0| 関数から直接 \verb|fun_c2ats_fclose| 関数を呼び出せるようになります。
+
+\begin{lstlisting}
+$ vi main.dats
+--snip--
+implement main0 () = {
+  val (pffp | fp) = my_fopen("main.dats", "r")
+  val () = readshow(pffp | fp)
+  val r = fun_c2ats_fclose(pffp | fp)
+}
+--snip--
+\end{lstlisting}
+
+\subsection{fun\_c2ats\_freadがstrnptr型を取るように}
+
+危険性4を修正するために \verb|buf_ptr| の元になった、\verb|string_tabulate| 関数で確保した、長さ情報を静的に持つ \verb|strnptr| 型の値を直接 \verb|fun_c2ats_fread| 関数に渡せるように、関数シグニチャを修正します。
+
+\begin{lstlisting}
+$ vi example.sats
+--snip--
+fun fun_c2ats_fread: {l1:agz}{m:nat} (!ptr_v_1(type_c2ats_FILE, l1) | !strnptr(m)>>strnptr(o), type_c2ats_size_t, type_c2ats_size_t, ptr l1) -> #[o:nat | o <= m] size_t(o) = "mac#fread"
+--snip--
+\end{lstlisting}
+
+上記の修正では \verb|fun_c2ats_fread| 関数の第1実引数に \verb|strnptr(m)| 型を渡し、この関数が返る時にはその型が \verb|strnptr(o)| であることを表明しています。ただし、このとき \verb|o| は \verb|o <= m| にならなければなりません。またこの関数の返り値も \verb|o| に依存しています。つまり \verb|fread| した後のバッファの長さはその返り値と等しいことが期待されています。
+
+また同時に上記修正では、\verb|fread| するファイルポインタは非NULLであることが望ましいので、当該ファイルポインタが依存している静的なアドレスを非NULLである \verb|agz| に設定しています。
+
+すると以下のように \verb|my_fread| 関数を修正して、\verb|fun_c2ats_fread| 関数に直接 \verb|strnptr| 型を渡せるようになります。
+
+\begin{lstlisting}
+$ vi main.dats
+--snip--
+fun my_fread {l:agz}{n:nat}
+    (pffp: !type_c2ats_FILE@l | fp: ptr(l), len: size_t(n)):
+    [m:int] (size_t(m), strnptr(m)) = ret where {
+  implement{} string_tabulate$fopr(s) = '_'
+  val buf_strnptr = string_tabulate(len)
+  val buf_ptr = strnptr2ptr(buf_strnptr)
+  val _ = $STRING.memset_unsafe(buf_ptr, 0, len)
+
+  val r = fun_c2ats_fread(pffp | buf_strnptr, 1UL, $UN.cast2ulint(len), fp)
+  val ret = (r, buf_strnptr)
+}
+--snip--
+\end{lstlisting}
+
+このとき、返り値と \verb|buf_strnptr| が依存する静的な長さと返り値 \verb|r| が依存する静的な長さが一致するので、\verb|cast| による危険なキャストも不要になり、危険性5も解消することができました。
+
+\subsection{fun\_c2ats\_freadでsize\_t型を使う}
+
+危険性6を解消するために、以下のように \verb|fun_c2ats_fread| 関数の引数を \verb|size_t| 型にして、さらにその値の範囲を明示します。
+
+\begin{lstlisting}
+$ vi example.sats
+--snip--
+fun fun_c2ats_fread: {l1:agz}{n,m:nat} (!ptr_v_1(type_c2ats_FILE, l1) | !strnptr(n*m)>>strnptr(o), size_t(n), size_t(m), ptr l1) -> #[o:nat | o <= n*m] size_t(o) = "mac#fread"
+--snip--
+\end{lstlisting}
+
+静的な変数 \verb|n| と \verb|m| を全称量化で導入し、その値は0以上です。\verb|fun_c2ats_fread| 関数の第2実引数と第3実引数はそれぞれ \verb|n| と \verb|m| に依存し、さらに第1実引数である \verb|strnptr| 型の文字列は当該関数の呼び出し前は \verb|n*m| の長さです。
+
+xxx
+
+\begin{lstlisting}
+$ vi main.dats
+fun my_fread {l:agz}{n:nat}
+    (pffp: !type_c2ats_FILE@l | fp: ptr(l), len: size_t(n)):
+    [m:nat | m <= n] (size_t(m), strnptr(m)) = ret where {
+  implement{} string_tabulate$fopr(s) = '_'
+  val buf_strnptr = string_tabulate(len)
+  val buf_ptr = strnptr2ptr(buf_strnptr)
+  val _ = $STRING.memset_unsafe(buf_ptr, 0, len)
+
+  val r = fun_c2ats_fread(pffp | buf_strnptr, i2sz(1), len, fp)
+  val ret = (r, buf_strnptr)
+}
+\end{lstlisting}
+
+xxx
+
+さらにもはやunsafe.satsのインポートも不要になり、危険性1も解消することができました。
+
+\section{現実的なアプリケーション: 安全になった関数シグニチャ}
 
 前章による段階的なコード修正によって、以下のようなアプリケーションが構築できました。
 
@@ -188,7 +315,6 @@ fun fun_c2ats_fread: {l1:addr} (!ptr_v_1(type_c2ats_FILE, l1) | ptr, type_c2ats_
 また、上記のアプリケーションは以下のsatsファイル中の関数シグニチャを使います。
 
 \begin{lstlisting}
-$ cd example/welltyped_fileread
 $ vi example_welltyped.sats
 --snip--
 abst@ype struct_c2ats__IO_FILE // FIXME! Forward declaration.
@@ -212,7 +338,7 @@ xxx c2hsとcorrodeについて簡単に紹介
 \section{結論と今後}
 
 \section{謝辞}
-C言語の型表現をいかにしてATS言語の型表現に解釈しなおすか、その筆者の疑問に対し根気強いサポートをしてくれたHongwei Xiに感謝します。
+C言語の型表現をいかにしてATS言語の型表現に解釈しなおすか、筆者のその疑問に対し根気強いサポートをしてくれたHongwei Xiに感謝します。
 
 % BibTeX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliographystyle{unsrt}
