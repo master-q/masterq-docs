@@ -49,10 +49,11 @@ C$B8@8l$rMQ$$$?Dc%l%Y%k$J%W%m%0%i%_%s%0$K$*$$$F%a%b%jGK2u$d%j%=!<%9%j!<%/$O$d$C
 
 ATS$B8@8l(B\cite{xi2003applied}\cite{ats}$B$O@EE*7?IU$1$N%W%m%0%i%_%s%08@8l$G!"0MB87?$H@~7A7?$r$=$J$($F$$$^$9!#(B
 
-xxx dats/sats$B$K$D$$$F@bL@(B
+xxx dats/sats$B$K$D$$$F(B
 xxx patscc$B%3%^%s%I$N;H$$J}(B
 xxx unsafe.sats$B$K$D$$$F(B \verb|ptr_vtake|
-xxx $B@EE*$JJQ?t$K$D$$$F@bL@(B
+xxx $B@EE*$JJQ?t$K$D$$$F(B
+xxx $BNL2=$K$D$$$F(B
 
 \section{$B@~7A7?$K$h$k0BA4$J%a%b%j;HMQ$H%j%=!<%9$NDI@W(B}
 
@@ -71,8 +72,6 @@ xxx ``mac\#'' $B$K$D$$$F(B
 \section{c2ats$B35MW(B}
 
 $BA0>O$G(BC$B8@8l4X?t$r(BATS$B8@8l$+$i8F$S=P$;$k$3$H$,$o$+$j$^$7$?$,!"$=$N$?$a$N%$%s%]!<%H$O<jF0$G9T$J$o$l$^$7$?!#$3$N<j:n6H$G$N%$%s%]!<%H$K$*$$$F?M0YE*$J%_%9$,$"$C$?>l9g!"$I$s$J$K(BATS$B%3%s%Q%$%i$,@5$7$/7?8!::$7$?$H$7$F$b!"%$%s%]!<%H85$N(BC$B8@8l4X?t$H%$%s%]!<%H$5$l$?(BATS$B4X?t%7%0%K%A%c$N7?$,9g$o$J$$$?$a$KIT6q9g$,:.F~$7$F$7$^$$$^$9!#(B
-
-$BNc$($P!"(Bxxx
 
 $B$=$3$GI.<T$O(Bc2ats\cite{c2ats}$B$H$$$&%D!<%k$r3+H/Cf$G$9!#K\>O$G$O(Bc2ats$B$N>\:Y$r2r@b$9$kA0$K$=$N;H$$J}$rDL$7$F35MW$r@bL@$7$^$9!#$^$:2<5-$N$h$&$J(Bexample.h$B%U%!%$%k$,$"$k$H$7$^$9!#(B
 
@@ -283,9 +282,9 @@ fun fun_c2ats_fread: {l1:agz}{n,m:nat} (!ptr_v_1(type_c2ats_FILE, l1) | !strnptr
 --snip--
 \end{lstlisting}
 
-$B@EE*$JJQ?t(B \verb|n| $B$H(B \verb|m| $B$rA4>NNL2=$GF3F~$7!"$=$NCM$O(B0$B0J>e$G$9!#(B\verb|fun_c2ats_fread| $B4X?t$NBh(B2$B<B0z?t$HBh(B3$B<B0z?t$O$=$l$>$l(B \verb|n| $B$H(B \verb|m| $B$K0MB8$7!"$5$i$KBh(B1$B<B0z?t$G$"$k(B \verb|strnptr| $B7?$NJ8;zNs$OEv3:4X?t$N8F$S=P$7A0$O(B \verb|n*m| $B$ND9$5$G$9!#(B
+$B@EE*$JJQ?t(B \verb|n| $B$H(B \verb|m| $B$rA4>NNL2=$GF3F~$7!"$=$NCM$O(B0$B0J>e$G$9!#(B\verb|fun_c2ats_fread| $B4X?t$NBh(B2$B<B0z?t$HBh(B3$B<B0z?t$O$=$l$>$l(B \verb|n| $B$H(B \verb|m| $B$K0MB8$7!"$5$i$KBh(B1$B<B0z?t$G$"$k(B \verb|strnptr| $B7?$NJ8;zNs$OEv3:4X?t$N8F$S=P$7A0$O(B \verb|n*m| $B$ND9$5$G$9!#K\4X?t$,8F$S=P$5$l$?8e$G$O!"(B\verb|strnptr| $B7?$NJ8;zNs$ND9$5$H(B \verb|size_t| $B7?$NJV$jCM$NCM$O(B \verb|o| $B$G!"$=$NHO0O$O(B \verb|p <= n*m| $B$G$9!#(B
 
-xxx
+$B$9$k$H0J2<$N$h$&$K(B \verb|my_fread| $B4X?t$r=$@5$7$F!"Ev3:4X?t$NJV$jCM$G$"$k(B \verb|size_t| $B$H(B \verb|strnptr| $B7?$NJ8;zNs$K(B \verb|m <= n| $B$H$$$&@)Ls$r$D$1$l$k$h$&$K$J$j$^$9!#(B
 
 \begin{lstlisting}
 $ vi main.dats
@@ -301,8 +300,6 @@ fun my_fread {l:agz}{n:nat}
   val ret = (r, buf_strnptr)
 }
 \end{lstlisting}
-
-xxx
 
 $B$5$i$K$b$O$d(Bunsafe.sats$B$N%$%s%]!<%H$bITMW$K$J$j!"4m81@-(B1$B$b2r>C$9$k$3$H$,$G$-$^$7$?!#(B
 
