@@ -65,10 +65,6 @@ xxx $B@8@.$H>CHq$K$D$$$F(B
 xxx $B4QJQ2=$K$D$$$F(B
 xxx $BJ8;zNs7?(Bstring,strptr,strnptr$B$K$D$$$F(B
 
-\section{ATS$B8@8l$+$i$N(BC$B8@8l4X?t8F$S=P$7(B}
-
-xxx ``mac\#'' $B$K$D$$$F(B
-
 \section{c2ats$B35MW(B}
 
 $BA0>O$G(BC$B8@8l4X?t$r(BATS$B8@8l$+$i8F$S=P$;$k$3$H$,$o$+$j$^$7$?$,!"$=$N$?$a$N%$%s%]!<%H$O<jF0$G9T$J$o$l$^$7$?!#$3$N<j:n6H$G$N%$%s%]!<%H$K$*$$$F?M0YE*$J%_%9$,$"$C$?>l9g!"$I$s$J$K(BATS$B%3%s%Q%$%i$,@5$7$/7?8!::$7$?$H$7$F$b!"%$%s%]!<%H85$N(BC$B8@8l4X?t$H%$%s%]!<%H$5$l$?(BATS$B4X?t%7%0%K%A%c$N7?$,9g$o$J$$$?$a$KIT6q9g$,:.F~$7$F$7$^$$$^$9!#(B
@@ -139,11 +135,91 @@ fun fun_c2ats_printf: (string) -> int = "mac#printf"
 
 \section{c2ats$B$K$h$k<+F0@8@.%k!<%k(B}
 
-xxx $B%W%j%_%F%#%V7?$NJQ49(B
-xxx $B%]%$%s%?(B \verb|ptr_v_1| $B$K$D$$$F@bL@(B
-xxx $B9=B$BN$N%]%$%s%?%a%s%P!<$X$N%"%/%;%5(B
-xxx $B%0%m!<%P%kJQ?t(B
-xxx C$B8@8l$K$*$1$kI=L@$NITB-(B
+$BA0>O$G$O(Bc2ats$B$N;H$$J}$K$D$$$F@bL@$7$^$7$?!#$3$N;~(Bc2ats$B$,(BC$B8@8l%X%C%@$+$i$I$N$h$&$J(Bsats$B%U%!%$%k$r@8@.$9$k$N$+$rK\>O$G@bL@$7$^$9!#$^$?K\O@J8$G$O2r@b$7$^$;$s$,!"9=B$BN$H9=B$BN%a%s%P!<$X$N%"%/%;%5$d4X?t%]%$%s%?$b(Bc2ats$B$O<+F0JQ49$7$^$9!#(B
+
+\subsection{$B%W%j%_%F%#%V7?(B}
+
+ATS$B8@8l$N%W%j%_%F%#%V7?$O(BC$B8@8l$N7?$HBP1~$7$F$$$^$9!#I=(B\ref{table:prim}$B$K$=$NBP1~$r<($7$^$9!#(B
+
+\begin{table}[htb]
+  \caption{ATS$B8@8l$H(BC$B8@8l$N%W%j%_%F%#%V7?(B}
+  \label{table:prim}
+  \centering
+  \begin{tabular}{l|l}
+    C$B8@8l$N7?L>(B & ATS$B8@8l$N7?L>(B \\ \hline
+    bool & bool \\
+    char & char \\
+    signed char & schar \\
+    unsigned char & uchar \\
+    short & sint \\
+    unsigned short & usint \\
+    int & int \\
+    unsigned int & uint \\
+    long int & lint \\
+    unsigned long int & ulint \\
+    long long int & llint \\
+    unsigned long int & ullint \\
+    float & float \\
+    double & double \\
+    long double & ldouble \\
+  \end{tabular}
+\end{table}
+
+\subsection{$B4X?t@k8@(B}
+
+$B0J2<$N$h$&$J(BC$B8@8l$N4X?t@k8@$,$"$C$?$H$-!"(B
+
+\begin{lstlisting}
+int function(int, char);
+\end{lstlisting}
+
+c2ats$B$O0J2<$N$h$&$J(BATS$B$N4X?t@k8@$KJQ49$7$^$9!#(B
+
+\begin{lstlisting}
+fun fun_c2ats_function: (int, char) -> int = "mac#function"
+\end{lstlisting}
+
+$B4X?tL>$K$O(B \verb|fun_c2ats_| $B$H$$$&A0CV;l$,IU$1$i$l$^$9!#(B\verb|=| $B$N:8JU$K$*$$$F$O(BC$B8@8l$+$i(BATS$B8@8l$X$NC1=c$JJ8K!$NJQ49$G$9!#(B\verb|"mac#function"| $B$NItJ,$K$OBP1~$9$k(BC$B8@8l$N4X?tL>$r;XDj$7$^$9!#$3$N;XDj$K$h$C$FEv3:(BC$B8@8l4X?t$r(BATS$B8@8l$+$i8F$S=P$72DG=$K$J$j$^$9!#(B
+
+\subsection{$B%]%$%s%?(B}
+
+C$B8@8l$N%]%$%s%?$r(BATS$B8@8l$G$O(B \verb|ptr| $B7?$H$7$FC1$K07$&$3$H$b$G$-$^$9$,!"$3$NJ}K!$G$O%]%$%s%?$r(BC$B8@8l$K$*$1$k(B \verb|void *| $B$N$h$&$K07$&$?$a$K!"4m81$G$"$k$H8@$($^$9!#$=$3$G(Bc2ats$B$OA4$F$N%]%$%s%?$KBP$9$kCs4Q$r<+F0@8@.$7$^$9!#(B
+
+$BNc$($P!"0J2<$N$h$&$J(BC$B8@8l4X?t$,$"$k$H$-!"(B
+
+\begin{lstlisting}
+int my_getopt (int, char **, char *);
+\end{lstlisting}
+
+c2ats$B$O0J2<$N$h$&$J(BATS$B$N4X?t@k8@$KJQ49$7$^$9!#(B
+
+\begin{lstlisting}
+fun fun_c2ats_my_getopt: {l1,l1_1,l2:addr} (!ptr_v_2(char, l1, l1_1), !ptr_v_1(char, l2) | int, ptr l1, ptr l2) -> int = "mac#my_getopt"
+\end{lstlisting}
+
+$B$3$N;~(B \verb|ptr_v_1|, \verb|ptr_v_2|, \verb|ptr_v_3| $B$O0J2<$N$h$&$K(Bsats$B%U%!%$%k$K=PNO$5$l$^$9!#(B
+
+\begin{lstlisting}
+viewdef ptr_v_1 (a:t@ype, l:addr) = a @ l
+dataview ptr_v_2 (a:t@ype+, l0: addr, l1: addr) =
+  | ptr_v_2_cons(a, l0, l1) of (ptr l1 @ l0, ptr_v_1 (a, l1))
+dataview ptr_v_3 (a:t@ype+, l0:addr, l1:addr, l2:addr) =
+  | ptr_v_3_cons(a, l0, l1, l2) of (ptr l1 @ l0, ptr_v_2 (a, l1, l2))
+\end{lstlisting}
+
+ATS$B8@8l$G$O5"G<E*$JCs4Q$r:n$k$3$H$b2DG=$G$9$,!"0MB8$9$k%"%I%l%9$NHO0O$rJL!9$K;XDj$7$?$$>l9g$rA[Dj$7$F7?@k8@$N30$K0MB8$7$?%"%I%l%9A4$F$r8+$;$F$$$^$9!#$9$J$o$A$3$NJ}<0$r;H$C$F!"@h$N(B \verb|my_getopt| $B4X?t$NJQ497k2L$K$*$$$F!"<!$N$h$&$K(B1$BCJL\$N%]%$%s%?$G$"$k(B \verb|l1| $B$H(B \verb|l2| $B$N$_$,(BNULL$B$G$O$J$/!"(B2$BCJL\$N%]%$%s%?$G$"$k(B \verb|l1_1| $B$O(BNULL$B$G$"$k$3$H$r5vMF$9$k$h$&$J7?%7%0%K%A%c$r=q$/$3$H$,$G$-$^$9!#(B
+
+\begin{lstlisting}
+fun fun_c2ats_my_getopt: {l1,l2:agz}{l1_1:addr} (!ptr_v_2(char, l1, l1_1), !ptr_v_1(char, l2) | int, ptr l1, ptr l2) -> int = "mac#my_getopt"
+\end{lstlisting}
+
+c2ats$B$O$3$N$h$&$K%]%$%s%?$,(BNULL$B$G$"$k$3$H$r5vMF$5$l$&$k$+$I$&$+$r?dB,$7$^$;$s!#(Bc2ats$B$OA4$F$N%]%$%s%?$K$O(BNULL$B$,5vMF$5$l$k$K$b$+$+$o$i$:!"Cs4Q$,$"$k$b$N$H8+$J$9$?$a!"Ev3:4X?t$OEv3:%]%$%s%?$r(B(NULL$B$G$"$k$+$b$7$l$J$$$K$b$+$+$o$i$:(B)$B%G%j%U%!%l%s%9$G$-$k$HA[Dj$7$F$$$k$3$H$K$J$j$^$9!#$3$l$O(BC$B8@8l$HF1Ey$K4m81$G$9!#(B
+
+$BK\Mh!"(BC$B8@8l4X?t$N<BAu<T$O0z?t$NF~=PNO$d0z?t$HJV$jCM$N%]%$%s%?$N4XO"$J$I$K$D$$$F0U?^$r;}$C$F@_7W$7$?$O$:$G$9$,!"$=$N0U?^$r(Bc2ats$B$,(BC$B8@8l%X%C%@$+$iFI$_<h$k$3$H$O:$Fq$G$9!#$=$3$G8=:_$N(Bc2ats$B$G$O=PNO$5$l$?(Bsats$B%U%!%$%k$rMxMQ$7$F(BATS$B%W%m%0%i%_%`$r=q$/:]$K!"$h$j6/$$7?$r<jF0$G3d$jEv$F$k$3$H$,>)Ne$5$l$^$9!#(B
+
+$B$5$i$K!"0z?t$H$7$F$NCs4Q$O$=$N0MB8$9$k%"%I%l%9$rA4>NNL2=$GF3F~$7!"$5$i$K4X?t$,JV$C$F$b>CHq$7$^$;$s!#$^$?JV$jCM$H$7$F$NCs4Q$O$=$N0MB8$9$k%"%I%l%9$rB8:_NL2=$GF3F~$7$^$9!#$3$l$O(B \verb|FCLOSE(3)| $B$N$h$&$K!"<B:]$K$OCs4Q$r>CHq$9$k$G$"$m$&4X?t%7%0%K%A%c$G$bF1MM$G$9!#(B
+
+$B$3$l$b$^$?K\Mh$O(BC$B8@8l@_7W<T$O%]%$%s%?$N@8B86h4V$r0U?^$7$F@_7W$7$?$O$:$G$9$,!"$=$N0U?^$r(Bc2ats$B$,(BC$B8@8l%X%C%@$+$iFI$_<h$k$3$H$O:$Fq$G$9!#8=:_$N(Bc2ats$B$G$O=PNO$5$l$?(Bsats$B%U%!%$%k$K<jF0$G6/$$7?$r3d$jEv$F$k$3$H$,>)Ne$5$l$^$9!#(B
 
 \section{$B8=<BE*$J%"%W%j%1!<%7%g%s(B: $B<+F0@8@.$5$l$?4m81$J4X?t$N;HMQ(B}
 
@@ -361,7 +437,7 @@ corrode\cite{corrode}$B$O(BC$B8@8l$N%X%C%@%U%!%$%k$d%=!<%9%U%!%$%k$rF~NO$H$7$
 $BHf3SE*C1=c$JJQ49%k!<%k$r7h$a$k$3$H$G!"(BC$B8@8l%X%C%@Cf$N@k8@$r(BATS$B8@8l$N@k8@(B(sats$B%U%!%$%k(B)$B$K<+F0E*K]Lu$9$k$3$H$,2DG=$G$"$k$3$H$r<($7$^$7$?!#<+F0JQ49$5$l$?(Bsats$B%U%!%$%k$r;H$C$F7?%-%c%9%H$rMQ$$$?4m81$J(BATS$B8@8l%"%W%j%1!<%7%g%s$r:n@.$G$-$k$3$H$r<($7$^$7$?!#$=$N(Bsats$B%U%!%$%k$H4m81$J%"%W%j%1!<%7%g%s$KCJ3,E*$K@~7A7?$rF3F~$9$k$3$H$G!"$h$j0BA4$J4X?t%7%0%K%A%c$H%"%W%j%1!<%7%g%s$,<j$KF~$k$3$H$r<($7$^$7$?!#:G8e$KK\%D!<%k$N8=>u$G$N@)8B$H3+H/7W2h$rE8K>$7$^$7$?!#(B
 
 \section*{$B<U<-(B}
-C$B8@8l$N7?I=8=$r$$$+$K$7$F(BATS$B8@8l$N7?I=8=$K2r<a$7$J$*$9$+!"I.<T$N$=$N5?Ld$KBP$7:,5$6/$$%5%]!<%H$r$7$F$/$l$?(BHongwei Xi$B$K46<U$7$^$9!#(B
+language-c$B$H$$$&AG@2$7$$%i%$%V%i%j$r>R2p$7$F$/$l$?B<<g?r9T;a$H!"(BC$B8@8l$N7?I=8=$r$$$+$K$7$F(BATS$B8@8l$N7?I=8=$K2r<a$7$J$*$9$+:,5$6/$$%5%]!<%H$r$7$F$/$l$?(BHongwei Xi$B$K46<U$7$^$9!#(B
 
 % BibTeX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliographystyle{unsrt}
