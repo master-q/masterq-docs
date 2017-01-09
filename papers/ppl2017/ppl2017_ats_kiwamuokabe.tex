@@ -53,22 +53,35 @@ ATS$B8@8l$N%W%m%0%i%`$NCM$K$O(BML$B8@8l$HF1MM$K7?$,$o$j$"$F$i$l$F$*$j!"CM$N@-
 
 $B>e5-$N>ZL@$H$O6qBNE*$K$O<!$N(B2$B$D$G$9!#(B1$B$DL\$O8EE5O@M}$rMQ$$$?%3!<%I$N>ZL@$G!"%=!<%H%"%k%4%j%:%`$N>ZL@$J$I$K;H$&$3$H$,$G$-$^$9!#(B2$B$DL\$O@~7AO@M}$rMQ$$$?%j%=!<%9$NDI@W$G!"%]%$%s%?$N@8B8HO0O$r%3%s%Q%$%k;~$K8!::$9$k$3$H$,$G$-$^$9!#(B
 
-ATS$B8@8l$N4X?tDj5A$K$O>ZL@$NJQ?t$HF0E*$JJQ?t$,$"$j!"A0<T$O%3%s%Q%$%k;~$G$N$_$N8!::$N$?$a$K;H$o$l!"8e<T$O%3%s%Q%$%k8e$N<B%3!<%I$K$=$N$^$^;H$o$l$^$9!#F1MM$K4X?t@k8@$K$b>ZL@$N0z?t(B/$BF0E*$J0z?t(B/$B>ZL@$NJV$jCM(B/$BF0E*$JJV$jCM$r<h$k$3$H$,$G$-$^$9!#Nc$($P%j%9%H(B\ref{proof_dynamic}$B$N%-!<%o!<%I(B \verb|fun| $B$GDj5A$5$l$?4X?t$O(B xxx
+ATS$B8@8l$N4X?tDj5A$K$O>ZL@$NJQ?t$HF0E*$JJQ?t$,$"$j!"A0<T$O%3%s%Q%$%k;~$G$N$_$N8!::$N$?$a$K;H$o$l!"8e<T$O%3%s%Q%$%k8e$N<B%3!<%I$K$=$N$^$^;H$o$l$^$9!#F1MM$K4X?t@k8@$K$b>ZL@$N0z?t(B/$BF0E*$J0z?t(B/$B>ZL@$NJV$jCM(B/$BF0E*$JJV$jCM$r<h$k$3$H$,$G$-$^$9!#Nc$($P%j%9%H(B\ref{proof_dynamic}$B$N%-!<%o!<%I(B \verb|fun| $B$GDj5A$5$l$?4X?t$O(B \verb|fun_a| $B$H$$$&L>A0$,$D$$$F$$$F$$$^$9!#$3$N4X?t$O(B \verb|PF1| $B$H(B \verb|PF2| $B$H$$$&7?$N>ZL@0z?t$H!"(B\verb|char| $B7?$N<B0z?t$r<h$j!"(B\verb|PF3| $B$H$$$&7?$N>ZL@JV$jCM$H(B \verb|int| $B7?$N<BJV$jCM$rJV$7$^$9!#(B
 
 \begin{lstlisting}[caption=$B>ZL@$N0z?t$HF0E*$J0z?t(B,label=proof_dynamic]
-xxx
+fun fun_a: (PF1, PF2 | char) -> (PF3 | int)
 \end{lstlisting}
 
-$B$5$i$K(B \verb|prfun| $B$d(B \verb|praxi| $B%-!<%o!<%I$r;H$&$3$H$G>ZL@0z?t$@$1$r<h$C$F>ZL@JV$jCM$@$1$rJV$94X?t$rDj5A$9$k$3$H$b$G$-$^$9!#(B
+$B<B0z?t$H<BJV$jCM$N$_$r<h$j!">ZL@$NCM$r07$o$J$$4X?t$b:n$k$3$H$,$G$-!"$5$i$K(B \verb|prfun| $B$d(B \verb|praxi| $B%-!<%o!<%I$r;H$&$3$H$G>ZL@0z?t$@$1$r<h$C$F>ZL@JV$jCM$@$1$rJV$94X?t$rDj5A$9$k$3$H$b$G$-$^$9!#(B
 
 \section{$B@~7A7?$K$h$k0BA4$J%a%b%j;HMQ$H%j%=!<%9$NDI@W(B}
 
 ATS$B8@8l$G$O@~7AO@M}$NL?Bj$r!V4Q!W$H8F$S!"Cf$G$b%a%b%j$X$N%"%/%;%98"8B$rI=$o$94Q$r!VCs4Q!W$H8F$S$^$9!#<o(B \verb|addr| $B$N@EE*$JCM%"%I%l%9(B \verb|l| $B$,$"$j!"$=$N@EE*$J%"%I%l%9$K0MB8$7$?%]%$%s%?$N7?$,(B \verb|ptr(l)| $B$G$"$k$H$7$^$9!#$9$k$HCs4Q(B \verb|a@l| $B$OEv3:%"%I%l%9(B \verb|l| $B$K(B \verb|a| $B7?$NCM$,$"$k$3$H$r0UL#$7$F$$$^$9!#$9$J$o$A@h$N%]%$%s%?$NCM$O%G%j%U%!%l%s%9$9$k$3$H$,$G$-!"(B\verb|a| $B7?$NCM$rFI$_=q$-$G$-$k$3$H$K$J$j$^$9!#$b$7$=$N%3%s%F%-%9%H$,(B \verb|l| $B$KBP$9$kCs4Q$r;}$?$J$$>l9g!"7?(B \verb|ptr(l)| $B$N%]%$%s%?$O%G%j%U%!%l%s%9$G$-$^$;$s!#(B
 
-$B4Q$dCs4Q$O@8@.$H>CHq$,$G$-$^$9!#(B
+$B4Q$dCs4Q$O8EE5O@M}$H0[$J$j!"4X?t$N8F$S=P$7$K$*$$$F@8@.$H>CHq$,$G$-$^$9!#Nc$($P%j%9%H(B\ref{produce_consume}$B$N4X?t(B \verb|fun_b| $B$O!"A4>NNL2=$GF3F~$5$l$?@EE*$J%"%I%l%9(B \verb|l1| $B$K0MB8$7$?Cs4Q(B \verb|char@l1| $B$HF1$8$/(B \verb|l1| $B$K0MB8$7$?%]%$%s%?(B \verb|ptr(l1)| $B$r<h$j$^$9!#$=$N$?$a(B \verb|fun_b| $B4X?t$r8F$VA0$K$O%3%s%F%-%9%H$KCs4Q$,$"$k$?$a$K(B \verb|ptr(l1)| $B7?$N%]%$%s%?$r%G%j%U%!%l%s%9$7$F(B \verb|char| $B7?$NCM$rFI$_=q$-$9$k$3$H$,$G$-$^$7$?!#$H$3$m$,!"(B\verb|fun_b| $B4X?t$r8F$s$@8e$OCs4Q(B \verb|char@l1| $B$O>CHq$5$l$F$7$^$&$?$a$K(B \verb|ptr(l1)| $B7?$N%]%$%s%?$r%G%j%U%!%l%s%9$G$-$J$/$J$j$^$9!#$5$i$K$3$N4X?t$OB8:_NL2=$GF3F~$5$l$?@EE*$J%"%I%l%9(B \verb|l2| $B$K0MB8$7$?Cs4Q(B \verb|int@l2| $B$HF1$8$/(B \verb|l2| $B$K0MB8$7$?%]%$%s%?(B \verb|ptr(l2)| $B$rJV$7$^$9!#4X?t(B \verb|fun_b| $B$r8F$S=P$7$?8e$O(B \verb|int@l2| $B$,@8@.$5$l$F$$$k$?$a$K(B \verb|ptr(l2)| $B$r%G%j%U%!%l%s%9$7$F(B \verb|int| $B7?$NCM$rFI$_=P$9$3$H$,$G$-$^$9!#(B
 
-xxx $B@8@.$H>CHq$K$D$$$F(B
-xxx $B4QJQ2=$K$D$$$F(B
+\begin{lstlisting}[caption=$BCs4Q$N@8@.$H>CHq$r9T$J$&4X?t(B,label=produce_consume]
+fun fun_b: {l1:addr} (char@l1 | ptr(l1)) -> [l2:addr] (int@l2 | ptr(l2))
+\end{lstlisting}
+
+$B$3$N$h$&$K4X?t$N0z?t$K<h$C$?Cs4Q$r>CHq$7$?$/$J$$>l9g$K$O%j%9%H(B\ref{no_consume}$B$N$h$&$K>CHq$7$J$$Cs4Q$NA0$K(B \verb|!| $B$rIU$1$^$9!#$3$N%^!<%/$N$*$+$2$G4X?t(B \verb|fun_b2| $B$N8F$S=P$7$,=*$o$C$?8e$bCs4Q(B \verb|char@l1| $B$O@8$-$F$$$k$N$G!"%]%$%s%?(B \verb|ptr(l1)| $B$r%G%j%U%!%l%s%9$9$k$3$H$,$G$-$^$9!#(B
+
+\begin{lstlisting}[caption=$BCs4Q$r>CHq$7$J$$4X?t(B,label=no_consume]
+fun fun_b2: {l1:addr} (!char@l1 | ptr(l1)) -> [l2:addr] (int@l2 | ptr(l2))
+\end{lstlisting}
+
+$B$5$i$K4X?t$N8F$S=P$7A08e$GCs4Q$N7A$rJQ2=(B($B4QJQ2=$H8F$P$l$^$9(B)$B$5$;$k$3$H$b$G$-$^$9!#Nc$($P%j%9%H(B\ref{view_change}$B$N4X?t(B \verb|fun_c| $B$r8F$S=P$9A0$G$O%"%I%l%9(B \verb|l| $B$KBP1~$9$kCs4Q$O(B \verb|int@l| $B$J$N$G!"%]%$%s%?(B \verb|ptr(l)| $B$r%G%j%U%!%l%s%9$9$k$H(B \verb|int| $B7?$NCM$,F@$i$l$^$9$,!"Ld$&$,$$(B $B4X?t$r8F$S=P$7$?8e$G$O$=$NCs4Q$,>CHq$5$l$F?7$7$$Cs4Q(B \verb|char@l| $B$KJQ2=$7$F$$$k$?$a$K!"%]%$%s%?(B \verb|ptr(l)| $B$r%G%j%U%!%s%9$9$k$H(B \verb|char| $B7?$NCM$,F@$i$l$k$3$H$K$J$j$^$9!#(B
+
+\begin{lstlisting}[caption=$B4QJQ2=(B,label=view_change]
+fun fun_c: {l:addr} (!int@l>>char@l | ptr(l)) -> void
+\end{lstlisting}
 
 unsafe.sats$B$H$$$&%U%!%$%k$r%$%s%/%k!<%I$9$k$H!"(B($BJXMx$@$1$l$I(B)$B4m81$J(BAPI$B$r;H$&$3$H$,2DG=$G$9!#Nc$($P$=$NCf$GDj5A$5$l$F$$$k(B \verb|ptr_vtake| $B4X?t$O$J$s$N>ZL@$b$J$$%]%$%s%?$r<h$j!"G$0U$NCs4Q$rJV$9%-%c%9%H4X?t$G$9!#(B
 
@@ -114,7 +127,7 @@ fun fun_c2ats_printf: {l1:addr} (!ptr_v_1(char, l1) | ptr l1) -> int = "mac#prin
 
 \lstinputlisting[caption=main.dats$B%U%!%$%k(B,label=main.dats]{example/hello/main.dats}
 
-$B>e5-$N(Bmain.dats$B$O%3%s%=!<%k$+$i%j%9%H(B\ref{}$B$N$h$&$K(BATS$B%3%s%Q%$%i$G%3%s%Q%$%k$7$?8e<B9T$9$k$3$H$,$G$-$^$9!#(B
+$B>e5-$N(Bmain.dats$B$O%3%s%=!<%k$+$i%j%9%H(B\ref{compile-main.dats}$B$N$h$&$K(BATS$B%3%s%Q%$%i$G%3%s%Q%$%k$7$?8e<B9T$9$k$3$H$,$G$-$^$9!#(B
 
 \begin{lstlisting}[caption=main.dats$B$N%3%s%Q%$%k(B,label=compile-main.dats]
 $ cd example/hello
