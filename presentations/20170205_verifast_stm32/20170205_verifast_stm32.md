@@ -8,10 +8,10 @@ Kiwamu Okabe
 
 ![background](img/ESAT_KULeuven.png)
 
-* Know ChibiOS/RT which is a RTOS
+* Introduce ChibiOS/RT which is a RTOS
 * Get development environment for ChibiOS/RT
-* Build sample ChibiOS/RT application
-* Know STM32 microcontroller
+* Build sample application on ChibiOS/RT
+* Introduce STM32 microcontroller
 * Run the application on STM32 board
 * Verify the application using VeriFast
 
@@ -21,7 +21,7 @@ Kiwamu Okabe
 
 * http://www.chibios.org/
 * Simple/Small/Fast/Portable real-time OS
-* Run on ARM Cortex-M*, Arduino Uno, PowerPC e200
+* Run on ARM Cortex-M, Arduino Uno, PowerPC e200
 * Context Switch (STM32F4xx): 0.40 µsec
 * Kernel Size (STM32F4xx): 6172 byte
 
@@ -71,7 +71,7 @@ https://github.com/verifast/verifast#binaries
 
 ![background](img/microsoft.png)
 
-* Open cygwin terminal, and checkout ChibiOS/RT source code:
+* Open cygwin terminal, and checkout custom ChibiOS/RT source code:
 
 ```
 $ git clone https://github.com/fpiot/chibios-verifast.git
@@ -114,7 +114,7 @@ $ mv verifast-*/ verifast
 $ export PATH=`pwd`/verifast/bin:$PATH
 ```
 
-* Checkout ChibiOS/RT source code:
+* Checkout custom ChibiOS/RT source code:
 
 ```
 $ git clone https://github.com/fpiot/chibios-verifast.git
@@ -156,7 +156,7 @@ $ mv verifast-*/ verifast
 $ export PATH=`pwd`/verifast/bin:$PATH
 ```
 
-* Checkout ChibiOS/RT source code:
+* Checkout custom ChibiOS/RT source code:
 
 ```
 $ git clone https://github.com/fpiot/chibios-verifast.git
@@ -333,7 +333,7 @@ $ picocom -b 38400 /dev/ttyACM0
 
 * https://github.com/verifast/verifast
 * A verifier for single-threaded and multithreaded C language programs annotated with preconditions and postconditions written in separation logic.
-* VeriFast is easy to use using own graphical IDE.
+* VeriFast is easy to use with the graphical IDE.
 
 # How to verify application?
 
@@ -437,7 +437,7 @@ int main(void)
 
 ![background](img/homework.png)
 
-* Verify ChibiOS/RT thread
+* Verify ChibiOS/RT thread blinking LED
 * Verify chEvtBroadcastI() which can be call from I-Locked or S-Locked state
 
 ```
@@ -457,7 +457,7 @@ chibios-verifast/ChibiOS_16.1.6/demos/STM32/RT-STM32F746G-DISCOVERY-LWIP-FATFS-U
 * STMicroelectronics provides STM32 boards.
 * Eiwa System Management, Inc. provides this meeting room.
 * \@ruicc supports around MacOS environment.
-* \@eldesh supports around Windows environment, and advice usage of VeriFast.
+* \@eldesh supports around Windows environment, and gives advice usage of VeriFast.
 
 # License of photos #1
 
