@@ -13,6 +13,7 @@ Kiwamu Okabe
 * Build sample application on ChibiOS/RT
 * Introduce STM32 microcontroller
 * Run the application on STM32 board
+* Introduce VeriFast
 * Verify the application using VeriFast
 
 # What's ChibiOS/RT?
