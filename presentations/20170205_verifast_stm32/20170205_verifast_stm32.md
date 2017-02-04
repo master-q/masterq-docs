@@ -14,8 +14,10 @@ Kiwamu Okabe
 # What's ChibiOS/RT?
 
 * http://www.chibios.org/
-
-xxx spec
+* Simple/Small/Fast/Portable real-time OS
+* Run on ARM Cortex-M*, Arduino Uno, PowerPC e200
+* Context Switch (STM32F4xx): 0.40 µsec
+* Kernel Size (STM32F4xx): 6172 byte
 
 # Get the devel-environment #Windows
 
@@ -276,15 +278,100 @@ $ picocom -b 38400 /dev/ttyACM0
 
 # Coffee break #2
 # What's VeriFast?
+
+xxx spec
+
 # How to verify application?
+
+Simply kick GNU make on your terminal:
+
+```
+$ cd chibios-verifast/verifast_demo/STM32/RT-STM32F091RC-NUCLEO
+$ make vfide
+```
+
 # What should be verified on ChibiOS?
+
+* ChibiOS has own system states:
+
+![inline](img/system_states1.png)
+
+# The state chart means...
+
+* Application start at "Init" state
+* Change into "HALInited" state calling halInit()
+* Change into "Thread" state calling chSysInit()
+* You can call some ChibiOS API on "Thread" state
+
+But run-time error is caused by violation. We would like to capture it on verification using VeriFast.
+
 # Your code already has assertion
 
-There is assertions in the fake header.
+```
+$ cat chibios-verifast/verifast_inc/ghost-chibios.gh
+--snip--
+inductive SystemState =
+  | InitState
+  | HALInitedState
+  | ThreadState
+  | IRQSuspendedState
+  | IRQDisabledState
+  | IRQWaitState
+  | ISRState
+  | SLockedState
+  | ILockedState
+  ;
+predicate chibios_sys_state_context(int threadId; SystemState state);
+```
+
+# ChibiOS API has pre/postcondition
+
+```
+$ cat chibios-verifast/verifast_inc/hal.h
+--snip--
+void halInit(void);
+    //@ requires chibios_sys_state_context(currentThread, InitState);
+    //@ ensures chibios_sys_state_context(currentThread, HALInitedState);
+--snip--
+$ cat chibios-verifast/verifast_inc/ch.h
+--snip--
+void chSysInit(void);
+    //@ requires chibios_sys_state_context(currentThread, HALInitedState);
+    //@ ensures chibios_sys_state_context(currentThread, ThreadState);
+
+void chThdSleepMilliseconds(uint32_t msec);
+    //@ requires chibios_sys_state_context(currentThread, ThreadState);
+    //@ ensures chibios_sys_state_context(currentThread, ThreadState);
+```
 
 # Let's violate the assertion
+
+```
+$ vi chibios-verifast/verifast_demo/STM32/RT-STM32F091RC-NUCLEO/main.c
+int main(void)
+    //@ requires chibios_sys_state_context(currentThread, InitState);
+    //@ ensures false;
+{
+  chSysInit(); // <=== SWAP!
+  halInit();   // <=== SWAP!
+  sdStart(&SD2, NULL);
+  while (true)
+    //@ invariant chibios_sys_state_context(currentThread, ThreadState);
+  {
+    if (!palReadPad(GPIOC, GPIOC_BUTTON))
+      TestThread(&SD2);
+    chThdSleepMilliseconds(500);
+  }
+}
+```
+
 # Then you will see error on verification
+
+![inline](img/vfide.png)
+
 # Homework
+
+xxx
 
 # Special thanks
 
