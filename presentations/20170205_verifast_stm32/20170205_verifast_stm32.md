@@ -1,5 +1,7 @@
 # Hands-on VeriFast with STM32 microcontroller
 
+![background](img/STMicroelectronics_logo_with_tagline.png)
+
 Kiwamu Okabe
 
 # Today's TOC
@@ -499,6 +501,13 @@ chibios-verifast/ChibiOS_16.1.6/demos/STM32/RT-STM32F746G-DISCOVERY-LWIP-FATFS-U
 * ESAT KULeuven | Pues aquí es donde trabajo durante estos mes… | Flickr
   https://www.flickr.com/photos/juanvvc/4688054880/
   Copyright: Juan V. Vera del Campo / License: CC BY-SA 2.0
+```
+
+# License of photos #3
+
+![background](img/creative_commons.png)
+
+```
 * Thank you... | Thank you to everyone on Flickr who comments … | Flickr
   https://www.flickr.com/photos/pearlslaceandruffles/4767722515/
   Copyright: Dee ♥ / License: CC BY-ND 2.0
