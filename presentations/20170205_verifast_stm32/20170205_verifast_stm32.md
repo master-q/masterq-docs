@@ -4,7 +4,7 @@
 
 Kiwamu Okabe
 
-# Today's TOC
+# Table of Contents
 
 ![background](img/ESAT_KULeuven.png)
 
