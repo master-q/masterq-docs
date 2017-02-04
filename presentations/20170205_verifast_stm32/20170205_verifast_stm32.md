@@ -279,7 +279,9 @@ $ picocom -b 38400 /dev/ttyACM0
 # Coffee break #2
 # What's VeriFast?
 
-xxx spec
+* https://github.com/verifast/verifast
+* A verifier for single-threaded and multithreaded C language programs annotated with preconditions and postconditions written in separation logic.
+* VeriFast is easy to use using own graphical IDE.
 
 # How to verify application?
 
@@ -371,7 +373,18 @@ int main(void)
 
 # Homework
 
-xxx
+* Verify ChibiOS/RT thread
+* Verify chEvtBroadcastI() which can be call from I-Locked or S-Locked state
+
+```
+http://chibios.sourceforge.net/html/group__events.html#ga0c3fcdef2ba14d8b6b6da5aa4113f18b
+```
+
+* Verify following more complex application:
+
+```
+chibios-verifast/ChibiOS_16.1.6/demos/STM32/RT-STM32F746G-DISCOVERY-LWIP-FATFS-USB
+```
 
 # Special thanks
 
