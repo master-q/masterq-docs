@@ -151,9 +151,128 @@ $ make
 
 # Coffee break #1
 # What's STM32?
+
+xxx spec
+
 # You can free to get own STM32 board!
-# How to write ChibiOS application?
-# How to run ChibiOS application?
+
+```
+https://developer.mbed.org/platforms/ST-Nucleo-F091RC/
+```
+
+* "NUCLEO-F091RC"
+* ARM Cortex-M0 CPU / 256 KB Flash / 32 KB SRAM
+* ADC / DAC / RTC / I2C / USART / SPI / CAN / HDMI CEC
+* Able to flash fiwmware and debug it using GDB
+* Thanks a lot, STMicroelectronics!
+
+# How to run application? #Windows
+
+* Connect the board to your PC using USB cable
+* Open cygwin terminal, kick "st-util":
+
+```
+$ (cd /usr/local/lib && st-util)
+```
+
+* Open another cygwin terminal, and write application into the board:
+
+```
+$ cd chibios-verifast/verifast_demo/STM32/RT-STM32F091RC-NUCLEO
+$ make gdbwrite
+```
+
+# How to run application? #Windows
+
+* Continue application from GDB prompt:
+
+```
+(gdb) c
+```
+
+* Open serial console using TeraTerm with baud rate 38400
+* Push "USER" button on the board
+
+# How to run application? #MacOS
+
+* Connect the board to your Mac using USB cable
+* Kick "st-util":
+
+```
+$ st-util
+```
+
+* Open another terminal, and write application into the board:
+
+```
+$ cd chibios-verifast/verifast_demo/STM32/RT-STM32F091RC-NUCLEO
+$ make gdbwrite
+```
+
+# How to run application? #MacOS
+
+* Continue application from GDB prompt:
+
+```
+(gdb) c
+```
+
+* Open another terminal, and open serial console:
+
+```
+$ picocom -b 38400 /dev/tty.usbmodem1423
+```
+
+* Push "USER" button on the board
+
+# How to run application? #Linux
+
+* Connect the board to your Mac using USB cable
+* Kick "st-util":
+
+```
+$ sudo st-util
+```
+
+* Open another terminal, and write application into the board:
+
+```
+$ cd chibios-verifast/verifast_demo/STM32/RT-STM32F091RC-NUCLEO
+$ make gdbwrite
+```
+
+# How to run application? #Linux
+
+* Continue application from GDB prompt:
+
+```
+(gdb) c
+```
+
+* Open another terminal, and open serial console:
+
+```
+$ picocom -b 38400 /dev/ttyACM0
+```
+
+* Push "USER" button on the board
+
+# Do you see test log of ChibiOS?
+
+* You will see following log on serial console:
+
+```
+*** ChibiOS/RT test suite
+***
+*** Kernel:       3.1.5
+*** Compiled:     Jan 15 2017 - 20:38:01
+*** Compiler:     GCC 4.8.4 20140725 (release) [ARM/embedded-4_8-branch revision 213147]
+*** Architecture: ARMv6-M
+*** Core Variant: Cortex-M0
+*** Port Info:    Preemption through NMI
+*** Platform:     STM32F091xC Entry Level Access Line devices
+*** Test Board:   STMicroelectronics NUCLEO-F091RC
+```
 
 # Coffee break #2
 # What's VeriFast?
