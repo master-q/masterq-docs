@@ -4,6 +4,8 @@ Kiwamu Okabe
 
 # Today's TOC
 
+![background](img/ESAT_KULeuven.png)
+
 * Know ChibiOS/RT which is a RTOS
 * Get development environment for ChibiOS/RT
 * Build sample ChibiOS/RT application
@@ -12,6 +14,8 @@ Kiwamu Okabe
 * Verify the application using VeriFast
 
 # What's ChibiOS/RT?
+
+![background](img/chibios_rt_logo.png)
 
 * http://www.chibios.org/
 * Simple/Small/Fast/Portable real-time OS
@@ -157,6 +161,8 @@ $ git clone https://github.com/fpiot/chibios-verifast.git
 ```
 
 # Build a ChibiOS application
+
+![background](img/sumo.png)
 
 * Finally build the code:
 
@@ -346,6 +352,8 @@ $ make vfide
 
 # The state chart means...
 
+![background](img/start.png)
+
 * Application start at "Init" state
 * Change into "HALInited" state calling halInit()
 * Change into "Thread" state calling chSysInit()
@@ -421,9 +429,11 @@ int main(void)
 
 # Then you will see error on verification
 
-![inline](img/vfide.png)
+![background](img/vfide.png)
 
 # Homework
+
+![background](img/homework.png)
 
 * Verify ChibiOS/RT thread
 * Verify chEvtBroadcastI() which can be call from I-Locked or S-Locked state
@@ -439,6 +449,8 @@ chibios-verifast/ChibiOS_16.1.6/demos/STM32/RT-STM32F746G-DISCOVERY-LWIP-FATFS-U
 ```
 
 # Special thanks
+
+![background](img/thankyou.png)
 
 * STMicroelectronics provides STM32 boards.
 * Eiwa System Management, Inc. provides this meeting room.
@@ -475,4 +487,19 @@ chibios-verifast/ChibiOS_16.1.6/demos/STM32/RT-STM32F746G-DISCOVERY-LWIP-FATFS-U
 * WGS7 DeltaIV Liftoff | Shots from the WGS7 DeltaIV rocket la… | Flickr
   https://www.flickr.com/photos/mseeley1/19953519882/
   Copyright: Michael Seeley / License: CC BY 2.0
+* Sumo | Better Than Bacon | Flickr
+  https://www.flickr.com/photos/slurm/3989895242/
+  Copyright: Better Than Bacon / License: CC BY 2.0
+* Start | Start up | CréAj | Flickr
+  https://www.flickr.com/photos/103939386@N07/15423955496/
+  Copyright: CréAj / License: CC BY-ND 2.0
+* Homework | ejecutivoagresivo | Flickr
+  https://www.flickr.com/photos/ejecutivoagresivo/5872031749/
+  Copyright: ejecutivoagresivo / License: CC BY 2.0
+* ESAT KULeuven | Pues aquí es donde trabajo durante estos mes… | Flickr
+  https://www.flickr.com/photos/juanvvc/4688054880/
+  Copyright: Juan V. Vera del Campo / License: CC BY-SA 2.0
+* Thank you... | Thank you to everyone on Flickr who comments … | Flickr
+  https://www.flickr.com/photos/pearlslaceandruffles/4767722515/
+  Copyright: Dee ♥ / License: CC BY-ND 2.0
 ```
