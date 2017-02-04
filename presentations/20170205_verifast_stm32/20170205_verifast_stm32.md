@@ -21,6 +21,8 @@ Kiwamu Okabe
 
 # Get the devel-environment #Windows
 
+![background](img/microsoft.png)
+
 ```
 Detail: https://github.com/fpiot/chibios-verifast/blob/master/doc/README.Windows.ja.md
 ```
@@ -43,6 +45,8 @@ Detail: https://github.com/fpiot/chibios-verifast/blob/master/doc/README.Windows
 
 # Get the devel-environment #Windows
 
+![background](img/microsoft.png)
+
 * Open cygwin terminal, and install "stlink":
 
 ```
@@ -59,6 +63,8 @@ https://github.com/verifast/verifast#binaries
 
 # Get the devel-environment #Windows
 
+![background](img/microsoft.png)
+
 * Open cygwin terminal, and checkout ChibiOS/RT source code:
 
 ```
@@ -66,6 +72,8 @@ $ git clone https://github.com/fpiot/chibios-verifast.git
 ```
 
 # Get the devel-environment #MacOS
+
+![background](img/imac.png)
 
 ```
 Detail: https://github.com/fpiot/chibios-verifast/blob/master/doc/README.MacOS.ja.md
@@ -89,6 +97,8 @@ $ (cd stlink/build/Release && sudo make install)
 
 # Get the devel-environment #MacOS
 
+![background](img/imac.png)
+
 * Download VeriFast, unzip it and set PATH:
 
 ```
@@ -105,6 +115,8 @@ $ git clone https://github.com/fpiot/chibios-verifast.git
 ```
 
 # Get the devel-environment #Linux
+
+![background](img/27050425-gnu-wallpapers.png)
 
 ```
 Detail: https://github.com/fpiot/chibios-verifast/blob/master/doc/README.Linux.ja.md
@@ -126,6 +138,8 @@ $ sudo ldconfig
 ```
 
 # Get the devel-environment #Linux
+
+![background](img/27050425-gnu-wallpapers.png)
 
 * Download VeriFast, unzip it and set PATH:
 
@@ -152,7 +166,12 @@ $ make
 ```
 
 # Coffee break #1
+
+![background](img/coffee1.png)
+
 # What's STM32?
+
+![background](img/en.stm32_sc1169.png)
 
 ```
 http://www.st.com/ja/microcontrollers/stm32-32-bit-arm-cortex-mcus.html
@@ -161,6 +180,8 @@ http://www.st.com/ja/microcontrollers/stm32-32-bit-arm-cortex-mcus.html
 The STM32 family of 32‑bit Flash microcontrollers based on the ARM Cortex‑M processor is designed to offer new degrees of freedom to MCU users. It offers a 32‑bit product range that combines very high performance, real-time capabilities, digital signal processing, and low‑power, low‑voltage operation, while maintaining full integration and ease of development.
 
 # You can free to get own STM32 board!
+
+![background](img/NUCLEO-F091RC-Arduino.png)
 
 ```
 https://developer.mbed.org/platforms/ST-Nucleo-F091RC/
@@ -173,6 +194,8 @@ https://developer.mbed.org/platforms/ST-Nucleo-F091RC/
 * Thanks a lot, STMicroelectronics!
 
 # How to run application? #Windows
+
+![background](img/microsoft.png)
 
 * Connect the board to your PC using USB cable
 * Open cygwin terminal, kick "st-util":
@@ -190,6 +213,8 @@ $ make gdbwrite
 
 # How to run application? #Windows
 
+![background](img/microsoft.png)
+
 * Continue application from GDB prompt:
 
 ```
@@ -200,6 +225,8 @@ $ make gdbwrite
 * Push "USER" button on the board
 
 # How to run application? #MacOS
+
+![background](img/imac.png)
 
 * Connect the board to your Mac using USB cable
 * Kick "st-util":
@@ -217,6 +244,8 @@ $ make gdbwrite
 
 # How to run application? #MacOS
 
+![background](img/imac.png)
+
 * Continue application from GDB prompt:
 
 ```
@@ -232,6 +261,8 @@ $ picocom -b 38400 /dev/tty.usbmodem1423
 * Push "USER" button on the board
 
 # How to run application? #Linux
+
+![background](img/27050425-gnu-wallpapers.png)
 
 * Connect the board to your Mac using USB cable
 * Kick "st-util":
@@ -249,6 +280,8 @@ $ make gdbwrite
 
 # How to run application? #Linux
 
+![background](img/27050425-gnu-wallpapers.png)
+
 * Continue application from GDB prompt:
 
 ```
@@ -264,6 +297,8 @@ $ picocom -b 38400 /dev/ttyACM0
 * Push "USER" button on the board
 
 # Do you see test log of ChibiOS?
+
+![background](img/liftoff.png)
 
 * You will see following log on serial console:
 
@@ -281,13 +316,20 @@ $ picocom -b 38400 /dev/ttyACM0
 ```
 
 # Coffee break #2
+
+![background](img/coffee2.png)
+
 # What's VeriFast?
+
+![background](img/kuleuven.png)
 
 * https://github.com/verifast/verifast
 * A verifier for single-threaded and multithreaded C language programs annotated with preconditions and postconditions written in separation logic.
 * VeriFast is easy to use using own graphical IDE.
 
 # How to verify application?
+
+![background](img/vfide_open.png)
 
 Simply kick GNU make on your terminal:
 
@@ -298,9 +340,9 @@ $ make vfide
 
 # What should be verified on ChibiOS?
 
-* ChibiOS has own system states:
+![background](img/system_states1.png)
 
-![inline](img/system_states1.png)
+* ChibiOS has own system states
 
 # The state chart means...
 
@@ -312,6 +354,8 @@ $ make vfide
 But run-time error is caused by violation. We would like to capture it on verification using VeriFast.
 
 # Your code already has assertion
+
+![background](img/memopad.png)
 
 ```
 $ cat chibios-verifast/verifast_inc/ghost-chibios.gh
@@ -332,6 +376,8 @@ predicate chibios_sys_state_context(int threadId; SystemState state);
 
 # ChibiOS API has pre/postcondition
 
+![background](img/memopad.png)
+
 ```
 $ cat chibios-verifast/verifast_inc/hal.h
 --snip--
@@ -351,6 +397,8 @@ void chThdSleepMilliseconds(uint32_t msec);
 ```
 
 # Let's violate the assertion
+
+![background](img/memopad.png)
 
 ```
 $ vi chibios-verifast/verifast_demo/STM32/RT-STM32F091RC-NUCLEO/main.c
@@ -396,3 +444,35 @@ chibios-verifast/ChibiOS_16.1.6/demos/STM32/RT-STM32F746G-DISCOVERY-LWIP-FATFS-U
 * Eiwa System Management, Inc. provides this meeting room.
 * \@ruicc supports around MacOS environment.
 * \@eldesh supports around Windows environment, and advice usage of VeriFast.
+
+# License of photos #1
+
+![background](img/creative_commons.png)
+
+```
+* Creative Commons BBB | Flickr
+  https://www.flickr.com/photos/steren/2732488224/
+  Copyright: Steren Giannini / License: CC BY 2.0
+* Microsoft | Microsoft Store, Connecticut, 12/2014 by Mike Mo… | Flickr
+  https://www.flickr.com/photos/jeepersmedia/15966145248/
+  Copyright: Mike Mozart / License: CC BY 2.0
+* Mac 20th anniversary poster #14: iMac | The last in the seri… | Flickr
+  https://www.flickr.com/photos/mwichary/2234474972/
+  Copyright: Marcin Wichary / License: CC BY 2.0
+* Coffee break | I'm determined to do my own latte art one day… | Flickr
+  https://www.flickr.com/photos/kwl/3457656569/
+  Copyright: Kenny Louie / License: CC BY 2.0
+* Coffee break | Matt Laugier | Flickr
+  https://www.flickr.com/photos/110206196@N06/14898090455/
+  Copyright: Matt Laugier / License: CC BY 2.0
+```
+
+# License of photos #2
+
+![background](img/creative_commons.png)
+
+```
+* WGS7 DeltaIV Liftoff | Shots from the WGS7 DeltaIV rocket la… | Flickr
+  https://www.flickr.com/photos/mseeley1/19953519882/
+  Copyright: Michael Seeley / License: CC BY 2.0
+```
