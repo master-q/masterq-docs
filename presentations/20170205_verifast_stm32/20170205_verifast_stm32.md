@@ -154,7 +154,11 @@ $ make
 # Coffee break #1
 # What's STM32?
 
-xxx spec
+```
+http://www.st.com/ja/microcontrollers/stm32-32-bit-arm-cortex-mcus.html
+```
+
+The STM32 family of 32‑bit Flash microcontrollers based on the ARM Cortex‑M processor is designed to offer new degrees of freedom to MCU users. It offers a 32‑bit product range that combines very high performance, real-time capabilities, digital signal processing, and low‑power, low‑voltage operation, while maintaining full integration and ease of development.
 
 # You can free to get own STM32 board!
 
@@ -390,3 +394,5 @@ chibios-verifast/ChibiOS_16.1.6/demos/STM32/RT-STM32F746G-DISCOVERY-LWIP-FATFS-U
 
 * STMicroelectronics provides STM32 boards.
 * Eiwa System Management, Inc. provides this meeting room.
+* \@ruicc supports around MacOS environment.
+* \@eldesh supports around Windows environment, and advice usage of VeriFast.
