@@ -183,7 +183,7 @@ $ make
 ![background](img/en.stm32_sc1169.png)
 
 ```
-http://www.st.com/ja/microcontrollers/stm32-32-bit-arm-cortex-mcus.html
+http://www.st.com/content/st_com/en/products/microcontrollers/stm32-32-bit-arm-cortex-mcus.html
 ```
 
 The STM32 family of 32‑bit Flash microcontrollers based on the ARM Cortex‑M processor is designed to offer new degrees of freedom to MCU users. It offers a 32‑bit product range that combines very high performance, real-time capabilities, digital signal processing, and low‑power, low‑voltage operation, while maintaining full integration and ease of development.
