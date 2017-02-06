@@ -336,6 +336,24 @@ $ picocom -b 38400 /dev/ttyACM0
 * A verifier for single-threaded and multithreaded C language programs annotated with preconditions and postconditions written in separation logic.
 * VeriFast is easy to use with the graphical IDE.
 
+# How to verify C code using VeriFast?
+
+![background](img/kuleuven.png)
+
+Please read VeriFast tutorial:
+
+* English:
+
+```
+https://people.cs.kuleuven.be/~bart.jacobs/verifast/tutorial.pdf
+```
+
+* Japanese:
+
+```
+https://github.com/jverifast-ug/translate/blob/master/Manual/Tutorial/Tutorial.md
+```
+
 # How to verify application?
 
 ![background](img/vfide_open.png)
