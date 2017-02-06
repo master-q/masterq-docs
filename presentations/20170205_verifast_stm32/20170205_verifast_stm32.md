@@ -91,7 +91,7 @@ Detail: https://github.com/fpiot/chibios-verifast/blob/master/doc/README.MacOS.j
 ```
 $ brew tap PX4/homebrew-px4
 $ brew update
-$ brew install wget git gcc-arm-none-eabi cmake picocom
+$ brew install wget git gcc-arm-none-eabi cmake picocom libusb
 ```
 
 * Install "stlink":
@@ -132,7 +132,7 @@ Detail: https://github.com/fpiot/chibios-verifast/blob/master/doc/README.Linux.j
 * Install deb packages:
 
 ```
-$ sudo apt-get install wget git libgtk2.0-0 libusb-1.0-0-dev libgtk-3-dev build-essential cmake gcc-arm-none-eabi picocom
+$ sudo apt-get install wget git libgtk2.0-0 libusb-1.0-0-dev libgtk-3-dev build-essential cmake gcc-arm-none-eabi gdb-arm-none-eabi picocom
 ```
 
 * Install "stlink":
