@@ -340,7 +340,7 @@ $ picocom -b 38400 /dev/ttyACM0
 
 ![background](img/kuleuven.png)
 
-Please read VeriFast tutorial:
+Please read VeriFast Tutorial:
 
 * English:
 
