@@ -31,7 +31,7 @@ Kiwamu Okabe
 ![background](img/microsoft.png)
 
 ```
-Detail: https://github.com/fpiot/chibios-verifast/blob/master/doc/README.Windows.ja.md
+Detail: https://github.com/fpiot/chibios-verifast/blob/master/doc/README.Windows.en.md
 ```
 
 * Install following:
@@ -72,7 +72,7 @@ https://github.com/verifast/verifast#binaries
 
 ![background](img/microsoft.png)
 
-* Open cygwin terminal, and checkout custom ChibiOS/RT source code:
+* Open cygwin terminal, and checkout custom ChibiOS/RT source code:w
 
 ```
 $ git clone https://github.com/fpiot/chibios-verifast.git
@@ -83,7 +83,7 @@ $ git clone https://github.com/fpiot/chibios-verifast.git
 ![background](img/imac.png)
 
 ```
-Detail: https://github.com/fpiot/chibios-verifast/blob/master/doc/README.MacOS.ja.md
+Detail: https://github.com/fpiot/chibios-verifast/blob/master/doc/README.MacOS.en.md
 ```
 
 * Install brew packages:
@@ -126,7 +126,7 @@ $ git clone https://github.com/fpiot/chibios-verifast.git
 ![background](img/27050425-gnu-wallpapers.png)
 
 ```
-Detail: https://github.com/fpiot/chibios-verifast/blob/master/doc/README.Linux.ja.md
+Detail: https://github.com/fpiot/chibios-verifast/blob/master/doc/README.Linux.en.md
 ```
 
 * Install deb packages:
@@ -273,7 +273,7 @@ $ picocom -b 38400 /dev/tty.usbmodem1423
 
 ![background](img/27050425-gnu-wallpapers.png)
 
-* Connect the board to your Mac using USB cable
+* Connect the board to your PC using USB cable
 * Kick "st-util":
 
 ```
