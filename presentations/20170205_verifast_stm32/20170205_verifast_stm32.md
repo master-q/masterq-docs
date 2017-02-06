@@ -199,7 +199,7 @@ https://developer.mbed.org/platforms/ST-Nucleo-F091RC/
 * "NUCLEO-F091RC"
 * ARM Cortex-M0 CPU / 256 KB Flash / 32 KB SRAM
 * ADC / DAC / RTC / I2C / USART / SPI / CAN / HDMI CEC
-* Able to flash fiwmware and debug it using GDB
+* Able to download fiwmware and debug it using GDB
 * Thanks a lot, STMicroelectronics!
 
 # How to run application? #Windows
@@ -213,7 +213,7 @@ https://developer.mbed.org/platforms/ST-Nucleo-F091RC/
 $ (cd /usr/local/lib && st-util)
 ```
 
-* Open another cygwin terminal, and write application into the board:
+* Open another cygwin terminal, and dowload application into the board:
 
 ```
 $ cd chibios-verifast/verifast_demo/STM32/RT-STM32F091RC-NUCLEO
@@ -244,7 +244,7 @@ $ make gdbwrite
 $ st-util
 ```
 
-* Open another terminal, and write application into the board:
+* Open another terminal, and download application into the board:
 
 ```
 $ cd chibios-verifast/verifast_demo/STM32/RT-STM32F091RC-NUCLEO
@@ -280,7 +280,7 @@ $ picocom -b 38400 /dev/tty.usbmodem1423
 $ sudo st-util
 ```
 
-* Open another terminal, and write application into the board:
+* Open another terminal, and download application into the board:
 
 ```
 $ cd chibios-verifast/verifast_demo/STM32/RT-STM32F091RC-NUCLEO
