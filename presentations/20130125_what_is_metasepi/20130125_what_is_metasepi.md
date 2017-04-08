@@ -26,7 +26,7 @@ Kiwamu Okabe
 # Metasepiって何？
 ![background](cuttlefish_mono.png)
 
-* http://metasepi.masterq.net/
+* http://metasepi.org/
 * UNIXモドキkernelを型によって設計する
 * C言語での記述はできるかぎり小さく
 * 設計言語はHaskellでもOCamlでも
