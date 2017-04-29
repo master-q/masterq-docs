@@ -60,7 +60,7 @@ https://developer.gnome.org/gobject/stable/
 
 # Implementation of GObject
 
-xxx UML?
+![inline](uml/gobject_class.png)
 
 # Example class: GtkProgressBar
 
@@ -78,10 +78,6 @@ GObject
 # Example functions: GtkProgressBar
 
 ![inline](draw/c_functions.png)
-
-# Example definition: GtkProgressBar
-
-xxx gtk/gtkprogressbar.hをUML図に
 
 # Example constructor: GtkProgressBar
 
