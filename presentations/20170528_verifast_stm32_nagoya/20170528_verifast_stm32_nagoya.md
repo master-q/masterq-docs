@@ -537,6 +537,26 @@ void tmr_init(void *p)
 chibios-verifast/verifast_demo/STM32/RT-STM32F746G-DISCOVERY-LWIP-FATFS-USB
 ```
 
+# For more information
+
+![background](img/kindle.png)
+
+```
+## In English
+"The VeriFast Program Verifier: A Tutorial"
+https://people.cs.kuleuven.be/~bart.jacobs/verifast/tutorial.pdf
+
+## In Japanese
+"プログラム検証器 VeriFast: チュートリアル"
+https://github.com/jverifast-ug/translate/blob/master/Manual/Tutorial/Tutorial.md
+
+"TPPMark2016 を解きながら学ぶ VeriFast"
+https://speakerdeck.com/eldesh/tppmark2016-wojie-kinagaraxue-bu-verifast
+
+"VeriFast Termination Checking Introduction(α)"
+https://speakerdeck.com/eldesh/verifast-termination-checking-introduction-a
+```
+
 # Special thanks
 
 ![background](img/thankyou.png)
@@ -598,4 +618,7 @@ chibios-verifast/verifast_demo/STM32/RT-STM32F746G-DISCOVERY-LWIP-FATFS-USB
 * Thank you... | Thank you to everyone on Flickr who comments … | Flickr
   https://www.flickr.com/photos/pearlslaceandruffles/4767722515/
   Copyright: Dee ♥ / License: CC BY-ND 2.0
+* kindle paperwhite 3G | Kindle paperwhite... | Tatsuo Yamashita | Flickr
+  https://www.flickr.com/photos/yto/8197280407/
+  Copyright: Tatsuo Yamashita / License: CC BY 2.0
 ```
