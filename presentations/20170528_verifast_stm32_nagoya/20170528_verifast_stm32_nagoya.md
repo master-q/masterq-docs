@@ -453,6 +453,13 @@ int main(void)
 
 # More complex example #1
 
+![background](img/STM32F746G-DISCO.png)
+
+* Board: DISCO-F746NG
+* ChibiOS/RT application shows directories and files on SD card onto serial console
+
+# More complex example #2
+
 ![background](img/memopad.png)
 
 ```c
@@ -472,7 +479,7 @@ static void tmrfunc(void *p)
 --snip--
 ```
 
-# More complex example #2
+# More complex example #3
 
 ![background](img/memopad.png)
 
