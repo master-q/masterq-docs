@@ -21,10 +21,16 @@ Kiwamu Okabe
 ![background](img/chibios_rt_logo.png)
 
 * http://www.chibios.org/
-* Simple/Small/Fast/Portable real-time OS
+* Simple / Small / Fast / Portable real-time OS
 * Run on ARM Cortex-M / 8-bit AVR / PowerPC e200
 * Context Switch (STM32F4xx): 0.40 µsec
 * Kernel Size (STM32F4xx): 6172 byte
+
+# Overview of the devel-environment
+
+![background](img/chibios_rt_logo.png)
+
+![inline](draw/overview_devenv.png)
 
 # Get the devel-environment #Windows
 
@@ -78,7 +84,7 @@ https://github.com/verifast/verifast#binaries
 $ git clone https://github.com/fpiot/chibios-verifast.git
 ```
 
-# Get the devel-environment #MacOS
+# Get the devel-environment #macOS
 
 ![background](img/imac.png)
 
@@ -102,7 +108,7 @@ $ (cd stlink && make)
 $ (cd stlink/build/Release && sudo make install)
 ```
 
-# Get the devel-environment #MacOS
+# Get the devel-environment #macOS
 
 ![background](img/imac.png)
 
@@ -188,7 +194,7 @@ http://www.st.com/content/st_com/en/products/microcontrollers/stm32-32-bit-arm-c
 
 The STM32 family of 32‑bit Flash microcontrollers based on the ARM Cortex‑M processor is designed to offer new degrees of freedom to MCU users. It offers a 32‑bit product range that combines very high performance, real-time capabilities, digital signal processing, and low‑power, low‑voltage operation, while maintaining full integration and ease of development.
 
-# You can free to get own STM32 board!
+# You can free to get own board, today!
 
 ![background](img/NUCLEO-F091RC-Arduino.png)
 
@@ -233,7 +239,7 @@ $ make gdbwrite
 * Open serial console using TeraTerm with baud rate 9600
 * Push "USER" button on the board
 
-# How to run application? #MacOS
+# How to run application? #macOS
 
 ![background](img/imac.png)
 
@@ -251,7 +257,7 @@ $ cd chibios-verifast/verifast_demo/STM32/RT-STM32F091RC-NUCLEO
 $ make gdbwrite
 ```
 
-# How to run application? #MacOS
+# How to run application? #macOS
 
 ![background](img/imac.png)
 
@@ -305,7 +311,7 @@ $ picocom -b 9600 /dev/ttyACM0
 
 * Push "USER" button on the board
 
-# Do you see test log of ChibiOS?
+# Do you see test log of ChibiOS/RT?
 
 ![background](img/liftoff.png)
 
@@ -333,7 +339,7 @@ $ picocom -b 9600 /dev/ttyACM0
 ![background](img/kuleuven.png)
 
 * https://github.com/verifast/verifast
-* A verifier for single-threaded and multi-threaded C language programs annotated with preconditions and postconditions written in separation logic.
+* A verifier for single-threaded and multi-threaded C and Java language programs annotated with preconditions and postconditions written in separation logic.
 * VeriFast is easy to use with the graphical IDE.
 
 # Get started with simple example
@@ -413,13 +419,13 @@ int main()
 
 ![background](img/vfide_simple_fixed.png)
 
-# What is invariant on ChibiOS?
+# What is invariant on ChibiOS/RT?
 
 ![background](img/system_states1.png)
 
 * ChibiOS/RT has own system states
 
-# How to verify ChibiOS application?
+# How to verify ChibiOS/RT application?
 
 ![background](img/vfide_open.png)
 
@@ -430,14 +436,14 @@ $ cd chibios-verifast/verifast_demo/STM32/RT-STM32F091RC-NUCLEO
 $ make vfide
 ```
 
-# The state chart means...
+# The state chart means some invariant
 
 ![background](img/start.png)
 
-* Application start at "Init" state
+* Application starts at "Init" state
 * Change into "HALInited" state calling halInit()
 * Change into "Thread" state calling chSysInit()
-* You can call some ChibiOS API on "Thread" state
+* You can call some ChibiOS/RT API on "Thread" state
 
 But run-time error is caused by violation. We would like to capture it on verification using VeriFast.
 
@@ -516,8 +522,30 @@ int main(void)
 
 * Board: DISCO-F746NG
 * ChibiOS/RT application shows directories and files on SD card onto serial console
+* Two functions are already verified
+* First: tmrfunc() run on "ISR" state
+* Second: tmr_init() run on "Thread" state
 
 # More complex application #2
+
+![background](img/STM32F746G-DISCO.png)
+
+* These functions use some APIs which have following invariant:
+
+```
+* chEvtBroadcastI() should be called on "S-Locked" or "I-Locked" state
+* chVTSetI() should be called on "S-Locked" or "I-Locked" state
+* chSysLock() should be called on "Thread" state,
+  and change state into "S-Locked"
+* chSysUnlock() should be called on "S-Locked" state,
+  and change state into "Thread"
+* chSysLockFromISR() should be called on "ISR" state,
+  and change state into "I-Locked"
+* chSysUnlockFromISR() should be called on "I-Locked" state,
+  and change state into "ISR"
+```
+
+# More complex application #3
 
 ![background](img/memopad.png)
 
@@ -538,7 +566,7 @@ static void tmrfunc(void *p)
 --snip--
 ```
 
-# More complex application #3
+# More complex application #4
 
 ![background](img/memopad.png)
 
@@ -593,17 +621,9 @@ void tmr_init(void *p)
 # Then you will see error on verification
 ![background](img/vfide_complex.png)
 
-# Homework
-
-![background](img/homework.png)
-
-* Get done with verifying entirely
-
-```
-chibios-verifast/verifast_demo/STM32/RT-STM32F746G-DISCOVERY-LWIP-FATFS-USB
-```
-
 # Difference on VeriFast and Frama-C?
+
+![background](img/buttons.png)
 
 ```
 "What is difference between VeriFast and Frama-C?"
@@ -614,6 +634,18 @@ https://groups.google.com/forum/#!topic/verifast/xbUHyhPjAe4
 * WP and VeriFast have difference to deal with pointers
 * WP maintains pointers on own memory model (first-order logic)
 * VeriFast maintins pointers on separation logic
+
+# Homework
+
+![background](img/homework.png)
+
+* Get done with verifying entirely on following code
+
+```
+chibios-verifast/verifast_demo/STM32/RT-STM32F746G-DISCOVERY-LWIP-FATFS-USB
+```
+
+* Capture more invariant on ChibiOS/RT application (e.g. changing of global variable)
 
 # For more information
 
@@ -641,7 +673,7 @@ https://speakerdeck.com/eldesh/verifast-termination-checking-introduction-a
 
 * STMicroelectronics provides STM32 boards.
 * Misoca provides this meeting room.
-* \@ruicc supports MacOS environment.
+* \@ruicc supports macOS environment.
 * \@eldesh supports Windows environment, and gives much advice for usage of VeriFast.
 
 # License of photos #1
@@ -699,4 +731,7 @@ https://speakerdeck.com/eldesh/verifast-termination-checking-introduction-a
 * kindle paperwhite 3G | Kindle paperwhite... | Tatsuo Yamashita | Flickr
   https://www.flickr.com/photos/yto/8197280407/
   Copyright: Tatsuo Yamashita / License: CC BY 2.0
+* buttons | Dean Hochman | Flickr
+  https://www.flickr.com/photos/deanhochman/33100533341/
+  Copyright: Dean Hochman / License: CC BY 2.0
 ```
