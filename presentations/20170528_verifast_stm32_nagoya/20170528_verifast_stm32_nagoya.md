@@ -22,7 +22,7 @@ Kiwamu Okabe
 
 * http://www.chibios.org/
 * Simple/Small/Fast/Portable real-time OS
-* Run on ARM Cortex-M, 8-bit AVR, PowerPC e200
+* Run on ARM Cortex-M / 8-bit AVR / PowerPC e200
 * Context Switch (STM32F4xx): 0.40 µsec
 * Kernel Size (STM32F4xx): 6172 byte
 
@@ -72,7 +72,7 @@ https://github.com/verifast/verifast#binaries
 
 ![background](img/microsoft.png)
 
-* Open cygwin terminal, and checkout custom ChibiOS/RT source code:w
+* Open cygwin terminal, and checkout custom ChibiOS/RT source code:
 
 ```
 $ git clone https://github.com/fpiot/chibios-verifast.git
@@ -196,7 +196,7 @@ The STM32 family of 32‑bit Flash microcontrollers based on the ARM Cortex‑M 
 https://developer.mbed.org/platforms/ST-Nucleo-F091RC/
 ```
 
-* "NUCLEO-F091RC"
+* Name: "NUCLEO-F091RC"
 * ARM Cortex-M0 CPU / 256 KB Flash / 32 KB SRAM
 * ADC / DAC / RTC / I2C / USART / SPI / CAN / HDMI CEC
 * Download fiwmware and debug it using GDB
@@ -207,7 +207,7 @@ https://developer.mbed.org/platforms/ST-Nucleo-F091RC/
 ![background](img/microsoft.png)
 
 * Connect the board to your PC using USB cable
-* Open cygwin terminal, kick "st-util":
+* Open cygwin terminal, run "st-util":
 
 ```
 $ (cd /usr/local/lib && st-util)
@@ -238,7 +238,7 @@ $ make gdbwrite
 ![background](img/imac.png)
 
 * Connect the board to your Mac using USB cable
-* Kick "st-util":
+* Run "st-util":
 
 ```
 $ st-util
@@ -274,7 +274,7 @@ $ picocom -b 9600 /dev/tty.usbmodem1423
 ![background](img/27050425-gnu-wallpapers.png)
 
 * Connect the board to your PC using USB cable
-* Kick "st-util":
+* Run "st-util":
 
 ```
 $ sudo st-util
@@ -333,43 +333,102 @@ $ picocom -b 9600 /dev/ttyACM0
 ![background](img/kuleuven.png)
 
 * https://github.com/verifast/verifast
-* A verifier for single-threaded and multithreaded C language programs annotated with preconditions and postconditions written in separation logic.
+* A verifier for single-threaded and multi-threaded C language programs annotated with preconditions and postconditions written in separation logic.
 * VeriFast is easy to use with the graphical IDE.
 
-# How to verify C code using VeriFast?
+# Get started with simple example
 
-![background](img/kuleuven.png)
+![background](img/memopad.png)
 
-Please read VeriFast Tutorial:
+```c
+// File: illegal_access.c
+#include "stdlib.h"
 
-* English:
+struct account {
+    int balance;
+};
+int main()
+    //@ requires true;
+    //@ ensures true;
+{
+    struct account *myAccount = malloc(sizeof(struct account));
+    //if (myAccount == 0) { abort(); } // Not checked!
+    myAccount->balance = 5;
+    free(myAccount);
+    return 0;
+}
+```
+
+# Example is compilable and runnable...
+
+![background](img/memopad.png)
 
 ```
-https://people.cs.kuleuven.be/~bart.jacobs/verifast/tutorial.pdf
+$ gcc --version
+gcc (Debian 6.3.0-18) 6.3.0 20170516
+Copyright (C) 2016 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+$ gcc -Wall -Wextra illegal_access.c # <= No error shown
+$ ./a.out                            # <= No segmentation fault
 ```
 
-* Japanese:
+# How to verify the simple example?
+
+![background](img/vfide_simple_error.png)
+
+Run "vfide" command on your terminal:
 
 ```
-https://github.com/jverifast-ug/translate/blob/master/Manual/Tutorial/Tutorial.md
+$ vfide illegal_access.c
 ```
 
-# How to verify application?
+You should see "No matching heap chunks" error, after push "Verify" button.
+
+# How to fix the error?
+
+![background](img/memopad.png)
+
+```c
+// File: illegal_access.c -- fixed
+#include "stdlib.h"
+
+struct account {
+    int balance;
+};
+int main()
+    //@ requires true;
+    //@ ensures true;
+{
+    struct account *myAccount = malloc(sizeof(struct account));
+    if (myAccount == 0) { abort(); } // Checked!
+    myAccount->balance = 5;
+    free(myAccount);
+    return 0;
+}
+```
+
+# Yeah, get green on verification!
+
+![background](img/vfide_simple_fixed.png)
+
+# What is invariant on ChibiOS?
+
+![background](img/system_states1.png)
+
+* ChibiOS/RT has own system states
+
+# How to verify ChibiOS application?
 
 ![background](img/vfide_open.png)
 
-Simply kick GNU make on your terminal:
+Run GNU make on your terminal:
 
 ```
 $ cd chibios-verifast/verifast_demo/STM32/RT-STM32F091RC-NUCLEO
 $ make vfide
 ```
-
-# What should be verified on ChibiOS?
-
-![background](img/system_states1.png)
-
-* ChibiOS has own system states
 
 # The state chart means...
 
@@ -451,14 +510,14 @@ int main(void)
 
 ![background](img/vfide.png)
 
-# More complex example #1
+# More complex application #1
 
 ![background](img/STM32F746G-DISCO.png)
 
 * Board: DISCO-F746NG
 * ChibiOS/RT application shows directories and files on SD card onto serial console
 
-# More complex example #2
+# More complex application #2
 
 ![background](img/memopad.png)
 
@@ -479,7 +538,7 @@ static void tmrfunc(void *p)
 --snip--
 ```
 
-# More complex example #3
+# More complex application #3
 
 ![background](img/memopad.png)
 
@@ -544,6 +603,18 @@ void tmr_init(void *p)
 chibios-verifast/verifast_demo/STM32/RT-STM32F746G-DISCOVERY-LWIP-FATFS-USB
 ```
 
+# Difference on VeriFast and Frama-C?
+
+```
+"What is difference between VeriFast and Frama-C?"
+https://groups.google.com/forum/#!topic/verifast/xbUHyhPjAe4
+```
+
+* WP plugin on Frama-C is similar to VeriFast
+* WP and VeriFast have difference to deal with pointers
+* WP maintains pointers on own memory model (first-order logic)
+* VeriFast maintins pointers on separation logic
+
 # For more information
 
 ![background](img/kindle.png)
@@ -571,7 +642,7 @@ https://speakerdeck.com/eldesh/verifast-termination-checking-introduction-a
 * STMicroelectronics provides STM32 boards.
 * Misoca provides this meeting room.
 * \@ruicc supports MacOS environment.
-* \@eldesh supports Windows environment, and gives advice for usage of VeriFast.
+* \@eldesh supports Windows environment, and gives much advice for usage of VeriFast.
 
 # License of photos #1
 
