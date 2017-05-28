@@ -419,7 +419,27 @@ int main()
 
 ![background](img/vfide_simple_fixed.png)
 
-# What is invariant on ChibiOS/RT?
+# Why capture the error on verification?
+
+![background](img/memopad.png)
+
+VeriFast has own header to define malloc():
+
+```c
+void *malloc(int size);
+    //@ requires 0 <= size;
+    /*@
+    ensures
+        result == 0 ?
+            emp
+        :
+            chars(result, size, ?cs) &*& malloc_block(result, size) &*&
+            true == ((char *)0 < result &&
+                     result + size <= (char *)UINTPTR_MAX);
+    @*/
+```
+
+# What's invariant on ChibiOS/RT?
 
 ![background](img/system_states1.png)
 
