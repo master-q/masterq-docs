@@ -8,13 +8,15 @@ Kiwamu Okabe
 
 * https://github.com/verifast/verifast
 * A verifier for single-threaded and multi-threaded C and Java language programs annotated with preconditions and postconditions written in separation logic.
+* VeriFast avoids illegal memory accesses such like buffer overflow.
 * VeriFast is easy to use with the graphical IDE.
 
 # VeriFasts find bugs on Linux kernel
 
 ```
-https://people.cs.kuleuven.be/~willem.penninckx/usbkbd/
 "Verification of Linux's USB Boot Protocol Keyboard Driver (usbkbd)"
+https://people.cs.kuleuven.be/~willem.penninckx/usbkbd/
+
 This project verified Linux's USB Boot Protocol Keyboard Driver (usbkbd), shipped with the Linux kernel. As far as we know, prior to this work, no device driver verification has been carried out that successfully combines:
 
 * verifying software not written with verification in mind, and
@@ -25,9 +27,9 @@ This project verified Linux's USB Boot Protocol Keyboard Driver (usbkbd), shippe
 
 # How to use VeriFast?
 
-* Manually write pre/postcondition as comments in C language code
-* VeriFast statically verifies the assertion
-* You may understand this style of verification as "static design by contract"
+* Manually write pre/postcondition as comments in C language code.
+* VeriFast statically verifies such assertion.
+* You may understand this style of verification as "static design by contract".
 
 ```
 * Design by contract - Wikipedia
@@ -110,7 +112,7 @@ thread_t *chThdCreateStatic(void *wsp, size_t size,
 * Linux kernel quality is shaped by human review, today.
 * If there is C99 compat VeriFast, we keep the quality with verification!
 
-# Advice from \@ftake
+# Thanks for advice from \@ftake
 
 ```
 https://twitter.com/ftake/status/872436138308378624
@@ -118,13 +120,19 @@ https://twitter.com/ftake/status/872436138308378624
 
 ![inline](img/ftake.png)
 
-# Next action: survey clang parser
+# Next action: survey Clang parser
 
 * Is following good for the first step?
 * Clang UPC2C Translator
 * https://clangupc.github.io/clang-upc2c/
-* It translates UPC (Unified Parallel C) code into C language code
+* It translates UPC (Unified Parallel C) code into C language code.
+* After survey, we will replace VeriFast C language parser with Clang's.
 
-# AD: C92 Functional Ikamusume
+# AD: C92 Functional Ikamusume book
+
+```
+http://www.paraiso-lang.org/ikmsm/
+We will publish VeriFast tutorial translated into Japanese, and more.
+```
 
 ![inline](img/ikmsm.png)
