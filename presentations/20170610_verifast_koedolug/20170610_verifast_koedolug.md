@@ -44,6 +44,14 @@ This project verified Linux's USB Boot Protocol Keyboard Driver (usbkbd), shippe
 * Context Switch (STM32F4xx): 0.40 µsec
 * Kernel Size (STM32F4xx): 6172 byte
 
+# Target MCU board
+
+```
+http://www.st.com/ja/evaluation-tools/32f746gdiscovery.html
+```
+
+![inline](img/en.stm32f746g-disco.png)
+
 # System state on ChibiOS/RT RTOS
 
 ![inline](img/system_states1.png)
@@ -100,17 +108,17 @@ thread_t *chThdCreateStatic(void *wsp, size_t size,
 
 # Limitation of VeriFast today
 
-* It need two C language header.
-* One is for compiling C code.
-* Another is for verifying C code.
+* It needs two C language header.
+* Original C headers are for compiling C code.
+* Pseud C headers are for verifying C code.
 * They may have some semantic gap, which cause miss verification.
 
 # We need C99 compatible VeriFast!
 
-* If VeriFast supports C99, pseud C header for verification.
-* It means original Linux kernel code can include the verfication.
+* If VeriFast supports C99, we can directly inject assertion onto original C headers.
+* No more pseud C headers.
 * Linux kernel quality is shaped by human review, today.
-* If there is C99 compat VeriFast, we keep the quality with verification!
+* If there is C99 compat VeriFast, we keep such quality things with verification!
 
 # Thanks for advice from \@ftake
 
@@ -123,7 +131,7 @@ https://twitter.com/ftake/status/872436138308378624
 # Next action: survey Clang parser
 
 * Is following good for the first step?
-* Clang UPC2C Translator
+* "Clang UPC2C Translator"
 * https://clangupc.github.io/clang-upc2c/
 * It translates UPC (Unified Parallel C) code into C language code.
 * After survey, we will replace VeriFast C language parser with Clang's.
