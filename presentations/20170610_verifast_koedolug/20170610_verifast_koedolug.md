@@ -25,12 +25,73 @@ This project verified Linux's USB Boot Protocol Keyboard Driver (usbkbd), shippe
 
 # How to use VeriFast?
 
-* Inject pre/postcondiction
+* Manually write pre/postcondition as comments in C language code
+* VeriFast statically verifies the assertion
+* You may understand this style of verification as "static design by contract"
+
+```
+* Design by contract - Wikipedia
+* https://en.wikipedia.org/wiki/Design_by_contract
+```
 
 # ChibiOS/RT RTOS
+
+* http://www.chibios.org/
+* Simple / Small / Fast / Portable real-time OS
+* Run on ARM Cortex-M / 8-bit AVR / PowerPC e200
+* Context Switch (STM32F4xx): 0.40 µsec
+* Kernel Size (STM32F4xx): 6172 byte
+
 # System state on ChibiOS/RT RTOS
-# Let's verify RTOS application!
+
+![inline](img/system_states1.png)
+
+# Let's verify RTOS application! #1
+
+```c
+static void tmrfunc(void *p)
+   /*@
+       requires chibios_sys_state_context(currentThread, ISRState) &*&
+           integer(&cnt, ?count);
+   @*/
+   /*@
+       ensures chibios_sys_state_context(currentThread, ISRState) &*&
+           integer(&cnt, _);
+   @*/
+{
+  BaseBlockDevice *bbdp = p;
+
+  chSysLockFromISR();
+  if (cnt > 0) {
+    if (blkIsInserted(bbdp)) {
+      if (--cnt == 0) {
+```
+
+# Let's verify RTOS application! #2
+
+```c
+void chSysLock(void);
+    //@ requires chibios_sys_state_context(currentThread, ThreadState);
+    //@ ensures chibios_sys_state_context(currentThread, SLockedState);
+void chSysUnlock(void);
+    //@ requires chibios_sys_state_context(currentThread, SLockedState);
+    //@ ensures chibios_sys_state_context(currentThread, ThreadState);
+void chSysLockFromISR(void);
+    //@ requires chibios_sys_state_context(currentThread, ISRState);
+    //@ ensures chibios_sys_state_context(currentThread, ILockedState);
+void chSysUnlockFromISR(void);
+    //@ requires chibios_sys_state_context(currentThread, ILockedState);
+    //@ ensures chibios_sys_state_context(currentThread, ISRState);
+thread_t *chThdCreateStatic(void *wsp, size_t size,
+                            tprio_t prio, tfunc_t pf, void *arg);
+    //@ requires chibios_sys_state_context(currentThread, ThreadState);
+    //@ ensures chibios_sys_state_context(currentThread, ThreadState);
+```
+
 # Demo
+
+![inline](img/vfide_complex.png)
+
 # Verification platform for RTOS
 
 xxx Figure
