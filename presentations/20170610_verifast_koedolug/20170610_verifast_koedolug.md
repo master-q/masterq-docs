@@ -94,7 +94,7 @@ thread_t *chThdCreateStatic(void *wsp, size_t size,
 
 # Verification platform for RTOS
 
-xxx Figure
+![inline](draw/platform.png)
 
 # Limitation of VeriFast today
 
