@@ -5,10 +5,30 @@
 Kiwamu Okabe
 
 # What's VeriFast?
-# Why need VeriFast?
+
+* https://github.com/verifast/verifast
+* A verifier for single-threaded and multi-threaded C and Java language programs annotated with preconditions and postconditions written in separation logic.
+* VeriFast is easy to use with the graphical IDE.
+
 # VeriFasts find bugs on Linux kernel
+
+```
+https://people.cs.kuleuven.be/~willem.penninckx/usbkbd/
+"Verification of Linux's USB Boot Protocol Keyboard Driver (usbkbd)"
+This project verified Linux's USB Boot Protocol Keyboard Driver (usbkbd), shipped with the Linux kernel. As far as we know, prior to this work, no device driver verification has been carried out that successfully combines:
+
+* verifying software not written with verification in mind, and
+* using a sound approach (we don't "try to find bugs", but "prove absence of bugs"), and
+* not avoiding concurrency (concurrency is common in this driver, and we do prove absence of race conditions), and
+* not relying on any bounding (there's an unbounded number of threads, unbounded number of keyboards, unbounded amount of time the driver is running, ...)
+```
+
 # How to use VeriFast?
-# A problem on ChibiOS/RT RTOS
+
+* Inject pre/postcondiction
+
+# ChibiOS/RT RTOS
+# System state on ChibiOS/RT RTOS
 # Let's verify RTOS application!
 # Demo
 # Verification platform for RTOS
@@ -39,7 +59,11 @@ https://twitter.com/ftake/status/872436138308378624
 
 # Next action: survey clang parser
 
-* Is following good for first step?
-* https://clangupc.github.io/clang-upc2c/
+* Is following good for the first step?
 * Clang UPC2C Translator
+* https://clangupc.github.io/clang-upc2c/
 * It translates UPC (Unified Parallel C) code into C language code
+
+# AD: C92 Functional Ikamusume
+
+![inline](img/ikmsm.png)
