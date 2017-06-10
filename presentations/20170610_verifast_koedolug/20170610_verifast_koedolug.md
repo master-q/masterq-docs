@@ -1,9 +1,10 @@
-# RTOS application verified by VeriFast, and Future plan
+# RTOS application verified by VeriFast, and future plan
 
 Kiwamu Okabe
 
 # What's VeriFast?
 # Why need VeriFast?
+# VeriFasts find bugs on Linux kernel
 # How to use VeriFast?
 # A problem on ChibiOS/RT RTOS
 # Let's verify RTOS application!
