@@ -115,7 +115,7 @@ $ patscc -o fib fib.dats
 
 # ATS-extsolve using SMT solver #5
 
-* But z3 can type-check it!
+* But, z3 can type-check it!
 
 ```
 $ patscc --constraint-ignore -o fib fib.dats
@@ -148,7 +148,7 @@ http://ats-lang.sourceforge.net/EXAMPLE/EFFECTIVATS/GraphSearch-npm/main.html
 
 # Better JavaScript support #1
 
-* ATS+Emscripten runs on web browser.
+* ATS+Emscripten run on web browser.
 * Command patsopt and atscc2js can run on web browser.
 * It means that you can compile ATS code into JavaScript on your browser!
 * Let's open following URL:
@@ -192,11 +192,6 @@ http://jats-ug.metasepi.org/doc/ATS2/EXAMPLE/EFFECTIVATS/ssntyped-channels-1/mai
 (Session-typed Channels:Let us combine sessions together!)
 http://jats-ug.metasepi.org/doc/ATS2/EXAMPLE/EFFECTIVATS/ssntyped-channels-2/main.html
 ```
-
-# Support templates
-
-* Introducing $tyrep(...) for outputing terms representing types in the generated code (so as to support direct use of C++ templates in ATS2)
-* Supporting $tempenver in template implementation: This is a crucial addition in support of programming in ATS that may potentially be (very) deeply template-based!!!
 
 # Syntax highlighting
 
@@ -251,6 +246,41 @@ $ ./a.out
 x = 10 and y = 11
 ```
 
+# Support templates, more #1
+
+* Supporting $tempenver in template implementation: This is a crucial addition in support of programming in ATS that may potentially be (very) deeply template-based!!!
+
+```ats
+(* https://github.com/githwxi/ATS-Postiats/blob/master/doc/EXAMPLE/TESTATS/tempenver.dats *)
+#define ATS_PACKNAME "TEMPENVER"
+#include "share/atspre_staload.hats"
+
+extern fun{} foo(): int
+extern fun{} bar1(int): int
+extern fun{} bar2(int): int
+```
+
+# Support templates, more #2
+
+```ats
+implmnt{} bar1(x) = bar2(x)
+implmnt{} bar2(x) = if x > 0 then foo() + bar1(x-1) else 0
+implement main0(argc ,argv) = let
+    implement{} foo((*void*)) = argc
+    val () = $tempenver(argc)
+  in
+    println! ("bar2(10) = ", bar2(10))
+  end
+```
+
+```
+$ patscc tempenver.dats
+casper$ ./a.out
+bar2(10) = 10
+casper$ ./a.out 100
+bar2(10) = 20
+```
+
 # New parsing-combinator package
 
 * Adding a parsing-combinator package for libats.
@@ -270,6 +300,18 @@ I have just created the ats-lang-club. Membership is by invitation only. The pla
 ```
 
 * They are discussing about the future of ATS language.
+
+# AD: 簡約!? λカ娘 10
+
+![background](img/c92-ikmsm.png)
+
+* コミックマーケット92 - 1日目 金曜日 東た11b
+* At 参照透明な海を守る会
+* 第1章 IST(Internal Set Theory) 入門 (後編)
+* 第2章 Coqダンジョン: 底抜けの壺の夢
+* 第3章 モナドとひも
+* 第4章 矢澤にこ先輩と一緒にモナドモナド!
+* 第5章 VeriFastチュートリアル
 
 # License of photos
 
