@@ -140,12 +140,15 @@ http://ats-lang.sourceforge.net/EXAMPLE/EFFECTIVATS/DivideConquer/main.html
 http://ats-lang.sourceforge.net/EXAMPLE/EFFECTIVATS/GraphSearch-npm/main.html
 ```
 
-# Better JavaScript support
+# Better JavaScript support #1
 
-* Adding some examples to illustrate a way of using ATS+Emscripten
-* With libatsopt(JS), patsopt can now run entirely inside the browser.
-* With libatscc2js(JS), Atscc2js can now run entirely inside the browser.
-* Patsopt(JS) and Atscc2js(JS) have been combined to allow one to try ATS entirely in one's browser (running only client-side JS).
+* ATS+Emscripten runs on web browser.
+* Command patsopt and atscc2js can run on web browser.
+* It means that you can compile ATS code into JavaScript on your browser!
+
+# Better JavaScript support #2
+
+![inline](img/ats_on_web.png)
 
 # The other language support
 
@@ -159,7 +162,15 @@ http://ats-lang.sourceforge.net/EXAMPLE/EFFECTIVATS/GraphSearch-npm/main.html
 
 # Session types
 
-* WebWorker-based support for session types in libatscc2js/Worker/channel
+```
+セッション型チャネル:概要入門
+(Session-typed Channels:A Brief Introduction)
+http://jats-ug.metasepi.org/doc/ATS2/EXAMPLE/EFFECTIVATS/ssntyped-channels-1/main.html
+
+セッション型チャネル:セッションを合成しよう!
+(Session-typed Channels:Let us combine sessions together!)
+http://jats-ug.metasepi.org/doc/ATS2/EXAMPLE/EFFECTIVATS/ssntyped-channels-2/main.html
+```
 
 # Support templates
 
@@ -168,8 +179,17 @@ http://ats-lang.sourceforge.net/EXAMPLE/EFFECTIVATS/GraphSearch-npm/main.html
 
 # Syntax highlighting
 
-* DocBook: https://github.com/githwxi/ATS-Postiats/blob/master/doc/BOOK/INT2PROGINATS/MYTEXT/mytexting.dats
-* Pandoc: https://github.com/jgm/skylighting/blob/master/xml/ats.xml
+* Pandoc
+
+```
+https://github.com/jgm/skylighting/blob/master/xml/ats.xml
+```
+
+* DocBook
+
+```
+https://github.com/githwxi/ATS-Postiats/blob/master/doc/BOOK/INT2PROGINATS/MYTEXT/mytexting.dats
+```
 
 # Syntax: ifcase-expressions #1
 
