@@ -1,8 +1,12 @@
 # ATS2 updates 2017
 
+![background](img/update.png)
+
 Kiwamu Okabe
 
 # What's ATS2 language?
+
+![background](img/ats_logo_on_display.png)
 
 * http://www.ats-lang.org/
 * The syntax is similar to ML
@@ -12,6 +16,8 @@ Kiwamu Okabe
 * Compiled into C language code
 
 # What's Japan ATS User Group?
+
+![background](img/jats-ug_logo_v1.png)
 
 * http://jats-ug.metasepi.org/
 * Translating ATS documents into Japanese
@@ -264,3 +270,16 @@ I have just created the ats-lang-club. Membership is by invitation only. The pla
 ```
 
 * They are discussing about the future of ATS language.
+
+# License of photos
+
+![background](img/creative_commons.png)
+
+```
+* Creative Commons BBB | Flickr
+  https://www.flickr.com/photos/steren/2732488224/
+  Copyright: Steren Giannini / License: CC BY 2.0
+* Update | Model: Viktoria Derevtsova | Exey Panteleev | Flickr
+  https://www.flickr.com/photos/exey/3960710978/
+  Copyright: Exey Panteleev / License: CC BY 2.0
+```
