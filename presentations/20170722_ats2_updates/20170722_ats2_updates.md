@@ -145,20 +145,35 @@ http://ats-lang.sourceforge.net/EXAMPLE/EFFECTIVATS/GraphSearch-npm/main.html
 * ATS+Emscripten runs on web browser.
 * Command patsopt and atscc2js can run on web browser.
 * It means that you can compile ATS code into JavaScript on your browser!
+* Let's open following URL:
+
+```
+http://www.ats-lang.org/SERVER/MYCODE/Patsoptaas_serve.php?mycode_fil=hello
+```
 
 # Better JavaScript support #2
 
 ![inline](img/ats_on_web.png)
 
-# The other language support
+# The other language support #1
 
-* Support in atscc2erl and atscc2scm for handling tail-call optimized code
-* Adding support for stream_vt in the following compilers: atscc2js, atscc2py3, atscc2scm, atscc2clj, atscc2php, atscc2pl
+* ATS has following language backends:
 
-# New parsing-combinator package
+```
+* C language
+* Erlang
+* JavaScript
+* PHP
+* Clojure
+* Perl
+* Python3
+* Scheme
+```
 
-* Adding a parsing-combinator package for libats.
-* Adding a parsing-combinator package for libatscc.
+# The other language support #2
+
+* Support in atscc2erl and atscc2scm for handling tail-call optimized code.
+* Adding support for stream_vt in the following compilers: atscc2js, atscc2py3, atscc2scm, atscc2clj, atscc2php, atscc2pl.
 
 # Session types
 
@@ -228,6 +243,16 @@ implement main0 () = () where {
 $ patscc ifcase.dats
 $ ./a.out
 x = 10 and y = 11
+```
+
+# New parsing-combinator package
+
+* Adding a parsing-combinator package for libats.
+* Adding a parsing-combinator package for libatscc.
+* It means following code?
+
+```
+https://github.com/githwxi/ATS-Postiats/tree/master/npm-utils/contrib/libats-/hwxi/parcomb
 ```
 
 # ats-lang-club@googlegroups.com
