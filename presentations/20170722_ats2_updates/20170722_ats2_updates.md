@@ -171,8 +171,51 @@ http://ats-lang.sourceforge.net/EXAMPLE/EFFECTIVATS/GraphSearch-npm/main.html
 * DocBook: https://github.com/githwxi/ATS-Postiats/blob/master/doc/BOOK/INT2PROGINATS/MYTEXT/mytexting.dats
 * Pandoc: https://github.com/jgm/skylighting/blob/master/xml/ats.xml
 
-# Extend syntax
+# Syntax: ifcase-expressions #1
 
-* ifcase-expressions: https://github.com/githwxi/ATS-Postiats/blob/master/doc/EXAMPLE/TESTATS/ifcase.dats
+```ats
+(* https://github.com/githwxi/ATS-Postiats/blob/master/doc/EXAMPLE/TESTATS/ifcase.dats *)
+#include "share/atspre_staload.hats"
+
+fun acker{m,n:nat} .<m,n>. (m: int(m), n: int(n)) : intGte(0) =
+  (ifcase
+   | m = 0 => n + 1
+   | n = 0 => acker(m-1, 1)
+   | _(*else*) => acker(m-1, acker(m, n-1)))
+
+val () = assertloc(acker(3,3) = 61)
+
+fun foo{i:nat} (x: int(i), y: int(i+1)): void = ()
+```
+
+# Syntax: ifcase-expressions #2
+
+```ats
+implement main0 () = () where {
+  var x: int
+  var y: int
+  val i = (2: intGte(0))
+  val () = (ifcase: [i:nat] (x: int(i), y: int(i+1)) =>
+            | i = 0 => (x := i; y := x+1)
+            | i = 1 => (x := i; y := x+1)
+            | _(*i >= 1*) => (x := 10; y := 11)): void
+  val () = foo(x, y)
+  val () = println! ("x = ", x, " and y = ", y)
+}
+```
+
+```
+$ patscc ifcase.dats
+$ ./a.out
+x = 10 and y = 11
+```
 
 # ats-lang-club@googlegroups.com
+
+* Welcome to the secret group!
+
+```
+I have just created the ats-lang-club. Membership is by invitation only. The plan is to use this group to discuss all matters, general and specific, on or related to "evangelizing" ATS. Cheers! --Hongwei
+```
+
+* They are discussing about the future of ATS language.
