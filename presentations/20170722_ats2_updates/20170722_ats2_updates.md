@@ -120,9 +120,25 @@ $ ./fib 25
 fib(25) = 75025
 ```
 
-# NPM package manager for ATS2
+# NPM package manager for ATS2 #1
 
-* Many ATS2 packages are: https://www.npmjs.com/browse/keyword/ATS
+* There are many ATS2 packages at NPM.
+* NPM is the package manager for JavaScript.
+* https://www.npmjs.com/browse/keyword/ATS
+
+# NPM package manager for ATS2 #2
+
+![inline](img/npm_ats.png)
+
+# NPM package manager for ATS2 #3
+
+* How to create ATS package?
+* Please read following articles:
+
+```
+http://ats-lang.sourceforge.net/EXAMPLE/EFFECTIVATS/DivideConquer/main.html
+http://ats-lang.sourceforge.net/EXAMPLE/EFFECTIVATS/GraphSearch-npm/main.html
+```
 
 # Better JavaScript support
 
