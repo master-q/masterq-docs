@@ -6,7 +6,7 @@ Kiwamu Okabe
 # Started on the experience at Ricoh
 ![background](img/ricoh_mfp.png)
 
-* I worked at Ricoh to develop embedded devices.
+* I worked at Ricoh Company, Ltd. to develop embedded devices.
 * The device is a Multi Function Printer, which is based on NetBSD OS.
 * My team doesn't only create device drivers,
 * but also add original functions into the OS core.
@@ -80,8 +80,7 @@ https://github.com/Microsoft/vcc
 * http://metasepi.org/
 * Idea: Strong types can capture specification.
 * Goal: Create Unix-like OS with strong type.
-* Challenge: Find such methods on science and engineering, and write practical code.
-* Currently, there are less methods to capture specification on low-level software.
+* Challenge: Find such type systems on science and engineering, and write practical code.
 
 # 1st iteration: Ajhc Haskell compiler
 ![background](img/ajhc.png)
@@ -91,6 +90,16 @@ https://github.com/Microsoft/vcc
 * I forked jhc to be customized embedded system.
 * The compiler is called "Ajhc".
 * http://ajhc.metasepi.org/
+
+# How does Ajhc work?
+![background](img/ajhc.png)
+
+![inline](draw/2012-12-22-jhc_compile.png)
+
+# 1st iteration: Plan for kernel
+![background](img/ajhc.png)
+
+![inline](draw/arafura_design.png)
 
 # Ajhc for multitask and interrupt
 ![background](img/ajhc.png)
@@ -147,6 +156,16 @@ Try
 * ATS code can run without GC.
 * I found "Japan ATS User Group" to translate documents into Japanese.
 * http://jats-ug.metasepi.org/
+
+# How does ATS work?
+![background](img/jats-ug.png)
+
+![inline](draw/ats_flow.png)
+
+# 2nd iteration: Plan for kernel
+![background](img/jats-ug.png)
+
+![inline](draw/bohai_design.png)
 
 # App: ATS code runs on 8bit AVR
 ![background](img/jats-ug.png)
@@ -211,6 +230,16 @@ Try
 https://github.com/jverifast-ug/translate/blob/master/Manual/Tutorial/Tutorial.md
 ```
 
+# How does VeriFast work?
+![background](img/ESAT_KULeuven.png)
+
+xxx
+
+# 3rd iteration: Plan for kernel
+![background](img/ESAT_KULeuven.png)
+
+![inline](draw/chiers_design.png)
+
 # App: Capture state on RTOS
 ![background](img/ESAT_KULeuven.png)
 
@@ -227,6 +256,10 @@ https://www.slideshare.net/master_q/poster-comparing-ats-and-verifast-on-rtos-sy
 * ATS: Type system in new language can capture invariant in the code.
 * VeriFast: Verification in comment of existing language can apply specification onto the code.
 * "Faced with a choice, do both" -- Dieter Rot
+
+# Future of Metasepi
+
+xxx
 
 # License of photos #1
 ![background](img/creative_commons.png)
