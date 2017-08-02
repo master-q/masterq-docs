@@ -50,7 +50,7 @@ Kiwamu Okabe
 
 ![inline](draw/iceberg_of_errors.png)
 
-# How to watch the iceberg, more?
+# How about watch more iceberg?
 ![background](img/iceberg.png)
 
 ![inline](draw/iceberg_more.png)
@@ -74,7 +74,7 @@ https://github.com/Microsoft/vcc
 
 * Why is there no solution for OSS product?
 
-# I found Metasepi Project
+# Metasepi Project
 ![background](img/metasepi.png)
 
 * http://metasepi.org/
@@ -102,26 +102,41 @@ http://metasepi.org/doc/metasepi-icfp2014-demo.pdf
 
 ![inline](draw/arena_lifecycle.png)
 
-# Application: Haskell code runs on MCU
+# App: Haskell code runs on ARM MCU
 ![background](img/ajhc.png)
 
 * http://youtu.be/C9JsJXWyajQ
 
 ![inline](img/rss_reader_haskell.png)
 
-# Application: Android NDK
+# App: Haskell code runs on Android NDK
 ![background](img/ajhc.png)
 
 * http://youtu.be/n6cepTfnFoo
 
 ![inline](img/android_ndk.png)
 
-# Application: NetBSD audio driver
+# App: Audio driver written by Haskell
 ![background](img/ajhc.png)
 
 * http://youtu.be/E30ZvEVExI0
 
 ![inline](img/netbsd_haskell.png)
+
+# 1st iteration: Keep/Problem/Try
+![background](img/ajhc.png)
+
+Keep
+
+* Languages other than C can effectively write kernel code.
+
+Problem
+
+* Haskell thunk easily eats large memory.
+
+Try
+
+* Should find system language without GC.
 
 # 2nd iteration: ATS language
 ![background](img/jats-ug.png)
@@ -133,14 +148,14 @@ http://metasepi.org/doc/metasepi-icfp2014-demo.pdf
 * I found "Japan ATS User Group" to translate documents into Japanese.
 * http://jats-ug.metasepi.org/
 
-# Application: ATS code runs on 8bit AVR
+# App: ATS code runs on 8bit AVR
 ![background](img/jats-ug.png)
 
 * http://youtu.be/5uPue0Jo1nc
 
 ![inline](img/ats_run_on_avr.png)
 
-# Application: Capture state on RTOS
+# App: Capture state on RTOS
 ![background](img/jats-ug.png)
 
 * https://github.com/fpiot/chibios-ats-2
@@ -168,6 +183,21 @@ fun fun_c2ats_fopen: {l1,l2:addr} (!ptr_v_1(char, l1), !ptr_v_1(char, l2) | ptr 
 fun fun_c2ats_fread: {l1:addr} (!ptr_v_1(type_c2ats_FILE, l1) | ptr, type_c2ats_size_t, type_c2ats_size_t, ptr l1) -> type_c2ats_size_t = "mac#fread"
 ```
 
+# 2nd iteration: Keep/Problem/Try
+![background](img/jats-ug.png)
+
+Keep
+
+* Linear types safely uses pointer without GC.
+
+Problem
+
+* Rewriting existing C code with ATS needs much human power.
+
+Try
+
+* Apply specification to code without rewriting.
+
 # 3rd iteration: VeriFast verifier
 ![background](img/ESAT_KULeuven.png)
 
@@ -181,7 +211,7 @@ fun fun_c2ats_fread: {l1:addr} (!ptr_v_1(type_c2ats_FILE, l1) | ptr, type_c2ats_
 https://github.com/jverifast-ug/translate/blob/master/Manual/Tutorial/Tutorial.md
 ```
 
-# Application: Capture state on RTOS
+# App: Capture state on RTOS
 ![background](img/ESAT_KULeuven.png)
 
 ```
