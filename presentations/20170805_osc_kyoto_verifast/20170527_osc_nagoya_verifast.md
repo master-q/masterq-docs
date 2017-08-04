@@ -1,8 +1,9 @@
 # Introduction to VeriFast @ Kyoto
+![background](img/kyoto.png)
 
 Kiwamu Okabe
 
-# Setup
+# Setup before this presentation
 
 * Plesse copy following files from the USB stick.
 
@@ -16,11 +17,18 @@ verifast-nightly.zip
 
 # What's VeriFast?
 
-xxx
+* https://github.com/verifast/verifast
+* A verifier for single-threaded and multi-threaded C and Java language programs annotated with preconditions and postconditions written in separation logic.
+* VeriFast avoids illegal memory accesses such like buffer overflow.
+* VeriFast is easy to use with the graphical IDE.
 
-# Why use VeriFast?
+# Why use VeriFast? #1
 
-xxx
+![inline](draw/iceberg_of_errors.png)
+
+# Why use VeriFast? #2
+
+![inline](draw/iceberg_more.png)
 
 # Let's try to boot VeriFast!
 
@@ -89,7 +97,7 @@ $ make vfide
 * VeriFast is easy to setup and use.
 * VeriFast has own graphical IDE.
 * VeriFast safely uses pointers.
-* VeriFast finds violation of RTOS system state.
+* VeriFast finds violation of RTOS system state.2
 
 # For more information
 
@@ -118,7 +126,23 @@ https://speakerdeck.com/eldesh/verifast-termination-checking-introduction-a
 * Some talks about "static code analysis"
 * Hands-on VeriFast with STM32 microcontroller
 
-# License of photos #1
+# 簡約!? λカ娘10 @ 参照透明な海を守る会
+
+![background](img/c92-ikmsm.png)
+
+* コミックマーケット92 - 1日目 金曜日 東た11b
+* http://www.paraiso-lang.org/ikmsm/books/c92.html
+
+```
+* 第1章 モナドとひも
+* 第2章 矢澤にこ先輩と一緒にモナドモナド!
+* 第3章 Coqダンジョン: 底抜けの壺の夢
+* 第4章 IST(Internal Set Theory) 入門 (後編)
+* 第5章 静的コード解析はいいぞ!
+* 第6章 VeriFastチュートリアル
+````
+
+# License of photos
 
 ![background](img/creative_commons.png)
 
@@ -128,5 +152,8 @@ https://speakerdeck.com/eldesh/verifast-termination-checking-introduction-a
   Copyright: Steren Giannini / License: CC BY 2.0
 * kindle paperwhite 3G | Kindle paperwhite... | Tatsuo Yamashita | Flickr
   https://www.flickr.com/photos/yto/8197280407/
-  Copyright: Tatsuo Yamashita / License: CC BY 2.0`
+  Copyright: Tatsuo Yamashita / License: CC BY 2.0
+* Kyoto | Japan | Pedro Szekely | Flickr
+  https://www.flickr.com/photos/pedrosz/34993395402/
+  Copyright: Pedro Szekely / License: CC BY-SA 2.0
 ```
