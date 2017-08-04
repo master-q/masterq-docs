@@ -250,6 +250,21 @@ https://www.slideshare.net/master_q/poster-comparing-ats-and-verifast-on-rtos-sy
 
 ![inline](img/slide_chibios_state.png)
 
+# 3rd iteration: Keep/Problem/Try
+![background](img/ESAT_KULeuven.png)
+
+Keep
+
+* xxx
+
+Problem
+
+* xxx
+
+Try
+
+* xxx
+
 # Today's choice: Type or Verification?
 ![background](img/fork.png)
 
