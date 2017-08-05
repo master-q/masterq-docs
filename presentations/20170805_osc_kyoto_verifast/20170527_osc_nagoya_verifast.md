@@ -70,7 +70,7 @@ $ ./verifast-*/bin/vfide
 # Example for RTOS application #1
 
 ```
-$ export PATH=`pwd`/verifast-*/bin/$PATH
+$ export PATH=`pwd`/verifast-*/bin:$PATH
 $ tar xf chibios-verifast.tgz
 $ cd chibios-verifast/verifast_demo/STM32/RT-STM32F746G-DISCOVERY-LWIP-FATFS-USB
 $ make vfide
@@ -97,7 +97,7 @@ $ make vfide
 * VeriFast is easy to setup and use.
 * VeriFast has own graphical IDE.
 * VeriFast safely uses pointers.
-* VeriFast finds violation of RTOS system state.2
+* VeriFast finds violation of RTOS system state.
 
 # For more information
 
