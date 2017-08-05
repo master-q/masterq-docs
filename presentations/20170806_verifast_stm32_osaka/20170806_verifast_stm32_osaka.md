@@ -47,13 +47,13 @@ Detail: https://github.com/fpiot/chibios-verifast/blob/master/doc/README.Windows
 * https://launchpad.net/gcc-arm-embedded/+download
 * https://ttssh2.osdn.jp/index.html.en
 * https://cygwin.com/
+* http://www.st.com/en/embedded-software/stsw-link009.html
 ```
 
 * Install following cygwin packages
 
 ```
-* cmake
-* libusb1.0-devel
+cmake / gcc-core (5.3.0) / libusb1.0-devel / make
 ```
 
 # Get the devel-environment #Windows
@@ -66,6 +66,7 @@ Detail: https://github.com/fpiot/chibios-verifast/blob/master/doc/README.Windows
 $ git clone https://github.com/texane/stlink.git
 $ (cd stlink && make)
 $ (cd stlink/build/Release && make install)
+$ cp /usr/local/lib/cygstlink-shared-1.dll /usr/local/bin/
 ```
 
 * Download VeriFast from following URL, unzip it and set PATH to "verifast-XXXXXXX/bin" directory.
@@ -213,27 +214,11 @@ https://developer.mbed.org/platforms/ST-Nucleo-F091RC/
 ![background](img/microsoft.png)
 
 * Connect the board to your PC using USB cable
-* Open cygwin terminal, run "st-util":
-
-```
-$ (cd /usr/local/lib && st-util)
-```
-
-* Open another cygwin terminal, and dowload application into the board:
+* Open cygwin terminal, and dowload application into the board:
 
 ```
 $ cd chibios-verifast/verifast_demo/STM32/RT-STM32F091RC-NUCLEO
-$ make gdbwrite
-```
-
-# How to run application? #Windows
-
-![background](img/microsoft.png)
-
-* Continue application from GDB prompt:
-
-```
-(gdb) c
+$ make flash
 ```
 
 * Open serial console using TeraTerm with baud rate 9600
@@ -244,30 +229,14 @@ $ make gdbwrite
 ![background](img/imac.png)
 
 * Connect the board to your Mac using USB cable
-* Run "st-util":
-
-```
-$ st-util
-```
-
-* Open another terminal, and download application into the board:
+* Download application into the board:
 
 ```
 $ cd chibios-verifast/verifast_demo/STM32/RT-STM32F091RC-NUCLEO
-$ make gdbwrite
+$ make flash
 ```
 
-# How to run application? #macOS
-
-![background](img/imac.png)
-
-* Continue application from GDB prompt:
-
-```
-(gdb) c
-```
-
-* Open another terminal, and open serial console:
+* Open serial console:
 
 ```
 $ picocom -b 9600 /dev/tty.usbmodem1423
@@ -280,30 +249,14 @@ $ picocom -b 9600 /dev/tty.usbmodem1423
 ![background](img/27050425-gnu-wallpapers.png)
 
 * Connect the board to your PC using USB cable
-* Run "st-util":
-
-```
-$ sudo st-util
-```
-
-* Open another terminal, and download application into the board:
+* Download application into the board:
 
 ```
 $ cd chibios-verifast/verifast_demo/STM32/RT-STM32F091RC-NUCLEO
-$ make gdbwrite
+$ make flash
 ```
 
-# How to run application? #Linux
-
-![background](img/27050425-gnu-wallpapers.png)
-
-* Continue application from GDB prompt:
-
-```
-(gdb) c
-```
-
-* Open another terminal, and open serial console:
+* Open serial console:
 
 ```
 $ picocom -b 9600 /dev/ttyACM0
@@ -340,6 +293,7 @@ $ picocom -b 9600 /dev/ttyACM0
 
 * https://github.com/verifast/verifast
 * A verifier for single-threaded and multi-threaded C and Java language programs annotated with preconditions and postconditions written in separation logic.
+* VeriFast avoids illegal memory accesses such like buffer overflow.
 * VeriFast is easy to use with the graphical IDE.
 
 # Get started with simple example
@@ -687,12 +641,28 @@ https://speakerdeck.com/eldesh/tppmark2016-wojie-kinagaraxue-bu-verifast
 https://speakerdeck.com/eldesh/verifast-termination-checking-introduction-a
 ```
 
+# 簡約!? λカ娘10 @ 参照透明な海を守る会
+
+![background](img/c92-ikmsm.png)
+
+* コミックマーケット92 - 1日目 金曜日 東た11b
+* http://www.paraiso-lang.org/ikmsm/books/c92.html
+
+```
+* 第1章 モナドとひも
+* 第2章 矢澤にこ先輩と一緒にモナドモナド!
+* 第3章 Coqダンジョン: 底抜けの壺の夢
+* 第4章 IST(Internal Set Theory) 入門 (後編)
+* 第5章 静的コード解析はいいぞ!
+* 第6章 VeriFastチュートリアル
+````
+
 # Special thanks
 
 ![background](img/thankyou.png)
 
 * STMicroelectronics provides STM32 boards.
-* Misoca provides this meeting room.
+* Fenrir Inc. provides this meeting room.
 * \@ruicc supports macOS environment.
 * \@eldesh supports Windows environment, and gives much advice for usage of VeriFast.
 
