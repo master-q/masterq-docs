@@ -8,9 +8,9 @@ Kiwamu Okabe
 
 ![background](img/ESAT_KULeuven.png)
 
-* Introduce ChibiOS/RT which is a RTOS
+* Introduce ChibiOS/RT as a RTOS
 * Get development environment for ChibiOS/RT
-* Build sample application on ChibiOS/RT
+* Build a sample application on ChibiOS/RT
 * Introduce STM32 microcontroller
 * Run the application on STM32 board
 * Introduce VeriFast
@@ -22,7 +22,7 @@ Kiwamu Okabe
 
 * http://www.chibios.org/
 * Simple / Small / Fast / Portable real-time OS
-* Run on ARM Cortex-M / 8-bit AVR / PowerPC e200
+* Run on ARM Cortex-M / AVR / PowerPC e200
 * Context Switch (STM32F4xx): 0.40 µsec
 * Kernel Size (STM32F4xx): 6172 byte
 
@@ -113,7 +113,7 @@ $ (cd stlink/build/Release && sudo make install)
 
 ![background](img/imac.png)
 
-* Download VeriFast, unzip it and set PATH:
+* Download VeriFast, untar it and set PATH:
 
 ```
 $ wget http://82076e0e62875f063ae8-929808a701855dfb71539d0a4342d4be.r54.cf5.rackcdn.com/verifast-nightly-osx.tar.gz
@@ -155,7 +155,7 @@ $ sudo ldconfig
 
 ![background](img/27050425-gnu-wallpapers.png)
 
-* Download VeriFast, unzip it and set PATH:
+* Download VeriFast, untar it and set PATH:
 
 ```
 $ wget http://82076e0e62875f063ae8-929808a701855dfb71539d0a4342d4be.r54.cf5.rackcdn.com/verifast-nightly.tar.gz
@@ -170,7 +170,7 @@ $ export PATH=`pwd`/verifast/bin:$PATH
 $ git clone https://github.com/fpiot/chibios-verifast.git
 ```
 
-# Build a ChibiOS application
+# Build a ChibiOS/RT application
 
 ![background](img/sumo.png)
 
@@ -203,9 +203,9 @@ The STM32 family of 32‑bit Flash microcontrollers based on the ARM Cortex‑M 
 https://developer.mbed.org/platforms/ST-Nucleo-F091RC/
 ```
 
-* Name: "NUCLEO-F091RC"
+* Board name: "NUCLEO-F091RC"
 * ARM Cortex-M0 CPU / 256 KB Flash / 32 KB SRAM
-* ADC / DAC / RTC / I2C / USART / SPI / CAN / HDMI CEC
+* Include ADC / DAC / RTC / I2C / USART / SPI / CAN / HDMI CEC
 * Download fiwmware and debug it using GDB
 * Thanks a lot, STMicroelectronics!
 
@@ -214,7 +214,7 @@ https://developer.mbed.org/platforms/ST-Nucleo-F091RC/
 ![background](img/microsoft.png)
 
 * Connect the board to your PC using USB cable
-* Open cygwin terminal, and dowload application into the board:
+* Open cygwin terminal, and download application into the board:
 
 ```
 $ cd chibios-verifast/verifast_demo/STM32/RT-STM32F091RC-NUCLEO
@@ -294,14 +294,14 @@ $ picocom -b 9600 /dev/ttyACM0
 * https://github.com/verifast/verifast
 * A verifier for single-threaded and multi-threaded C and Java language programs annotated with preconditions and postconditions written in separation logic.
 * VeriFast avoids illegal memory accesses such like buffer overflow.
-* VeriFast is easy to use with the graphical IDE.
+* VeriFast is easy to use with own graphical IDE.
 
 # Get started with simple example
 
 ![background](img/memopad.png)
 
 ```c
-// File: illegal_access.c
+// File: verifast/tutorial_solutions/illegal_access.c
 #include "stdlib.h"
 
 struct account {
@@ -334,6 +334,20 @@ $ gcc -Wall -Wextra illegal_access.c # <= No error shown
 $ ./a.out                            # <= No segmentation fault
 ```
 
+# But SEGV occurs if malloc return NULL
+
+![background](img/memopad.png)
+
+```
+$ w3m http://www.nongnu.org/failmalloc/
+$ wget http://download.savannah.nongnu.org/releases/failmalloc/failmalloc-1.0.tar.gz
+$ tar xf failmalloc-1.0.tar.gz
+$ (cd failmalloc-1.0 && ./configure && make && sudo make install)
+$ gcc -Wall illegal_access.c
+$ env LD_PRELOAD=libfailmalloc.so ./a.out
+Segmentation fault
+```
+
 # How to verify the simple example?
 
 ![background](img/vfide_simple_error.png)
@@ -351,7 +365,7 @@ You should see "No matching heap chunks" error, after push "Verify" button.
 ![background](img/memopad.png)
 
 ```c
-// File: illegal_access.c -- fixed
+// File: verifast/tutorial_solutions/illegal_access.c -- fixed
 #include "stdlib.h"
 
 struct account {
@@ -362,7 +376,7 @@ int main()
     //@ ensures true;
 {
     struct account *myAccount = malloc(sizeof(struct account));
-    if (myAccount == 0) { abort(); } // Checked!
+    if (myAccount == 0) { abort(); } // Uncomment
     myAccount->balance = 5;
     free(myAccount);
     return 0;
@@ -380,6 +394,7 @@ int main()
 VeriFast has own header to define malloc():
 
 ```c
+// File: verifast/bin/malloc.h
 void *malloc(int size);
     //@ requires 0 <= size;
     /*@
@@ -393,12 +408,6 @@ void *malloc(int size);
     @*/
 ```
 
-# What's invariant on ChibiOS/RT?
-
-![background](img/system_states1.png)
-
-* ChibiOS/RT has own system states
-
 # How to verify ChibiOS/RT application?
 
 ![background](img/vfide_open.png)
@@ -409,6 +418,12 @@ Run GNU make on your terminal:
 $ cd chibios-verifast/verifast_demo/STM32/RT-STM32F091RC-NUCLEO
 $ make vfide
 ```
+
+# What's invariant on ChibiOS/RT?
+
+![background](img/system_states1.png)
+
+* ChibiOS/RT has own system states
 
 # The state chart means some invariant
 
@@ -421,7 +436,7 @@ $ make vfide
 
 But run-time error is caused by violation. We would like to capture it on verification using VeriFast.
 
-# Your code already has assertion
+# Your code already has annotation
 
 ![background](img/memopad.png)
 
@@ -442,7 +457,7 @@ inductive SystemState =
 predicate chibios_sys_state_context(int threadId; SystemState state);
 ```
 
-# ChibiOS API has pre/postcondition
+# ChibiOS/RT API has pre/postcondition
 
 ![background](img/memopad.png)
 
@@ -464,7 +479,7 @@ void chThdSleepMilliseconds(uint32_t msec);
     //@ ensures chibios_sys_state_context(currentThread, ThreadState);
 ```
 
-# Let's violate the assertion
+# Let's violate the annotation
 
 ![background](img/memopad.png)
 
@@ -494,7 +509,11 @@ int main(void)
 
 ![background](img/STM32F746G-DISCO.png)
 
-* Board: DISCO-F746NG
+```
+https://developer.mbed.org/platforms/ST-Discovery-F746NG/
+```
+
+* Board name: "DISCO-F746NG"
 * ChibiOS/RT application shows directories and files on SD card onto serial console
 * Two functions are already verified
 * First: tmrfunc() run on "ISR" state
@@ -568,11 +587,12 @@ void tmr_init(void *p)
 ![background](img/vfide_execution.png)
 
 * Please set off "Check arithmetic overflow" on "Verify" menu
+* Push "Verify" button.
 * Drag the right-hand border of the VeriFast window to the left
 * Select "Verifying function 'tmrfunc'" item
 * Click dots on the pane to follow symbolic execution tree
 
-# Let's violate the assertion
+# Let's violate the annotation
 
 ![background](img/memopad.png)
 
@@ -613,13 +633,13 @@ https://groups.google.com/forum/#!topic/verifast/xbUHyhPjAe4
 
 ![background](img/homework.png)
 
-* Get done with verifying entirely on following code
+* Get done with verifying entirely on following code.
 
 ```
 chibios-verifast/verifast_demo/STM32/RT-STM32F746G-DISCOVERY-LWIP-FATFS-USB
 ```
 
-* Capture more invariant on ChibiOS/RT application (e.g. changing of global variable)
+* Capture more invariant on ChibiOS/RT application (e.g. changing of global variable).
 
 # For more information
 
