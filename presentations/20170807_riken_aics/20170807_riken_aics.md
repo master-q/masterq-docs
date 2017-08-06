@@ -3,6 +3,17 @@
 
 Kiwamu Okabe
 
+# Table of Contents
+
+xxx Add background
+
+* Background of the project
+* Runtime error is root of issue
+* Result of 1st iteration
+* Result of 2nd iteration
+* Result of 3rd iteration
+* Today's conclusion
+
 # Everything is started at Ricoh
 ![background](img/ricoh_mfp.png)
 
@@ -87,8 +98,8 @@ https://github.com/Microsoft/vcc
 
 * John Meacham creates own Haskell compiler, named "jhc".
 * http://repetae.net/computer/jhc/
-* I forked jhc to be customized embedded system.
-* The compiler is called "Ajhc".
+* I forked jhc to be customized for embedded system.
+* The compiler is named "Ajhc".
 * http://ajhc.metasepi.org/
 
 # How does Ajhc work?
@@ -135,17 +146,17 @@ http://metasepi.org/doc/metasepi-icfp2014-demo.pdf
 # 1st iteration: Keep/Problem/Try
 ![background](img/ajhc.png)
 
-Keep
+Keep:
 
 * Languages other than C can effectively write kernel code.
 
-Problem
+Problem:
 
-* Haskell thunk easily eats large memory.
+* Haskell thunk easily eats huge memory.
 
-Try
+Try:
 
-* Should find system language without GC.
+* Find system language without GC.
 
 # 2nd iteration: ATS language
 ![background](img/jats-ug.png)
@@ -174,7 +185,7 @@ Try
 
 ![inline](img/ats_run_on_avr.png)
 
-# App: Capture state on RTOS
+# App: Capture system state on RTOS
 ![background](img/jats-ug.png)
 
 * https://github.com/fpiot/chibios-ats-2
@@ -205,15 +216,15 @@ fun fun_c2ats_fread: {l1:addr} (!ptr_v_1(type_c2ats_FILE, l1) | ptr, type_c2ats_
 # 2nd iteration: Keep/Problem/Try
 ![background](img/jats-ug.png)
 
-Keep
+Keep:
 
 * Linear types safely uses pointer without GC.
 
-Problem
+Problem:
 
 * Rewriting existing C code with ATS needs much human power.
 
-Try
+Try:
 
 * Apply specification to code without rewriting.
 
@@ -223,7 +234,7 @@ Try
 * https://github.com/verifast/verifast
 * VeriFast is developed at KU Leuven.
 * VeriFast verifies pre/postcondition in comment.
-* VeriFast is for C and Java language.
+* VeriFast can verify C and Java language.
 * I translated VeriFast tutorial into Japanese.
 
 ```
@@ -233,48 +244,47 @@ https://github.com/jverifast-ug/translate/blob/master/Manual/Tutorial/Tutorial.m
 # How does VeriFast work?
 ![background](img/ESAT_KULeuven.png)
 
-xxx
+xxx Figure
 
 # 3rd iteration: Plan for kernel
 ![background](img/ESAT_KULeuven.png)
 
 ![inline](draw/chiers_design.png)
 
-# App: Capture state on RTOS
+# App: Capture system state on RTOS
 ![background](img/ESAT_KULeuven.png)
 
-```
-https://github.com/fpiot/chibios-verifast
-https://www.slideshare.net/master_q/poster-comparing-ats-and-verifast-on-rtos-system-state
-```
+* https://github.com/fpiot/chibios-verifast
 
 ![inline](img/slide_chibios_state.png)
+
+# App: Capture system state on RTOS
+![background](img/ESAT_KULeuven.png)
+
+![inline](draw/platform.png)
 
 # 3rd iteration: Keep/Problem/Try
 ![background](img/ESAT_KULeuven.png)
 
-Keep
+Keep:
 
-* xxx
+* VeriFast exhaustively captures invariant in C code.
 
-Problem
+Problem:
 
-* xxx
+* VeriFast only support subset of C language.
 
-Try
+Try:
 
-* xxx
+* Get C99 compat C language parser on VeriFast.
 
 # Today's choice: Type or Verification?
 ![background](img/fork.png)
 
 * ATS: Type system in new language can capture invariant in the code.
 * VeriFast: Verification in comment of existing language can apply specification onto the code.
+* Which is better for writing OS?
 * "Faced with a choice, do both" -- Dieter Rot
-
-# Future of Metasepi
-
-xxx
 
 # License of photos #1
 ![background](img/creative_commons.png)
