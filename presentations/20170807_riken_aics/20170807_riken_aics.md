@@ -3,9 +3,14 @@
 
 Kiwamu Okabe
 
-# Table of Contents
+# Goal of today
+![background](img/goal_of_today.png)
 
-xxx Add background
+* Understand Metasepi as a research project.
+* Debate whether RIKEN AICS should support it or not.
+
+# Table of Contents
+![background](img/Compass.png)
 
 * Background of the project
 * Runtime error is root of issue
@@ -326,4 +331,16 @@ Try:
 * The fork in the road | 例の分かれ道 | i_yudai | Flickr
   https://www.flickr.com/photos/y_i/2330044065/
   Copyright: i_yudai / License: CC BY-SA 2.0
+```
+
+# License of photos #3
+![background](img/creative_commons.png)
+
+```
+* goal | olle svensson | Flickr
+  https://www.flickr.com/photos/ollesvensson/4252196844/
+  Copyright: olle svensson / License: CC BY 2.0
+* Compass | A large old compass. Photo may be use as free stoc… | Flickr
+  https://www.flickr.com/photos/waltstoneburner/6170496511/
+  Copyright: Walt Stoneburner / License: CC BY 2.0
 ```
