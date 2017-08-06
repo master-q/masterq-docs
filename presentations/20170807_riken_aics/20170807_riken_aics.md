@@ -249,7 +249,7 @@ https://github.com/jverifast-ug/translate/blob/master/Manual/Tutorial/Tutorial.m
 # How does VeriFast work?
 ![background](img/ESAT_KULeuven.png)
 
-xxx Figure
+![inline](draw/verifast.png)
 
 # 3rd iteration: Plan for kernel
 ![background](img/ESAT_KULeuven.png)
@@ -281,7 +281,7 @@ Problem:
 
 Try:
 
-* Get C99 compat C language parser on VeriFast.
+* Get C99 compat C language parser in VeriFast.
 
 # Today's choice: Type or Verification?
 ![background](img/fork.png)
