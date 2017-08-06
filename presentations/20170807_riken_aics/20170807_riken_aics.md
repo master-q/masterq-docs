@@ -1,37 +1,38 @@
-# Past and future of Metasepi project
+# Past and today of Metasepi project
 ![background](img/never_do_today.png)
 
 Kiwamu Okabe
 
-# Started on the experience at Ricoh
+# Everything is started at Ricoh
 ![background](img/ricoh_mfp.png)
 
 * I worked at Ricoh Company, Ltd. to develop embedded devices.
-* The device is a Multi Function Printer, which is based on NetBSD OS.
-* My team doesn't only create device drivers,
-* but also add original functions into the OS core.
+* The device was a Multi Function Printer based on NetBSD OS.
+* http://netbsd.org/
+* My team didn't only create device drivers,
+* but also add original features into the OS core.
 
-# Issues between OSS and product #1
+# Get less quality on OSS product #1
 ![background](img/netbsd.png)
 
 ![inline](draw/2013-01-18-fork1.png)
 
-# Issues between OSS and product #2
+# Get less quality on OSS product #2
 ![background](img/netbsd.png)
 
 ![inline](draw/2013-01-18-fork2.png)
 
-# Issues between OSS and product #3
+# Get less quality on OSS product #3
 ![background](img/netbsd.png)
 
 ![inline](draw/2013-01-18-fork3.png)
 
-# Issues between OSS and product #4
+# Get less quality on OSS product #4
 ![background](img/netbsd.png)
 
 ![inline](draw/2013-01-18-fork4.png)
 
-# Issues between OSS and product #5
+# Get less quality on OSS product #5
 ![background](img/netbsd.png)
 
 ![inline](draw/2013-01-18-fork5.png)
@@ -41,11 +42,10 @@ Kiwamu Okabe
 
 * Such issues are runtime errors, which are caused without sharing the specification.
 * Specification =~ {Meaning, Invariant}
-* If well specification is shared in people,
-* we can understand new code and changing.
+* If well specification is shared in people, we can easily understand new code and changing.
 * Such specification is located at human's brain, and volatilized after writing code.
 
-# Iceberg of errors
+# Iceberg of runtime errors
 ![background](img/iceberg.png)
 
 ![inline](draw/iceberg_of_errors.png)
@@ -55,7 +55,7 @@ Kiwamu Okabe
 
 ![inline](draw/iceberg_more.png)
 
-# Microsoft commits quality of software
+# Microsoft is getting less runtime errors
 ![background](img/bill_gates.png)
 
 * Static Driver Verifier
@@ -78,7 +78,7 @@ https://github.com/Microsoft/vcc
 ![background](img/metasepi.png)
 
 * http://metasepi.org/
-* Idea: Strong types can capture specification.
+* Idea: Strong types can capture specification, which avoids some of runtime errors.
 * Goal: Create Unix-like OS with strong type.
 * Challenge: Find such type systems on science and engineering, and write practical code.
 
