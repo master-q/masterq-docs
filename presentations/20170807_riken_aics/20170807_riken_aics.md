@@ -25,8 +25,7 @@ Kiwamu Okabe
 * I worked at Ricoh Company, Ltd. to develop embedded devices.
 * The device was a Multi Function Printer based on NetBSD OS.
 * http://netbsd.org/
-* My team didn't only create device drivers,
-* but also add original features into the OS core.
+* My team didn't only create device drivers, but also add original features into the OS core.
 
 # Get less quality on OSS product #1
 ![background](img/netbsd.png)
