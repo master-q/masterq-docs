@@ -197,48 +197,15 @@ Metasepi is very experimental and ambitious project, however I believe that it a
 \subsection*{April 2001 - February 2012: Software Development Engineer (permanent employee) at Ricoh Company, Ltd.}
 
 \begin{itemize}
+  \item Develop BIOS and bootloader for multifunction printer on Intel architecture
+  \item Design secure boot for multifunction printer on Intel architecture
+  \item Develop new BIOS for multifunction printer
+  \item Tune multifunction printer boot time as 10 seconds
+  \item Develop POSIX thread library
+  \item Develop and technical support NetBSD OS
+  \item Port OS to new Intel hardware
   \item Reason for Quitting: to join more small and quick team
 \end{itemize}
-
-\subsubsection*{April 2010: Port OS to new Intel hardware}
-I ported NetBSD-2.0\footnote{\href{http://netbsd.org/}{\tt http://netbsd.org/}} to new Intel hardware, and calculated boot time before porting the OS.
-
-\subsubsection*{April 2008: Develop and technical support NetBSD OS}
-I became technical leader to maintain and support Ricoh's multifunction printer.
-Also I debuged and fixed many kernel level bugs.
-I designed power down process by software trigger.
-
-\subsubsection*{April 2006: Develop POSIX thread library}
-I replaced old user level POSIX thread library with new NetBSD-2.0 m:n thread.
-My efforts are following.
-\begin{itemize}
-  \item Research the presence of thread-safe and cancel-safe in kernel, libc and libpthread.
-  \item Write test code to get thread-safe and cancel-safe.
-  \item Add API into the m:n thread library. Because printer application depend on the missing API.
-  \item Debug and fix signal bugs in the m:n thread library.
-\end{itemize}
-
-\subsubsection*{June 2004: Tune multifunction printer boot time as 10 seconds}
-Before my tune, the printer boot time is 30 seconds.
-I developed a tool analyze log dumped by bootloader, kernel, init process and application,
-analyze IPC network, and advice how to get speed to application developer,
-and split application as groups for pre-boot and post-boot.
-Ricoh's multifunction printer ``imagio''\footnote{\href{http://www.ricoh.co.jp/imagio/}{\tt http://www.ricoh.co.jp/imagio/}}
-uses my method and tool, ever now.
-
-\subsubsection*{October 2003: Develop new BIOS for multifunction printer}
-Develop new custom BIOS with a company at the United States.
-
-\subsubsection*{November 2002: Design secure boot for multifunction printer on Intel architecture}
-I re-designed bootloader to support public key algorithm authentication,
-and designed the format include secure key in SD card
-
-\subsubsection*{July 2001: Develop BIOS and bootloader for multifunction printer on Intel architecture}
-My first work at Ricoh. Ricoh's multifunction printer
-``imagio''\footnote{\href{http://www.ricoh.co.jp/imagio/}{\tt http://www.ricoh.co.jp/imagio/}}
-use my bootloader design, ever now.
-Also I designed hardware dependent data structure to configure bootloader and kernel,
-and Option BIOS to boot on SD card
 
 \section*{Education}
 
