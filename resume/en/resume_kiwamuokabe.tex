@@ -37,7 +37,7 @@
 %\usepackage[sc,osf]{mathpazo}
 
 % Set your name here
-\def\name{Kiwamu Okabe - Research and Development Engineer}
+\def\name{Kiwamu Okabe}
 
 % Replace this with a link to your CV if you like, or set it empty
 % (as in \def\footerlink{}) to remove the link in the footer:
@@ -113,13 +113,27 @@
   \end{tabular}
 \end{minipage}
 
-\section*{Interests}
+\section*{Brief}
 
-I launched my career on developing embedded devices at Ricoh Company, Ltd, and also learned application design using functional language such like Haskell. I found Metasepi project\footnote{\href{http://www.metasepi.org/}{\tt http://www.metasepi.org/}} what is trying to apply strong type to embedded programming. Until now, I developed an embedded Haskell compiler named Ajhc\footnote{\href{http://ajhc.metasepi.org/}{\tt http://ajhc.metasepi.org/}}, and also traslate documents about  ATS language\footnote{\href{http://www.ats-lang.org/}{\tt http://www.ats-lang.org/}} into Japanese\footnote{\href{http://jats-ug.metasepi.org/}{\tt http://jats-ug.metasepi.org/}}. And I published some research papers\footnote{\href{http://www.metasepi.org/papers.html}{\tt http://www.metasepi.org/papers.html}}.
+I launched my career on developing embedded devices using Unix-like kernel at Ricoh Company, Ltd. The experience was not only for designing device drivers but also including debug of virtual memory. And I have experience in IoT platfom such like ARM Cortex-M MCU and RTOS. Also I learned application design using functional language such like Haskell, and published some research papers\footnote{\href{http://www.metasepi.org/papers.html}{\tt http://www.metasepi.org/papers.html}} about such languages.
 
-Today, I choose VeriFast\footnote{\href{https://github.com/verifast/verifast}{\tt https://github.com/verifast/verifast}} to verify C language running on embedded platform, and translate the tutorial into Japanese\footnote{\href{https://github.com/jverifast-ug/translate/blob/master/Manual/Tutorial/Tutorial.md}{\tt https://github.com/jverifast-ug/translate/blob/master/Manual/Tutorial/Tutorial.md}}. And I'm trying to apply the verifier to RTOS\footnote{\href{https://github.com/fpiot/chibios-verifast}{\tt https://github.com/fpiot/chibios-verifast}}.
+\section*{Skill Set}
 
-Metasepi is very experimental and ambitious project, however I believe that it also introduces an by-product ``the technology to design real software with predictable manpower and safety'' regardless of embedded domain.
+\subsection*{Deep knowledge for Unix-like Kernel and User Space}
+
+I am an expert for Unix-like kernel such like Linux, because I provided technical support for NetBSD, which is a Unix-like OS similar to Linux, at Ricoh. My skill is not only for NetBSD but also Linux. In fact, a race condition bug in PowerPC Linux kernel was fixed by me in only five days at MIRACLE LINUX.
+
+\subsection*{Wide experience in IoT platform}
+
+I have a wide experience in IoT platform such like FreeRTOS, ChibiOS/RT\footnote{\href{http://www.chibios.org/}{\tt http://www.chibios.org/}}, ARM Cortex-M, ESP8266, AVR and MSP430. Also I launched a new IoT business using TWELITE wireless platform\footnote{\href{https://mono-wireless.com/}{\tt https://mono-wireless.com/}} at Centillion Japan.
+
+\subsection*{Leadership}
+
+I was leading a technical team of twenty people to support the OS at Ricoh. And also I have experience in leading offshore team in china to maintain web application at Centillion Japan.
+
+\subsection*{Research Security and Quality}
+
+A prototype of own Secure-OS similar to OP-TEE\footnote{\href{https://github.com/OP-TEE/optee\_os}{\tt https://github.com/OP-TEE/optee\_os}} was designed by me at SELTECH. It runs with the other RTOS on ARM Cortex-M MCU. Also I have a wealth of experience in strong static typing language such like Haskell and verification of C language such like VeriFast, which are useful to keep the quality of products.
 
 \section*{Work Experience}
 %%%%%%%%%%%%%%%%
@@ -135,20 +149,20 @@ Metasepi is very experimental and ambitious project, however I believe that it a
 
 \begin{itemize}
   \item Research embedded functional programming running on ARM Cortex-M and AVR
-  \item Verification for RTOS application such like ChibiOS/RT\footnote{\href{http://www.chibios.org/}{\tt http://www.chibios.org/}} running on ARM Cortex-M
+  \item Verification for RTOS application such like ChibiOS/RT running on ARM Cortex-M
 \end{itemize}
 
 %%%%%%%%%%%%%%%%
 \subsection*{July 2013 - Present: Self-employed Software Engineer at METASEPI DESIGN}
 
 \begin{itemize}
-  \item Research and develop Ajhc Haskell Compiler
-  \item Host meetups\footnote{\href{https://metasepi.connpass.com/}{\tt https://metasepi.connpass.com/}} for hands-on to verify embedded application on ARM Cortex-M using STM32\footnote{\href{http://www.st.com/en/microcontrollers/stm32-32-bit-arm-cortex-mcus.html}{\tt http://www.st.com/en/microcontrollers/stm32-32-bit-arm-cortex-mcus.html}} board and ST-LINK\footnote{\href{http://www.st.com/en/development-tools/st-link.html}{\tt http://www.st.com/en/development-tools/st-link.html}} debugger
-  \item ATS language evangelist
+  \item Research and develop Ajhc Haskell Compiler\footnote{\href{http://ajhc.metasepi.org/}{\tt http://ajhc.metasepi.org/}}
+  \item Host meetup\footnote{\href{https://metasepi.connpass.com/}{\tt https://metasepi.connpass.com/}} for hands-on to verify embedded application on ARM Cortex-M using STM32\footnote{\href{http://www.st.com/en/microcontrollers/stm32-32-bit-arm-cortex-mcus.html}{\tt http://www.st.com/en/microcontrollers/stm32-32-bit-arm-cortex-mcus.html}} board and ST-LINK\footnote{\href{http://www.st.com/en/development-tools/st-link.html}{\tt http://www.st.com/en/development-tools/st-link.html}} debugger
+  \item ATS language evangelist\footnote{\href{http://www.ats-lang.org/}{\tt http://www.ats-lang.org/}}\footnote{\href{http://jats-ug.metasepi.org/}{\tt http://jats-ug.metasepi.org/}} for embedded devices
   \item Verification evangelist using VeriFast\footnote{\href{https://github.com/verifast/verifast}{\tt https://github.com/verifast/verifast}}, which is a verifier C language programs annotated with preconditions and postconditions
   \item Translated VeriFast Tutorial into Japanese\footnote{\href{https://github.com/jverifast-ug/translate/blob/master/Manual/Tutorial/Tutorial.md}{\tt https://github.com/jverifast-ug/translate/blob/master/Manual/Tutorial/Tutorial.md}}
   \item Support to develop any embedded software
-  \item Manage Metasepi Project and develop the core technology
+  \item Manage Metasepi Project\footnote{\href{http://www.metasepi.org/}{\tt http://www.metasepi.org/}} and develop the core technology
 \end{itemize}
 
 %%%%%%%%%%%%%%%%
@@ -257,18 +271,18 @@ Metasepi is very experimental and ambitious project, however I believe that it a
 \section*{Computer Skills}
 
 \begin{itemize}
-  \item Languages: C, C++, Haskell, ATS, Intel/ARM assembler, Ruby, JavaScript, Python
+  \item Languages: C, C++, Haskell, Intel/ARM assembler, Ruby, OCaml, Python, Erlang, JavaScript, R
   \item Platforms: Linux, NetBSD, FreeRTOS, ChibiOS/RT, Android NDK, Cygwin, MinGW, Bare metal
 \end{itemize}
 
 \section*{Reference available upon request}
 
 \begin{itemize}
-  \item Hiroyasu Fukuyama CTO - SELTECH CORPORATION
+  \item Shoi Egawa CEO - SELTECH CORPORATION
   \item Woo-Keun Yoon CEO - Life Robotics Inc.
   \item Kentaro Kuroiwa Research Chief - Centillion Japan Co., Ltd.
   \item Yasuhiro Yamazaki CEO - Axsh Co., Ltd.
-  \item Takayuki Muranushi - RIKEN Advanced Institute for Computational Science
+  \item Junichiro Makino Team Leader - RIKEN Advanced Institute for Computational Science
   \item Takashi KODAMA CEO - MIRACLE LINUX CORPORATION
   \item Shigeya SENDA - Ricoh Company, Ltd.
   \item Hitoshi Sekimoto Professor - Tokyo Metropolitan University, Department of Electrical and Electronic Engineering
