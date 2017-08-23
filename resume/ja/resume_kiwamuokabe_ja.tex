@@ -112,13 +112,27 @@
   \end{tabular}
 \end{minipage}
 
-\section*{Interests}
+\section*{Brief}
 
-株式会社リコーにて10年の組み込み開発に従事した後、Haskellをはじめとした関数型プログラミングによるアプリケーション設計を学びました。そしてMetasepi\footnote{\href{http://www.metasepi.org/}{\tt http://www.metasepi.org/}}というプロジェクトにて関数型プログラミング言語の持つ強い型を組み込みプログラミングに応用できないか探求しています。これまで、組み込み向けHaskellコンパイラAjhc\footnote{\href{http://ajhc.metasepi.org/}{\tt http://ajhc.metasepi.org/}}を開発し、さらにATS言語\footnote{\href{http://www.ats-lang.org/}{\tt http://www.ats-lang.org/}}に関するドキュメントを日本語訳してきました。またその成果を論文化\footnote{\href{http://www.metasepi.org/papers.html}{\tt http://www.metasepi.org/papers.html}}もしてきました。
+私は株式会社リコーにて10年のUnixライクカーネルを用いた組み込み開発に従事しました。それは単なるデバイスドライバの開発だけではなく仮想メモリのデバッグにおよぶ幅広い経験でした。またARM Cortex-M MCUやRTOSのようなIoTプラットフォームに対する経験も保有しています。さらにHaskellのような関数型プログラミング言語を持ちいたアプリケーション設計も学び、その成果を論文化\footnote{\href{http://www.metasepi.org/papers.html}{\tt http://www.metasepi.org/papers.html}}もしてきました。
 
-現在はVeriFast\footnote{\href{https://github.com/verifast/verifast}{\tt https://github.com/verifast/verifast}}を用いて組み込みプラットフォーム上で動作するC言語コードの検証を行ない、さらにそのチュートリアルを日本語に翻訳\footnote{\href{https://github.com/jverifast-ug/translate/blob/master/Manual/Tutorial/Tutorial.md}{\tt https://github.com/jverifast-ug/translate/blob/master/Manual/Tutorial/Tutorial.md}}しています。また当該検証器をRTOSの検証にも適用\footnote{\href{https://github.com/fpiot/chibios-verifast}{\tt https://github.com/fpiot/chibios-verifast}}できないか試作しています。
+\section*{Skill Set}
 
-Metasepiは上記のような大変実験的かつ野心的なプロジェクトですが、その副産物として、組み込み領域だけに留まらず本当に実用化できる「予測可能な工数で安全に実際のソフトウェアを作る技術」を日々探求試作しています。
+\subsection*{Unixライクカーネルとユーザ空間に対する深い知識}
+
+私はLinuxのようなUnixライクカーネルのエキスパートであり、リコーではLinuxと良く似たUnixライクOSであるNetBSDに対するテクニカルサポートを提供していました。このスキルはNetBSDのみならずLinuxに関しても同様です。その証拠にミラクル・リナックスにてPowerPC Linuxのレースコンディションバグはたった5日間の内に私が発見/修復しました。
+
+\subsection*{IoTプラットフォームにおける幅広い経験}
+
+私はFreeRTOSやChibiOS/RT\footnote{\href{http://www.chibios.org/}{\tt http://www.chibios.org/}}、ARM Cortex-M、ESP8266、AVR、MSP430のようなIoTプラットフォームに幅広い経験があります。またセンティリオンではTWELITEワイヤレスプラットフォーム\footnote{\href{https://mono-wireless.com/}{\tt https://mono-wireless.com/}}を用いて新しいIoTビジネスを立ち上げました。
+
+\subsection*{リーダーシップ}
+
+リコーにて私は20名からなるOSのテクニカルサポート部隊を指揮しました。またセンティリオンではWebアプリケーションの中国へのオフショアの経験もあります。
+
+\subsection*{セキュリティと品質の探求}
+
+SELTECHで私はOP-TEE\footnote{\href{https://github.com/OP-TEE/optee\_os}{\tt https://github.com/OP-TEE/optee\_os}}と良く似た独自セキュアOSのプロトタイプを設計しました。そのSecure-OSはARM Cortex-M MCUの上で別のRTOSと協調動作します。また私はHaskellのような強い型システムを持つ言語とVeriFast\footnote{\href{https://github.com/verifast/verifast}{\tt https://github.com/verifast/verifast}}のようなC言語の検証について広い経験があります。それらは製品の品質を維持するのに有用です。
 
 \section*{Work Experience}
 %%%%%%%%%%%%%%%%
@@ -134,20 +148,20 @@ Metasepiは上記のような大変実験的かつ野心的なプロジェクト
 
 \begin{itemize}
   \item ARM Cortex-MやAVRプラットフォーム上における組み込み関数型プログラミングに関する研究
-  \item ARM Cortex-Mプラットフォーム上で動作するChibiOS/RT\footnote{\href{http://www.chibios.org/}{\tt http://www.chibios.org/}}のようなRTOSアプリケーションの検証
+  \item ARM Cortex-Mプラットフォーム上で動作するChibiOS/RTのようなRTOSアプリケーションの検証
 \end{itemize}
 
 %%%%%%%%%%%%%%%%
 \subsection*{2013年07月 - 現在: METASEPI DESIGNにて自営業}
 
 \begin{itemize}
-  \item Ajhc Haskellコンパイラの研究開発
+  \item Ajhc Haskellコンパイラ\footnote{\href{http://ajhc.metasepi.org/}{\tt http://ajhc.metasepi.org/}}の研究開発
   \item STM32\footnote{\href{http://www.st.com/en/microcontrollers/stm32-32-bit-arm-cortex-mcus.html}{\tt http://www.st.com/en/microcontrollers/stm32-32-bit-arm-cortex-mcus.html}}ボードとST-LINK\footnote{\href{http://www.st.com/en/development-tools/st-link.html}{\tt http://www.st.com/en/development-tools/st-link.html}}デバッガを用いてARM Cortex-M上の組み込みアプリケーションの検証ハンズオンを開催\footnote{\href{https://metasepi.connpass.com/}{\tt https://metasepi.connpass.com/}}
-  \item ATS言語エバンジェリスト
+  \item 組み込み開発におけるATS言語エバンジェリスト\footnote{\href{http://www.ats-lang.org/}{\tt http://www.ats-lang.org/}}\footnote{\href{http://jats-ug.metasepi.org/}{\tt http://jats-ug.metasepi.org/}}
   \item 事前条件と事後条件を付記したC言語プログラムの検証器であるVeriFast\footnote{\href{https://github.com/verifast/verifast}{\tt https://github.com/verifast/verifast}}を用いたソフトウェア検証のエバンジェリスト
   \item VeriFastチュートリアルの日本語翻訳\footnote{\href{https://github.com/jverifast-ug/translate/blob/master/Manual/Tutorial/Tutorial.md}{\tt https://github.com/jverifast-ug/translate/blob/master/Manual/Tutorial/Tutorial.md}}
   \item 組み込みソフトウェア開発のサポート
-  \item Metasepiプロジェクトの運営とそのコア技術の研究開発
+  \item Metasepiプロジェクト\footnote{\href{http://www.metasepi.org/}{\tt http://www.metasepi.org/}}の運営とそのコア技術の研究開発
 \end{itemize}
 
 %%%%%%%%%%%%%%%%
@@ -180,7 +194,7 @@ Metasepiは上記のような大変実験的かつ野心的なプロジェクト
 \end{itemize}
 
 %%%%%%%%%%%%%%%%
-\subsection*{2012年03月 - 2013年07月: ミラクル-リナックス株式会社にてソフトウェアエンジニア(正社員)}
+\subsection*{2012年03月 - 2013年07月: ミラクル・リナックス株式会社にてソフトウェアエンジニア(正社員)}
 
 \begin{itemize}
   \item Linux OS, C++, OpenGL, GTK+\footnote{\href{https://www.gtk.org/}{\tt https://www.gtk.org/}}, GStreamer\footnote{\href{https://gstreamer.freedesktop.org/}{\tt https://gstreamer.freedesktop.org/}}を用いたIntelアーキティクチャ上での独自デジタルサイネージプラットフォームの開発
@@ -258,18 +272,18 @@ Metasepiは上記のような大変実験的かつ野心的なプロジェクト
 \section*{Computer Skills}
 
 \begin{itemize}
-  \item Languages: C, C++, Haskell, ATS, Intel/ARM assembler, Ruby, JavaScript, Python
+  \item Languages: C, C++, Haskell, Intel/ARM assembler, Ruby, OCaml, Python, Erlang, JavaScript, R
   \item Platforms: Linux, NetBSD, FreeRTOS, ChibiOS/RT, Android NDK, Cygwin, MinGW, Bare metal
 \end{itemize}
 
 \section*{Reference available upon request}
 
 \begin{itemize}
-  \item 福山 博康 執行役員 - 株式会社SELTECH
+  \item 江川 将偉 代表取締役社長 - 株式会社SELTECH
   \item 尹 祐根 代表取締役 - ライフロボティクス株式会社
   \item 黒岩 健太郎 研究主任 - センティリオン株式会社
   \item 山崎 泰宏 代表取締役 - 株式会社あくしゅ
-  \item 村主 崇行 - 独立行政法人理化学研究所 計算科学研究機構
+  \item 牧野 淳一郎 チームリーダー - 独立行政法人理化学研究所 計算科学研究機構
   \item 児玉 崇 社長 - ミラクル-リナックス株式会社
   \item 千田 滋也 - 株式会社リコー
   \item 関本 仁 教授 - 首都大学東京 工学部電気工学科 電気・電子工学
