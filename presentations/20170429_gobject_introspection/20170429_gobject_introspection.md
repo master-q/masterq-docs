@@ -1,4 +1,5 @@
 # Introduction of GObject Introspection
+![background](img/GNOME-lens.png)
 
 Kiwamu Okabe
 
@@ -87,12 +88,12 @@ GtkWidget *gtk_progress_bar_new()
    => g_object_new_with_properties((GType) GTK_TYPE_PROGRESS_BAR, 0,
                                    NULL, NULL)
       => GObjectClass *class =
-	       g_type_class_peek_static((GType) GTK_TYPE_PROGRESS_BAR)
+           g_type_class_peek_static((GType) GTK_TYPE_PROGRESS_BAR)
          => TypeNode *node = lookup_type_node_I(type)
          => return node->data->class.class
       => return (GObject *) g_object_new_internal(class, NULL, 0)
          => return (GObject *) g_type_create_instance(
-		                         class->g_type_class.g_type)
+                                 class->g_type_class.g_type)
 ```
 
 # Manually writing language bindings
@@ -100,7 +101,7 @@ GtkWidget *gtk_progress_bar_new()
 * Human easily inject mistake on manually writing
 * It's a big problem...
 
-# GObject Introspection (GI) is an answer!
+# GObject Introspection is an answer!
 
 * A middleware layer between C libraries (using GObject) and language bindings
 * Such languages are:
@@ -390,6 +391,9 @@ disownObject obj = withManagedPtr obj $ \ptr -> do
                      castPtr <$> disownManagedPtr obj
 ```
 
-# Let's create ATS GI framework!
+# Conclusion
 
-To be continued...
+* GObject Introspection supports writing language bindings.
+* The haskell-gi provides GObject Introspection on Haskell.
+* File foo.gir is a hint for the language bindings.
+* The haskell-gi implements managedPtr to maintain ownership.
