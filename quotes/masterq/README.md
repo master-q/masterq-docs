@@ -4,3 +4,4 @@
 * 僕にとってやる気って有限のリソースって感じじゃないんだ。ある日天から幸運にもやる気がふってくる。そんなかんじなんだよ。 -- Kouki
 * 全ては繋がっている -- masterq
 * 壁は卵のために -- masterq
+* Unhappiness is more interesting than happiness. -- masterq
