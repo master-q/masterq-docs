@@ -6,19 +6,37 @@ Kiwamu Okabe
 
 * Why not use the Menhir as parser?
 * Because VeriFast verifier uses Camlp4 parser.
+
+# What is VeriFast verifier? #1
+
 * https://github.com/verifast/verifast
+* A verifier for single-threaded and multi-threaded C and Java language programs annotated with preconditions and postconditions written in separation logic.
+* VeriFast avoids illegal memory accesses such like buffer overflow.
+* VeriFast is written by OCaml.
 
-# What is VeriFast verifier?
+# What is VeriFast verifier? #2
 
-xxx
+![inline](img/illegal_access.png)
 
-# Why modify VeriFast parser?
+# What is VeriFast verifier? #3
 
-xxx
+![inline](img/stack.png)
+
+# Why modify VeriFast parser? #1
+
+![inline](draw/platform.png)
+
+# Why modify VeriFast parser? #2
+
+* Real usage needs two C language header.
+* Original C headers are for compiling C code.
+* Pseud C headers are for verifying C code.
+* They may have some semantic gaps, which cause miss verification.
+* Because VeriFast's parser is a subset of C99 parser.
 
 # What is a near-term goal?
 
-* Verify "kern/subr_optstr.c" file in NetBSD kernel:
+* Let's verify "kern/subr_optstr.c" file in NetBSD kernel:
 
 ```
 $ sh build.sh -U -u -j 4 -T obj/tooldir -m amd64 tools
@@ -31,13 +49,13 @@ $ vfide -D __STDC__ -D __GNUC__ -D _KERNEL -D __ELF__ -D NO_KERNEL_RCSIDS -I sys
 
 # Original verifier
 
-xxx Screen shot
+![inline](img/before.png)
 
 # Modified verifier
 
 xxx Screen shot
 
-# My patches
+# My patches for VeriFast's parser
 
 ```
 * Parse semicolon without any declarations #121
@@ -53,14 +71,6 @@ xxx Screen shot
 # Knowledge to debug parser #1
 
 xxx
-
-# But patch may introduce unsoundness
-
-```
-$ cat verifast/soundness.md
---snip--
-- We currently assume the same macros are defined on the command line when verifying the various modules that include a particular header file. (Otherwise, different modules may interpret the same header file differently.) TODO: Record the defined macros in the .vfmanifest?
-```
 
 # Ads: 静的コード解析の会 第7回
 ![background](img/metasepi_meeting.png)
