@@ -1,13 +1,16 @@
 # An OCaml newbie meets Camlp4 parser
+![background](img/camel.png)
 
 Kiwamu Okabe
 
 # Why use Camlp4 parser?
+![background](img/persona4.png)
 
 * Why not use the Menhir as parser?
 * Because VeriFast verifier uses Camlp4 parser.
 
 # What is VeriFast verifier? #1
+![background](img/ESAT_KULeuven.png)
 
 * https://github.com/verifast/verifast
 * A verifier for single-threaded and multi-threaded C and Java language programs annotated with preconditions and postconditions written in separation logic.
@@ -15,18 +18,22 @@ Kiwamu Okabe
 * VeriFast is written by OCaml.
 
 # What is VeriFast verifier? #2
+![background](img/ESAT_KULeuven.png)
 
 ![inline](img/illegal_access.png)
 
 # What is VeriFast verifier? #3
+![background](img/ESAT_KULeuven.png)
 
 ![inline](img/stack.png)
 
 # Why modify VeriFast parser? #1
+![background](img/Dennis_Ritchie.png)
 
 ![inline](draw/platform.png)
 
 # Why modify VeriFast parser? #2
+![background](img/Dennis_Ritchie.png)
 
 * Real usage needs two C language headers.
 * Original C header is for compiling C code.
@@ -35,6 +42,7 @@ Kiwamu Okabe
 * Because VeriFast's parser is a subset of C99 parser.
 
 # What is a near-term goal?
+![background](img/spiral_staircase.png)
 
 * Getting C99 compatible parser is hard.
 * Let's verify "kern/subr_optstr.c" file in NetBSD kernel:
@@ -49,14 +57,17 @@ $ vfide -D __STDC__ -D __GNUC__ -D _KERNEL -D __ELF__ -D NO_KERNEL_RCSIDS -I sys
 * https://github.com/IIJ-NetBSD/netbsd-src
 
 # Original verifier
+![background](img/spiral_staircase.png)
 
 ![inline](img/before.png)
 
 # Modified verifier
+![background](img/spiral_staircase.png)
 
 xxx Screen shot
 
 # My patches for VeriFast's parser
+![background](img/memopad.png)
 
 ```
 * Parse semicolon without any declarations #121
@@ -70,6 +81,7 @@ xxx Screen shot
 ```
 
 # Knowledge to debug parser #1-1
+![background](img/memopad.png)
 
 * Don't catch exception to get stack trace.
 
@@ -90,6 +102,7 @@ index 8846dcb5..9204c2a4 100644
 ```
 
 # Knowledge to debug parser #1-2
+![background](img/memopad.png)
 
 ```
 $ cat tab_in_printf.c
@@ -111,6 +124,7 @@ Called from file "verifast.ml", line 3130, characters 18-460
 ```
 
 # Knowledge to debug parser #2-1
+![background](img/memopad.png)
 
 * Dump "token" using debug functions.
 
@@ -128,6 +142,7 @@ let rec print_tokens_stream tokens =
 ```
 
 # Knowledge to debug parser #3-1
+![background](img/memopad.png)
 
 * Exception "Stream.Error" has a string parameter specified by "??".
 
@@ -147,6 +162,7 @@ parse_c_file token_stream
 ```
 
 # Knowledge to debug parser #3-2
+![background](img/memopad.png)
 
 ```
 $ cat main.c
@@ -189,3 +205,20 @@ http://www.toranoana.jp/mailorder/article/04/0030/58/73/040030587376.html
 * Please read following about CFA:
 * https://wiki.haskell.org/Books#Joke
 
+# License of photos
+![background](img/creative_commons.png)
+
+```
+* Creative Commons BBB | Flickr
+  https://www.flickr.com/photos/steren/2732488224/
+  Copyright: Steren Giannini / License: CC BY 2.0
+* Smiling Camel | John Campbell | Flickr
+  https://www.flickr.com/photos/104346167@N06/16765659629/
+  Copyright: John Campbell / License: Public domain
+* ritchie-thompson | 12 octobre 2011 : Décès de Dennis Ritchie… | Paille | Flickr
+  https://www.flickr.com/photos/paille-fr/8070924277/
+  Copyright: Paille / License: CC BY-SA 2.0
+* Spiral - BlakeWalk | Staircase in the Monument BlakeWalk, 7 … | Flickr
+  https://www.flickr.com/photos/joeflintham/4196385813/
+  Copyright: Joe Flintham / License: CC BY-SA 2.0
+```
