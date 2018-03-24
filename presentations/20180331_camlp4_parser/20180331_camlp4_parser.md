@@ -1,4 +1,4 @@
-# A OCaml newbie meets Camlp4 parser
+# An OCaml newbie meets Camlp4 parser
 
 Kiwamu Okabe
 
@@ -28,14 +28,15 @@ Kiwamu Okabe
 
 # Why modify VeriFast parser? #2
 
-* Real usage needs two C language header.
-* Original C headers are for compiling C code.
-* Pseud C headers are for verifying C code.
+* Real usage needs two C language headers.
+* Original C header is for compiling C code.
+* Pseud C header is for verifying C code.
 * They may have some semantic gaps, which cause miss verification.
 * Because VeriFast's parser is a subset of C99 parser.
 
 # What is a near-term goal?
 
+* Getting C99 compatible parser is hard.
 * Let's verify "kern/subr_optstr.c" file in NetBSD kernel:
 
 ```
@@ -68,16 +69,105 @@ xxx Screen shot
   https://github.com/verifast/verifast/pull/116
 ```
 
-# Knowledge to debug parser #1
+# Knowledge to debug parser #1-1
 
-xxx
+* Don't catch exception to get stack trace.
+
+```
+$ git diff
+diff --git a/src/vfconsole.ml b/src/vfconsole.ml
+index 8846dcb5..9204c2a4 100644
+--- a/src/vfconsole.ml
++++ b/src/vfconsole.ml
+@@ -23,7 +23,6 @@ let _ =
+       Java_frontend_bridge.unload();
+     with
+       PreprocessorDivergence (l, msg) -> print_msg l msg; exit 1
+-    | ParseException (l, msg) -> print_msg l ("Parse error" ^ ...
+     | CompilationError(msg) -> print_endline (msg); exit 1
+     | StaticError (l, msg, url) -> print_msg l msg; exit 1
+     | SymbolicExecutionError (ctxts, l, msg, url) ->
+```
+
+# Knowledge to debug parser #1-2
+
+```
+$ cat tab_in_printf.c
+#include <stdio.h>
+
+int main() {
+        printf("Use hard        tab\n");
+        return 0;
+}
+$ OCAMLRUNPARAM=b verifast -c tab_in_printf.c
+tab_in_printf.c
+Fatal error: exception Lexer.ParseException(_, "")
+Raised at file "parser.ml", line 1627, characters 26-61
+Called from file "verifast.ml", line 2966, characters 12-185
+Called from file "verifast1.ml", line 470, characters 6-13
+Called from file "util.ml" (inlined), line 109, characters 15-18
+Called from file "verifast.ml", line 2922, characters 17-1023
+Called from file "verifast.ml", line 3130, characters 18-460
+```
+
+# Knowledge to debug parser #2-1
+
+* Dump "token" using debug functions.
+
+```ocaml
+let rec print_tokens_list tokens =
+  match tokens with
+    [(_, tok)] -> Printf.printf "%s\n" (string_of_token tok)
+  | (_, tok) :: xs -> Printf.printf "%s, " (string_of_token tok); print_tokens_list xs
+  | [] -> Printf.printf "\n"
+
+let rec print_tokens_stream tokens =
+  Printf.printf "[\n";
+  Stream.iter (fun (_, tok) -> Printf.printf " %s\n" (string_of_token tok)) tokens;
+  Printf.printf "]\n"
+```
+
+# Knowledge to debug parser #3-1
+
+* Exception "Stream.Error" has a string parameter specified by "??".
+
+```
+$ vi src/parser.ml
+```
+
+```ocaml
+let parse_c_file = parser
+  [< (headers, _) = parse_include_directives ignore_eol verbose
+                      enforceAnnotations dataModel;
+    ds = parse_decls CLang dataModel enforceAnnotations ~inGhostHeader:false;
+    _ = Stream.empty ?? "Stream.empty expected" (* <= *) >]
+  -> (headers, [PackageDecl(dummy_loc,"",[],ds)])
+in
+parse_c_file token_stream
+```
+
+# Knowledge to debug parser #3-2
+
+```
+$ cat main.c
+;
+#include <stdio.h>
+$ OCAMLRUNPARAM=b verifast -c main.c
+main.c
+Fatal error: exception Lexer.Stream.Error("Stream.empty expected") # <=
+Raised at file "parser.ml", line 1629, characters 6-312
+Called from file "parser.ml", line 1634, characters 6-31
+Called from file "verifast.ml", line 2966, characters 12-185
+Called from file "verifast1.ml", line 470, characters 6-13
+Called from file "util.ml" (inlined), line 109, characters 15-18
+```
 
 # Ads: 静的コード解析の会 第7回
 ![background](img/metasepi_meeting.png)
 
 * The meeting will be held on 2018-05-12.
 * https://metasepi.connpass.com/event/77398/
-* Discussing about following static code analysis technology:
+* Discussing about static code analysis such like:
 
 ```
 ATS, B-Method, CBMC, Coq, Coverity Scan, CSP, Dafny, F*, Frama-C, FreeSafeTy, Infer, Isabelle, SATABS, SPARK, Spin, Uppaal, VDM, VeriFast, Why3, boogie, cogent, corral, seL4, vcc, etc.
