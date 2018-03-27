@@ -27,6 +27,24 @@ Kiwamu Okabe
 
 ![inline](img/stack.png)
 
+# VeriFast has own C language parser
+![background](img/memopad.png)
+
+```ocaml
+let rec parse_decls ?inGhostHeader =
+  if match inGhostHeader with None -> false | Some b -> b then
+    parse_pure_decls
+  else
+    parse_decls_core
+and
+  parse_decls_core = parser
+  [< '((p1, _), Kwd "/*@"); ds = parse_pure_decls; '((_, p2), Kwd "@*/"); ds' = parse_decls_core >] -> ds @ ds'
+| [< _ = opt (parser [< '(_, Kwd "public") >] -> ());
+     abstract = (parser [< '(_, Kwd "abstract") >] -> true | [< >] -> false);
+     final = (parser [< '(_, Kwd "final") >] -> FinalClass | [< >] -> ExtensibleClass);
+     ds = begin parser
+```
+
 # Why modify VeriFast parser? #1
 ![background](img/Dennis_Ritchie.png)
 
@@ -79,6 +97,8 @@ xxx Screen shot
 * Support operators in macros / Add -D option #116
   https://github.com/verifast/verifast/pull/116
 ```
+
+xxx More
 
 # Knowledge to debug parser #1-1
 ![background](img/memopad.png)
@@ -200,6 +220,7 @@ ATS, B-Method, CBMC, Coq, Coverity Scan, CSP, Dafny, F*, Frama-C, FreeSafeTy, In
 http://www.toranoana.jp/mailorder/article/04/0030/58/73/040030587376.html
 ```
 
+* Translated VeriFast tutorial appears in it!
 * And we are calling for article on Comiket 94.
 * The abstract deadline is 2018-06-24.
 * Please read following about CFA:
