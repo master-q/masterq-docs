@@ -198,6 +198,12 @@ Called from file "verifast1.ml", line 470, characters 6-13
 Called from file "util.ml" (inlined), line 109, characters 15-18
 ```
 
+# Let's join the VeriFast project!
+![background](img/ESAT_KULeuven.png)
+
+* To verify C language on real world.
+* To get better parser.
+
 # Ads: 静的コード解析の会 第7回
 ![background](img/metasepi_meeting.png)
 
