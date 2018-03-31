@@ -165,6 +165,8 @@ let rec print_tokens_stream tokens =
 * Exception "Stream.Error" has a string parameter specified by "??".
 
 ```
+$ wc -l src/parser.ml
+1801 src/parser.ml
 $ vi src/parser.ml
 ```
 
