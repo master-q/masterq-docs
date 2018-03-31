@@ -82,7 +82,7 @@ $ vfide -D __STDC__ -D __GNUC__ -D _KERNEL -D __ELF__ -D NO_KERNEL_RCSIDS -I sys
 # Modified verifier
 ![background](img/spiral_staircase.png)
 
-xxx Screen shot
+![inline](img/after.png)
 
 # My patches for VeriFast's parser
 ![background](img/memopad.png)
@@ -97,8 +97,6 @@ xxx Screen shot
 * Support operators in macros / Add -D option #116
   https://github.com/verifast/verifast/pull/116
 ```
-
-xxx More
 
 # Knowledge to debug parser #1-1
 ![background](img/memopad.png)
