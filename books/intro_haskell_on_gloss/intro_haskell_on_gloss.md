@@ -10,11 +10,31 @@
 # 開発環境構築
 
 * xxx GHCの簡単な説明
-* xxx stackの簡単な説明
+
+https://www.haskellstack.org/ は現時点で多く使われているクロスプラットフォームな管理ツールです。先のGHCコンパイラも開発に必要なライブラリ群もこのツールで一括管理できます。
+
+「さっそく使ってみるでゲソ!」
 
 ## Windows
-## macOS
-## Linux
+
+インストーラである `stack-1.6.5-windows-x86_64-installer.exe` を https://www.stackage.org/stack/windows-x86_64-installer からダウンロードして、インストーラを起動してください。
+インストールが完了したらコマンドプロンプトを開いて以下のようにstackがインストールされていることを確認してください。
+
+```
+$ stack --version
+Version 1.6.5, Git revision 24ab0d6ff07f28276e082c3ce74dfdeb1a2ca9e9 (5514 commits) x86_64 hpack-0.20.0
+```
+
+## macOSもしくはLinux
+
+curlでインストールスクリプトをダウンロードして実行してください。その後`$HOME/.local/bin`にPATHを通してから、以下のようにstackがインストールされていることを確認してください。
+
+```
+$ curl -sSL https://get.haskellstack.org/ | sh
+$ export PATH=$HOME/.local/bin:$PATH
+$ stack --version
+Version 1.6.5, Git revision 24ab0d6ff07f28276e082c3ce74dfdeb1a2ca9e9 (5514 commits) x86_64 hpack-0.20.0
+```
 
 # 対話環境を使ってみる
 
