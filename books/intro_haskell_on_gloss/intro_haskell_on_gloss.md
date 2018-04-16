@@ -159,7 +159,7 @@ Completed 13 action(s).
 ```
 $ stack ghci
 Prelude> import Graphics.Gloss
-Prelude Graphics.Gloss> display (InWindow "Hello" (200, 200) (10, 10)) white (Circle 80)
+Prelude Graphics.Gloss> display (InWindow "Hoge" (200, 200) (10, 10)) white (Circle 80)
 ```
 
 新しいウィンドウが開いて、以下のような円が表示されたでしょうか:
