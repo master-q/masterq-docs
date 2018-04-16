@@ -177,6 +177,9 @@ Prelude Graphics.Gloss> display (InWindow "Hoge" (200, 200) (10, 10)) white (Cir
 
 # 最初のアプリケーション
 
+* xxx Windowsでglossを使えるようにする
+* https://stackoverflow.com/questions/42072958/haskell-with-opengl-unknown-glut-entry-glutinit
+
 * xxx スケルトンの生成
 * xxx ディレクトリ構造
 * xxx ビルド手順
