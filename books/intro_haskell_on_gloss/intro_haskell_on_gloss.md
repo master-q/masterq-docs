@@ -38,6 +38,8 @@ Version 1.6.5, Git revision 24ab0d6ff07f28276e082c3ce74dfdeb1a2ca9e9 (5514 commi
 
 # 対話環境を使ってみる
 
+* xxx この章はmacOSでは動かないことを注記
+
 最初に告白します。さきほど嘘をついてしまいました。「GHCはコンパイラだ」と書きましたがそれは嘘です。厳密にはghcというコマンドはコンパイラとして振舞い、ghciという別のコマンドは対話環境として振舞います。stackが既にインストールされていれば、すぐにghciを使って対話的にプログラミングできます。
 
 まずは一旦ghciを起動してみましょう:
@@ -168,7 +170,7 @@ Prelude Graphics.Gloss> display (InWindow "Hoge" (200, 200) (10, 10)) white (Cir
 
 これでウィンドウにお絵描きすることを身に付けました。最初の一歩としては上出来でしょう!
 
-* xxx WindowsとmacOSでglossのウィンドウが出るか試す
+* xxx Windowsでglossのウィンドウが出るか試す
 
 # 最初のアプリケーション
 
