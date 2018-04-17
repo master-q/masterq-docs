@@ -320,10 +320,9 @@ someFunc :: IO ()
 someFunc = display (InWindow "Hoge" (200, 200) (10, 10)) white (Circle 80)
 ```
 
-* xxx Windowsでglossを使えるようにする
-* https://stackoverflow.com/questions/42072958/haskell-with-opengl-unknown-glut-entry-glutinit
+もしWindowsを使っていたら開発環境構築で設定した`glut32.dll`ファイルを`practice-gloss`ディレクトリにコピーしてください。
 
-再度ビルドして実行してみましょう:
+さて、それでは再度ビルドして実行してみましょう:
 
 ```
 $ stack build
@@ -375,11 +374,14 @@ Gloss http://hackage.haskell.org/package/gloss は...
 # その先へ
 
 * xxx すごいH
-* xxx 栄光のグラスゴー
 * xxx Preludeを読む
 * xxx Preludeを自作する
+* xxx 栄光のグラスゴー
 * xxx 論文
 * xxx コミュニティ
+    * https://haskell.jp/
+    * https://www.meetup.com/Tokyo-Haskell-Meetup/
+    * 参照透明な海を守る会
 
 # 製品品質のコードを書くには
 
