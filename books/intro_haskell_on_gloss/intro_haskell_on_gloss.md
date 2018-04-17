@@ -343,8 +343,8 @@ Gloss http://hackage.haskell.org/package/gloss は...
 
 * xxx 型とは
 
-## GHCiを使う
-## Haddockを使う
+## GHCiを使って型を調べる
+## Haddockを使って型を調べる
 
 * Prelude http://hackage.haskell.org/packages/archive/base/latest/doc/html/Prelude.html
 * Gloss http://hackage.haskell.org/packages/archive/gloss/latest/doc/html/Graphics-Gloss.html
