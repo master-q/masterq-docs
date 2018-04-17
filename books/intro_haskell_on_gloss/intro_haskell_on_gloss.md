@@ -354,8 +354,24 @@ Gloss http://hackage.haskell.org/package/gloss は...
 
 ![](draw/draw.png)
 
-* xxx 図をStackアプリケーション構造に合わせる
 * xxx ディレクトリ構造
+
+```
+practice-gloss
+├── app
+│   └── Main.hs
+├── ChangeLog.md
+├── LICENSE
+├── package.yaml
+├── README.md
+├── Setup.hs
+├── src
+│   └── Lib.hs
+├── stack.yaml
+└── test
+    └── Spec.hs
+```
+
 * xxx ソース解説
 
 # HoogleでAPIを探してみよう
