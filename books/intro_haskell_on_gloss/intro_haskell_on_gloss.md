@@ -157,7 +157,7 @@ Completed 13 action(s).
 
 インストールは無事終わったようです。
 
-再度ghciを起動して、簡単なアプリケーションを作ってみましょう:
+再度ghciを起動して、少し高度な処理をさせてみましょう:
 
 ```
 $ stack ghci
@@ -248,7 +248,7 @@ someFunc
 なにやら文字列が表示されました。せっかくなのでこの文字列を`Hello, World!`に変えるためてみましょう。
 まずは`src/Lib.hs`をエディタで開きます、すると以下の内容が確認できます:
 
-```
+```haskell
 module Lib
     ( someFunc
     ) where
@@ -259,7 +259,7 @@ someFunc = putStrLn "someFunc"
 
 そこで、この`someFunc`を`Hello, World!`に書き換えて、ファイルに上書き保存してみましょう:
 
-```
+```haskell
 module Lib
     ( someFunc
     ) where
@@ -276,12 +276,32 @@ $ stack exec practice-gloss-exe
 Hello, World!
 ```
 
-* xxx REPLと同じことをアプリケーションにまとめる
+さて、アプリケーションを作ることができたので、ghciで描画した円をこのアプリケーションでも同様に表示してみましょうやはり`src/Lib.hs`をエディタで以下のように編集します:
+
+```haskell
+module Lib
+    ( someFunc
+    ) where
+
+someFunc :: IO ()
+someFunc = display (InWindow "Hoge" (200, 200) (10, 10)) white (Circle 80)
+```
 
 * xxx Windowsでglossを使えるようにする
 * https://stackoverflow.com/questions/42072958/haskell-with-opengl-unknown-glut-entry-glutinit
 
+再度ビルドして実行してみましょう:
+
+```
+$ stack build
+$ stack exec practice-gloss-exe
+```
+
+ghciの時と同様に円を表示できたら成功です。やりましたウィンドウを表示するアプリケーションをたった一行で描けました!
+
 # Glossライブラリ
+
+ここまでウィンドウを表示し円を描画するライブラリであるGloss説明してきませんでした。Glossの表現力の豊かさを体感した今がその説明にふさわしい時でしょう。
 
 * xxx Glossとは
 
