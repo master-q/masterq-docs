@@ -11,26 +11,29 @@
 
 GHCはHaskell言語のコンパイラの1つで、現時点でもっとも多くのHaskellプログラマが日常的に使っています。「HaskellコンパイラならGHCで決まり」と思ってしまって問題ありません。
 
-GHC単体でもプログラミングはできますが、近年stack https://www.haskellstack.org/ と呼ばれるクロスプラットフォームな管理ツールが普及しました。先のGHCコンパイラも開発に必要なライブラリ群もこのツールで一括管理できます。
+GHC単体でもプログラミングはできますが、近年Stack https://www.haskellstack.org/ と呼ばれるクロスプラットフォームな管理ツールが普及しました。先のGHCコンパイラも開発に必要なライブラリ群もこのツールで一括管理できます。
 
 「さっそく使ってみるでゲソ!」
 
 ## Windows
 
 インストーラである `stack-1.6.5-windows-x86_64-installer.exe` を https://www.stackage.org/stack/windows-x86_64-installer からダウンロードして、インストーラを起動してください。
-インストールが完了したらコマンドプロンプトを開いて以下のようにstackがインストールされていることを確認してください。
+インストールが完了したらコマンドプロンプトを開いて以下のようにstackコマンドがインストールされていることを確認してください。
 
 ```
-$ stack --version
+C:\Users\user>stack --version
 Version 1.6.5, Git revision 24ab0d6ff07f28276e082c3ce74dfdeb1a2ca9e9 (5514 commits) x86_64 hpack-0.20.0
 ```
 
-* xxx glossを使えるようにする
-* https://stackoverflow.com/questions/42072958/haskell-with-opengl-unknown-glut-entry-glutinit
+さらに本記事ではGLUTという3D描画ライブラリを使うので、MinGW版のものをホームディレクトリに配置してください。
+
+具体的には files.transmissionzero.co.uk/software/development/GLUT/freeglut-MinGW.zip をダウンロードした後、解凍すると`freeglut\bin\x64`というディレクトリができると思います。この中にある`freeglut.dll`をホームディレクトリ(ここでは`C:\Users\user`としています)にコピーしましょう。さらにそのファイル名を`glut32.dll`に変更してください。
+
+WindowsにおけるGLUTライブラリについて、詳しくは https://stackoverflow.com/questions/42072958/haskell-with-opengl-unknown-glut-entry-glutinit を参照してください。
 
 ## macOSもしくはLinux
 
-curlでインストールスクリプトをダウンロードして実行してください。その後`$HOME/.local/bin`にPATHを通してから、以下のようにstackがインストールされていることを確認してください。
+curlでインストールスクリプトをダウンロードして実行してください。その後`$HOME/.local/bin`にPATHを通してから、以下のようにstackコマンドがインストールされていることを確認してください。
 
 ```
 $ curl -sSL https://get.haskellstack.org/ | sh
@@ -41,7 +44,7 @@ Version 1.6.5, Git revision 24ab0d6ff07f28276e082c3ce74dfdeb1a2ca9e9 (5514 commi
 
 # 対話環境を使ってみる
 
-最初に告白します。さきほど嘘をついてしまいました。「GHCはコンパイラだ」と書きましたがそれは嘘です。厳密にはghcというコマンドはコンパイラとして振舞い、ghciという別のコマンドは対話環境として振舞います。stackが既にインストールされていれば、すぐにghciを使って対話的にプログラミングできます。
+最初に告白します。さきほど嘘をついてしまいました。「GHCはコンパイラだ」と書きましたがそれは嘘です。厳密にはghcというコマンドはコンパイラとして振舞い、ghciという別のコマンドは対話環境として振舞います。Stackが既にインストールされていれば、すぐにghciを使って対話的にプログラミングできます。
 
 まずは一旦ghciを起動してみましょう:
 
@@ -181,7 +184,7 @@ Prelude Graphics.Gloss> display (InWindow "Hoge" (200, 200) (10, 10)) white (Cir
 
 (この記事で作成するソースコード全体は https://github.com/master-q/practice-gloss で公開されています。)
 
-まずはstackを使ってアプリケーションの雛形を作りましょう:
+まずはStackを使ってアプリケーションの雛形を作りましょう:
 
 ```
 $ stack new practice-gloss
@@ -322,7 +325,7 @@ Gloss http://hackage.haskell.org/package/gloss は
 
 ![](draw/draw.png)
 
-* xxx 図をstackアプリケーション構造に合わせる
+* xxx 図をStackアプリケーション構造に合わせる
 * xxx ディレクトリ構造
 * xxx ソース解説
 
