@@ -176,14 +176,110 @@ Prelude Graphics.Gloss> display (InWindow "Hoge" (200, 200) (10, 10)) white (Cir
 
 # 最初のアプリケーション
 
+対話的環境を使っていてもHaskellの学習には役に立ちますが、実際のアプリケーションはコンパイラでコンパイルして実行バイナリ形式にして配布したいものです。
+そこで、本章ではghciを使わずにGHCコンパイラを使って、先の円を表示するアプリケーションを作ってみます。
+
+(この記事で作成するソースコード全体は https://github.com/master-q/practice-gloss で公開されています。)
+
+まずはstackを使ってアプリケーションの雛形を作りましょう:
+
+```
+$ stack new practice-gloss
+Downloading template "new-template" to create project "practice-gloss" in practice-gloss/ ...
+
+The following parameters were needed by the template but not provided: author-email, author-name, category, copyright, github-username
+You can provide them in /home/user/.stack/config.yaml, like this:
+templates:
+  params:
+    author-email: value
+    author-name: value
+    category: value
+    copyright: value
+    github-username: value
+Or you can pass each one as parameters like this:
+stack new practice-gloss new-template -p "author-email:value" -p "author-name:value" -p "category:value" -p "copyright:value" -p "github-username:value"
+
+Looking for .cabal or package.yaml files to use to init the project.
+Using cabal packages:
+- practice-gloss/
+
+Selecting the best among 13 snapshots...
+
+* Matches lts-11.5
+
+Selected resolver: lts-11.5
+Initialising configuration using resolver: lts-11.5
+Total number of user packages considered: 1
+Writing configuration to file: practice-gloss/stack.yaml
+All done.
+```
+
+これだけで、最小のHaskellアプリケーションの雛形ができました。ビルドしてみましょう:
+
+```
+$ cd practice-gloss
+$ stack build
+Building all executables for `practice-gloss' once. After a successful build of all of them, only specified executables will be rebuilt.
+practice-gloss-0.1.0.0: configure (lib + exe)
+Configuring practice-gloss-0.1.0.0...
+practice-gloss-0.1.0.0: build (lib + exe)
+Preprocessing library for practice-gloss-0.1.0.0..
+Building library for practice-gloss-0.1.0.0..
+[1 of 2] Compiling Lib              ( src/Lib.hs, .stack-work/dist/x86_64-linux-nopie/Cabal-2.0.1.0/build/Lib.o )
+[2 of 2] Compiling Paths_practice_gloss ( .stack-work/dist/x86_64-linux-nopie/Cabal-2.0.1.0/build/autogen/Paths_practice_gloss.hs, .stack-work/dist/x86_64-linux-nopie/Cabal-2.0.1.0/build/Paths_practice_gloss.o )
+Preprocessing executable 'practice-gloss-exe' for practice-gloss-0.1.0.0..
+Building executable 'practice-gloss-exe' for practice-gloss-0.1.0.0..
+[1 of 2] Compiling Main             ( app/Main.hs, .stack-work/dist/x86_64-linux-nopie/Cabal-2.0.1.0/build/practice-gloss-exe/practice-gloss-exe-tmp/Main.o )
+[2 of 2] Compiling Paths_practice_gloss ( .stack-work/dist/x86_64-linux-nopie/Cabal-2.0.1.0/build/practice-gloss-exe/autogen/Paths_practice_gloss.hs, .stack-work/dist/x86_64-linux-nopie/Cabal-2.0.1.0/build/practice-gloss-exe/practice-gloss-exe-tmp/Paths_practice_gloss.o )
+Linking .stack-work/dist/x86_64-linux-nopie/Cabal-2.0.1.0/build/practice-gloss-exe/practice-gloss-exe ...
+practice-gloss-0.1.0.0: copy/register
+Installing library in /home/user/tmp/practice-gloss/.stack-work/install/x86_64-linux-nopie/lts-11.5/8.2.2/lib/x86_64-linux-ghc-8.2.2/practice-gloss-0.1.0.0-7Uibrp4CT9NGChYUGqQasz
+Installing executable practice-gloss-exe in /home/user/tmp/practice-gloss/.stack-work/install/x86_64-linux-nopie/lts-11.5/8.2.2/bin
+Registering library for practice-gloss-0.1.0.0..
+```
+
+さっそくできた実行バイナリを起動してみましょう:
+
+```
+$ stack exec practice-gloss-exe
+someFunc
+```
+
+なにやら文字列が表示されました。せっかくなのでこの文字列を`Hello, World!`に変えるためてみましょう。
+まずは`src/Lib.hs`をエディタで開きます、すると以下の内容が確認できます:
+
+```
+module Lib
+    ( someFunc
+    ) where
+
+someFunc :: IO ()
+someFunc = putStrLn "someFunc"
+```
+
+そこで、この`someFunc`を`Hello, World!`に書き換えて、ファイルに上書き保存してみましょう:
+
+```
+module Lib
+    ( someFunc
+    ) where
+
+someFunc :: IO ()
+someFunc = putStrLn "Hello, World!"
+```
+
+再度ビルドして実行してみるとどんな文字列が表示されるでしょうか:
+
+```
+$ stack build
+$ stack exec practice-gloss-exe
+Hello, World!
+```
+
+* xxx REPLと同じことをアプリケーションにまとめる
+
 * xxx Windowsでglossを使えるようにする
 * https://stackoverflow.com/questions/42072958/haskell-with-opengl-unknown-glut-entry-glutinit
-
-* xxx スケルトンの生成
-* xxx ディレクトリ構造
-* xxx ビルド手順
-* xxx 実行手順
-* xxx REPLと同じことをアプリケーションにまとめる
 
 # Glossライブラリ
 
@@ -200,6 +296,7 @@ Prelude Graphics.Gloss> display (InWindow "Hoge" (200, 200) (10, 10)) white (Cir
 
 ![](draw/draw.png)
 
+* xxx ディレクトリ構造
 * xxx ソース解説
 
 # HoogleでAPIを探してみよう
