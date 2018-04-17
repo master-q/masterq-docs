@@ -57,7 +57,7 @@ Version 1.6.5, Git revision 24ab0d6ff07f28276e082c3ce74dfdeb1a2ca9e9 (5514 commi
 
 さらに本記事ではGLUTという3D描画ライブラリを使うので、MinGW版のものをホームディレクトリに配置してください。
 
-具体的には files.transmissionzero.co.uk/software/development/GLUT/freeglut-MinGW.zip をダウンロードした後、解凍すると`freeglut\bin\x64`というディレクトリができると思います。この中にある`freeglut.dll`をホームディレクトリ(ここでは`C:\Users\user`としています)にコピーしましょう。さらにそのファイル名を`glut32.dll`に変更してください。
+具体的には http://files.transmissionzero.co.uk/software/development/GLUT/freeglut-MinGW.zip をダウンロードした後、解凍すると`freeglut\bin\x64`というディレクトリができると思います。この中にある`freeglut.dll`をホームディレクトリ(ここでは`C:\Users\user`としています)にコピーしましょう。さらにそのファイル名を`glut32.dll`に変更してください。
 
 WindowsにおけるGLUTライブラリについて、詳しくは https://stackoverflow.com/questions/42072958/haskell-with-opengl-unknown-glut-entry-glutinit を参照してください。
 
