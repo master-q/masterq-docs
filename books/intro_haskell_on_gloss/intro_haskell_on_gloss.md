@@ -4,8 +4,38 @@
 
 * xxx 入門のきっかけ
 * xxx Haskellの簡単な説明
-* xxx Haskellアプリケーションの例
-* xxx Haskellを使っている会社の例
+
+と、ここまでHaskell言語を紹介してみて「採用事例はあるのだろうか？」と思われるかもしれません。
+しかし現在ではHaskellを使った実用的なアプリケーションも実は豊富にあります:
+
+* Attoparsec - 高速パーサコンビネータ
+* Gitit - VCSバックエンドWiki
+* Gtk2hs - Haskellから使えるGtkラッパ
+* Hakyll - 静的Webサイト生成
+* Haskell Relational Record - 安全なSQLクエリ生成器
+* House - Haskell製OS
+* Mighttpd - nginxぐらい速いWebサーバ
+* Monadius - グラディウスっぽいゲーム
+* Pandoc - ドキュメントフォーマット変換
+* Yesod - RailsっぽいWebフレームワーク
+
+また、Haskellを使っている会社も数多く存在します:
+
+* ASAHIネット: プロバイダのインフラ
+* AT&T: ネットワークセキュリティ
+* Bluespec: SystemVerilogとSystemCのツール実装に使ってる
+* Bump Technologies: モバイル向け連絡先交換のサーバサイド
+* Facebook: PHPコードの加工
+* Intel: 独自のHaskellコンパイラ
+* NICTA: L4マイクロカーネルの検証
+* NVIDIA: 用途非公開
+* Qualcomm: LuaのBREWバインディングジェネレータ
+* Standard Chartered Bank: デリバティブリスク分析
+* Tsuru Capital: 高頻度取引
+* 株式会社新川: 社内マクロ言語のトランスレータ
+* その他: http://www.haskell.org/haskellwiki/Haskell_in_industry
+
+Haskellは実用的な使用に耐え、しかも高品質な製品を作るのに効果的な言語なのです。
 
 # 開発環境構築
 
@@ -306,7 +336,7 @@ ghciの時と同様に円を表示できたら成功です。やりましたウ�
 
 ここまでウィンドウを表示し円を描画するライブラリであるGloss説明してきませんでした。Glossの表現力の豊かさを体感した今がその説明にふさわしい時でしょう。
 
-Gloss http://hackage.haskell.org/package/gloss は
+Gloss http://hackage.haskell.org/package/gloss は...
 
 * xxx
 
