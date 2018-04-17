@@ -303,7 +303,9 @@ ghciの時と同様に円を表示できたら成功です。やりましたウ�
 
 ここまでウィンドウを表示し円を描画するライブラリであるGloss説明してきませんでした。Glossの表現力の豊かさを体感した今がその説明にふさわしい時でしょう。
 
-* xxx Glossとは
+Gloss http://hackage.haskell.org/package/gloss は
+
+* xxx
 
 # 型を調べる
 
@@ -312,14 +314,21 @@ ghciの時と同様に円を表示できたら成功です。やりましたウ�
 ## GHCiを使う
 ## Haddockを使う
 
+* Prelude http://hackage.haskell.org/packages/archive/base/latest/doc/html/Prelude.html
+* Gloss http://hackage.haskell.org/packages/archive/gloss/latest/doc/html/Graphics-Gloss.html
+
+
 # 最初のアプリケーションの構造
 
 ![](draw/draw.png)
 
+* xxx 図をstackアプリケーション構造に合わせる
 * xxx ディレクトリ構造
 * xxx ソース解説
 
 # HoogleでAPIを探してみよう
+
+* https://www.haskell.org/hoogle/
 
 # より凝ったアプリケーション
 
@@ -349,3 +358,4 @@ ghciの時と同様に円を表示できたら成功です。やりましたウ�
 # 宿題
 
 * xxx 黄金比とアニメーションスピードの相関
+* http://ja.wikipedia.org/wiki/黄金長方形
