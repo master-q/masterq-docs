@@ -278,7 +278,7 @@ $ stack exec practice-gloss-exe
 someFunc
 ```
 
-なにやら文字列が表示されました。せっかくなのでこの文字列を`Hello, World!`に変えるためてみましょう。
+なにやら文字列が表示されました。せっかくなのでこの文字列を`Hello, World!`に変えてみましょう。
 まずは`src/Lib.hs`をエディタで開きます、すると以下の内容が確認できます:
 
 ```haskell
