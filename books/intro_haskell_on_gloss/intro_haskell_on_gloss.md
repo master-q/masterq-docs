@@ -361,7 +361,7 @@ ghciの時と同様に円を表示できたら成功です。やりました。�
 
 ここまでウィンドウを表示し円を描画するライブラリであるGloss説明してきませんでした。Glossの表現力の豊かさを体感した今がその説明にふさわしい時でしょう。
 
-Gloss http://hackage.haskell.org/package/gloss は図形描画を簡単にできるお絵描きライブラリです。
+Gloss http://gloss.ouroborus.net/ は図形描画を簡単にできるお絵描きライブラリです。
 OpenGLを採用することでWindows/macOS/Linuxいずれのプラットフォームでも動作します。
 
 GlossはHaskellの静的型を上手く活用することで、利用者に対するライブラリの学習コストを大きく下げることに貢献しています。
