@@ -73,7 +73,7 @@ GHC単体でもプログラミングはできますが、近年Stack https://www
 
 ## Windows
 
-インストーラである `stack-1.6.5-windows-x86_64-installer.exe` を https://www.stackage.org/stack/windows-x86_64-installer からダウンロードして、インストーラを起動してください。
+インストーラである `stack-1.6.5-windows-x86_64-installer.exe` ファイルを https://www.stackage.org/stack/windows-x86_64-installer からダウンロードして、インストーラを起動してください。
 インストールが完了したらコマンドプロンプトを開いて以下のようにstackコマンドがインストールされていることを確認してください。
 
 ```
@@ -231,7 +231,7 @@ Prelude Graphics.Gloss> display (InWindow "Hoge" (200, 200) (10, 10)) white (Cir
 これでウィンドウにお絵描きすることを身に付けました。最初の一歩としては上出来でしょう!
 
 っとここでおそらくmacOSユーザの方は憤慨していることだと思います。実はこのGlossライブラリはmacOSのOpenGLの制約のためにghciからは使えません。
-次にGHCコンパイラを使ったアプリケーションを作るので、対話環境での試行錯誤はあきらめて次の章に進みましょう。
+次にGHCコンパイラを使ったアプリケーションを作るので、macOSユーザの方は対話環境での試行錯誤はあきらめて次の章に進みましょう。
 
 # 最初のアプリケーション
 
@@ -355,15 +355,17 @@ $ stack build
 $ stack exec practice-gloss-exe
 ```
 
-ghciの時と同様に円を表示できたら成功です。やりましたウィンドウを表示するアプリケーションをたった一行で描けました!
+ghciの時と同様に円を表示できたら成功です。やりました。ウィンドウを表示するアプリケーションをたった一行で書けました!
 
 # Glossライブラリ
 
 ここまでウィンドウを表示し円を描画するライブラリであるGloss説明してきませんでした。Glossの表現力の豊かさを体感した今がその説明にふさわしい時でしょう。
 
-Gloss http://hackage.haskell.org/package/gloss は...
+Gloss http://hackage.haskell.org/package/gloss は図形描画を簡単にできるお絵描きライブラリです。
+OpenGLを採用することでWindows/macOS/Linuxいずれのプラットフォームでも動作します。
 
-* xxx
+GlossはHaskellの静的型を上手く活用することで、利用者に対するライブラリの学習コストを大きく下げることに貢献しています。
+先のコード例からわかることですが「`display`が画面に図形を描画する関数だ」ということさえ理解すれば、次章で説明する手順で型を調べれば自然とGlossライブラリのAPIを理解できるのです。
 
 # 型を調べる
 
@@ -374,7 +376,6 @@ Gloss http://hackage.haskell.org/package/gloss は...
 
 * Prelude http://hackage.haskell.org/packages/archive/base/latest/doc/html/Prelude.html
 * Gloss http://hackage.haskell.org/packages/archive/gloss/latest/doc/html/Graphics-Gloss.html
-
 
 # 最初のアプリケーションの構造
 
