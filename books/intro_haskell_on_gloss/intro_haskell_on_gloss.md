@@ -367,6 +367,8 @@ OpenGLを採用することでWindows/macOS/Linuxいずれのプラットフォ�
 GlossはHaskellの静的型を上手く活用することで、利用者に対するライブラリの学習コストを大きく下げることに貢献しています。
 先のコード例からわかることですが「`display`が画面に図形を描画する関数だ」ということさえ理解すれば、次章で説明する手順で型を調べれば自然とGlossライブラリのAPIを理解できるのです。
 
+ちなみに`display`の型(もしくは仕様)は http://hackage.haskell.org/package/gloss-1.12.0.0/docs/Graphics-Gloss.html#v:display から閲覧できます。
+
 # 型を調べる
 
 * xxx 型とは
