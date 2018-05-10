@@ -28,7 +28,7 @@ int main()
 #define _(...) /* nothing */
 ```
 
-しかしVCCは上記annotationを特殊構文を見做します。
+しかしVCCは上記annotationを特殊構文と見做します。
 `_(assert E)`と書くことで、当該行にて式`E`が真であることをVCCは保証します。
 
 ### 2.2 Logical Operators and Quantifiers
@@ -96,5 +96,72 @@ int main()
 ```
 
 ### 2.4 Overflows and unchecked arithmetic
+
+xxx 後で調べる
+
+#### 2.4.1 Bitvector Reasoning
+
+xxx 後で調べる
+
+## 3. Function Contracts
+
+以下のように最小値を求める処理を関数にすると検証はエラーになります:
+
+[下記コードをオンラインで実行](https://rise4fun.com/Vcc/04cG)
+
+```c
+#include <vcc.h>
+
+int min(int a, int b)
+{
+  if (a <= b)
+    return a;
+  else return b;
+}
+
+int main()
+{
+  int x, y, z;
+  z = min(x, y);
+  _(assert z <= x)
+  return 0;
+}
+```
+
+これはVCCの検証がmodularであり、関数呼び出しにおいてその関数本体までVCCが調べないためです。
+関数の仕様はときにcontractと呼ばれ、その関数自身と呼び元に影響します。
+このcontractは次の4種類のannotationで与えられます:
+
+* `requires`: 事前条件。
+* `ensures`: 事後条件。
+* `writes`: 次の章で説明します。
+* `decreases`: 3.3章で説明します。
+
+先の`min`関数は以下のようなcontractを追加することで検査に成功します:
+
+[下記コードをオンラインで実行](https://rise4fun.com/Vcc/E2V3)
+
+```c
+#include <vcc.h>
+
+int min(int a, int b)
+  _(requires \true)
+  _(ensures \result <= a && \result <= b)
+{
+  if (a <= b)
+    return a;
+  else return b;
+}
+
+int main()
+{
+  int x, y, z;
+  z = min(x, y);
+  _(assert z <= x)
+  return 0;
+}
+```
+
+### 3.1 Reading and Writing Memory
 
 xxx
