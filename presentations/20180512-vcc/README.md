@@ -164,4 +164,13 @@ int main()
 
 ### 3.1 Reading and Writing Memory
 
+C言語におけるメモリアクセスは2種類に分類できます。
+
+1つ目はSequentialアクセスで、他のスレッドと共有されていないメモリアクセスです。これはデフォルトの動作です。
+
+2つ目はAtomicアクセスで、複数のスレッドから読み書きされる可能性があります。一般にこのようなメモリアクセスは`volatile`型を使います。
+(訳注: `volatile`つけてもアトミックと見做せないんじゃなかったでしたっけ。。。[POS03-C](https://www.jpcert.or.jp/sc-rules/c-pos03-c.html))
+
+Atomicアクセスについては8章で扱い、この章ではSequentialアクセスのみ紹介します。
+
 xxx
