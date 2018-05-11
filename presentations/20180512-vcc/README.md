@@ -584,4 +584,90 @@ void memcpyandclr(unsigned char *dst,
 
 ## 5 Object invariants
 
+VCCでは、C言語の型(structやunion)を組み合わせとobject invariantを関連付けることができます。
+型のinvariantはその型の良いobjectの振舞いを表現します。
+この章からは、この振舞いの静的な側面を扱います。
+invariantはまた良いobjectの変化も記述でき、これは8章で学びます。
+
+最初の例として、静的に確保された配列で実装された、`\0`で終端された安全な文字列の型定義を考えましょう。
+
+[下記コードをオンラインで実行](https://rise4fun.com/Vcc/cEXs)
+
+```c
+#include <vcc.h>
+
+/*{obj}*/
+#define SSTR_MAXLEN 100
+typedef struct SafeString {
+  unsigned len;
+  char content[SSTR_MAXLEN + 1];
+  _(invariant \this->len <= SSTR_MAXLEN)
+  _(invariant content[len] == '\0')
+} SafeString;
+```
+
+`SafeString`のinvariantは、良い`SafeString`は長さが`SSTR_MAXLEN`以下で、`\0`終端されていることを表明しています。
+type invariant中では`\this`は型のインスタンスへのポインタで、構造体メンバーは直接指定できます。
+
+C言語のメモリは確保時に初期化されないため、object invariantが確保時に保持されることは保証できません。
+良い状態のobjectはclosedであると呼ばれ、良い状態にないobjectはopenであると呼ばれます。
+mutable objectは実行中のスレッドに所有されたopen objectで、wrapped objectは実行中のスレッドに所有されたclosed objectです。
+型のコンストラクタとして動作する関数は通常、invariantを成立させ、objectをwrapします:
+
+```c
+/*{init}*/
+void sstr_init(struct SafeString *s)
+  _(writes \span(s))
+  _(ensures \wrapped(s))
+  _(decreases 0)
+{
+  s->len = 0;
+  s->content[0] = '\0';
+  _(wrap s)
+}
+```
+
+struct型のポインタ`p`に対して、`\span(p)`は`p`のメンバーへのポインタの集合を返します。
+そのため上記の例では`\span(s)`は次の集合を省略です:
+
+```c
+{ s, &s->len, &s->content[0], &s->content[1], ...,
+  &s->content[SSTR_MAXLEN] }
+```
+
+したがって、 xxx
+
+```c
+/*{append}*/
+void sstr_append_char(struct SafeString *s, char c)
+  _(requires \wrapped(s))
+  _(requires s->len < SSTR_MAXLEN)
+  _(ensures \wrapped(s))
+  _(writes s)
+  _(decreases 0)
+{
+  _(unwrap s)
+  s->content[s->len++] = c;
+  s->content[s->len] = '\0';
+  _(wrap s)
+}
+```
+
+xxx
+
+```c
+/*{index}*/
+int sstr_index_of(struct SafeString *s, char c)
+  _(requires \wrapped(s))
+  _(ensures \result >= 0 ==> s->content[\result] == c)
+  _(decreases 0)
+{
+  unsigned i;
+  for (i = 0; i < s->len; ++i)
+          _(decreases s->len - i)
+    if (s->content[i] == c) return (int)i;
+  return -1;
+}
+```
+
 xxx
