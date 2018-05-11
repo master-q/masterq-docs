@@ -1,6 +1,6 @@
 # さわって学ぶVCC
 
-* 本ページの短縮URL: http://bit.ly/sawa-vcc
+(本ページの短縮URL: http://bit.ly/sawa-vcc )
 
 ["Verifying C Programs: A VCC Tutorial"](https://swt.informatik.uni-freiburg.de/teaching/SS2015/swtvl/Resources/literature/vcc-tutorial-col2.pdf)で紹介されているコードを[オンライン](https://rise4fun.com/Vcc)で実行させながら[VCC](https://github.com/Microsoft/vcc)検証器の使い方を学びます。
 
