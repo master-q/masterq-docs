@@ -1,11 +1,13 @@
 # さわって学ぶVCC
 
+* 本ページの短縮URL: http://bit.ly/sawa-vcc
+
 ["Verifying C Programs: A VCC Tutorial"](https://swt.informatik.uni-freiburg.de/teaching/SS2015/swtvl/Resources/literature/vcc-tutorial-col2.pdf)で紹介されているコードを[オンライン](https://rise4fun.com/Vcc)で実行させながら[VCC](https://github.com/Microsoft/vcc)検証器の使い方を学びます。
 
 この翻訳は完全な翻訳でありません。また訳語も安定していません。詳しくは[原文](https://swt.informatik.uni-freiburg.de/teaching/SS2015/swtvl/Resources/literature/vcc-tutorial-col2.pdf)を参照してください。
 
-## 1. Introduction
-## 2. Verifying Simple Programs
+## 1 Introduction
+## 2 Verifying Simple Programs
 ### 2.1 Assertions
 
 [下記コードをオンラインで実行](https://rise4fun.com/Vcc/aMuM)
@@ -105,7 +107,7 @@ xxx 後で調べる
 
 xxx 後で調べる
 
-## 3. Function Contracts
+## 3 Function Contracts
 
 以下のように最小値を求める処理を関数にすると検証はエラーになります:
 
@@ -334,5 +336,252 @@ void my_memcpy(unsigned char *dst,
 `src`と`dst`はオーバラップしません。
 
 ### 3.3 Termination
+
+`_(decreases 0)`と単純に指定すると、その関数は再帰しません。
+再帰する関数であれば、その関数の`decreases`に関数の呼び出し毎に現象するmeasureを与えます。
+例えば、上記の`my_memcpy`の停止を検証するためには、annotation`_(decreases len)`を追加するだけです。
+
+### 3.4 Pure functions
+
+pure functionは副作用を持たない関数です。
+VCCではpure functionはメモリを確保できませんし、local variableにのみ書き込めます。
+VCCのannotationから呼び出せるのはpure functionのみです; この関数は停止することが求められます。
+
+上記の関数`min()`はpureとして宣言できます;
+そのためには修飾子`_(pure)`を関数仕様の前に追加します。例えば:
+
+```c
+_(pure) min(int x, int y) ...
+```
+
+決して実行したくないpure functionは`_(def)`タグを使って定義できます。
+これはpure ghost functionと呼ばれ、次のように使います:
+
+```c
+_(def \bool sorted(int *arr, unsigned len) {
+  return \forall unsigned i, j;
+    i <= j && j < len ==> arr[i] <= arr[j];
+})
+```
+
+ソートの部分的な仕様は次のようになります:
+
+```c
+void sort(int *arr, unsigned len)
+  _(writes \array_range(arr, len))
+  _(ensures sorted(arr, len))
+```
+
+### 3.5 Contracts on Blocks
+
+関数内ブロックに対する仕様を以下のように書けます:
+
+```c
+x = 5;
+_(requires x == 5)
+_(writes &x)
+_(ensures x == 6)
+{
+  x++;
+}
+```
+
+## 4 Loop invariants
+
+ループの先頭で知るべきことを類推しようとするかわりに、VCCはループが知るべき情報をloop invariantで与えます。
+
+例を見てみましょう:
+
+[下記コードをオンラインで実行](https://rise4fun.com/Vcc/Cprv)
+
+```c
+#include <vcc.h>
+
+void divide(unsigned x, 
+            unsigned d, 
+            unsigned *q, 
+            unsigned *r)
+_(requires d > 0 && q != r)
+_(writes q,r)
+_(ensures x == d*(*q) + *r && *r < d)
+{
+  unsigned lq = 0;
+  unsigned lr = x;
+  while (lr >= d)
+  _(invariant x == d*lq + lr)
+  {
+    lq++;
+    lr -= d;
+  }
+  *q = lq;
+  *r = lr;
+}
+```
+
+`divide()`関数は`x`を`d`で割った商と余りを古典的なアルゴリズムで求めます。
+loop invariantは余りが大きくならないように強制しています。
+
+別のループの例として次の関数は配列中に値が出現するかどうか線形探索します:
+
+[下記コードをオンラインで実行](https://rise4fun.com/Vcc/fWT)
+
+```c
+#include <vcc.h>
+#include <limits.h>
+
+unsigned lsearch(int elt, int *ar, unsigned sz)
+  _(requires \thread_local_array(ar, sz))
+  _(ensures \result != UINT_MAX 
+     ==> ar[\result] == elt)
+  _(ensures \forall unsigned i; 
+    i < sz && i < \result ==> ar[i] != elt)
+{
+  unsigned i;
+  for (i = 0; i < sz; i++)
+    _(invariant \forall unsigned j; 
+        j < i ==> ar[j] != elt)
+  {
+    if (ar[i] == elt) return i;
+  }
+  return UINT_MAX;
+}
+```
+
+事後条件は返り値が`elt`が出現した最初の配列インデックスであることを主張しています。
+loop invariantは`elt`が`ar[0] . . . ar[i - 1]`中には出現しないことを主張しています。
+
+### 4.1 Termination measures for loops
+
+ループが終了することを証明するために、関数と同様に、`_(decreases)`節を使います。
+
+例えば、`divide`関数では、ループに`_(decreases lr)`を追加することで、ループの終了を指定できます。
+これで`divide`関数に`_(decreases 0)`を追加できます。
+
+もしtermination measure付き関数がtermination measureなしの`for`ループを含むなら、VCCはそのループのヘッダの構文を推測しようとします。
+すなわち、多くの`for`ループは明示的なtermination measureを要求しません。
+
+以下はバブルソートを使って配列をソートする関数の例です。
+VCCは外側のループのtermination measureを推論しますが、内側のループのtermination measureは必要です:
+
+[下記コードをオンラインで実行](https://rise4fun.com/Vcc/WuXj)
+
+```c
+#include <vcc.h>
+
+_(def \bool sorted(int *buf, unsigned len) {
+  return \forall unsigned i, j; i < j && j < len 
+            ==> buf[i] <= buf[j];
+})
+
+void sort(int *buf, unsigned len)
+  _(writes \array_range(buf, len))
+  _(ensures sorted(buf, len))
+  _(decreases 0)
+{
+  if (len < 2) return;
+  for (unsigned i = len; i > 0; i--)
+    _(invariant i <= len)
+    _(invariant \forall unsigned u,v; 
+      i <= v && u <= v && v < len 
+      ==> buf[u] <= buf[v])
+    for (unsigned j = 0; j + 1 < i; j++)
+      _(decreases i-j)
+      _(invariant j < i)
+      _(invariant \forall unsigned u,v; 
+          i <= v && u <= v && v < len 
+          ==> buf[u] <= buf[v])
+      _(invariant \forall unsigned u; u < j 
+          ==> buf[u] <= buf[j])
+      if (buf[j] > buf[j+1]) {
+        int tmp = buf[j];
+        buf[j] = buf[j+1];
+        buf[j+1] = tmp;
+      }
+}
+```
+
+この仕様はソートの結果が確かにソートされていることを表わします。
+しかし、この仕様はその結果が置換(permutation)されたものであることを表わしません。
+これについては6.2章で扱います。
+
+### 4.2 Writes clauses for loops
+
+ループは多くの面で再帰関数と似ています。
+invariantは事前条件と事後条件の組み合わせとして働きます。
+関数と同様に、ループもまたwrites clauseを持ちます。
+関数に対してと同様、同じ構文を使えます。
+ループ中でヒープに書き込まないのであれば、VCCは自動的に空のwrites clauseを推論します。
+そうでねければ、関数で指定されたwrites clauseを取ります。
+そのためデフォルトでは、ループは関数が書ける全ての対象に書き込めます。
+次は暗黙のwrites clauseの例です:
+
+[下記コードをオンラインで実行](https://rise4fun.com/Vcc/7AsB)
+
+```c
+#include<vcc.h>
+
+void my_memcpy(unsigned char *dst, 
+               unsigned char *src, 
+               unsigned len)
+  _(writes \array_range(dst, len))
+  _(requires \thread_local_array(src, len))
+  _(requires \arrays_disjoint(src, len, dst, len))
+  _(ensures \forall unsigned i; i < len ==> 
+       dst[i] == \old(src[i]))
+  _(decreases 0)
+{
+  unsigned k;
+  for (k = 0; k < len; ++k)
+    _(invariant \forall unsigned i; i < k ==> 
+        dst[i] == \old(src[i]))
+  {
+    dst[k] = src[k];
+  }
+}
+```
+
+(VCCは`for`ループの適切なtermination measureも推論することに注意してください。)
+
+もしループが関数が書き込める全てに書き込まないのであれば、しばしば明示的なwrite clausesを指定したくなるかもしれません。
+次はコピーした後にソースバッファをクリアする`memcpy()`の変種です。
+
+[下記コードをオンラインで実行](https://rise4fun.com/Vcc/JleM)
+
+```c
+#include<vcc.h>
+
+void memcpyandclr(unsigned char *dst, 
+                  unsigned char *src, 
+                  unsigned len)
+  _(writes \array_range(src, len))
+  _(writes \array_range(dst, len))
+  _(requires \arrays_disjoint(src, len, dst, len))
+  _(ensures \forall unsigned i; i < len 
+      ==> dst[i] == \old(src[i]))
+  _(ensures \forall unsigned i; i < len 
+      ==> src[i] == 0)
+  _(decreases 0)
+{
+  unsigned k;
+  for (k = 0; k < len; ++k)
+    _(writes \array_range(dst, len))
+    _(invariant \forall unsigned i; i < k 
+        ==> dst[i] == \old(src[i]))
+  {
+    dst[k] = src[k];
+  }
+  for (k = 0; k < len; ++k)
+    _(writes \array_range(src, len))
+    _(invariant \forall unsigned i; i < k 
+        ==> src[i] == 0)
+  {
+    src[k] = 0;
+  }
+}
+```
+
+もし二番目のループがwrites clauseを持たないと、最初の事後条件を証明できません—VCCは二番目のループが`dst`を上書きすると見做してしまうのです。
+
+## 5 Object invariants
 
 xxx
