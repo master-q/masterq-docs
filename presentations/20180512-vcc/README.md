@@ -663,7 +663,9 @@ void sstr_append_char(struct SafeString *s, char c)
 }
 ```
 
-VCCは xxx
+最後に、objectを読み出しする関数はunwrapは不要です。
+そのためwrites clause中にリストアップする必要はありません。
+例えば:
 
 ```c
 /*{index}*/
@@ -679,5 +681,25 @@ int sstr_index_of(struct SafeString *s, char c)
   return -1;
 }
 ```
+
+VCCは`\closed`フィールドに`\bool`でobjectがclosedであるかどうかを追跡します。
+`\owner`フィールドでobjectの所有者を追跡します。
+このフィールドはスレッドであるobjectへのポインタです。
+
+```c
+_(def \bool \wrapped(\object o) {
+   return \non_primitive_ptr(o) && o->\closed && o->\owner ==
+       \me;
+})
+_(def \bool \mutable(\object o) {
+   if (!\non_primitive_ptr(o)) return \mutable(\embedding(o));
+   return !o->\closed && o->\owner == \me;
+}
+```
+
+これらの定義はいくつか新しい機能を使っています:
+
+* 関数本体を検証するとき、VCCはいくつかのスレッドが実行されることを仮定します。`\thread`objectは`\me`として参照されます。
+* 型`\object`は`void *`です。 xxx
 
 xxx
