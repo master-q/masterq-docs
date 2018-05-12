@@ -635,7 +635,17 @@ struct型のポインタ`p`に対して、`\span(p)`は`p`のメンバーへの�
   &s->content[SSTR_MAXLEN] }
 ```
 
-したがって、 xxx
+したがって、このwrites clauseは関数が`s`のフィールドに書き込み可能であることを主張しています。
+事後条件は関数がwrapされた`s`を返すことを主張しています。
+これは`s`のinvariantが保持されていることも推論します;
+
+このinvariantはobjectがwrapされるときにチェックされるのです。
+
+wrapped objectを修正する関数は、はじめにそれをunwrapする必要があります。
+そして修正した後再度objectをwrapするのです;
+これでVCCはclosedである間、objectのフィールドにアクセスしません。
+objectのunwrapは関数のwrites集合にそのメンバー全てを追加します。
+そのため関数はobjectへの書き込みを報告する必要がありますが、objectのフィールドへの書き込みをレポートする必要はありません:
 
 ```c
 /*{append}*/
@@ -653,7 +663,7 @@ void sstr_append_char(struct SafeString *s, char c)
 }
 ```
 
-xxx
+VCCは xxx
 
 ```c
 /*{index}*/
