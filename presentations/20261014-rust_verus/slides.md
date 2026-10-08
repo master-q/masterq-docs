@@ -192,7 +192,7 @@ fn align_down(self, align: Self) -> Self {
 
 # KVerus: LLMs help generate and repair proof
 
-![w:1000](img/kverus.png)
+![w:1000](assets/kverus.png)
 
 ---
 
