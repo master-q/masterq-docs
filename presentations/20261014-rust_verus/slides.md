@@ -3,7 +3,7 @@ marp: true
 theme: default
 paginate: true
 size: 16:9
-title: AsterinasとVerusではじめるOSレベル検証の紹介
+title: An Introduction to OS-Level Verification with Asterinas and Verus
 style: |
   section { font-size: 29px; }
   h1 { font-size: 42px; }
@@ -12,7 +12,7 @@ style: |
 footer: 'Rust、何もわからない… #15'
 ---
 
-# AsterinasとVerusではじめるOSレベル検証の紹介
+# An Introduction to OS-Level Verification with Asterinas and Verus
 
 Kiwamu Okabe
 kiwamu@metasepi.org
@@ -20,31 +20,41 @@ https://metasepi.org/
 
 ---
 
-# Asterinas building a Linux-compatible kernel in Rust
+# Asterinas: a Linux-compatible kernel in Rust
 
 https://github.com/asterinas/asterinas
 
-> Asterinas pioneers the framekernel architecture, combining monolithic-kernel performance with microkernel-inspired separation. **Unsafe Rust** is confined to a small, auditable framework called [OSTD](https://asterinas.github.io/api-docs-nightly/ostd/), while the rest of the kernel is written in safe Rust, keeping the memory-safety TCB intentionally minimal.
+- Asterinas is a Linux-compatible kernel written in Rust.
+- Most of the kernel is written in **safe Rust**.
+- Low-level **unsafe Rust** is isolated in a small framework called **OSTD**.
+- This keeps the memory-safety trusted code base small.
 
 ---
 
-# Formal Verification of Asterinas OSTD with Verus
+# Verifying Asterinas OSTD with Verus
 
 https://github.com/asterinas/vostd
 
-> The **vostd** project provides a formally-verified version of **OSTD**, the (unofficial) standard library for OS development in safe Rust. OSTD encapsulates low-level hardware interactions—which require **unsafe Rust**—into a small set of high-level, safe abstractions, enabling complex, general-purpose OSes like Asterinas to be written entirely in **safe Rust**. By design, OSTD guarantees soundness: no undefined behavior is possible regardless of how its API is used. The goal of vostd is to bolster this soundness through formal verification with [Verus](https://github.com/verus-lang/verus).
+- **OSTD** wraps low-level hardware operations in safe Rust APIs.
+- Those low-level operations sometimes require **unsafe Rust**.
+- **VOSTD** uses **Verus** to formally verify OSTD.
+- Goal: make OSTD's safety guarantees stronger and more trustworthy.
 
 ---
 
-# Verus verifying Rust for low-level systems code
+# Verus: verifying Rust code
 
 https://github.com/verus-lang/verus
 
-> Verus is a tool for verifying the correctness of code written in Rust. Developers write **specifications** of what their code should do, and Verus **statically checks** that the executable Rust code will always satisfy the specifications for all possible executions of the code. Rather than adding run-time checks, Verus instead relies on powerful solvers to prove the code is correct.
+- Write normal Rust code.
+- Add **specifications** describing what the code must do.
+- Verus checks that the code always satisfies those specifications.
+- Verification is done **statically**.
+- No extra run-time checks are required.
 
 ---
 
-# VOSTDのアドレスを境界にそろえるコード(抜粋)
+# Example: `align_down` in VOSTD
 
 ```rust
 $ cd ~/src/vostd
@@ -58,11 +68,9 @@ $ vi ostd/libs/align_ext/src/lib.rs
                 )]
 
                 /// ## Postconditions
-                /// - `align` is a power of two `>= 2` (panic-enforced; the
-                ///   function panics on invalid `align`, so a returning call
-                ///   guarantees validity).
-                /// - The return value is the greatest number that is smaller
-                ///   than or equal to `self` and is a multiple of `align`.
+                /// - `align` is a power of two `>= 2`.
+                /// - The return value is the greatest multiple of `align`
+                ///   that is less than or equal to `self`.
                 fn align_down(self, align: Self) -> Self {
                     /// -- snip proof --
                     self & !(align - 1)
@@ -71,7 +79,7 @@ $ vi ostd/libs/align_ext/src/lib.rs
 
 ---
 
-# VOSTDに意図的に不具合を混入してみる
+# Let's break VOSTD on purpose
 
 ```diff
 $ git diff | cat
@@ -92,9 +100,9 @@ index 3640e7c7c..288a0e4e6 100644
 
 ---
 
-# VOSTDをVerusで検査すると...
+# Verus catches the bug
 
-```
+```text
 $ make verify
 --snip--
 error: postcondition not satisfied
@@ -114,34 +122,39 @@ error: postcondition not satisfied
 227 | |     usize,
 228 | | }
     | |_- in this macro invocation
-    |
-    = note: this error originates in the macro `impl_align_ext` (in Nightly builds,...)
 ```
 
 ---
 
-# 検査エラーメッセージの意味は？
+# What does this error mean?
+
+The specification says:
 
 ```rust
-                    ensures
-                        align >= 2,
-                        is_pow2(align as int),
-                        ret <= self,
-                        ret % align == 0, /// the postcondition
+ensures
+    align >= 2,
+    is_pow2(align as int),
+    ret <= self,
+    ret % align == 0,
 ```
 
-Above violates following.
+So the result **must be aligned**.
+
+But our broken code:
 
 ```rust
-                fn align_down(self, align: Self) -> Self {
-                    /// -- snip proof --
-                    self & (align - 1) /// may be zero
-                }
+fn align_down(self, align: Self) -> Self {
+    self & (align - 1)
+}
 ```
+
+- keeps only the low bits
+- does **not** always return a multiple of `align`
+- therefore violates the postcondition
 
 ---
 
-# でも証明コードを全部手書きするのは大変
+# But writing proofs by hand is hard
 
 ```rust
                 #[inline]
@@ -157,11 +170,6 @@ Above violates following.
                         forall |n: nat|  !(n<=self && #[trigger] (n % align as nat) == 0) || (ret >= n),
                 )]
 
-                /// ## Postconditions
-                /// - `align` is a power of two `>= 2` (panic-enforced; the
-                ///   function panics on invalid `align`, so a returning call
-                ///   guarantees validity).
-                /// - The return value is the greatest number that is smaller than or equal to `self` and is a multiple of `align`.
                 fn align_down(self, align: Self) -> Self {
                     vstd_extra::assert!(align.is_power_of_two() && align >= 2);
                     proof!{
@@ -187,19 +195,22 @@ Above violates following.
 
 ---
 
-# KVerus, LLM-assisted workflow for Verus proof
+# KVerus: LLMs help generate and repair Verus proofs
 
 ![w:1000](img/kverus.png)
 
 ---
 
-# 宣伝: 組み込み言語TakibiとLinux互換kernel
+# A quick plug: Takibi language and kernel
 
 https://github.com/takibi-lang/takibi
 
-OCaml / LLVM IR / LLMで組み込み言語を作り、その言語でLinux互換kernelを作る
-"Detect errors at compile time."
-Alpine Linuxで配布しているBusyBox実行バイナリでHTTPサーバが動作
-マルチコアサポートを実装中
+- An embedded programming language built with **OCaml + LLVM**
+- Developed together with **LLM coding agents**
+- Goal: **"Detect errors at compile time."**
+- Building a Linux-compatible kernel in Takibi
+- Already runs the **BusyBox HTTP server** from Alpine Linux
+- Multi-core support is now under development
 
-詳細はブログで! https://metasepi.org/en/tags/takibi.html
+More details:
+https://metasepi.org/en/tags/takibi.html
