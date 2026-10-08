@@ -3,7 +3,7 @@ marp: true
 theme: default
 paginate: true
 size: 16:9
-title: Rustで型が合っても、答えは合っている？
+title: AsterinasとVerusではじめるOSレベル検証の紹介
 style: |
   section { font-size: 29px; }
   h1 { font-size: 42px; }
@@ -12,163 +12,194 @@ style: |
 footer: 'Rust、何もわからない… #15'
 ---
 
-# Rustで型が合っても、<br>答えは合っている？
+# AsterinasとVerusではじめるOSレベル検証の紹介
 
-## Verusで検証する、カーネルの小さな計算
-
-Rust開発者向け · 5分
-
-<!--
-目安: 15秒。
-今回はVOSTDの実際の関数を題材にします。難しい並行処理や数学の記号から始めず、整数を丸める小さな計算で「型の保証」と「計算結果の保証」の違いを見ます。
--->
+Kiwamu Okabe
+kiwamu@metasepi.org
+https://metasepi.org/
 
 ---
 
-# 実例：アドレスを境界にそろえる
+# Asterinas building a Linux-compatible kernel in Rust
 
-VOSTDの `align_down` は、整数を指定した境界へ切り下げます。
+https://github.com/asterinas/asterinas
 
-| 入力 | 境界 | 正しい結果 |
-| --- | --- | --- |
-| 12 | 8 | **8** |
-| 16 | 8 | **16** |
-| 0x1234 | 0x1000 | **0x1000** |
-
-メモリ管理では、アドレスからページの先頭を求めるときなどに使います。
-
-今回は **境界が2以上の2の累乗** の場合を扱います。
-
-<!--
-目安: 45秒。
-8刻みの目盛りなら、0、8、16、24と並びます。12の直前の目盛りは8です。すでに目盛り上にある16は16のままです。
-0x1000は4096です。4096バイト境界を例にすると、0x1234のあるページの先頭は0x1000です。ページサイズを普遍的に4096と主張しているわけではありません。
-実装: ostd/libs/align_ext/src/lib.rs の AlignExt::align_down。
-利用例: ostd/src/mm/page_table/cursor/mod.rs の cur_va_range 内で self.va.align_down(page_size) を使用。
--->
+> Asterinas pioneers the framekernel architecture, combining monolithic-kernel performance with microkernel-inspired separation. **Unsafe Rust** is confined to a small, auditable framework called [OSTD](https://asterinas.github.io/api-docs-nightly/ostd/), while the rest of the kernel is written in safe Rust, keeping the memory-safety TCB intentionally minimal.
 
 ---
 
-# Rustの型では、この間違いは見つからない
+# Formal Verification of Asterinas OSTD with Verus
+
+https://github.com/asterinas/vostd
+
+> The **vostd** project provides a formally-verified version of **OSTD**, the (unofficial) standard library for OS development in safe Rust. OSTD encapsulates low-level hardware interactions—which require **unsafe Rust**—into a small set of high-level, safe abstractions, enabling complex, general-purpose OSes like Asterinas to be written entirely in **safe Rust**. By design, OSTD guarantees soundness: no undefined behavior is possible regardless of how its API is used. The goal of vostd is to bolster this soundness through formal verification with [Verus](https://github.com/verus-lang/verus).
+
+---
+
+# Verus verifying Rust for low-level systems code
+
+https://github.com/verus-lang/verus
+
+> Verus is a tool for verifying the correctness of code written in Rust. Developers write **specifications** of what their code should do, and Verus **statically checks** that the executable Rust code will always satisfy the specifications for all possible executions of the code. Rather than adding run-time checks, Verus instead relies on powerful solvers to prove the code is correct.
+
+---
+
+# VOSTDのアドレスを境界にそろえるコード(抜粋)
 
 ```rust
-fn align_down(x: usize, align: usize) -> usize {
-    assert!(align.is_power_of_two() && align >= 2);
-    x & (align - 1) // 「!」を忘れた！
-}
+$ cd ~/src/vostd
+$ vi ostd/libs/align_ext/src/lib.rs
+                #[inline]
+                #[verus_spec(ret =>
+                    requires
+                    /// -- snip proof --
+                    ensures
+                    /// -- snip proof --
+                )]
+
+                /// ## Postconditions
+                /// - `align` is a power of two `>= 2` (panic-enforced; the
+                ///   function panics on invalid `align`, so a returning call
+                ///   guarantees validity).
+                /// - The return value is the greatest number that is smaller
+                ///   than or equal to `self` and is a multiple of `align`.
+                fn align_down(self, align: Self) -> Self {
+                    /// -- snip proof --
+                    self & !(align - 1)
+                }
 ```
-
-`align_down(12, 8)` は **4**。欲しい答えは **8**。
-
-- 引数も戻り値も `usize`。このコードはRustの型検査を通る
-- 所有権や借用が正しくても、「8の倍数を返す」とは限らない
-
-<!--
-目安: 45秒。
-これは説明用に作った誤実装で、VOSTDにこのバグがあるという意味ではありません。
-12は2進数で1100、7は0111。ANDすると0100、つまり4になります。
-Rustはメモリ安全性などを支える強い型システムを持ちますが、この関数の型usize -> usizeには丸めの意味が書かれていません。
-境界のassertは実行時の入力チェックで、戻り値の正しさを検査するものではありません。
--->
 
 ---
 
-# Verusでは「戻り値の条件」も書く
+# VOSTDに意図的に不具合を混入してみる
 
-VOSTDの実際の仕様から、2つの条件を抜粋：
+```diff
+$ git diff | cat
+diff --git a/ostd/libs/align_ext/src/lib.rs b/ostd/libs/align_ext/src/lib.rs
+index 3640e7c7c..288a0e4e6 100644
+--- a/ostd/libs/align_ext/src/lib.rs
++++ b/ostd/libs/align_ext/src/lib.rs
+@@ -212,7 +212,7 @@ macro_rules! impl_align_ext {
+                         assert((self & !mask) as nat == nat_align_down(self as nat, align as nat));
+                         lemma_nat_align_down_sound(self as nat, align as nat);
+                     }
+-                    self & !(align - 1)
++                    self & (align - 1)
+                 }
+         }
+             )*
+```
+
+---
+
+# VOSTDをVerusで検査すると...
+
+```
+$ make verify
+--snip--
+error: postcondition not satisfied
+   --> ostd/libs/align_ext/src/lib.rs:186:25
+    |
+186 |                           ret % align == 0,
+    |                           ^^^^^^^^^^^^^^^^ failed this postcondition
+...
+215 |                       self & (align - 1)
+    |                       ------------------ at the end of the function body
+...
+222 | / impl_align_ext! {
+223 | |     u8,
+224 | |     u16,
+225 | |     u32,
+226 | |     u64,
+227 | |     usize,
+228 | | }
+    | |_- in this macro invocation
+    |
+    = note: this error originates in the macro `impl_align_ext` (in Nightly builds,...)
+```
+
+---
+
+# 検査エラーメッセージの意味は？
 
 ```rust
-#[verus_spec(ret =>
-    ensures
-        ret <= self,
-        ret % align == 0,
-)]
+                    ensures
+                        align >= 2,
+                        is_pow2(align as int),
+                        ret <= self,
+                        ret % align == 0, /// the postcondition
 ```
 
-- `self`：丸める前の値。`ret`：戻り値
-- `ensures`：正常に戻ったときに、必ず成り立つ条件
-- **入力以下**で、**境界の倍数**になることを実装から証明する
-
-先ほどの **4** は `4 % 8 != 0`。この仕様を満たしません。
-
-<!--
-目安: 65秒。
-この記法はリポジトリのverus_spec属性をそのまま抜粋しています。Verusのすべてのコードがこの属性形式というわけではありません。
-selfは拡張トレイトのメソッドの入力です。通常の関数のxだと思ってください。
-ensuresは実行時のassertを追加する指定ではなく、検証時に証明する約束です。
-この抜粋は仕様全体ではありません。実際のコードには境界の有効性や最大性の条件などもあります。前提はrequiresに書きます。今回は有効な境界に話を絞っています。
-誤実装は仕様に反するため、同じ仕様の証明は成立しません。この資料作成時に誤実装をVerusに投入してエラー表示を取得したわけではありません。
--->
-
----
-
-# でも「0を返す」でも条件を満たす？
+Above violates following.
 
 ```rust
-// 入力以下、かつ境界の倍数。でも正しい切り下げではない！
-0
+                fn align_down(self, align: Self) -> Self {
+                    /// -- snip proof --
+                    self & (align - 1) /// may be zero
+                }
 ```
-
-そこで実際の仕様は、さらに次の性質を要求します。
-
-> 入力以下にある境界の倍数のうち、戻り値が最大である。
-
-入力が12、境界が8なら、候補は **0と8**。答えは **8**。
-
-**正しい実装に加えて、十分な仕様も必要。**
-
-<!--
-目安: 40秒。
-0はどんな有効な入力に対しても「入力以下」「境界の倍数」を満たします。2つの条件だけでは仕様が弱すぎると分かります。
-実際のコードではforallで、入力以下にあるすべての境界の倍数nについてret >= nと要求します。またnat_align_downという数学的モデルとの一致も要求しています。
-仕様自体が意図を十分に表しているかは、人が考える必要があります。
--->
 
 ---
 
-# VOSTDでは、ビット演算と仕様をつなぐ
-
-実行時の計算は、この1行です。
+# でも証明コードを全部手書きするのは大変
 
 ```rust
-self & !(align - 1)
+                #[inline]
+                #[verus_spec(ret =>
+                    requires
+                        (is_pow2(align as int) && align >= 2) || may_panic(),
+                    ensures
+                        align >= 2,
+                        is_pow2(align as int),
+                        ret <= self,
+                        ret % align == 0,
+                        ret == nat_align_down(self as nat, align as nat),
+                        forall |n: nat|  !(n<=self && #[trigger] (n % align as nat) == 0) || (ret >= n),
+                )]
+
+                /// ## Postconditions
+                /// - `align` is a power of two `>= 2` (panic-enforced; the
+                ///   function panics on invalid `align`, so a returning call
+                ///   guarantees validity).
+                /// - The return value is the greatest number that is smaller than or equal to `self` and is a multiple of `align`.
+                fn align_down(self, align: Self) -> Self {
+                    vstd_extra::assert!(align.is_power_of_two() && align >= 2);
+                    proof!{
+                        is_pow2_equiv(align as int);
+                        lemma_low_bits_mask_values();
+                        let mask = (align - 1) as Self;
+                        let e = choose |e: nat| pow(2, e) == align;
+                        lemma_pow2(e);
+                        assert(e < $uint_type::BITS) by {
+                            if e >= $uint_type::BITS {
+                                lemma_pow2_strictly_increases($uint_type::BITS as nat, e);
+                                lemma2_to64();
+                            }
+                        }
+                        call_lemma_low_bits_mask_is_mod!($uint_type, self, e);
+                        assert(self == (self & mask) + (self & !mask)) by (bit_vector);
+                        assert((self & !mask) as nat == nat_align_down(self as nat, align as nat));
+                        lemma_nat_align_down_sound(self as nat, align as nat);
+                    }
+                    self & !(align - 1)
+                }
 ```
-
-その前の `proof!` で、補助定理を使って関係を証明します。
-
-```text
-下位ビットを消す計算
-        ↓ 証明
-入力以下の、最大の境界の倍数
-```
-
-テストは選んだ入力を確認。証明は **前提を満たす全入力** を対象にする。
-
-<!--
-目安: 60秒。
-実際の関数には入力チェックとproof!ブロックもあります。「関数全体が1行」という意味ではなく、戻り値を計算する式が1行です。
-proof!内では、下位ビットと剰余の関係、ビットの分解、数学的な切り下げモデルの性質などの補助定理を組み合わせています。
-実行コード、仕様、証明用のコードが一つのファイルに並びます。証明用コードは実行時には消去されます。
-保証は型の上限を含む前提と、使用するライブラリ仕様や検証モデルの下で成立します。今回は新たにVerusを実行していないため、現在のチェックアウトの検証成功を報告するものではありません。
--->
 
 ---
 
-# Rustに、計算の「意味」の保証を足す
+# KVerus, LLM-assisted workflow for Verus proof
 
-| | この例で確かめること |
-| --- | --- |
-| Rustの型検査 | 入力・戻り値が `usize` など、型の整合性 |
-| Verusの検証 | 戻り値が **入力以下の、最大の境界の倍数** |
+![w:1000](img/kverus.png)
 
-**カーネルの小さな計算から、形式手法を試せる。**
+---
 
-実装：`ostd/libs/align_ext/src/lib.rs`
+# 宣伝: 組み込み言語TakibiとLinux互換kernel
 
-[VOSTDのソース](https://github.com/asterinas/vostd/blob/main/ostd/libs/align_ext/src/lib.rs)
+https://github.com/takibi-lang/takibi
 
-<!--
-目安: 30秒。合計: 5分。
-型が合っていることと、意図した結果を返すことは別の性質です。Rustが持つ型や所有権の保証に、Verusで関数の意味についての保証を加えられます。
-今回の例はAsterinasのOSTD向けの検証開発であるVOSTDから取りました。Asterinasカーネル全体の証明が完了したという説明ではありません。
--->
+OCaml / LLVM IR / LLMで組み込み言語を作り、その言語でLinux互換kernelを作る
+"Detect errors at compile time."
+Alpine Linuxで配布しているBusyBox実行バイナリでHTTPサーバが動作
+マルチコアサポートを実装中
+
+詳細はブログで! https://metasepi.org/en/tags/takibi.html
