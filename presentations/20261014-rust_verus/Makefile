@@ -3,13 +3,15 @@ TARGET := slides
 SRC    := $(TARGET).md
 PDF    := $(TARGET).pdf
 HTML   := $(TARGET).html
+THEME  := ../takibi-theme/takibi.css
+MARP   := marp $(SRC) --theme-set $(THEME) --allow-local-files --html
 
 .PHONY: all show html pdf clean
 
 all: show
 
 show:
-	RABBIT_MINUTES=$(MINUTES) marp --engine ./rabbit-engine.js --preview $(SRC)
+	RABBIT_MINUTES=$(MINUTES) $(MARP) --engine ./rabbit-engine.js --preview $(SRC)
 
 html: $(HTML)
 

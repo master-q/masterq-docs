@@ -1,0 +1,320 @@
+/* @theme takibi */
+
+@import "default";
+
+:root {
+  --takibi-ink: #18203d;
+  --takibi-muted: #596078;
+  --takibi-paper: #fffaf0;
+  --takibi-paper-deep: #f6ead8;
+  --takibi-flame: #f04a18;
+  --takibi-ember: #ff8a2a;
+  --takibi-night: #111936;
+  --takibi-night-soft: #202b57;
+}
+
+section {
+  background:
+    linear-gradient(90deg, var(--takibi-flame) 0 8px, transparent 8px),
+    radial-gradient(circle at 88% 8%, rgba(255, 138, 42, 0.13), transparent 25%),
+    var(--takibi-paper);
+  color: var(--takibi-ink);
+  font-family: Inter, Avenir, "Helvetica Neue", Arial, sans-serif;
+  font-size: 28px;
+  line-height: 1.35;
+  padding: 58px 76px 64px;
+}
+
+section::after {
+  background: url("../takibi-theme/takibi-icon-v3.png") center / contain no-repeat;
+  border: 2px solid rgba(240, 74, 24, 0.55);
+  border-radius: 50%;
+  bottom: 23px;
+  box-shadow: 0 3px 10px rgba(17, 25, 54, 0.18);
+  color: transparent;
+  content: "";
+  height: 42px;
+  opacity: 0.92;
+  position: absolute;
+  right: 31px;
+  width: 42px;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--takibi-ink);
+  font-weight: 750;
+  letter-spacing: -0.025em;
+}
+
+h1 {
+  border-bottom: 3px solid var(--takibi-flame);
+  font-size: 1.72em;
+  line-height: 1.08;
+  margin-bottom: 0.7em;
+  padding-bottom: 0.22em;
+}
+
+h2 {
+  color: var(--takibi-flame);
+  font-size: 1.12em;
+}
+
+strong {
+  color: #c9360d;
+  font-weight: 750;
+}
+
+a {
+  color: #c9360d;
+  text-decoration-color: rgba(201, 54, 13, 0.35);
+  text-underline-offset: 0.12em;
+}
+
+ul,
+ol {
+  padding-left: 1.15em;
+}
+
+li {
+  margin: 0.2em 0;
+}
+
+li::marker {
+  color: var(--takibi-flame);
+}
+
+blockquote {
+  background: rgba(240, 74, 24, 0.08);
+  border: 0;
+  border-left: 6px solid var(--takibi-flame);
+  color: var(--takibi-ink);
+  margin: 0.8em 0;
+  padding: 0.52em 0.8em;
+}
+
+code {
+  background: rgba(240, 74, 24, 0.08);
+  border-radius: 0.22em;
+  color: #9f2e0d;
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  padding: 0.04em 0.18em;
+}
+
+pre {
+  background: var(--takibi-night);
+  border-left: 6px solid var(--takibi-ember);
+  border-radius: 9px;
+  box-shadow: 0 10px 28px rgba(17, 25, 54, 0.14);
+  color: #f9f5eb;
+  font-size: 20px;
+  line-height: 1.32;
+  padding: 0.7em 0.9em;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+pre .hljs-keyword,
+pre .hljs-meta,
+pre .hljs-selector-tag,
+pre .hljs-type {
+  color: #ff8a5b;
+}
+
+pre .hljs-built_in,
+pre .hljs-literal,
+pre .hljs-number,
+pre .hljs-symbol {
+  color: #ffc16c;
+}
+
+pre .hljs-string,
+pre .hljs-title,
+pre .hljs-title.class_ {
+  color: #9fe6c1;
+}
+
+pre .hljs-comment {
+  color: #9ba5c8;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  box-shadow: 0 8px 22px rgba(17, 25, 54, 0.08);
+  font-size: 0.78em;
+  overflow: hidden;
+  width: 100%;
+}
+
+th {
+  background: var(--takibi-night);
+  color: white;
+  font-weight: 700;
+}
+
+th,
+td {
+  border: 0;
+  border-bottom: 1px solid #e8d9c5;
+  padding: 0.48em 0.62em;
+}
+
+tr:nth-child(even) td {
+  background: rgba(246, 234, 216, 0.58);
+}
+
+footer {
+  color: var(--takibi-muted);
+  font-size: 14px;
+  left: 76px;
+}
+
+section:not(.lead)::before {
+  color: var(--takibi-muted);
+  content: attr(data-marpit-pagination) " / " attr(data-marpit-pagination-total);
+  font-size: 13px;
+  position: absolute;
+  right: 78px;
+  top: 28px;
+}
+
+section.lead {
+  align-items: flex-start;
+  background:
+    linear-gradient(90deg, rgba(9, 14, 36, 0.93) 0%, rgba(9, 14, 36, 0.73) 48%, rgba(9, 14, 36, 0.12) 100%),
+    url("../takibi-theme/takibi-icon-back-v3.png") center / cover no-repeat;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 76px 88px;
+  text-align: left;
+}
+
+section.lead::after,
+section.lead::before {
+  display: none;
+}
+
+section.lead h1 {
+  border: 0;
+  color: white;
+  font-size: 2.18em;
+  line-height: 1.04;
+  margin: 0 0 0.34em;
+  max-width: 900px;
+  padding: 0;
+  text-shadow: 0 3px 20px rgba(0, 0, 0, 0.38);
+}
+
+section.lead h2 {
+  color: #ffc16c;
+  font-size: 1.18em;
+  margin: 0.2em 0;
+  max-width: 790px;
+}
+
+section.lead a,
+section.lead strong {
+  color: #ffd396;
+}
+
+section.lead p {
+  margin: 0.28em 0;
+  max-width: 800px;
+}
+
+section.invert {
+  background:
+    radial-gradient(circle at 88% 18%, rgba(240, 74, 24, 0.32), transparent 28%),
+    linear-gradient(135deg, var(--takibi-night), var(--takibi-night-soft));
+  color: #f9f5eb;
+}
+
+section.invert h1,
+section.invert h2 {
+  color: white;
+}
+
+section.invert h1 {
+  border-bottom-color: var(--takibi-ember);
+}
+
+section.invert strong,
+section.invert a {
+  color: #ffc16c;
+}
+
+section.invert code {
+  background: rgba(255, 193, 108, 0.12);
+  color: #ffc16c;
+}
+
+section.invert blockquote {
+  background: rgba(255, 193, 108, 0.1);
+  border-left-color: var(--takibi-ember);
+  color: #f9f5eb;
+}
+
+section.invert footer,
+section.invert:not(.lead)::before {
+  color: #c8cce0;
+}
+
+section.statement {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+section.statement h1 {
+  border: 0;
+  font-size: 2.25em;
+  max-width: 980px;
+}
+
+.small {
+  font-size: 0.72em;
+}
+
+.diagram-placeholder {
+  align-items: center;
+  background:
+    linear-gradient(135deg, rgba(17, 25, 54, 0.96), rgba(32, 43, 87, 0.92));
+  border: 2px dashed rgba(255, 193, 108, 0.8);
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(17, 25, 54, 0.16);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  height: 350px;
+  justify-content: center;
+  line-height: 1.55;
+  margin: 0 auto 0.7em;
+  text-align: center;
+  width: 88%;
+}
+
+.diagram-placeholder strong {
+  color: #ffc16c;
+  font-size: 1.25em;
+}
+
+section.video-slide video {
+  background: #080d20;
+  border: 3px solid var(--takibi-ember);
+  border-radius: 12px;
+  box-shadow: 0 14px 34px rgba(17, 25, 54, 0.22);
+  display: block;
+  height: 500px;
+  margin: 0 auto;
+  max-width: 100%;
+}

@@ -1,16 +1,14 @@
 ---
 marp: true
-theme: default
+theme: takibi
 paginate: true
-size: 16:9
 title: An Introduction to OS-Level Verification with Asterinas and Verus
-style: |
-  section { font-size: 29px; }
-  h1 { font-size: 42px; }
-  pre { font-size: 24px; }
-  footer { font-size: 16px; }
 footer: 'Rust、何もわからない… #15'
 ---
+
+<!-- _class: lead -->
+<!-- _paginate: false -->
+<!-- _footer: "" -->
 
 # An Introduction to OS-Level Verification with Asterinas and Verus
 
@@ -138,9 +136,7 @@ ensures
     ret % align == 0,
 ```
 
-So the result **must be aligned**.
-
-But our broken code:
+So the result **must be aligned**. But our broken code:
 
 ```rust
 fn align_down(self, align: Self) -> Self {
@@ -150,11 +146,10 @@ fn align_down(self, align: Self) -> Self {
 
 - keeps only the low bits
 - does **not** always return a multiple of `align`
-- therefore violates the postcondition
 
 ---
 
-# But writing proofs by hand is hard
+# But writing proof by hand is hard
 
 ```rust
                 #[inline]
@@ -195,13 +190,17 @@ fn align_down(self, align: Self) -> Self {
 
 ---
 
-# KVerus: LLMs help generate and repair Verus proofs
+# KVerus: LLMs help generate and repair proof
 
 ![w:1000](img/kverus.png)
 
 ---
 
-# A quick plug: Takibi language and kernel
+<!-- _class: lead -->
+<!-- _paginate: false -->
+<!-- _footer: "" -->
+
+# A quick plug: Takibi language
 
 https://github.com/takibi-lang/takibi
 
