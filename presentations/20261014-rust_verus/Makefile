@@ -10,7 +10,7 @@ IMAGES := ../takibi-theme/takibi-icon-back-v3.png ../takibi-theme/takibi-icon-v3
 # maintained and may be redrawn. Referencing the live one would silently
 # rewrite this deck years after it was given.
 FIGURES :=
-MEDIA := assets/kverus.png
+MEDIA := assets/kverus.png assets/three-approaches.svg
 ASSETS := $(FIGURES) $(MEDIA)
 # assets/demo.mp4 and assets/demo.png are recorded separately and dropped in
 # by hand, so they are deliberately NOT prerequisites: the deck has to build

@@ -204,12 +204,6 @@ fn align_down(self, align: Self) -> Self {
 
 https://github.com/takibi-lang/takibi
 
-- An embedded programming language built with **OCaml + LLVM**
-- Developed together with **LLM coding agents**
-- Goal: **"Detect errors at compile time."**
-- Building a Linux-compatible kernel in Takibi
-- Already runs the **BusyBox HTTP server** from Alpine Linux
-- Multi-core support is now under development
+<style scoped>section.lead { padding: 40px 48px; } section.lead p { max-width: none; }</style>
 
-More details:
-https://metasepi.org/en/tags/takibi.html
+![w:1184](assets/three-approaches.svg)
