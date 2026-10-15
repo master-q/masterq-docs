@@ -1,6 +1,6 @@
-# An Introduction to OS-Level Verification with Asterinas and Verus
+# Survey: An Introduction to OS-Level Verification with Asterinas and Verus
 
-I gave a short talk at *Rust、何もわからない… #15* about formal verification at the operating-system level. The slides are below.
+I gave a short talk at [Rust、何もわからない… #15](https://estie.connpass.com/event/405217/) about formal verification at the operating-system level. The slides are below.
 
 [Asterinas](https://github.com/asterinas/asterinas) is a Linux-compatible kernel written in Rust. Most of its code uses safe Rust, while low-level operations that require `unsafe` are isolated in OSTD. [VOSTD](https://github.com/asterinas/vostd) uses [Verus](https://github.com/verus-lang/verus) to verify this low-level layer.
 
